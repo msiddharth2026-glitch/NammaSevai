@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-labelledby="title desc">
+  <title id="title">NammaSevai AI — minimal logo</title>
+  <desc id="desc">A modern, minimal teal speech mark with an elegant N-shaped pathway and a small saffron spark, paired with the NammaSevai AI wordmark.</desc>
+  <defs>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#19A69C"/>
+      <stop offset="1" stop-color="#087C7B"/>
+    </linearGradient>
+    <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#153F5B"/>
+      <stop offset="1" stop-color="#092D50"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon: a speech shape that also forms an N / pathway -->
+  <g transform="translate(600 430)">
+    <path d="M-214 -150
+             C-214 -226 -153 -280 -77 -280
+             H112
+             C190 -280 246 -224 246 -147
+             V34
+             C246 111 190 166 112 166
+             H-55
+             L-133 228
+             L-116 166
+             H-77
+             C-153 166 -214 111 -214 34 Z"
+          fill="url(#teal)"/>
+    <path d="M-119 67 V-104
+             Q-119 -130 -94 -130
+             Q-79 -130 -65 -111
+             L83 63
+             Q97 80 114 80
+             Q137 80 137 55
+             V-112"
+          fill="none" stroke="#FFFFFF" stroke-width="34"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="174" cy="-196" r="13" fill="#F2A93B"/>
+    <path d="M174 -228 L182 -205 L205 -196 L182 -188 L174 -165 L166 -188 L143 -196 L166 -205 Z"
+          fill="#F2A93B"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="600" y="835" text-anchor="middle"
+        font-family="Inter, Avenir, Montserrat, Arial, sans-serif"
+        font-size="104" font-weight="700" letter-spacing="-4"
+        fill="url(#navy)">NammaSevai<tspan fill="#0B918B"> AI</tspan></text>
+
+  <!-- Quiet descriptor -->
+  <line x1="430" y1="900" x2="770" y2="900" stroke="#D8E4E6" stroke-width="3"/>
+  <text x="600" y="958" text-anchor="middle"
+        font-family="Inter, Avenir, Montserrat, Arial, sans-serif"
+        font-size="25" font-weight="600" letter-spacing="5"
+        fill="#6B818C">GOVERNMENT SERVICES, SIMPLIFIED</text>
+</svg>
