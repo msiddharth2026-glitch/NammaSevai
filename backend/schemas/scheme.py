@@ -9,16 +9,26 @@ from .source import OfficialSourceResponse, OfficialSourceCreate
 class SchemeBase(BaseModel):
     name: str
     name_ta: str
+    name_hi: Optional[str] = None
+    name_ml: Optional[str] = None
     department: str
     department_ta: str
+    department_hi: Optional[str] = None
+    department_ml: Optional[str] = None
     category: str
     beneficiary_type: Optional[str] = None
     beneficiary_type_ta: Optional[str] = None
     benefit_summary: str
     benefit_summary_ta: str
+    benefit_summary_hi: Optional[str] = None
+    benefit_summary_ml: Optional[str] = None
     benefit_amount: str
     description: str
     description_ta: str
+    description_hi: Optional[str] = None
+    description_ml: Optional[str] = None
+    coverage_type: Optional[str] = "State Government (Tamil Nadu)"
+    application_url: Optional[str] = None
     is_active: bool = True
 
 class SchemeListItem(SchemeBase):

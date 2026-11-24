@@ -1,66 +1,160 @@
-// NammaSevai AI - Footer Component
+// NammaSevai AI - Footer Component (Stitch / Namma Pathways Design)
 import { i18n } from '../i18n.js';
 
 export function renderFooter(state) {
   const t = i18n[state.lang] || i18n.ta;
+  const lang = state.lang || 'ta';
+
+  // Localized disclaimer banner title
+  const disclaimerTitles = {
+    ta: "பொது வழிகாட்டுதல் மற்றும் விழிப்புணர்வு தளம் மட்டுமே (Civic Guidance & Awareness Only)",
+    hi: "नागरिक मार्गदर्शन एवं जागरूकता मंच (Civic Guidance & Awareness Only)",
+    ml: "പൗര മാർഗ്ഗനിർദ്ദേശവും അവബോധവും മാത്രം (Civic Guidance & Awareness Only)",
+    hinglish: "Civic Guidance & Awareness Only (Sarkari Jankari Sahayak):",
+    tanglish: "Civic Guidance & Awareness Only (Makkal Sevai Guide):",
+    en: "Civic Guidance & Awareness Only:"
+  };
+  const disclaimerTitle = disclaimerTitles[lang] || disclaimerTitles.en;
+
+  // Localized helpline sub-labels
+  const cmHelplineLabel = {
+    ta: "முதல்வரின் தனிப்பிரிவு உதவி எண்",
+    hi: "मुख्यमंत्री हेल्पलाइन",
+    ml: "മുഖ്യമന്ത്രി ഹെൽപ്പ്‌ലൈൻ",
+    hinglish: "CM Helpline",
+    tanglish: "CM Helpline",
+    en: "CM Special Cell Helpline"
+  }[lang] || "CM Special Cell Helpline";
+
+  const eduHelplineLabel = {
+    ta: "பள்ளிக் கல்வி வழிகாட்டுதல்",
+    hi: "शिक्षा मार्गदर्शन हेल्पलाइन",
+    ml: "വിദ്യാഭ്യാസ ഹെൽപ്പ്‌ലൈൻ",
+    hinglish: "Education Helpline",
+    tanglish: "Education Helpline",
+    en: "Education Guidance Helpline"
+  }[lang] || "Education Guidance Helpline";
+
+  const womenHelplineLabel = {
+    ta: "பெண்கள் உதவி மையம்",
+    hi: "महिला हेल्पलाइन",
+    ml: "വനിതാ ഹെൽപ്പ്‌ലൈൻ",
+    hinglish: "Women Helpline",
+    tanglish: "Women Helpline",
+    en: "Women Welfare Helpline"
+  }[lang] || "Women Welfare Helpline";
+
+  const healthHelplineLabel = {
+    ta: "மருத்துவ ஆலோசனை உதவி மையம்",
+    hi: "स्वास्थ्य एवं चिकित्सा हेल्पलाइन",
+    ml: "ആരോഗ്യ ഹെൽപ്പ്‌ലൈൻ",
+    hinglish: "Health & Medical Helpline",
+    tanglish: "Health & Medical Helpline",
+    en: "State Health & Medical Helpline"
+  }[lang] || "State Health & Medical Helpline";
+
+  const emergencyLabel = {
+    ta: "அவசர உதவி: 108 (ஆம்புலன்ஸ்) / 100 (காவல்துறை)",
+    hi: "आपातकालीन सेवा: 108 (एम्बुलेंस) / 100 (पुलिस)",
+    ml: "അടിയന്തിരം: 108 (ആംബുലൻസ്) / 100 (പോലീസ്)",
+    hinglish: "Emergency Services: 108 (Ambulance) / 100 (Police)",
+    tanglish: "Emergency Services: 108 (Ambulance) / 100 (Police)",
+    en: "Emergency Services: 108 (Ambulance) / 100 (Police)"
+  }[lang] || "Emergency Services: 108 (Ambulance) / 100 (Police)";
 
   return `
     <footer class="footer">
       <div class="container">
+        <!-- Civic Guidance & Disclaimer Strip -->
         <div class="disclaimer-banner">
-          <strong>⚠️ ${t.sampleDisclaimer}</strong><br/>
-          <span>${t.disclaimerText}</span>
+          <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+            <span class="material-symbols-outlined" style="font-size: 24px; color: var(--secondary-saffron); flex-shrink: 0;">info</span>
+            <div>
+              <strong style="color: var(--primary-indigo); font-size: 0.95rem;">
+                ${disclaimerTitle}
+              </strong>
+              <p style="margin-top: 0.25rem; font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6;">
+                ${t.disclaimerText || "NammaSevai AI simplifies public welfare scheme discovery. Official state and union departments determine final eligibility and financial approval. Please verify requirements at your nearest e-Sevai center or official department portal before applying."}
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="footer-grid">
+          <!-- Column 1: Brand & Civic Mission -->
           <div class="footer-brand">
-            <div style="display: flex; align-items: center; gap: 0.75rem;">
-              <img src="assets/nammasevai_minimal.svg" alt="NammaSevai AI" style="height: 38px; width: auto; filter: brightness(1.2);" />
-              <div class="footer-brand-title">NammaSevai AI</div>
+            <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.75rem;">
+              <img src="assets/nammasevai_minimal.svg" alt="NammaSevai AI Logo" style="height: 34px; width: auto;" />
+              <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: var(--primary-indigo);">
+                NammaSevai AI
+              </div>
             </div>
-            <p class="footer-text">${t.footerDesc}</p>
-            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-              <span class="badge badge-teal">Tamil Nadu GovTech</span>
-              <span class="badge badge-saffron">Voice AI Assistant</span>
-              <span class="badge badge-navy">Bilingual</span>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65; max-width: 360px;">
+              ${t.footerDesc || "A voice-first welfare scheme discovery assistant for Indian citizens, especially Tamil Nadu residents. Discover benefits, documents, and procedures in plain language."}
+            </p>
+            <div style="display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 1rem;">
+              <span class="badge badge-indigo">
+                <span class="material-symbols-outlined" style="font-size: 14px;">gavel</span>
+                Civic Tech
+              </span>
+              <span class="badge badge-saffron">
+                <span class="material-symbols-outlined" style="font-size: 14px;">mic</span>
+                Voice First
+              </span>
+              <span class="badge badge-green">
+                <span class="material-symbols-outlined" style="font-size: 14px;">lock</span>
+                Zero-PII Storage
+              </span>
             </div>
           </div>
 
+          <!-- Column 2: Navigation Links -->
           <div>
-            <h4 class="footer-col-title">${t.quickLinks}</h4>
+            <h4 class="footer-col-title">${t.quickLinks || 'Quick Navigation'}</h4>
             <ul class="footer-links-list">
-              <li><a href="#landing">${t.home}</a></li>
-              <li><a href="#assistant">${t.assistant}</a></li>
-              <li><a href="#schemes">${t.schemes}</a></li>
-              <li><a href="#admin">${t.admin}</a></li>
-              <li><a href="https://tnesevai.tn.gov.in" target="_blank" rel="noopener">TNeGA e-Sevai Portal ↗</a></li>
-              <li><a href="https://www.tn.gov.in" target="_blank" rel="noopener">TN.gov.in Official ↗</a></li>
+              <li><a href="#landing">${t.home || 'Home'}</a></li>
+              <li><a href="#assistant">${t.assistant || 'Find Schemes (Voice/Text)'}</a></li>
+              <li><a href="#schemes">${t.schemes || 'Explore All Schemes'}</a></li>
+              <li><a href="#checklist">${t.checklist || t.savedChecklistNav || 'Saved Preparation Checklist'}</a></li>
+              <li><a href="#admin">${t.admin || 'Portal Administration'}</a></li>
+              <li><a href="https://tnesevai.tn.gov.in" target="_blank" rel="noopener">TNeGA e-Sevai Citizen Portal ↗</a></li>
+              <li><a href="https://www.tn.gov.in" target="_blank" rel="noopener">Tamil Nadu Government Portal ↗</a></li>
             </ul>
           </div>
 
+          <!-- Column 3: Helplines & Assistance -->
           <div>
-            <h4 class="footer-col-title">${t.citizenHelplines}</h4>
+            <h4 class="footer-col-title">${t.helplineTitle || t.citizenHelplines || 'Citizen Helplines'}</h4>
             <div class="helpline-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              <span>${t.cmHelpline}</span>
+              <span class="material-symbols-outlined" style="color: var(--secondary-saffron); font-size: 18px;">call</span>
+              <span><strong>1100</strong> — ${cmHelplineLabel}</span>
             </div>
             <div class="helpline-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
-              <span>${t.studentHelpline}</span>
+              <span class="material-symbols-outlined" style="color: var(--secondary-saffron); font-size: 18px;">school</span>
+              <span><strong>14417</strong> — ${eduHelplineLabel}</span>
             </div>
             <div class="helpline-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-              <span>${t.womenHelpline}</span>
+              <span class="material-symbols-outlined" style="color: var(--secondary-saffron); font-size: 18px;">support_agent</span>
+              <span><strong>181</strong> — ${womenHelplineLabel}</span>
             </div>
-            <div class="helpline-item" style="color: #94a3b8; font-size: 0.82rem; margin-top: 0.5rem;">
-              <span>Emergency Services: 108 (Ambulance) / 100 (Police)</span>
+            <div class="helpline-item">
+              <span class="material-symbols-outlined" style="color: var(--secondary-saffron); font-size: 18px;">local_hospital</span>
+              <span><strong>104</strong> — ${healthHelplineLabel}</span>
+            </div>
+            <div style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-muted);">
+              ${emergencyLabel}
             </div>
           </div>
         </div>
 
+        <!-- Footer Bottom Bar -->
         <div class="footer-bottom">
-          <div>${t.copyright}</div>
-          <div>FastAPI + PostgreSQL Ready Architecture | Designed with accessibility in mind</div>
+          <div>${t.copyright || '© 2026 NammaSevai AI. Developed for public welfare awareness.'}</div>
+          <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+            <span>FastAPI + PostgreSQL Ready</span>
+            <span>•</span>
+            <span>WCAG AAA Contrast Compliant</span>
+          </div>
         </div>
       </div>
     </footer>

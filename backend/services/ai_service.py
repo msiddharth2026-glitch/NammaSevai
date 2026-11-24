@@ -139,7 +139,9 @@ Guidelines:
                 "field_name": m.field_name,
                 "relevance_to_scheme": m.relevance_to_scheme,
                 "question_en": m.question_en,
-                "question_ta": m.question_ta
+                "question_ta": m.question_ta,
+                "question_hi": getattr(m, "question_hi", m.question_en),
+                "question_ml": getattr(m, "question_ml", m.question_en)
             }
             for m in missing_objs
         ]
@@ -153,26 +155,21 @@ Guidelines:
         lang: str = "ta"
     ) -> str:
         """
-        Generates a respectful, clear citizen-facing summary of findings.
+        Generates a respectful, clear citizen-facing summary of findings in the selected language.
+        Supports: ta (Tamil), hi (Hindi), ml (Malayalam), tanglish, hinglish, and en (English).
         """
         count = len(matches)
-        if count == 0:
-            if lang == "ta":
+        top_match = matches[0] if count > 0 else None
+
+        if lang == "ta":
+            if count == 0:
                 return (
                     "உங்கள் விவரங்களுக்கு நேரடி திட்டம் எதுவும் பொருந்தவில்லை. "
                     "தயவுசெய்து உங்கள் படிப்பு, விவசாய நிலம், குடும்ப ஆண்டு வருமானம் அல்லது "
                     "தொழில் போன்ற கூடுதல் விவரங்களை குறிப்பிடுங்கள்."
                 )
-            return (
-                "We could not find an exact welfare scheme match for your description. "
-                "Please describe your education, landholding, annual income or occupation."
-            )
-
-        top_match = matches[0]
-        scheme_name = top_match.scheme_name_ta if lang == "ta" else top_match.scheme_name_en
-        benefit = top_match.benefit_summary_ta if lang == "ta" else top_match.benefit_summary_en
-
-        if lang == "ta":
+            scheme_name = top_match.scheme_name_ta or top_match.scheme_name_en
+            benefit = top_match.benefit_summary_ta or top_match.benefit_summary_en
             msg = (
                 f"உங்கள் நிலையை ஆய்வு செய்து {count} நலத்திட்டங்களை கண்டறிந்துள்ளேன். "
                 f"இதில் முக்கிய திட்டம் \"{scheme_name}\" ஆகும் (பலன்: {benefit}). "
@@ -182,7 +179,87 @@ Guidelines:
                 msg += f"உங்கள் தகுதியை முழுமையாக உறுதி செய்ய: {first_q} "
             msg += "தேவையான ஆவணங்களை தயார் செய்து அரசு தளத்தில் அல்லது இ-சேவை மையத்தில் விண்ணப்பிக்கலாம்."
             return msg
+
+        elif lang == "hi":
+            if count == 0:
+                return (
+                    "आपके विवरण के अनुसार कोई प्रत्यक्ष सरकारी योजना मेल नहीं खाती। "
+                    "कृपया अपनी शिक्षा, कृषि भूमि, पारिवारिक वार्षिक आय या व्यवसाय का अधिक विवरण दें।"
+                )
+            scheme_name = getattr(top_match, "scheme_name_hi", None) or top_match.scheme_name_en
+            benefit = getattr(top_match, "benefit_summary_hi", None) or top_match.benefit_summary_en
+            msg = (
+                f"आपकी स्थिति का विश्लेषण करने के बाद मुझे {count} उपयुक्त कल्याणकारी योजनाएं मिली हैं। "
+                f"इनमें प्रमुख योजना \"{scheme_name}\" है (लाभ: {benefit})। "
+            )
+            if len(missing_info) > 0:
+                first_q = missing_info[0].get("question_hi") or missing_info[0].get("question_en")
+                msg += f"आपकी पात्रता की पुष्टि के लिए: {first_q} "
+            msg += "कृपया आवश्यक दस्तावेज़ तैयार रखें और आधिकारिक पोर्टल या ई-सेवा केंद्र पर आवेदन करें।"
+            return msg
+
+        elif lang == "ml":
+            if count == 0:
+                return (
+                    "നിങ്ങൾ നൽകിയ വിവരങ്ങൾക്ക് അനുയോജ്യമായ പദ്ധതികൾ ഒന്നും കണ്ടെത്താനായില്ല. "
+                    "ദയവായി വിദ്യാഭ്യാസം, കൃഷിഭൂമി, വാർഷിക വരുമാനം അല്ലെങ്കിൽ തൊഴിൽ വിവരങ്ങൾ നൽകുക."
+                )
+            scheme_name = getattr(top_match, "scheme_name_ml", None) or top_match.scheme_name_en
+            benefit = getattr(top_match, "benefit_summary_ml", None) or top_match.benefit_summary_en
+            msg = (
+                f"നിങ്ങളുടെ സാഹചര്യം പരിശോധിച്ച് {count} ക്ഷേമപദ്ധതികൾ കണ്ടെത്തിയിട്ടുണ്ട്. "
+                f"ഇതിൽ പ്രധാനപ്പെട്ടത് \"{scheme_name}\" ആണ് (ആനുകൂല്യം: {benefit}). "
+            )
+            if len(missing_info) > 0:
+                first_q = missing_info[0].get("question_ml") or missing_info[0].get("question_en")
+                msg += f"യോഗ്യത പൂർണ്ണമായി സ്ഥിരീകരിക്കാൻ: {first_q} "
+            msg += "രേഖകൾ തയ്യാറാക്കി ഔദ്യോഗിക പോർട്ടൽ വഴി അപേക്ഷ സമർപ്പിക്കാം."
+            return msg
+
+        elif lang == "tanglish":
+            if count == 0:
+                return (
+                    "Unga details-kku direct scheme edhuvum match aagala. "
+                    "Unga education, land, family annual income, or occupation pathi innum konjam sollunga."
+                )
+            scheme_name = top_match.scheme_name_ta or top_match.scheme_name_en
+            benefit = top_match.benefit_summary_ta or top_match.benefit_summary_en
+            msg = (
+                f"Unga situation-ah analyze panni {count} welfare schemes match pannirukken. "
+                f"Idhula main scheme \"{scheme_name}\" (Benefit: {benefit}). "
+            )
+            if len(missing_info) > 0:
+                first_q = missing_info[0].get("question_ta") or missing_info[0].get("question_en")
+                msg += f"Eligibility confirm panna: {first_q} "
+            msg += "Thevaiyaana documents ready panni official portal or e-Sevai-la apply pannalaam."
+            return msg
+
+        elif lang == "hinglish":
+            if count == 0:
+                return (
+                    "Aapki details ke matching koi direct welfare scheme nahi mili. "
+                    "Please apni education, agriculture land, annual income ya occupation ki aur details batayein."
+                )
+            scheme_name = getattr(top_match, "scheme_name_hi", None) or top_match.scheme_name_en
+            benefit = getattr(top_match, "benefit_summary_hi", None) or top_match.benefit_summary_en
+            msg = (
+                f"Aapki profile analyze karke {count} matching welfare schemes identify hui hain. "
+                f"Inmein top scheme \"{scheme_name}\" hai (Benefit: {benefit}). "
+            )
+            if len(missing_info) > 0:
+                first_q = missing_info[0].get("question_hi") or missing_info[0].get("question_en")
+                msg += f"Eligibility confirm karne ke liye: {first_q} "
+            msg += "Zaroori documents checklist check karke official portal ya e-Sevai center par apply karein."
+            return msg
+
         else:
+            if count == 0:
+                return (
+                    "We could not find an exact welfare scheme match for your description. "
+                    "Please describe your education, landholding, annual income or occupation."
+                )
+            scheme_name = top_match.scheme_name_en
+            benefit = top_match.benefit_summary_en
             msg = (
                 f"Based on your profile, I identified {count} potential welfare scheme(s). "
                 f"The top recommendation is \"{scheme_name}\" providing {benefit}. "

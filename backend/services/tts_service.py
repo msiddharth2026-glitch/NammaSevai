@@ -36,18 +36,30 @@ class TTSService:
         if len(clean) > 450:
             clean = clean[:447] + "..."
 
-        target_lang = "ta" if lang == "ta" else "en"
+        if lang in ["hi", "hinglish"]:
+            target_lang = "hi"
+        elif lang in ["ml"]:
+            target_lang = "ml"
+        elif lang in ["ta", "tanglish"]:
+            target_lang = "ta"
+        else:
+            target_lang = "en"
 
         try:
-            from gtts import gTTS
-            # Strict 2.0s timeout to prevent hanging on network/sandbox blocks
-            tts = gTTS(text=clean, lang=target_lang, slow=False, timeout=2.0)
-            fp = io.BytesIO()
-            tts.write_to_fp(fp)
-            fp.seek(0)
-            audio = fp.read()
-            if audio and len(audio) > 100:
-                return audio
+            import socket
+            orig_timeout = socket.getdefaulttimeout()
+            socket.setdefaulttimeout(1.0)
+            try:
+                from gtts import gTTS
+                tts = gTTS(text=clean, lang=target_lang, slow=False, timeout=1.0)
+                fp = io.BytesIO()
+                tts.write_to_fp(fp)
+                fp.seek(0)
+                audio = fp.read()
+                if audio and len(audio) > 100:
+                    return audio
+            finally:
+                socket.setdefaulttimeout(orig_timeout)
         except Exception as e:
             logger.info(f"gTTS online synthesis unavailable ({e}), using audio stream fallback")
 

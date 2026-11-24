@@ -26,34 +26,49 @@ class SchemeMatcherService:
         val = condition.expected_value
 
         # Age evaluation
-        if f == "age_min":
-            req_age = int(val)
+        if f in ("age", "age_min", "age_max"):
             if profile.age is None:
-                return False, False, f"Age requirement (min {req_age}) needs verification", f"குறைந்தபட்ச வயது ({req_age}) சரிபார்க்கப்பட வேண்டும்"
-            passed = profile.age >= req_age
-            return True, passed, f"Age {profile.age} meets min requirement of {req_age}", f"வயது {profile.age} குறைந்தபட்ச நிபந்தனையான {req_age}-ஐ பூர்த்தி செய்கிறது"
-
-        if f == "age_max":
-            req_age = int(val)
-            if profile.age is None:
-                return False, False, f"Age ceiling (max {req_age}) needs verification", f"அதிகபட்ச வயது ({req_age}) சரிபார்க்கப்பட வேண்டும்"
-            passed = profile.age <= req_age
-            return True, passed, f"Age {profile.age} is within maximum limit of {req_age}", f"வயது {profile.age} அதிகபட்ச வரம்பான {req_age}-க்குள் உள்ளது"
+                return False, False, f"Age requirement ({op} {val}) needs verification", f"வயது நிபந்தனை ({val}) சரிபார்க்கப்பட வேண்டும்"
+            try:
+                req_age = int(val)
+                if op == "gte" or f == "age_min":
+                    passed = profile.age >= req_age
+                elif op == "lte" or f == "age_max":
+                    passed = profile.age <= req_age
+                elif op == "gt":
+                    passed = profile.age > req_age
+                elif op == "lt":
+                    passed = profile.age < req_age
+                else:
+                    passed = profile.age == req_age
+                return True, passed, f"Age {profile.age} meets {val} condition", f"வயது {profile.age} நிபந்தனை பூர்த்தி செய்கிறது"
+            except (ValueError, TypeError):
+                pass
 
         # Gender evaluation
         if f == "gender":
             if not profile.gender:
                 return False, False, f"Gender ({val}) condition needs verification", f"பாலின நிபந்தனை ({val}) சரிபார்க்கப்பட வேண்டும்"
-            passed = profile.gender.lower() == val.lower()
+            passed = profile.gender.lower() == str(val).lower()
             return True, passed, f"Gender matches ({val})", f"பாலினம் ({val}) பொருந்துகிறது"
 
-        # Income ceiling
-        if f == "income_max":
-            req_inc = float(val)
+        # Income ceiling / annual income
+        if f in ("income_max", "annual_income"):
             if profile.annual_income is None:
-                return False, False, f"Family annual income ceiling of ₹{req_inc:,.0f} needs confirmation", f"குடும்ப ஆண்டு வருமான வரம்பு ₹{req_inc:,.0f} சரிபார்க்கப்பட வேண்டும்"
-            passed = profile.annual_income <= req_inc
-            return True, passed, f"Annual income ₹{profile.annual_income:,.0f} is within ₹{req_inc:,.0f} ceiling", f"ஆண்டு வருமானம் ₹{profile.annual_income:,.0f} அனுமதிக்கப்பட்ட வரம்பான ₹{req_inc:,.0f}-க்குள் உள்ளது"
+                return False, False, f"Family annual income ceiling of ₹{float(val):,.0f} needs confirmation", f"குடும்ப ஆண்டு வருமான வரம்பு ₹{float(val):,.0f} சரிபார்க்கப்பட வேண்டும்"
+            try:
+                req_inc = float(val)
+                if op in ("lte", "le") or f == "income_max":
+                    passed = profile.annual_income <= req_inc
+                elif op in ("gte", "ge"):
+                    passed = profile.annual_income >= req_inc
+                elif op == "lt":
+                    passed = profile.annual_income < req_inc
+                else:
+                    passed = profile.annual_income <= req_inc
+                return True, passed, f"Annual income ₹{profile.annual_income:,.0f} is within ₹{req_inc:,.0f} ceiling", f"ஆண்டு வருமானம் ₹{profile.annual_income:,.0f} அனுமதிக்கப்பட்ட வரம்பான ₹{req_inc:,.0f}-க்குள் உள்ளது"
+            except (ValueError, TypeError):
+                pass
 
         # Government school education requirement
         if f == "school_type":
@@ -66,7 +81,11 @@ class SchemeMatcherService:
         if f == "occupation":
             if not profile.occupation:
                 return False, False, f"Occupation ({val}) needs verification", f"தொழில் ({val}) சரிபார்க்கப்பட வேண்டும்"
-            passed = profile.occupation.lower() == val.lower()
+            if op == "in" or "," in str(val):
+                allowed = [x.strip().lower() for x in str(val).split(",")]
+                passed = any(a in profile.occupation.lower() or profile.occupation.lower() in a for a in allowed)
+            else:
+                passed = profile.occupation.lower() == str(val).lower()
             return True, passed, f"Occupation matches ({val})", f"தொழில் ({val}) பொருந்துகிறது"
 
         # Landholding max acres
@@ -85,10 +104,10 @@ class SchemeMatcherService:
             return True, passed, "Has tailoring training", "தையல் பயிற்சி சான்றிதழ் உள்ளது"
 
         # Community category (SC/ST)
-        if f == "community":
+        if f in ("community", "community_category"):
             if not profile.community_category:
                 return False, False, f"Community category ({val}) needs voluntary verification", f"சமூகப் பிரிவு ({val}) சரிபார்க்கப்பட வேண்டும்"
-            passed = val.lower() in profile.community_category.lower()
+            passed = str(val).lower() in profile.community_category.lower()
             return True, passed, f"Community matches {val}", f"சமூகப் பிரிவு {val} பொருந்துகிறது"
 
         # Disability status
@@ -159,15 +178,20 @@ class SchemeMatcherService:
             if len(fulfilled) > 0:
                 explanation_en = f"Potential match based on: {'; '.join(fulfilled)}. Note: {len(unverified)} condition(s) still require official verification."
                 explanation_ta = f"பொருந்தும் தகுதிகள்: {'; '.join(fulfilled)}. கவனிக்க: {len(unverified)} நிபந்தனைகள் அதிகாரப்பூர்வமாக சரிபார்க்கப்பட வேண்டும்."
+                explanation_hi = f"संभावित पात्रता आधार: {'; '.join(fulfilled)}। ध्यान दें: {len(unverified)} शर्तों का आधिकारिक सत्यापन आवश्यक है।"
+                explanation_ml = f"സാധ്യതയുള്ള യോഗ്യതാ മാനദണ്ഡങ്ങൾ: {'; '.join(fulfilled)}. ശ്രദ്ധിക്കുക: {len(unverified)} വ്യവസ്ഥകൾ ഔദ്യോഗികമായി പരിശോധിക്കേണ്ടതുണ്ട്."
             else:
                 explanation_en = f"Potential scheme in your area of interest. Mandatory criteria ({len(unverified)}) need verification."
                 explanation_ta = f"உங்கள் துறைக்கு சாத்தியமான திட்டம். இதற்குரிய {len(unverified)} தகுதி நிபந்தனைகள் சரிபார்க்கப்பட வேண்டும்."
+                explanation_hi = f"आपकी रुचि से संबंधित संभावित योजना। अनिवार्य पात्रता शर्तें ({len(unverified)}) सत्यापित की जानी चाहिए।"
+                explanation_ml = f"നിങ്ങളുടെ മേഖലയിലെ സാധ്യതയുള്ള പദ്ധതി. ഇതിലെ {len(unverified)} യോഗ്യതാ മാനദണ്ഡങ്ങൾ പരിശോധിക്കേണ്ടതുണ്ട്."
 
-            # Source details
+            # Source & coverage details
             src = scheme.source
             source_url = src.portal_url if src else "https://www.tn.gov.in"
-            source_name = src.source_name if src else "Government of Tamil Nadu"
+            source_name = src.source_name if src else "Government Portal"
             verified_date = src.verified_date if src else "2026-10-15"
+            coverage = "Central Government / Centrally Sponsored" if any(k in scheme.id for k in ["pm-", "pmegp", "nsp-"]) else "State Government (Tamil Nadu)"
 
             # Serialize documents and steps
             docs_res = [RequiredDocumentResponse.model_validate(d) for d in (scheme.documents or [])]
@@ -177,16 +201,26 @@ class SchemeMatcherService:
                 scheme_id=scheme.id,
                 scheme_name_en=scheme.name,
                 scheme_name_ta=scheme.name_ta,
+                scheme_name_hi=getattr(scheme, "name_hi", None) or scheme.name_ta,
+                scheme_name_ml=getattr(scheme, "name_ml", None) or scheme.name_ta,
                 department_en=scheme.department,
                 department_ta=scheme.department_ta,
+                department_hi=getattr(scheme, "department_hi", None) or scheme.department,
+                department_ml=getattr(scheme, "department_ml", None) or scheme.department,
                 category=scheme.category,
+                coverage_type=coverage,
+                application_url=source_url,
                 benefit_amount=scheme.benefit_amount,
                 benefit_summary_en=scheme.benefit_summary,
                 benefit_summary_ta=scheme.benefit_summary_ta,
+                benefit_summary_hi=getattr(scheme, "benefit_summary_hi", None) or scheme.benefit_summary,
+                benefit_summary_ml=getattr(scheme, "benefit_summary_ml", None) or scheme.benefit_summary,
                 match_status=status,
                 match_confidence=confidence,
                 eligibility_explanation_en=explanation_en,
                 eligibility_explanation_ta=explanation_ta,
+                eligibility_explanation_hi=explanation_hi,
+                eligibility_explanation_ml=explanation_ml,
                 fulfilled_conditions=fulfilled,
                 unverified_conditions=unverified,
                 required_documents=docs_res,
@@ -196,7 +230,7 @@ class SchemeMatcherService:
                 verified_date=verified_date
             ))
 
-        # Sort matches by confidence descending
-        potential_matches.sort(key=lambda x: x.match_confidence, reverse=True)
+        # Sort matches by high potential status then confidence descending
+        potential_matches.sort(key=lambda x: (x.match_status == "high_potential", x.match_confidence), reverse=True)
 
         return potential_matches, list(follow_ups_en), list(follow_ups_ta)

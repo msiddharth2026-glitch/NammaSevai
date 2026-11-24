@@ -9,6 +9,7 @@ import { renderLandingPage } from './components/landingPage.js';
 import { renderAssistantPage } from './components/assistantPage.js';
 import { renderResultsPage } from './components/resultsPage.js';
 import { renderDetailsPage } from './components/detailsPage.js';
+import { renderChecklistPage } from './components/checklistPage.js';
 import { renderAdminPage } from './components/adminPage.js';
 
 class App {
@@ -16,9 +17,11 @@ class App {
     this.speechService = new SpeechService();
     this.currentAudioPlayer = null;
 
+    const storedLang = localStorage.getItem('nammasevai_lang') || 'ta';
+
     this.state = {
-      lang: localStorage.getItem('nammasevai_lang') || 'ta',
-      assistantLang: 'ta',
+      lang: storedLang,
+      assistantLang: storedLang,
       route: 'landing',
       schemeDetailsId: null,
       schemes: this.loadSchemes(),
@@ -28,6 +31,7 @@ class App {
       searchQuery: '',
       lastAssistantQuery: '',
       lastMatchedMap: {},
+      userProfile: {},
       isListening: false,
       isSpeaking: false,
       adminSearch: '',
@@ -135,7 +139,7 @@ class App {
     if (hash.startsWith('scheme-details/')) {
       this.state.route = 'scheme-details';
       this.state.schemeDetailsId = hash.replace('scheme-details/', '');
-    } else if (['landing', 'assistant', 'schemes', 'admin'].includes(hash)) {
+    } else if (['landing', 'assistant', 'schemes', 'checklist', 'admin'].includes(hash)) {
       this.state.route = hash;
       this.state.schemeDetailsId = null;
     } else {
@@ -156,6 +160,7 @@ class App {
 
   setLanguage(lang) {
     this.state.lang = lang;
+    this.state.assistantLang = lang;
     localStorage.setItem('nammasevai_lang', lang);
     this.render();
   }
@@ -164,7 +169,32 @@ class App {
     const appRoot = document.getElementById('app-root');
 
     appRoot.addEventListener('click', (e) => {
-      // Language Toggle in Navbar
+      // Compact Language Dropdown button toggle in Navbar
+      const dropdownBtn = e.target.closest('#lang-dropdown-btn');
+      if (dropdownBtn) {
+        const wrapper = document.getElementById('lang-dropdown-wrapper');
+        if (wrapper) {
+          const isOpen = wrapper.classList.toggle('open');
+          dropdownBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
+        return;
+      }
+
+      // Language selection option (dropdown menu item or mobile drawer button)
+      const setLangBtn = e.target.closest('[data-set-lang]');
+      if (setLangBtn) {
+        const nextLang = setLangBtn.getAttribute('data-set-lang');
+        this.setLanguage(nextLang);
+        return;
+      }
+
+      // Close mobile drawer if open when user clicks a nav link
+      const menu = document.getElementById('nav-menu');
+      if (menu && menu.classList.contains('open') && e.target.closest('.nav-link')) {
+        menu.classList.remove('open');
+      }
+
+      // Legacy Language Toggle in Navbar fallback
       if (e.target.closest('#lang-toggle-btn')) {
         const nextLang = this.state.lang === 'ta' ? 'en' : 'ta';
         this.setLanguage(nextLang);
@@ -173,7 +203,6 @@ class App {
 
       // Mobile Menu Toggle
       if (e.target.closest('#mobile-toggle')) {
-        const menu = document.getElementById('nav-menu');
         if (menu) menu.classList.toggle('open');
         return;
       }
@@ -303,6 +332,97 @@ class App {
         return;
       }
 
+      // Download Text Checklist (.txt)
+      if (e.target.closest('#downloadTextChecklistBtn')) {
+        const saved = JSON.parse(localStorage.getItem('nammasevai_checklist_state') || '{}');
+        const defaultDocs = [
+          { id: 'doc-1', name: 'College Bonafide Certificate & Student ID', authority: 'College office / Principal' },
+          { id: 'doc-2', name: 'Aadhaar Card (Linked with Mobile & Bank DBT)', authority: 'UIDAI' },
+          { id: 'doc-3', name: 'Class 10 & 12 Marksheets', authority: 'State Board / CBSE' },
+          { id: 'doc-4', name: 'Bank Passbook Front Page (Clear IFSC & A/C)', authority: 'Scheduled Bank' },
+          { id: 'doc-5', name: 'Community Certificate (சாதிச் சான்றிதழ்)', authority: 'Revenue Department / e-Sevai' },
+          { id: 'doc-6', name: 'Income Certificate for Current FY (வருமானச் சான்றிதழ்)', authority: 'Revenue Department / Tahsildar' }
+        ];
+
+        let content = "=====================================================\n";
+        content += "NAMMASEVAI AI — CITIZEN SCHEME PREPARATION CHECKLIST\n";
+        content += "Generated: " + new Date().toLocaleString() + "\n";
+        content += "=====================================================\n\n";
+        content += "STATUS     | DOCUMENT NAME                                  | ISSUING AUTHORITY\n";
+        content += "-----------------------------------------------------------------------------\n";
+        let readyCount = 0;
+        defaultDocs.forEach((d, idx) => {
+          const isDone = saved[d.id] !== undefined ? saved[d.id] : idx < 4;
+          if (isDone) readyCount++;
+          const mark = isDone ? "[X] READY  " : "[ ] PENDING";
+          content += `${mark} | ${d.name.padEnd(46)} | ${d.authority}\n`;
+        });
+        content += "-----------------------------------------------------------------------------\n";
+        content += `Summary: ${readyCount} of ${defaultDocs.length} documents ready (${Math.round(readyCount / defaultDocs.length * 100)}% prepared)\n\n`;
+        content += "PUBLIC-SERVICE GUIDANCE DISCLAIMER:\n";
+        content += "This document checklist is generated for preliminary preparation guidance only.\n";
+        content += "Official departments determine actual eligibility, document validity, and scheme approval.\n";
+        content += "=====================================================\n";
+
+        const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'nammasevai_document_checklist.txt';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+        return;
+      }
+
+      // Copy / Share Checklist
+      if (e.target.closest('#copyShareChecklistBtn')) {
+        const saved = JSON.parse(localStorage.getItem('nammasevai_checklist_state') || '{}');
+        const defaultDocs = [
+          { id: 'doc-1', name: 'College Bonafide Certificate & Student ID' },
+          { id: 'doc-2', name: 'Aadhaar Card (DBT Active)' },
+          { id: 'doc-3', name: 'Class 10 & 12 Marksheets' },
+          { id: 'doc-4', name: 'Bank Passbook (IFSC & A/C)' },
+          { id: 'doc-5', name: 'Community Certificate (e-Sevai)' },
+          { id: 'doc-6', name: 'Income Certificate (Revenue Dept)' }
+        ];
+
+        let readyCount = 0;
+        let textSummary = "📋 NammaSevai AI Document Preparation Checklist:\n\n";
+        defaultDocs.forEach((d, idx) => {
+          const isDone = saved[d.id] !== undefined ? saved[d.id] : idx < 4;
+          if (isDone) readyCount++;
+          textSummary += (isDone ? "✅ " : "⏳ ") + d.name + (isDone ? " (Ready)" : " (Pending)") + "\n";
+        });
+        textSummary += `\nProgress: ${readyCount}/${defaultDocs.length} ready (${Math.round(readyCount / defaultDocs.length * 100)}% prepared).\n`;
+        textSummary += "Guidance disclaimer: Preliminary preparation checklist. Final verification at official government desks.";
+
+        if (navigator.share) {
+          navigator.share({
+            title: 'NammaSevai AI Scheme Checklist',
+            text: textSummary
+          }).catch(() => {});
+        } else if (navigator.clipboard) {
+          navigator.clipboard.writeText(textSummary).then(() => {
+            alert("சரிபார்ப்பு பட்டியல் நகலெடுக்கப்பட்டது! / Checklist summary copied to clipboard!");
+          }).catch(() => {
+            alert(textSummary);
+          });
+        } else {
+          alert(textSummary);
+        }
+        return;
+      }
+
+      // Header Privacy Badge Tooltip toggle for touch/click
+      const privacyBadge = e.target.closest('.header-privacy-badge');
+      if (privacyBadge) {
+        privacyBadge.classList.toggle('active');
+        return;
+      } else {
+        document.querySelectorAll('.header-privacy-badge.active').forEach(b => b.classList.remove('active'));
+      }
+
       // Document Checklist item toggling
       const checklistItem = e.target.closest('.checklist-item');
       if (checklistItem && e.target.type !== 'checkbox') {
@@ -311,6 +431,38 @@ class App {
           checkbox.checked = !checkbox.checked;
           checklistItem.classList.toggle('checked', checkbox.checked);
         }
+        return;
+      }
+
+      // Dedicated Saved Checklist Page Item Toggling
+      const interactiveDocItem = e.target.closest('.checklist-item-interactive');
+      if (interactiveDocItem && e.target.type !== 'checkbox') {
+        const checkbox = interactiveDocItem.querySelector('.interactive-doc-checkbox');
+        if (checkbox) {
+          checkbox.checked = !checkbox.checked;
+          const id = checkbox.getAttribute('data-id');
+          const saved = JSON.parse(localStorage.getItem('nammasevai_checklist_state') || '{}');
+          saved[id] = checkbox.checked;
+          localStorage.setItem('nammasevai_checklist_state', JSON.stringify(saved));
+          this.render();
+        }
+        return;
+      }
+
+      const interactiveCheckbox = e.target.closest('.interactive-doc-checkbox');
+      if (interactiveCheckbox) {
+        const id = interactiveCheckbox.getAttribute('data-id');
+        const saved = JSON.parse(localStorage.getItem('nammasevai_checklist_state') || '{}');
+        saved[id] = interactiveCheckbox.checked;
+        localStorage.setItem('nammasevai_checklist_state', JSON.stringify(saved));
+        this.render();
+        return;
+      }
+
+      // Reset All Checklist
+      if (e.target.closest('#resetAllChecklist')) {
+        localStorage.removeItem('nammasevai_checklist_state');
+        this.render();
         return;
       }
 
@@ -394,6 +546,46 @@ class App {
         this.saveModalScheme();
       }
     });
+
+    // Close Language Dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      const wrapper = document.getElementById('lang-dropdown-wrapper');
+      if (wrapper && wrapper.classList.contains('open') && !e.target.closest('#lang-dropdown-wrapper')) {
+        wrapper.classList.remove('open');
+        const btn = document.getElementById('lang-dropdown-btn');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close Language Dropdown on Escape key & Arrow navigation
+    document.addEventListener('keydown', (e) => {
+      const wrapper = document.getElementById('lang-dropdown-wrapper');
+      if (!wrapper || !wrapper.classList.contains('open')) return;
+
+      if (e.key === 'Escape') {
+        wrapper.classList.remove('open');
+        const btn = document.getElementById('lang-dropdown-btn');
+        if (btn) {
+          btn.setAttribute('aria-expanded', 'false');
+          btn.focus();
+        }
+        return;
+      }
+
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        const items = Array.from(wrapper.querySelectorAll('.lang-dropdown-item'));
+        if (items.length === 0) return;
+        e.preventDefault();
+        const activeIdx = items.indexOf(document.activeElement);
+        let nextIdx = 0;
+        if (e.key === 'ArrowDown') {
+          nextIdx = activeIdx >= 0 ? (activeIdx + 1) % items.length : 0;
+        } else {
+          nextIdx = activeIdx > 0 ? (activeIdx - 1) % items.length : items.length - 1;
+        }
+        items[nextIdx].focus();
+      }
+    });
   }
 
   handleMicClick() {
@@ -415,7 +607,7 @@ class App {
   }
 
   startVoiceRecording() {
-    const lang = this.state.assistantLang === 'en' ? 'en' : 'ta';
+    const lang = this.state.assistantLang || this.state.lang || 'ta';
 
     this.speechService.startListening({
       lang,
@@ -435,7 +627,7 @@ class App {
       },
       onError: (err) => {
         this.state.isListening = false;
-        alert("குரல் பதிவில் பிழை / Microphone issue: " + err + ". தயவுசெய்து தட்டச்சு செய்யவும்.");
+        alert("குரல் பதிவில் தகவல் / Speech recognition notice: " + err + ". நீங்கள் நேரடியாக கீழே தட்டச்சு செய்து கேட்கலாம் / You can also type your query directly.");
         this.render();
       },
       onEnd: () => {
@@ -464,15 +656,19 @@ class App {
     let responseText = "";
     let followUpsEn = [];
     let followUpsTa = [];
+    let followUpsHi = [];
+    let followUpsMl = [];
 
     // Attempt real backend call to /api/assistant/match
     try {
+      const activeLang = this.state.assistantLang || this.state.lang || 'ta';
       const res = await fetch('/api/assistant/match', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           query: query,
-          lang: this.state.lang
+          lang: activeLang,
+          profile: this.state.userProfile || {}
         })
       });
 
@@ -481,6 +677,16 @@ class App {
         matches = data.matches || [];
         followUpsEn = data.follow_up_questions_en || [];
         followUpsTa = data.follow_up_questions_ta || [];
+        followUpsHi = data.follow_up_questions_hi || [];
+        followUpsMl = data.follow_up_questions_ml || [];
+
+        const detectedProf = data.extracted_profile || data.detected_profile;
+        if (detectedProf) {
+          this.state.userProfile = {
+            ...(this.state.userProfile || {}),
+            ...detectedProf
+          };
+        }
 
         // Save matched map for schemes results page
         this.state.lastAssistantQuery = query;
@@ -490,26 +696,58 @@ class App {
             matchPercent: item.match_confidence,
             status: item.match_status,
             reasonEn: item.eligibility_explanation_en,
-            reasonTa: item.eligibility_explanation_ta
+            reasonTa: item.eligibility_explanation_ta,
+            reasonHi: item.eligibility_explanation_hi,
+            reasonMl: item.eligibility_explanation_ml
           };
         }
 
         // Formulate response text
-        const isTa = this.state.lang === 'ta';
-        if (matches.length > 0) {
+        const curLang = activeLang;
+        if (data.compassionate_response) {
+          responseText = data.compassionate_response;
+        } else if (matches.length > 0) {
           const top = matches[0];
-          const name = isTa ? top.scheme_name_ta : top.scheme_name_en;
-          const benefit = isTa ? top.benefit_summary_ta : top.benefit_summary_en;
-          
-          if (isTa) {
+          let name = top.scheme_name_en;
+          let benefit = top.benefit_summary_en;
+
+          if (curLang === 'ta') {
+            name = top.scheme_name_ta || top.scheme_name_en;
+            benefit = top.benefit_summary_ta || top.benefit_summary_en;
             responseText = `உங்கள் தேவையை ஆய்வு செய்து ${matches.length} சாத்தியமான அரசு நலத்திட்டங்களை கண்டறிந்துள்ளேன். முதன்மையான திட்டம் "${name}" (பலன்: ${benefit}). கீழே உள்ள விவரங்களை சரிபார்க்கவும்.`;
+          } else if (curLang === 'tanglish') {
+            name = top.scheme_name_ta || top.scheme_name_en;
+            benefit = top.benefit_summary_ta || top.benefit_summary_en;
+            responseText = `Unga situation-ah analyze panni ${matches.length} matching welfare schemes kandupidichirukken. Top scheme "${name}" (Benefit: ${benefit}). Keela irukkira eligibility rules & documents check pannunga.`;
+          } else if (curLang === 'hi') {
+            name = top.scheme_name_hi || top.scheme_name_en;
+            benefit = top.benefit_summary_hi || top.benefit_summary_en;
+            responseText = `आपकी जानकारी का विश्लेषण कर ${matches.length} संभावित सरकारी कल्याणकारी योजनाओं की पहचान की गई है। प्रमुख योजना "${name}" (लाभ: ${benefit}) है। कृपया नीचे पात्रता और आवश्यक दस्तावेज़ देखें।`;
+          } else if (curLang === 'hinglish') {
+            name = top.scheme_name_hi || top.scheme_name_en;
+            benefit = top.benefit_summary_hi || top.benefit_summary_en;
+            responseText = `Aapki profile analyze karke ${matches.length} matching welfare schemes identify hui hain. Top scheme "${name}" (Benefit: ${benefit}) hai. Kripya neeche eligibility rules aur documents verify karein.`;
+          } else if (curLang === 'ml') {
+            name = top.scheme_name_ml || top.scheme_name_en;
+            benefit = top.benefit_summary_ml || top.benefit_summary_en;
+            responseText = `നിങ്ങളുടെ വിവരങ്ങൾ വിശകലനം ചെയ്ത് ${matches.length} സാധ്യമായ സർക്കാർ ക്ഷേമപദ്ധതികൾ കണ്ടെത്തി. പ്രധാന പദ്ധതി "${name}" (പ്രയോജനം: ${benefit}) ആണ്. താഴെ നൽകിയിട്ടുള്ള യോഗ്യതാ വ്യവസ്ഥകൾ പരിശോധിക്കുക.`;
           } else {
             responseText = `I analyzed your profile and discovered ${matches.length} potential welfare schemes. The top recommendation is "${name}" (${benefit}). Please verify the eligibility rules and documents below.`;
           }
         } else {
-          responseText = isTa
-            ? "உங்கள் தகவலுக்கு நேரடி திட்டம் எதுவும் கிடைக்கவில்லை. உங்கள் படிப்பு, தொழில், நில அளவு போன்ற விவரங்களை குறிப்பிட்டு மீண்டும் கேட்கவும்."
-            : "No exact schemes matched your description. Please provide more details about your education, farming, or occupation.";
+          if (curLang === 'ta') {
+            responseText = "உங்கள் தகவலுக்கு நேரடி திட்டம் எதுவும் கிடைக்கவில்லை. உங்கள் படிப்பு, தொழில், நில அளவு போன்ற விவரங்களை குறிப்பிட்டு மீண்டும் கேட்கவும்.";
+          } else if (curLang === 'tanglish') {
+            responseText = "Unga details-kku direct scheme match aagala. Unga education, land, income, or velai pathi innum konjam sollunga.";
+          } else if (curLang === 'hi') {
+            responseText = "आपकी वर्तमान जानकारी से कोई प्रत्यक्ष योजना मेल नहीं खाती। कृपया अपनी शिक्षा, व्यवसाय या आय का अतिरिक्त विवरण प्रदान करें।";
+          } else if (curLang === 'hinglish') {
+            responseText = "Aapki details se matching koi direct scheme nahi mili. Kripya apni education, zameen, income ya occupation ke baare mein thoda aur batayein.";
+          } else if (curLang === 'ml') {
+            responseText = "നിങ്ങളുടെ വിവരങ്ങൾക്ക് അനുയോജ്യമായ നേരിട്ടുള്ള പദ്ധതിയൊന്നും കണ്ടെത്തിയില്ല. ദയവായി നിങ്ങളുടെ വിദ്യാഭ്യാസം, തൊഴിൽ എന്നിവയെക്കുറിച്ചുള്ള കൂടുതൽ വിവരങ്ങൾ നൽകുക.";
+          } else {
+            responseText = "No exact schemes matched your description. Please provide more details about your education, farming, or occupation.";
+          }
         }
       } else {
         throw new Error("Backend response error");
@@ -535,7 +773,10 @@ class App {
       time: currentTime,
       matches: matches,
       follow_ups_en: followUpsEn,
-      follow_ups_ta: followUpsTa
+      follow_ups_ta: followUpsTa,
+      follow_ups_hi: followUpsHi,
+      follow_ups_ml: followUpsMl,
+      extracted_profile: this.state.userProfile || {}
     });
 
     this.render();
@@ -858,6 +1099,9 @@ class App {
       case 'scheme-details':
         const currentScheme = this.state.schemes.find(s => s.id === this.state.schemeDetailsId);
         pageHtml = renderDetailsPage(currentScheme, this.state);
+        break;
+      case 'checklist':
+        pageHtml = renderChecklistPage(this.state);
         break;
       case 'admin':
         pageHtml = renderAdminPage(this.state);

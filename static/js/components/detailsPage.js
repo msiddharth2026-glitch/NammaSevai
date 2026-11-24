@@ -1,220 +1,344 @@
-// NammaSevai AI - Scheme Details Page Component
+// NammaSevai AI - Scheme Details Page Component (BharatSevai AI / Stitch Theme Redesign)
 import { i18n } from '../i18n.js';
+import { getLocalizedScheme } from '../schemesData.js';
 
 export function renderDetailsPage(scheme, state) {
   const t = i18n[state.lang] || i18n.ta;
-  const isTa = state.lang === 'ta';
 
   if (!scheme) {
     return `
-      <div class="container" style="padding: 4rem 1.5rem; text-align: center;">
-        <h2>நலத்திட்டம் காணப்படவில்லை (Scheme Not Found)</h2>
-        <p style="margin: 1rem 0;">கேட்கப்பட்ட நலத்திட்டம் தரவுத்தளத்தில் இல்லை.</p>
-        <a href="#schemes" class="btn btn-primary">← ${t.backToResults}</a>
+      <div class="container" style="max-width: 900px; margin: 4rem auto; text-align: center; background: #ffffff; padding: 3rem 2rem; border-radius: var(--radius-xl); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+        <span class="material-symbols-outlined" style="font-size: 48px; color: var(--secondary-saffron); margin-bottom: 0.5rem;">search_off</span>
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--primary-indigo);">${t.noResultsFound || "Scheme Not Found"}</h2>
+        <p style="color: var(--text-secondary); margin: 0.5rem 0 1.5rem;">${t.tableNoSchemesFound || "The requested scheme is not available in our verified catalog."}</p>
+        <a href="#schemes" class="btn btn-primary">← ${t.backToResults || "Back to Schemes"}</a>
       </div>
     `;
   }
 
-  const criteriaList = isTa ? (scheme.eligibility_criteria_ta || scheme.eligibility_criteria || [])
-                            : (scheme.eligibility_criteria || []);
-
-  const docsList = scheme.required_documents || (scheme.documents ? scheme.documents.map(d => ({ name: d.name_en, name_ta: d.name_ta, mandatory: d.is_mandatory })) : []);
+  const loc = getLocalizedScheme(scheme, state.lang);
+  const name = loc.displayName || scheme.name;
+  const subName = (state.lang === 'ta' || state.lang === 'tanglish') ? scheme.name : (scheme.name_ta || '');
+  const dept = loc.displayDepartment || scheme.department;
+  const benefit = loc.displayBenefit || scheme.benefit_summary;
+  const desc = loc.displayDescription || scheme.description;
+  const criteriaList = loc.displayCriteria || [];
+  const docsList = loc.displayDocuments || [];
   const portalUrl = scheme.official_portal || scheme.portal_url || (scheme.source ? scheme.source.portal_url : 'https://www.tn.gov.in');
+  const summaryForTts = `${name}. ${benefit}. ${dept}.`;
 
   return `
-    <div class="details-page-container container">
-      <!-- Breadcrumb & Back -->
-      <a href="#schemes" class="details-back-btn" id="details-back-link">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
-        <span>${t.backToResults}</span>
-      </a>
+    <div class="details-page-container container" style="max-width: 1150px; margin: 0 auto; padding: 1.5rem 1rem 3.5rem;">
+      
+      <!-- Breadcrumb Navigation -->
+      <nav aria-label="Breadcrumb" style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+        <a href="#schemes" style="display: inline-flex; align-items: center; gap: 0.25rem; color: var(--text-secondary); text-decoration: none; font-weight: 600;">
+          <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
+          <span>${t.backToSchemes || "Back to Schemes"}</span>
+        </a>
+        <span>/</span>
+        <span style="color: var(--primary-indigo); font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 450px;">
+          ${name}
+        </span>
+      </nav>
 
-      <!-- Scheme Header Card -->
-      <div class="details-header-card">
-        <div class="details-badge-row">
-          <span class="badge badge-teal">${scheme.category.toUpperCase()}</span>
-          <span class="badge badge-green">
-            ✓ ${scheme.source_verification === 'verified' ? 'அரசு தளம் தகவல்' : 'Verified Source'}
-          </span>
-          <span class="badge badge-navy">Tamil Nadu Scheme</span>
-        </div>
+      <!-- Asymmetric Hero Banner / Header Card -->
+      <section style="position: relative; background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-2xl); padding: 1.75rem; box-shadow: var(--shadow-md); margin-bottom: 2rem; overflow: hidden;">
+        <!-- Kolam Geometry Blur Accents -->
+        <div style="position: absolute; right: -40px; top: -40px; width: 280px; height: 280px; border-radius: 9999px; background: rgba(217, 119, 6, 0.1); filter: blur(50px); pointer-events: none;"></div>
+        <div style="position: absolute; left: -30px; bottom: -30px; width: 200px; height: 200px; border-radius: 9999px; background: rgba(21, 35, 62, 0.06); filter: blur(40px); pointer-events: none;"></div>
 
-        <div>
-          <h1 class="details-title-en">${scheme.name}</h1>
-          <h2 class="details-title-ta">${scheme.name_ta}</h2>
-        </div>
+        <div style="position: relative; z-index: 10; display: flex; flex-direction: column; gap: 1rem;">
+          
+          <!-- Tag / Match Pill Cluster -->
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <span style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.25rem 0.75rem; border-radius: 9999px; background: rgba(21, 128, 61, 0.12); color: var(--tertiary-green); font-size: 0.82rem; font-weight: 700;">
+              <span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span>
+              <span>${t.strongMatchBadge || "Strong Potential Match"}</span>
+            </span>
 
-        <div class="details-dept-text">
-          <strong>🏛️ ${t.departmentLabel}</strong> ${isTa ? scheme.department_ta : scheme.department}
-        </div>
+            <span style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.25rem 0.75rem; border-radius: 9999px; background: var(--bg-canvas); border: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.78rem; text-transform: capitalize;">
+              <span class="material-symbols-outlined" style="font-size: 15px; color: var(--secondary-saffron);">account_balance</span>
+              <span>${scheme.category} Support · ${scheme.coverage_type || (['pm-', 'pmegp', 'nsp-'].some(k => (scheme.id || '').includes(k)) ? (t.coverageCentral || 'Central Government') : (t.coverageState || 'Tamil Nadu State Government'))}</span>
+            </span>
 
-        <div class="details-benefit-banner">
-          <div>
-            <div style="font-size: 0.85rem; font-weight: 700; color: var(--primary-teal-dark); text-transform: uppercase;">
-              ${t.benefitAmount}
-            </div>
-            <div style="font-size: 1.45rem; font-weight: 800; color: var(--primary-navy); margin-top: 0.2rem;">
-              💰 ${scheme.benefit_amount}
-            </div>
-            <div style="font-size: 0.92rem; color: var(--text-muted); margin-top: 0.25rem;">
-              ${isTa ? scheme.benefit_summary_ta : scheme.benefit_summary}
-            </div>
+            <span style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.25rem 0.75rem; border-radius: 9999px; background: rgba(21, 35, 62, 0.08); color: var(--primary-indigo); font-size: 0.78rem; font-weight: 600;">
+              <span class="material-symbols-outlined" style="font-size: 15px;">verified</span>
+              <span>${t.sourceVerifiedBadge || "Verified Catalog"}</span>
+            </span>
           </div>
 
-          <div>
-            <a href="${portalUrl}" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-              <span>${t.officialApplyBtn} ↗</span>
+          <!-- Main Scheme Title Block -->
+          <div style="display: flex; flex-direction: column; md:flex-row; justify-content: space-between; align-items: flex-start; md:align-items: baseline; gap: 0.75rem;">
+            <div>
+              <h1 style="font-size: 2rem; font-weight: 800; color: var(--primary-indigo); margin: 0; line-height: 1.25;">
+                ${name}
+              </h1>
+              ${subName ? `
+                <p style="font-size: 1.15rem; color: var(--secondary-saffron); font-weight: 600; margin: 0.35rem 0 0;">
+                  ${subName}
+                </p>
+              ` : ''}
+            </div>
+
+            <button class="tts-listen-btn btn btn-outline" data-tts-text="${encodeURIComponent(summaryForTts)}" type="button" title="Listen to summary" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 1rem; font-size: 0.85rem; border-radius: var(--radius-xl); flex-shrink: 0;">
+              <span class="material-symbols-outlined" style="font-size: 18px; color: var(--secondary-saffron);">volume_up</span>
+              <span>${t.listenAudioSummary || t.listenAudio || "Listen"}</span>
+            </button>
+          </div>
+
+          <!-- Department Verification Source Box -->
+          <div style="background: var(--bg-canvas); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 0.85rem 1.25rem; display: flex; flex-direction: column; sm:flex-row; justify-content: space-between; align-items: flex-start; sm:align-items: center; gap: 0.75rem;">
+            <div style="display: flex; align-items: center; gap: 0.65rem;">
+              <div style="width: 34px; height: 34px; border-radius: 8px; background: rgba(217, 119, 6, 0.12); display: flex; align-items: center; justify-content: center; color: var(--secondary-saffron); flex-shrink: 0;">
+                <span class="material-symbols-outlined" style="font-size: 20px;">account_balance</span>
+              </div>
+              <p style="font-size: 0.88rem; color: var(--text-primary); margin: 0;">
+                <strong style="color: var(--primary-indigo); font-weight: 700;">${dept}</strong>
+                <span style="color: var(--text-secondary); margin-left: 0.5rem; font-size: 0.8rem;">· ${t.sourceAndVerified || 'Published Government Guidelines'}</span>
+              </p>
+            </div>
+
+            <a href="${portalUrl}" target="_blank" rel="noopener" style="font-size: 0.82rem; font-weight: 700; color: var(--secondary-saffron); display: inline-flex; align-items: center; gap: 0.25rem; text-decoration: none;">
+              <span>${t.officialPortal || "Official Department Portal"}</span>
+              <span class="material-symbols-outlined" style="font-size: 14px;">launch</span>
             </a>
           </div>
-        </div>
-      </div>
 
-      <!-- Main Layout Grid -->
-      <div class="details-grid">
-        <div class="details-main-content">
-          <!-- Description Card -->
-          <div class="content-card">
-            <h3 class="content-card-title">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-teal)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></svg>
-              <span>${t.schemeDescription}</span>
-            </h3>
-            <p style="font-size: 1rem; color: var(--text-main); line-height: 1.7;">
-              ${isTa ? scheme.description_ta : scheme.description}
+          <!-- Calm Civic Disclaimer Strip -->
+          <div style="display: flex; align-items: flex-start; gap: 0.65rem; background: rgba(217, 119, 6, 0.08); border: 1px solid rgba(217, 119, 6, 0.25); border-radius: var(--radius-lg); padding: 0.75rem 1rem; font-size: 0.84rem; color: #7c2d12; line-height: 1.5;">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--secondary-saffron); flex-shrink: 0; margin-top: 1px;">info</span>
+            <p style="margin: 0;">
+              <strong style="color: #9a3412;">${t.guidanceOnlyBadge || "Civic Guidance Only"}:</strong> ${t.disclaimerDetailedNotice || "NammaSevai AI simplifies public guidelines. The responsible department makes the final eligibility and financial approval decisions based on submitted original credentials."}
             </p>
           </div>
 
-          <!-- Eligibility Criteria Card -->
-          <div class="content-card">
-            <h3 class="content-card-title">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gov-green)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>${t.eligibilityCriteria}</span>
-            </h3>
-            <div style="font-size: 0.88rem; color: var(--text-light); margin-bottom: 1rem;">
-              விண்ணப்பதாரர் பூர்த்தி செய்ய வேண்டிய குறைந்தபட்ச நிபந்தனைகள்:
+        </div>
+      </section>
+
+      <!-- Editorial Main Layout: 2-Column Desktop Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.75rem; align-items: start;">
+        
+        <!-- Left Column: Core Narrative & Value Proposition -->
+        <div style="display: flex; flex-direction: column; gap: 1.75rem; flex: 2; min-width: 0;">
+          
+          <!-- Section 1: What this scheme offers -->
+          <section style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="width: 28px; height: 28px; border-radius: 9999px; background: var(--primary-indigo); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">1</span>
+                <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--primary-indigo); margin: 0;">${t.keyBenefitsTitle || "What this scheme offers"}</h2>
+              </div>
+              <span style="font-size: 0.76rem; font-weight: 700; padding: 0.2rem 0.65rem; border-radius: 9999px; background: var(--bg-canvas); color: var(--text-secondary); border: 1px solid var(--border-color);">
+                ${t.targetBeneficiary || "Direct Citizen Benefit"}
+              </span>
             </div>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem;">
+
+            <!-- 3 Benefit Cards Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
+              <div style="background: var(--bg-canvas); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.5rem;">
+                <div>
+                  <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(217, 119, 6, 0.12); display: flex; align-items: center; justify-content: center; color: var(--secondary-saffron); margin-bottom: 0.5rem;">
+                    <span class="material-symbols-outlined" style="font-size: 22px;">payments</span>
+                  </div>
+                  <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--primary-indigo); margin: 0 0 0.25rem;">${t.benefitAmount || "Financial Support"}</h3>
+                  <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; margin: 0;">
+                    ${scheme.benefit_amount || benefit}
+                  </p>
+                </div>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--secondary-saffron); text-transform: uppercase;">Direct Disbursement</span>
+              </div>
+
+              <div style="background: var(--bg-canvas); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.5rem;">
+                <div>
+                  <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(21, 128, 61, 0.12); display: flex; align-items: center; justify-content: center; color: var(--tertiary-green); margin-bottom: 0.5rem;">
+                    <span class="material-symbols-outlined" style="font-size: 22px;">savings</span>
+                  </div>
+                  <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--primary-indigo); margin: 0 0 0.25rem;">${t.targetBeneficiary || "Beneficiary Coverage"}</h3>
+                  <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; margin: 0;">
+                    ${benefit}
+                  </p>
+                </div>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary-indigo);">${t.sourceVerifiedBadge || "Verified Scale"}</span>
+              </div>
+
+              <div style="background: var(--bg-canvas); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.5rem;">
+                <div>
+                  <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(21, 35, 62, 0.08); display: flex; align-items: center; justify-content: center; color: var(--primary-indigo); margin-bottom: 0.5rem;">
+                    <span class="material-symbols-outlined" style="font-size: 22px;">verified_user</span>
+                  </div>
+                  <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--primary-indigo); margin: 0 0 0.25rem;">${t.departmentLabel || "Department"}</h3>
+                  <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; margin: 0;">
+                    ${dept}
+                  </p>
+                </div>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-secondary);">${t.stateGuidelinesPill || "Published Guidelines"}</span>
+              </div>
+            </div>
+
+            <!-- Description Paragraph -->
+            <p style="font-size: 0.92rem; color: var(--text-primary); line-height: 1.6; margin-bottom: 1rem;">
+              ${desc}
+            </p>
+
+            <!-- DBT Callout -->
+            <div style="background: var(--bg-canvas); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 0.85rem 1rem; display: flex; align-items: center; gap: 0.65rem;">
+              <span class="material-symbols-outlined" style="font-size: 22px; color: var(--secondary-saffron);">assured_workload</span>
+              <span style="font-size: 0.84rem; color: var(--text-primary); font-weight: 600;">
+                Direct Benefit Transfer (DBT): Payments directly credited to linked bank account without intermediaries.
+              </span>
+            </div>
+          </section>
+
+          <!-- Section 2: Why it may match you (Eligibility Criteria) -->
+          <section style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="width: 28px; height: 28px; border-radius: 9999px; background: var(--primary-indigo); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">2</span>
+                <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--primary-indigo); margin: 0;">${t.eligibilityCriteriaTitle || t.eligibilityCriteria}</h2>
+              </div>
+              <span style="font-size: 0.76rem; font-weight: 700; padding: 0.2rem 0.65rem; border-radius: 9999px; background: rgba(21, 128, 61, 0.12); color: var(--tertiary-green);">
+                ${criteriaList.length} ${t.eligibilityCheck || "Criteria Aligned"}
+              </span>
+            </div>
+
+            <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
               ${criteriaList.map(criterion => `
-                <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
-                  <span style="color: var(--gov-green); font-size: 1.1rem; line-height: 1;">✓</span>
-                  <span style="font-size: 0.95rem; color: var(--text-main); line-height: 1.5;">${criterion}</span>
+                <li style="display: flex; align-items: flex-start; gap: 0.65rem; background: var(--bg-canvas); padding: 0.75rem 1rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+                  <div style="width: 22px; height: 22px; border-radius: 9999px; background: var(--tertiary-green); color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">
+                    <span class="material-symbols-outlined" style="font-size: 14px;">check</span>
+                  </div>
+                  <span style="font-size: 0.92rem; color: var(--text-primary); line-height: 1.5;">${typeof criterion === 'string' ? criterion : (criterion.criterion || criterion.name || '')}</span>
                 </li>
               `).join('')}
             </ul>
-          </div>
+          </section>
 
+          <!-- Section 3: How to apply -->
+          <section style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="width: 28px; height: 28px; border-radius: 9999px; background: var(--primary-indigo); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">3</span>
+                <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--primary-indigo); margin: 0;">${t.applicationProcedureTitle || t.applicationSteps}</h2>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+              <div style="background: var(--bg-canvas); padding: 1rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+                <div style="display: flex; align-items: center; gap: 0.4rem; font-weight: 700; color: var(--primary-indigo); font-size: 0.9rem; margin-bottom: 0.35rem;">
+                  <span class="material-symbols-outlined" style="font-size: 18px; color: var(--secondary-saffron);">language</span>
+                  <span>${t.onlineModeTitle || t.onlineMode}</span>
+                </div>
+                <p style="font-size: 0.86rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">
+                  ${loc.displayProcedure?.online || (scheme.application_procedure?.online || `Apply online at official portal: <a href="${portalUrl}" target="_blank" rel="noopener" style="color: var(--secondary-saffron); font-weight: 600;">${portalUrl}</a>`)}
+                </p>
+              </div>
+
+              <div style="background: var(--bg-canvas); padding: 1rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+                <div style="display: flex; align-items: center; gap: 0.4rem; font-weight: 700; color: var(--primary-indigo); font-size: 0.9rem; margin-bottom: 0.35rem;">
+                  <span class="material-symbols-outlined" style="font-size: 18px; color: var(--tertiary-green);">storefront</span>
+                  <span>${t.offlineModeTitle || t.offlineMode}</span>
+                </div>
+                <p style="font-size: 0.86rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">
+                  ${loc.displayProcedure?.offline || (scheme.application_procedure?.offline || 'Visit your nearest e-Sevai Center / Taluk Office / VAO Office with original identity proofs and community certificates.')}
+                </p>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Right Column: Documents Checklist & Action Dossier -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; flex: 1; min-width: 0;">
+          
           <!-- Interactive Documents Checklist Card -->
-          <div class="content-card" id="printable-documents-checklist">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
-              <h3 class="content-card-title" style="margin-bottom: 0;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-saffron-dark)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
-                <span>${t.documentsChecklist}</span>
+          <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.5rem; box-shadow: var(--shadow-sm);" id="printable-documents-checklist">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--primary-indigo); margin: 0; display: flex; align-items: center; gap: 0.4rem;">
+                <span class="material-symbols-outlined" style="font-size: 20px; color: var(--secondary-saffron);">fact_check</span>
+                <span>${t.requiredDocumentsTitle || t.documentsChecklist}</span>
               </h3>
-              <button class="btn btn-outline btn-sm" id="print-checklist-btn" type="button">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
-                <span>${t.printChecklist}</span>
+              <button class="btn btn-outline btn-sm" id="print-checklist-btn" type="button" style="padding: 0.3rem 0.65rem; font-size: 0.78rem;">
+                <span class="material-symbols-outlined" style="font-size: 14px;">print</span>
+                <span>${t.printChecklist || "Print"}</span>
               </button>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-light); margin-bottom: 1.25rem;">
+
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.4;">
               ${t.docsSubtitle}
             </p>
 
-            <div class="checklist-group">
-              ${docsList.map((doc, idx) => `
-                <label class="checklist-item" data-doc-index="${idx}">
-                  <input type="checkbox" class="checklist-checkbox" />
-                  <div style="display: flex; flex-direction: column;">
-                    <span class="checklist-text" style="font-weight: 600;">
-                      ${isTa ? doc.name_ta : doc.name}
-                    </span>
-                    <span style="font-size: 0.78rem; color: var(--text-light);">
-                      ${doc.mandatory ? '(கட்டாயம் தேவை / Mandatory)' : '(பொருந்தினால் மட்டும் / If Applicable)'}
-                    </span>
-                  </div>
-                </label>
-              `).join('')}
-            </div>
-          </div>
+            <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+              ${docsList.map((doc, idx) => {
+                const docName = typeof doc === 'string' ? doc : (doc.name || doc.name_ta || doc.name_hi || doc.name_ml || '');
+                const isMandatory = typeof doc === 'object' ? doc.mandatory !== false : true;
 
-          <!-- Application Procedure Steps -->
-          <div class="content-card">
-            <h3 class="content-card-title">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-navy)" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
-              <span>${t.applicationSteps}</span>
-            </h3>
-
-            <div class="procedure-steps">
-              <div class="procedure-mode-box">
-                <div class="procedure-mode-title">🌐 ${t.onlineMode}</div>
-                <div class="procedure-mode-text">
-                  ${isTa ? (scheme.application_procedure?.online_ta || scheme.application_procedure?.online) : scheme.application_procedure?.online}
-                </div>
-              </div>
-
-              <div class="procedure-mode-box" style="border-left-color: var(--accent-saffron);">
-                <div class="procedure-mode-title">🏢 ${t.offlineMode}</div>
-                <div class="procedure-mode-text">
-                  ${isTa ? (scheme.application_procedure?.offline_ta || scheme.application_procedure?.offline) : scheme.application_procedure?.offline}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sidebar Metadata -->
-        <div class="details-side-content">
-          <!-- Timelines & Dates -->
-          <div class="content-card">
-            <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.45rem;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              <span>${t.importantDates}</span>
-            </h4>
-            <div style="font-size: 0.92rem; color: var(--text-main); background: var(--bg-surface); padding: 0.85rem; border-radius: var(--radius-sm); border-left: 3px solid var(--primary-teal);">
-              ${isTa ? (scheme.important_dates_ta || scheme.important_dates) : scheme.important_dates}
-            </div>
-          </div>
-
-          <!-- Official Portal & Verification -->
-          <div class="content-card">
-            <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.45rem;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span>${t.sourceAndVerified}</span>
-            </h4>
-            <div style="display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.88rem;">
-              <div>
-                <span style="color: var(--text-light);">தகவல் மூலம்:</span><br/>
-                <strong>${scheme.official_source}</strong>
-              </div>
-              <div>
-                <span style="color: var(--text-light);">சரிபார்க்கப்பட்ட தேதி:</span><br/>
-                <strong>${scheme.verified_date || '2026-10-15'}</strong>
-              </div>
-              <div style="margin-top: 0.5rem; padding: 0.75rem; background: var(--bg-surface); border-radius: var(--radius-sm); font-size: 0.8rem; color: var(--text-muted);">
-                ℹ️ ${t.sampleDisclaimer}
-              </div>
+                return `
+                  <label class="checklist-item" style="display: flex; align-items: flex-start; gap: 0.65rem; background: var(--bg-canvas); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" class="checklist-checkbox" data-doc-id="doc-${scheme.id}-${idx}" style="margin-top: 3px; width: 18px; height: 18px; accent-color: var(--secondary-saffron); cursor: pointer;" />
+                    <div style="flex: 1;">
+                      <span style="font-size: 0.88rem; font-weight: 600; color: var(--primary-indigo); display: block;">
+                        ${docName}
+                      </span>
+                      <span style="font-size: 0.74rem; color: ${isMandatory ? '#b45309' : 'var(--text-secondary)'};">
+                        ${isMandatory ? (t.mandatoryBadge || '★ Mandatory Document') : (t.optionalBadge || 'Optional / If applicable')}
+                      </span>
+                    </div>
+                  </label>
+                `;
+              }).join('')}
             </div>
 
             <div style="margin-top: 1.25rem;">
-              <a href="${portalUrl}" target="_blank" rel="noopener" class="btn btn-navy" style="width: 100%;">
-                <span>அரசு தளம் செல்லவும் ↗</span>
+              <a href="#checklist" class="btn btn-outline" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.5rem;">
+                <span class="material-symbols-outlined" style="font-size: 16px;">checklist</span>
+                <span>${t.checklist || "Open Dedicated Checklist Tracker"}</span>
               </a>
             </div>
           </div>
 
-          <!-- Citizen Helplines -->
-          <div class="content-card">
-            <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.45rem;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              <span>${t.helplineTitle}</span>
+          <!-- Official Portal Primary Link -->
+          <div style="background: var(--bg-card); border: 1.5px solid var(--secondary-saffron); border-radius: var(--radius-xl); padding: 1.25rem; box-shadow: var(--shadow-sm); text-align: center;">
+            <span class="material-symbols-outlined" style="font-size: 32px; color: var(--secondary-saffron); margin-bottom: 0.25rem;">open_in_new</span>
+            <h4 style="font-size: 1rem; font-weight: 700; color: var(--primary-indigo); margin: 0 0 0.25rem;">
+              ${t.applyOnOfficialPortal || "Ready to submit application?"}
             </h4>
-            <div style="font-size: 0.9rem; color: var(--text-main); display: flex; flex-direction: column; gap: 0.5rem;">
-              <div><strong>துறை உதவி எண்:</strong> ${scheme.helpline || '1100'}</div>
-              <div><strong>முதலமைச்சர் உதவி மையம்:</strong> 1100</div>
-              <div><strong>இ-சேவை உதவி:</strong> 1800-425-1333</div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0 0 1rem;">
+              ${t.officialSchemeGuidance || "Visit the official government application portal directly."}
+            </p>
+            <a href="${portalUrl}" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 0.65rem 1rem; font-size: 0.92rem;">
+              <span>${t.officialApplyBtn || "Apply on Official Portal"} ↗</span>
+            </a>
+          </div>
+
+          <!-- Important Dates Card -->
+          <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.25rem; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; align-items: center; gap: 0.4rem; font-weight: 700; color: var(--primary-indigo); font-size: 0.95rem; margin-bottom: 0.5rem;">
+              <span class="material-symbols-outlined" style="font-size: 18px; color: var(--secondary-saffron);">calendar_today</span>
+              <span>${t.importantDates || "Important Timeline"}</span>
+            </div>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">
+              ${loc.displayDates || (scheme.important_dates || 'Ongoing for Academic & Financial Year 2024–25. Submit early to prevent e-Sevai rush.')}
+            </p>
+          </div>
+
+          <!-- Helplines Card -->
+          <div style="background: var(--bg-canvas); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.25rem;">
+            <div style="font-weight: 700; color: var(--primary-indigo); font-size: 0.88rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem;">
+              <span class="material-symbols-outlined" style="font-size: 16px; color: var(--secondary-saffron);">call</span>
+              <span>${t.helplineTitle}</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.82rem; color: var(--text-secondary);">
+              <div>📞 <strong>1100:</strong> ${t.cmHelpline || "Chief Minister Helpline"}</div>
+              <div>📞 <strong>14417:</strong> ${t.studentHelpline || "Education Helpline"}</div>
+              <div>📞 <strong>181:</strong> ${t.womenHelpline || "Women Helpline"}</div>
             </div>
           </div>
+
         </div>
+
       </div>
+
     </div>
   `;
 }

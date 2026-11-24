@@ -361,28 +361,60 @@ export class SchemeMatcher {
     // Generate conversational response text
     let responseMessageEn = "";
     let responseMessageTa = "";
+    let responseMessageHi = "";
+    let responseMessageMl = "";
+    let responseMessageTanglish = "";
+    let responseMessageHinglish = "";
 
     if (finalMatches.length > 0) {
       const top = finalMatches[0];
-      const topName = lang === "ta" ? top.scheme.name_ta : top.scheme.name;
-      const benefit = lang === "ta" ? top.scheme.benefit_summary_ta : top.scheme.benefit_summary;
       const count = finalMatches.length;
+
+      const nameTa = top.scheme.name_ta || top.scheme.name;
+      const benefitTa = top.scheme.benefit_summary_ta || top.scheme.benefit_summary;
+      const nameHi = top.scheme.name_hi || top.scheme.name;
+      const benefitHi = top.scheme.benefit_summary_hi || top.scheme.benefit_summary;
+      const nameMl = top.scheme.name_ml || top.scheme.name;
+      const benefitMl = top.scheme.benefit_summary_ml || top.scheme.benefit_summary;
 
       responseMessageEn = `I have analyzed your situation and found ${count} welfare scheme${count > 1 ? "s" : ""} matching your profile. The top recommendation is "${top.scheme.name}", which provides ${top.scheme.benefit_summary}. You will need documents like Aadhaar, Smart Ration Card, and relevant certificates to apply.`;
       
-      responseMessageTa = `உங்கள் தேவையை ஆய்வு செய்து, உங்களுக்கு தகுதியான ${count} அரசு நலத்திட்டங்களை கண்டறிந்துள்ளேன். இதில் முதன்மையான திட்டம் "${top.scheme.name_ta}" ஆகும். இதன் மூலம் ${top.scheme.benefit_summary_ta} பெறலாம். இதற்கு ஆதார், குடும்ப அட்டை போன்ற ஆவணங்கள் தேவைப்படும். கீழே உள்ள விவரங்களை சரிபார்க்கவும்.`;
+      responseMessageTa = `உங்கள் தேவையை ஆய்வு செய்து, உங்களுக்கு தகுதியான ${count} அரசு நலத்திட்டங்களை கண்டறிந்துள்ளேன். இதில் முதன்மையான திட்டம் "${nameTa}" ஆகும். இதன் மூலம் ${benefitTa} பெறலாம். இதற்கு ஆதார், குடும்ப அட்டை போன்ற ஆவணங்கள் தேவைப்படும். கீழே உள்ள விவரங்களை சரிபார்க்கவும்.`;
+
+      responseMessageTanglish = `Unga situation-ah analyze panni ${count} welfare schemes match pannirukken. Top scheme "${nameTa}" (Benefit: ${benefitTa}). Thevaiyaana certificates & documents check pannunga.`;
+
+      responseMessageHi = `आपकी स्थिति का विश्लेषण करने के बाद मुझे ${count} कल्याणकारी योजनाएं मिली हैं। मुख्य योजना "${nameHi}" है (लाभ: ${benefitHi})। आवेदन के लिए आधार कार्ड और संबंधित प्रमाण पत्र आवश्यक होंगे।`;
+
+      responseMessageHinglish = `Aapki profile analyze karke ${count} matching welfare schemes identify hui hain. Top scheme "${nameHi}" hai (Benefit: ${benefitHi}). Kripya neeche zaroori documents checklist check karein.`;
+
+      responseMessageMl = `നിങ്ങളുടെ സാഹചര്യം പരിശോധിച്ച് ${count} ക്ഷേമപദ്ധതികൾ കണ്ടെത്തിയിട്ടുണ്ട്. പ്രധാന പദ്ധതി "${nameMl}" ആണ് (ആനുകൂല്യം: ${benefitMl}). താഴെ നൽകിയിട്ടുള്ള രേഖകൾ പരിശോധിക്കുക.`;
     } else {
       responseMessageEn = "I couldn't find an exact scheme match for your query. Try describing your occupation, education, or whether you are a farmer, student, or senior citizen.";
       responseMessageTa = "உங்கள் தகவலுக்கு நேரடி திட்டம் எதுவும் கிடைக்கவில்லை. உங்கள் படிப்பு, தொழில், விவசாய நிலம் அல்லது வயது போன்ற விவரங்களை குறிப்பிட்டு மீண்டும் பேசுங்கள்.";
+      responseMessageTanglish = "Unga details-kku direct scheme edhuvum match aagala. Unga education, land, income, or velai pathi innum konjam sollunga.";
+      responseMessageHi = "आपकी जानकारी के अनुसार कोई प्रत्यक्ष योजना नहीं मिली। कृपया अपनी शिक्षा, व्यवसाय, कृषि भूमि या आय का विवरण देकर पुनः प्रयास करें।";
+      responseMessageHinglish = "Aapki details se matching koi direct scheme nahi mili. Kripya apni education, zameen ya income ke baare mein thoda aur batayein.";
+      responseMessageMl = "നിങ്ങൾ നൽകിയ വിവരങ്ങൾക്ക് അനുയോജ്യമായ നേരിട്ടുള്ള പദ്ധതികൾ ഒന്നും കണ്ടെത്താനായില്ല. ദയവായി നിങ്ങളുടെ വിദ്യാഭ്യാസം അല്ലെങ്കിൽ തൊഴിൽ വിവരങ്ങൾ നൽകുക.";
     }
+
+    let finalMsg = responseMessageEn;
+    if (lang === "ta") finalMsg = responseMessageTa;
+    else if (lang === "tanglish") finalMsg = responseMessageTanglish;
+    else if (lang === "hi") finalMsg = responseMessageHi;
+    else if (lang === "hinglish") finalMsg = responseMessageHinglish;
+    else if (lang === "ml") finalMsg = responseMessageMl;
 
     return {
       query: rawQuery,
       matches: finalMatches,
       intent,
-      responseMessage: lang === "ta" ? responseMessageTa : responseMessageEn,
+      responseMessage: finalMsg,
       responseMessageEn,
-      responseMessageTa
+      responseMessageTa,
+      responseMessageHi,
+      responseMessageMl,
+      responseMessageTanglish,
+      responseMessageHinglish
     };
   }
 }

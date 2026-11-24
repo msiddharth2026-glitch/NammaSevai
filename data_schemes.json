@@ -1,0 +1,118 @@
+[
+  {
+    "id": "pudhumai-penn",
+    "name": "Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme (Pudhumai Penn)",
+    "name_ta": "மூவலூர் ராமாமிர்தம் அம்மையார் புதுமைப் பெண் திட்டம்",
+    "department": "Social Welfare and Women Empowerment Department",
+    "department_ta": "சமூக நலன் மற்றும் மகளிர் உரிமைத் துறை",
+    "category": "education",
+    "beneficiary_type": "Girl students joining undergraduate/diploma courses",
+    "beneficiary_type_ta": "அரசுப் பள்ளியில் படித்து கல்லூரி சேரும் மாணவிகள்",
+    "benefit_summary": "₹1,000 per month deposited directly into bank account until graduation",
+    "benefit_summary_ta": "கல்லூரி படிப்பு முடியும் வரை மாதம் ₹1,000 நேரடி வங்கி வரவு",
+    "benefit_amount": "₹1,000 / month",
+    "description": "Financial assistance to encourage female students who studied from 6th to 12th standard in Tamil Nadu government schools to pursue higher education.",
+    "description_ta": "தமிழ்நாடு அரசுப் பள்ளிகளில் 6 முதல் 12-ம் வகுப்பு வரை பயின்று உயர்கல்வியில் சேரும் மாணவிகளுக்கு மாதம் ₹1,000 உதவித்தொகை வழங்கும் திட்டம்.",
+    "eligibility_criteria": [
+      "Must have studied Classes 6 to 12 in Tamil Nadu Government schools",
+      "Must be enrolled in recognized higher education (UG degree, diploma, ITI)",
+      "Student must have a valid individual bank account seeded with Aadhaar"
+    ],
+    "required_documents": [
+      {
+        "name": "Aadhaar Card",
+        "name_ta": "ஆதார் அட்டை",
+        "mandatory": true
+      },
+      {
+        "name": "10th & 12th Marksheet",
+        "name_ta": "10 மற்றும் 12-ம் வகுப்பு மதிப்பெண் சான்றிதழ்",
+        "mandatory": true
+      },
+      {
+        "name": "Govt School Study Bonafide",
+        "name_ta": "அரசுப் பள்ளி பயின்றதற்கான சான்றிதழ்",
+        "mandatory": true
+      },
+      {
+        "name": "Bank Passbook with IFSC",
+        "name_ta": "வங்கி சேமிப்புக் கணக்கு புத்தகம்",
+        "mandatory": true
+      }
+    ],
+    "official_portal": "https://www.penkalvi.tn.gov.in",
+    "official_source": "Tamil Nadu Social Welfare Dept (Sample Demo Entry)",
+    "source_verification": "verified",
+    "verified_date": "2026-10-20"
+  },
+  {
+    "id": "kmut-magalir",
+    "name": "Kalaignar Magalir Urimai Thittam (KMUT)",
+    "name_ta": "கலைஞர் மகளிர் உரிமைத் திட்டம்",
+    "department": "Special Programme Implementation & Revenue Department",
+    "department_ta": "சிறப்புத் திட்டச் செயலாக்கம் மற்றும் வருவாய்த் துறை",
+    "category": "women",
+    "beneficiary_type": "Eligible female heads of family in Tamil Nadu",
+    "beneficiary_type_ta": "குடும்பத் தலைவிகள் (பெண்கள்)",
+    "benefit_summary": "₹1,000 monthly basic income guarantee directly credited to bank account",
+    "benefit_summary_ta": "குடும்பத் தலைவிகளுக்கு மாதம் ₹1,000 உரிமைத் தொகை வங்கி வரவு",
+    "benefit_amount": "₹1,000 / month",
+    "description": "A universal basic income program providing economic independence to women heads of family across Tamil Nadu.",
+    "description_ta": "குடும்பத் தலைவிகளின் பொருளாதார சுதந்திரத்திற்காக மாதம் ₹1,000 வழங்கும் திட்டம்.",
+    "eligibility_criteria": [
+      "Female head of family named in the Smart Family Ration Card",
+      "Family annual income should be less than ₹2.5 Lakhs",
+      "Applicant age should be 21 years or older"
+    ],
+    "required_documents": [
+      {
+        "name": "Smart Ration Card",
+        "name_ta": "ஸ்மார்ட் குடும்ப அட்டை",
+        "mandatory": true
+      },
+      {
+        "name": "Aadhaar Card",
+        "name_ta": "ஆதார் அட்டை",
+        "mandatory": true
+      },
+      {
+        "name": "Electricity Bill",
+        "name_ta": "மின் நுகர்வோர் எண்",
+        "mandatory": true
+      },
+      {
+        "name": "Bank Passbook",
+        "name_ta": "வங்கி புத்தகம்",
+        "mandatory": true
+      }
+    ],
+    "official_portal": "https://kmut.tn.gov.in",
+    "official_source": "Tamil Nadu Revenue Department (Sample Demo Entry)",
+    "source_verification": "verified",
+    "verified_date": "2026-11-01"
+  },
+  {
+    "benefit_amount": "₹500 / month",
+    "benefit_summary": "Test monthly assistance",
+    "benefit_summary_ta": "மாத உதவி",
+    "category": "education",
+    "department": "Test Dept",
+    "department_ta": "தேர்வு துறை",
+    "name": "Test Citizen Scheme",
+    "name_ta": "தேர்வு திட்டம்",
+    "official_portal": "https://tn.gov.in",
+    "id": "scheme-3"
+  },
+  {
+    "benefit_amount": "₹500 / month",
+    "benefit_summary": "Test monthly assistance",
+    "benefit_summary_ta": "மாத உதவி",
+    "category": "education",
+    "department": "Test Dept",
+    "department_ta": "தேர்வு துறை",
+    "name": "Test Citizen Scheme",
+    "name_ta": "தேர்வு திட்டம்",
+    "official_portal": "https://tn.gov.in",
+    "id": "scheme-4"
+  }
+]

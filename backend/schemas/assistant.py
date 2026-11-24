@@ -32,6 +32,8 @@ class MissingInformationItem(BaseModel):
     relevance_to_scheme: str
     question_en: str
     question_ta: str
+    question_hi: Optional[str] = None
+    question_ml: Optional[str] = None
 
 class AnalyzeResponse(BaseModel):
     original_text: str
@@ -41,23 +43,35 @@ class AnalyzeResponse(BaseModel):
     missing_critical_info: List[MissingInformationItem]
     follow_up_questions_en: List[str]
     follow_up_questions_ta: List[str]
+    follow_up_questions_hi: Optional[List[str]] = []
+    follow_up_questions_ml: Optional[List[str]] = []
 
 class PotentialSchemeMatch(BaseModel):
     scheme_id: str
     scheme_name_en: str
     scheme_name_ta: str
+    scheme_name_hi: Optional[str] = None
+    scheme_name_ml: Optional[str] = None
     department_en: str
     department_ta: str
+    department_hi: Optional[str] = None
+    department_ml: Optional[str] = None
     category: str
+    coverage_type: Optional[str] = "State Government (Tamil Nadu)"
+    application_url: Optional[str] = None
     benefit_amount: str
     benefit_summary_en: str
     benefit_summary_ta: str
+    benefit_summary_hi: Optional[str] = None
+    benefit_summary_ml: Optional[str] = None
     
     # Matching breakdown
     match_status: str  # high_potential, potential_match, conditional, not_eligible
     match_confidence: float  # 0 to 100 percentage
     eligibility_explanation_en: str
     eligibility_explanation_ta: str
+    eligibility_explanation_hi: Optional[str] = None
+    eligibility_explanation_ml: Optional[str] = None
     fulfilled_conditions: List[str]
     unverified_conditions: List[str]
     
@@ -80,6 +94,9 @@ class MatchResponse(BaseModel):
     extracted_profile: ExtractedUserProfile
     follow_up_questions_en: List[str]
     follow_up_questions_ta: List[str]
+    follow_up_questions_hi: Optional[List[str]] = []
+    follow_up_questions_ml: Optional[List[str]] = []
+    compassionate_response: Optional[str] = None
     disclaimer: str = (
         "Notice: Potential matching does not constitute confirmed eligibility. "
         "Citizens must verify all conditions with the respective department or official portal."
@@ -87,4 +104,12 @@ class MatchResponse(BaseModel):
     disclaimer_ta: str = (
         "குறிப்பு: இங்கு காட்டப்படும் முடிவுகள் சாத்தியமான பரிந்துரைகளே தவிர, அதிகாரப்பூர்வ தகுதி உறுதிப்படுத்தல் அல்ல. "
         "விண்ணப்பிக்கும் முன் அரசு தளத்தில் அல்லது இ-சேவை மையத்தில் விதிகளை சரிபார்க்கவும்."
+    )
+    disclaimer_hi: Optional[str] = (
+        "सूचना: संभावित मिलान आधिकारिक पात्रता की गारंटी नहीं है। "
+        "अंतिम पात्रता संबंधित सरकारी विभाग या आधिकारिक पोर्टल द्वारा निर्धारित की जाएगी।"
+    )
+    disclaimer_ml: Optional[str] = (
+        "ശ്രദ്ധിക്കുക: സാധ്യതയുള്ള പൊരുത്തം സ്ഥിരീകരിച്ച യോഗ്യതയല്ല. "
+        "അന്തിമ യോഗ്യത ഔദ്യോഗിക സർക്കാർ പോർട്ടൽ വഴി സ്ഥിരീകരിക്കേണ്ടതാണ്."
     )

@@ -40,7 +40,15 @@ export class SpeechService {
       this.stopListening();
     }
 
-    const langCode = options.lang === "ta" ? "ta-IN" : "en-IN";
+    const langMap = {
+      ta: "ta-IN",
+      hi: "hi-IN",
+      ml: "ml-IN",
+      en: "en-IN",
+      tanglish: "ta-IN",
+      hinglish: "hi-IN"
+    };
+    const langCode = langMap[options.lang] || (options.lang && options.lang.includes("-") ? options.lang : "en-IN");
     this.recognition.lang = langCode;
 
     this.recognition.onstart = () => {
@@ -112,14 +120,23 @@ export class SpeechService {
     if (!cleanText) return;
 
     this.currentUtterance = new SpeechSynthesisUtterance(cleanText);
-    this.currentUtterance.lang = lang === "ta" ? "ta-IN" : "en-IN";
+    const langMap = {
+      ta: "ta-IN",
+      hi: "hi-IN",
+      ml: "ml-IN",
+      en: "en-IN",
+      tanglish: "ta-IN",
+      hinglish: "hi-IN"
+    };
+    const ttsLang = langMap[lang] || (lang && lang.includes("-") ? lang : "en-IN");
+    this.currentUtterance.lang = ttsLang;
     this.currentUtterance.rate = 0.95; // slightly slower for citizen clarity
     this.currentUtterance.pitch = 1.0;
 
     // Pick best available voice
     const voices = this.synthesis.getVoices();
-    const targetLang = lang === "ta" ? "ta" : "en";
-    const matchedVoice = voices.find(v => v.lang.startsWith(targetLang));
+    const targetPrefix = ttsLang.split("-")[0];
+    const matchedVoice = voices.find(v => v.lang.toLowerCase().startsWith(targetPrefix));
     if (matchedVoice) {
       this.currentUtterance.voice = matchedVoice;
     }

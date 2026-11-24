@@ -26,7 +26,7 @@ def get_voice_config():
     return {
         "voice_recognition_available": True,
         "tts_available": True,
-        "supported_languages": ["ta", "en", "tanglish"],
+        "supported_languages": ["ta", "en", "hi", "ml", "tanglish", "hinglish"],
         "ai_model_configured": ai_service.is_api_configured(),
         "configuration_instruction": config_instruction,
         "privacy_policy": {

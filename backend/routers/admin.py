@@ -177,7 +177,10 @@ def toggle_verification_status(
     return {"scheme_id": scheme_id, "verification_status": src.verification_status}
 
 @router.get("/stats", summary="Get admin dashboard overview metrics")
-def get_admin_stats(db: Session = Depends(get_db)):
+def get_admin_stats(
+    db: Session = Depends(get_db),
+    authorized: bool = Depends(require_admin_auth)
+):
     schemes = db.query(Scheme).all()
     total_schemes = len(schemes)
     categories = len(set(s.category for s in schemes))

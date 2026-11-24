@@ -8,10 +8,10 @@ class Settings(BaseSettings):
     APP_ENV: str = "development"
     DEBUG: bool = True
     
-    # Database Settings
+    # Database Settings (Default SQLite for standalone resilience; supports Postgres via DATABASE_URL)
     DATABASE_URL: str = os.getenv(
         "DATABASE_URL", 
-        "postgresql://postgres:postgres@localhost:5432/nammasevai_db"
+        "sqlite:///./nammasevai.db"
     )
     
     # Server configuration

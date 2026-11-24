@@ -189,8 +189,10 @@ class TestNammaSevaiBackend(unittest.TestCase):
             }
         }
 
+        headers = {"X-Admin-Key": "nammasevai-admin-secret-2026"}
+
         # 1. POST create
-        res = self.client.post("/api/admin/schemes", json=new_scheme_payload)
+        res = self.client.post("/api/admin/schemes", json=new_scheme_payload, headers=headers)
         self.assertEqual(res.status_code, 201)
         created = res.json()
         self.assertEqual(created["id"], "tn-sports-scholarship")
@@ -200,7 +202,7 @@ class TestNammaSevaiBackend(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 
         # 3. DELETE clean up
-        res = self.client.delete("/api/admin/schemes/tn-sports-scholarship")
+        res = self.client.delete("/api/admin/schemes/tn-sports-scholarship", headers=headers)
         self.assertEqual(res.status_code, 200)
 
         # 4. GET verify deletion
@@ -208,7 +210,8 @@ class TestNammaSevaiBackend(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
 
     def test_12_admin_stats(self):
-        res = self.client.get("/api/admin/stats")
+        headers = {"X-Admin-Key": "nammasevai-admin-secret-2026"}
+        res = self.client.get("/api/admin/stats", headers=headers)
         self.assertEqual(res.status_code, 200)
         data = res.json()
         self.assertIn("total_schemes", data)

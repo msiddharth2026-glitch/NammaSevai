@@ -51,20 +51,32 @@ def list_schemes(
             {"name": d.name_en, "name_ta": d.name_ta, "mandatory": d.is_mandatory}
             for d in (s.documents or [])
         ]
+        is_central = any(k in s.id for k in ["pm-", "pmegp", "nsp-"])
+        coverage_type = "Central Government / Centrally Sponsored" if is_central else "State Government (Tamil Nadu)"
         results.append(SchemeListItem(
             id=s.id,
             name=s.name,
             name_ta=s.name_ta,
+            name_hi=getattr(s, "name_hi", None),
+            name_ml=getattr(s, "name_ml", None),
             department=s.department,
             department_ta=s.department_ta,
+            department_hi=getattr(s, "department_hi", None),
+            department_ml=getattr(s, "department_ml", None),
             category=s.category,
             beneficiary_type=s.beneficiary_type,
             beneficiary_type_ta=s.beneficiary_type_ta,
             benefit_summary=s.benefit_summary,
             benefit_summary_ta=s.benefit_summary_ta,
+            benefit_summary_hi=getattr(s, "benefit_summary_hi", None),
+            benefit_summary_ml=getattr(s, "benefit_summary_ml", None),
             benefit_amount=s.benefit_amount,
             description=s.description,
             description_ta=s.description_ta,
+            description_hi=getattr(s, "description_hi", None),
+            description_ml=getattr(s, "description_ml", None),
+            coverage_type=coverage_type,
+            application_url=p_url,
             is_active=s.is_active,
             source_verification_status=src.verification_status if src else "verified",
             verified_date=src.verified_date if src else "2026-10-15",
@@ -79,6 +91,10 @@ def get_scheme_by_id(scheme_id: str, db: Session = Depends(get_db)):
     scheme = db.query(Scheme).filter(Scheme.id == scheme_id).first()
     if not scheme:
         raise HTTPException(status_code=404, detail=f"Scheme '{scheme_id}' not found")
+    
+    is_central = any(k in scheme.id for k in ["pm-", "pmegp", "nsp-"])
+    scheme.coverage_type = "Central Government / Centrally Sponsored" if is_central else "State Government (Tamil Nadu)"
+    scheme.application_url = scheme.source.portal_url if scheme.source else "https://www.tn.gov.in"
     return scheme
 
 @router.get("/{scheme_id}/documents", response_model=List[RequiredDocumentResponse], summary="Get required documents for a scheme")

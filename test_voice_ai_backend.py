@@ -61,7 +61,7 @@ class TestVoiceAndAIBackend(unittest.TestCase):
         self.assertGreater(data["total_potential_matches"], 0)
         top = data["matches"][0]
         self.assertEqual(top["scheme_id"], "oap-senior-pension")
-        self.assertIn("potential_match", top["match_status"])
+        self.assertIn("potential", top["match_status"])
         self.assertIn("oap", top["official_portal_url"].lower() + top["scheme_id"].lower())
         self.assertIn("disclaimer", data)
 
@@ -97,15 +97,16 @@ class TestVoiceAndAIBackend(unittest.TestCase):
                 "verification_status": "verified"
             }
         }
-        res = self.client.post("/api/admin/schemes", json=new_scheme)
+        headers = {"X-Admin-Key": "nammasevai-admin-secret-2026"}
+        res = self.client.post("/api/admin/schemes", json=new_scheme, headers=headers)
         self.assertEqual(res.status_code, 201)
 
         # Toggle status
-        res = self.client.post("/api/admin/schemes/tn-green-fellowship/toggle-status")
+        res = self.client.post("/api/admin/schemes/tn-green-fellowship/toggle-status", headers=headers)
         self.assertEqual(res.status_code, 200)
 
         # Delete
-        res = self.client.delete("/api/admin/schemes/tn-green-fellowship")
+        res = self.client.delete("/api/admin/schemes/tn-green-fellowship", headers=headers)
         self.assertEqual(res.status_code, 200)
 
 if __name__ == "__main__":

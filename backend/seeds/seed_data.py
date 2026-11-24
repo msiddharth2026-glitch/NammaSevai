@@ -1191,6 +1191,222 @@ SCHEMES_SEED = [
             "verification_status": "verified",
             "helpline_number": "CM Helpline 1100 / District Rural Wing"
         }
+    },
+    {
+        "id": "pmegp-msme-business",
+        "name": "Prime Minister's Employment Generation Programme (PMEGP)",
+        "name_ta": "பிரதமரின் வேலைவாய்ப்பு உருவாக்கும் திட்டம் (PMEGP)",
+        "department": "Ministry of Micro, Small and Medium Enterprises (MSME)",
+        "department_ta": "குறு, சிறு மற்றும் நடுத்தர தொழில் அமைச்சகம் (MSME)",
+        "category": "business",
+        "beneficiary_type": "Aspiring entrepreneurs and micro-enterprise owners (Age 18+)",
+        "beneficiary_type_ta": "புதிய தொழில் தொடங்குவோர் மற்றும் சிறு தொழில் முனைவோர் (18 வயதுக்கு மேற்பட்டோர்)",
+        "benefit_summary": "15% to 35% margin money government subsidy on bank project loans up to ₹50 Lakhs (Manufacturing) / ₹20 Lakhs (Service)",
+        "benefit_summary_ta": "ரூ. 50 லட்சம் வரை உற்பத்தி மற்றும் ரூ. 20 லட்சம் வரை சேவை தொழில் கடன்களுக்கு 15% முதல் 35% வரை அரசு மானியம்",
+        "benefit_amount": "15% - 35% Subsidy (up to ₹50L project)",
+        "description": "Credit-linked government subsidy programme to generate self-employment opportunities through establishment of micro-enterprises in manufacturing and service sectors.",
+        "description_ta": "உற்பத்தி மற்றும் சேவை துறைகளில் புதிய சிறு தொழில் நிறுவனங்களை அமைத்து சுயவேலைவாய்ப்பை உருவாக்க மத்திய அரசு வழங்கும் கடன் மானியத் திட்டம்.",
+        "conditions": [
+            {
+                "field_name": "age",
+                "operator": "gte",
+                "expected_value": 18,
+                "is_mandatory": True,
+                "description_en": "Applicant must be at least 18 years of age",
+                "description_ta": "விண்ணப்பதாரர் குறைந்தபட்சம் 18 வயது பூர்த்தியடைந்தவராக இருக்க வேண்டும்",
+                "prompt_question_en": "Are you at least 18 years old?",
+                "prompt_question_ta": "உங்களுக்கு 18 வயது பூர்த்தியாகிவிட்டதா?"
+            },
+            {
+                "field_name": "occupation",
+                "operator": "in",
+                "expected_value": "self_employed,business,entrepreneur,unemployed,artisan",
+                "is_mandatory": True,
+                "description_en": "Applicant must be an aspiring entrepreneur or establishing a new micro-enterprise",
+                "description_ta": "புதிய தொழில் தொடங்கும் தொழில் முனைவோராக அல்லது சுயதொழில் ஆர்வலராக இருக்க வேண்டும்",
+                "prompt_question_en": "Are you planning to establish a new business or self-employment venture?",
+                "prompt_question_ta": "நீங்கள் புதிய தொழில் அல்லது சுயதொழில் தொடங்க திட்டமிடுகிறீர்களா?"
+            }
+        ],
+        "documents": [
+            {
+                "name_en": "Aadhaar Card linked to Mobile and Bank",
+                "name_ta": "மொபைல் மற்றும் வங்கி கணக்குடன் இணைக்கப்பட்ட ஆதார் அட்டை",
+                "is_mandatory": True,
+                "issuing_authority_en": "UIDAI",
+                "issuing_authority_ta": "இந்திய தனித்துவ அடையாள ஆணையம்"
+            },
+            {
+                "name_en": "Detailed Project Report (DPR) / Project Proposal",
+                "name_ta": "திட்ட மதிப்பீட்டு அறிக்கை (DPR)",
+                "is_mandatory": True,
+                "issuing_authority_en": "Chartered Accountant / DIC / Self-prepared",
+                "issuing_authority_ta": "பட்டயக் கணக்காளர் / மாவட்ட தொழில் மையம் (DIC)"
+            },
+            {
+                "name_en": "Educational Qualification Certificate (8th / 10th / Diploma / Degree)",
+                "name_ta": "கல்வித் தகுதிச் சான்றிதழ் (8-ம் வகுப்பு அல்லது அதற்கு மேல்)",
+                "is_mandatory": True,
+                "issuing_authority_en": "School / Board / University",
+                "issuing_authority_ta": "பள்ளி / கல்வி வாரியம் / பல்கலைக்கழகம்"
+            },
+            {
+                "name_en": "Special Category / Community Certificate (for higher 25-35% subsidy)",
+                "name_ta": "சாதி / சிறப்புப் பிரிவுச் சான்றிதழ் (கூடுதல் மானியத்திற்கு)",
+                "is_mandatory": False,
+                "issuing_authority_en": "Revenue Department (Tahsildar)",
+                "issuing_authority_ta": "வருவாய்த்துறை (வட்டாட்சியர்)"
+            },
+            {
+                "name_en": "Bank Account Passbook / KYC Verification",
+                "name_ta": "வங்கி பாஸ்புக் / KYC சரிபார்ப்பு",
+                "is_mandatory": True,
+                "issuing_authority_en": "Scheduled Commercial Bank",
+                "issuing_authority_ta": "அங்கீகரிக்கப்பட்ட வணிக வங்கி"
+            }
+        ],
+        "steps": [
+            {
+                "step_number": 1,
+                "mode": "online",
+                "title_en": "Online Application Submission on KVIC PMEGP e-Portal",
+                "title_ta": "KVIC PMEGP இணையதளத்தில் ஆன்லைன் விண்ணப்பம் சமர்ப்பித்தல்",
+                "description_en": "Register and fill the online application on kviconline.gov.in with DPR and KYC documents.",
+                "description_ta": "kviconline.gov.in தளத்தில் திட்ட அறிக்கை மற்றும் ஆவணங்களுடன் விண்ணப்பிக்கவும்.",
+                "portal_url": "https://www.kviconline.gov.in/pmegpeportal/"
+            },
+            {
+                "step_number": 2,
+                "mode": "both",
+                "title_en": "District Task Force Committee (DTFC) Scrutiny & Bank Sanction",
+                "title_ta": "மாவட்ட பணிக்குழு சரிபார்ப்பு மற்றும் வங்கி கடன் அனுமதி",
+                "description_en": "District committee forwards application to selected bank branch for credit appraisal and loan sanction.",
+                "description_ta": "மாவட்ட தொழில் குழுவால் வங்கிக்கு பரிந்துரைக்கப்பட்டு கடன் அனுமதி வழங்கப்படும்."
+            },
+            {
+                "step_number": 3,
+                "mode": "both",
+                "title_en": "Entrepreneurship Development Programme (EDP) & Margin Money Credit",
+                "title_ta": "தொழில்முனைவோர் பயிற்சி (EDP) மற்றும் மானிய நிதி வரவு",
+                "description_en": "Undergo mandatory EDP training; bank disburses loan and claims margin money subsidy directly from KVIC.",
+                "description_ta": "EDP பயிற்சி முடித்தவுடன் கடன் வழங்கப்பட்டு அரசு மானியம் வங்கி கணக்கில் பூட்டப்படும் (Lock-in)."
+            }
+        ],
+        "source": {
+            "source_name": "Khadi and Village Industries Commission (KVIC) / Ministry of MSME",
+            "portal_url": "https://www.kviconline.gov.in/pmegpeportal/",
+            "verified_date": "2026-10-15",
+            "verification_status": "verified",
+            "helpline_number": "1800-180-6763 / MSME Helpdesk"
+        }
+    },
+    {
+        "id": "nsp-post-matric-scholarship",
+        "name": "National Scholarship Portal (NSP) - Post-Matric Scholarship Scheme",
+        "name_ta": "தேசிய கல்வி உதவித்தொகை தளம் - மெட்ரிக் பின் கல்வி உதவித்தொகை",
+        "department": "Ministry of Social Justice and Empowerment / Ministry of Minority Affairs, Govt. of India",
+        "department_ta": "சமூக நீதி மற்றும் அதிகாரமளித்தல் அமைச்சகம் / மத்திய அரசு",
+        "category": "education",
+        "beneficiary_type": "Post-matric students enrolled in Classes 11, 12, ITI, Diploma, Undergraduate & Postgraduate courses",
+        "beneficiary_type_ta": "11, 12, ஐடிஐ, பாலிடெக்னிக், கல்லூரி மற்றும் பல்கலைக்கழகத்தில் பயிலும் மாணவர்கள்",
+        "benefit_summary": "Reimbursement of non-refundable tuition fees plus annual maintenance allowance up to ₹13,500/year",
+        "benefit_summary_ta": "முழுக் கல்விக் கட்டண விலக்கு மற்றும் ஆண்டு பராமரிப்பு உதவித்தொகை ரூ. 13,500 வரை",
+        "benefit_amount": "Tuition fee reimbursement + Maintenance allowance",
+        "description": "Centrally sponsored nationwide scholarship scheme supporting eligible students from economically weaker backgrounds to complete higher education.",
+        "description_ta": "குறைந்த வருமானம் கொண்ட குடும்பங்களைச் சேர்ந்த மாணவர்கள் 11-ம் வகுப்பு முதல் உயர்கல்வி வரை தடையின்றி படிக்க மத்திய அரசு வழங்கும் உதவித்தொகை.",
+        "conditions": [
+            {
+                "field_name": "occupation",
+                "operator": "eq",
+                "expected_value": "student",
+                "is_mandatory": True,
+                "description_en": "Applicant must be an actively enrolled student in a recognized post-matric institution",
+                "description_ta": "அங்கீகரிக்கப்பட்ட கல்லூரியில் மெட்ரிக் பின் படிப்பில் பயிலும் மாணவராக இருக்க வேண்டும்",
+                "prompt_question_en": "Are you a student enrolled in a recognized institution?",
+                "prompt_question_ta": "நீங்கள் அங்கீகரிக்கப்பட்ட கல்லூரியில் பயிலும் மாணவரா?"
+            },
+            {
+                "field_name": "annual_income",
+                "operator": "lte",
+                "expected_value": 250000,
+                "is_mandatory": True,
+                "description_en": "Annual family income must not exceed ₹2,50,000",
+                "description_ta": "குடும்ப ஆண்டு வருமானம் ரூ. 2,50,000-க்கு மிகாமல் இருக்க வேண்டும்",
+                "prompt_question_en": "Is your annual family income within ₹2,50,000?",
+                "prompt_question_ta": "உங்கள் குடும்ப ஆண்டு வருமானம் ரூ. 2.5 லட்சத்திற்குள் உள்ளதா?"
+            }
+        ],
+        "documents": [
+            {
+                "name_en": "College Bonafide Student Certificate",
+                "name_ta": "கல்லூரி படிப்புச் சான்றிதழ் (Bonafide)",
+                "is_mandatory": True,
+                "issuing_authority_en": "Head of Institution / College Principal",
+                "issuing_authority_ta": "கல்லூரி முதல்வர் அலுவலகம்"
+            },
+            {
+                "name_en": "Previous Qualifying Examination Marksheet",
+                "name_ta": "முந்தைய ஆண்டு தேர்ச்சி மதிப்பெண் சான்றிதழ்",
+                "is_mandatory": True,
+                "issuing_authority_en": "School / University Exam Authority",
+                "issuing_authority_ta": "பல்கலைக்கழக / தேர்வு வாரியம்"
+            },
+            {
+                "name_en": "Income Certificate for Current Financial Year",
+                "name_ta": "நடப்பு நிதியாண்டு வருமானச் சான்றிதழ்",
+                "is_mandatory": True,
+                "issuing_authority_en": "Revenue Department (e-Sevai / Tahsildar)",
+                "issuing_authority_ta": "வருவாய்த்துறை (இ-சேவை / வட்டாட்சியர்)"
+            },
+            {
+                "name_en": "Community / Caste Certificate",
+                "name_ta": "சாதிச் சான்றிதழ் (Community Certificate)",
+                "is_mandatory": True,
+                "issuing_authority_en": "Revenue Department (Zonal Deputy Tahsildar)",
+                "issuing_authority_ta": "மண்டல துணை வட்டாட்சியர்"
+            },
+            {
+                "name_en": "Bank Passbook with Aadhaar Active DBT Seeding",
+                "name_ta": "ஆதார் DBT இணைக்கப்பட்ட வங்கி பாஸ்புக்",
+                "is_mandatory": True,
+                "issuing_authority_en": "Scheduled Commercial Bank",
+                "issuing_authority_ta": "அங்கீகரிக்கப்பட்ட வங்கி"
+            }
+        ],
+        "steps": [
+            {
+                "step_number": 1,
+                "mode": "online",
+                "title_en": "One-Time Registration (OTR) on National Scholarship Portal",
+                "title_ta": "தேசிய கல்வி உதவித்தொகை தளத்தில் ஒருமுறை பதிவு (OTR)",
+                "description_en": "Create user profile using Aadhaar e-KYC on scholarships.gov.in.",
+                "description_ta": "scholarships.gov.in தளத்தில் ஆதார் e-KYC மூலம் ஒருமுறை பதிவு செய்யவும்.",
+                "portal_url": "https://scholarships.gov.in"
+            },
+            {
+                "step_number": 2,
+                "mode": "online",
+                "title_en": "Scheme Selection and Document Upload",
+                "title_ta": "திட்டம் தேர்வு செய்து சான்றிதழ்கள் பதிவேற்றம்",
+                "description_en": "Select Post-Matric scheme, enter academic details and upload certificates.",
+                "description_ta": "மெட்ரிக் பின் உதவித்தொகை திட்டத்தை தேர்வு செய்து விவரங்களை உள்ளிடவும்."
+            },
+            {
+                "step_number": 3,
+                "mode": "both",
+                "title_en": "Institutional and State Nodal Officer Verification & DBT Release",
+                "title_ta": "கல்வி நிறுவனம் மற்றும் மாநில அலுவலர் சரிபார்ப்பு & DBT வரவு",
+                "description_en": "Institute verifies student records; scholarship disbursed via PFMS direct benefit transfer.",
+                "description_ta": "கல்லூரி ஒப்புதலுக்கு பின் மத்திய அரசு DBT மூலம் வங்கி கணக்கில் நேரடியாக செலுத்தும்."
+            }
+        ],
+        "source": {
+            "source_name": "National Scholarship Portal, Govt. of India",
+            "portal_url": "https://scholarships.gov.in",
+            "verified_date": "2026-10-15",
+            "verification_status": "verified",
+            "helpline_number": "0120-6619540 (NSP Helpline)"
+        }
     }
 ]
 

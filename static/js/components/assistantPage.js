@@ -1,183 +1,292 @@
-// NammaSevai AI - AI Assistant Page Component with Real Voice & Privacy Modal
+// NammaSevai AI - AI Assistant Page Component (BharatSevai AI / Stitch Theme Redesign)
 import { i18n } from '../i18n.js';
+import { getLocalizedScheme } from '../schemesData.js';
 
 export function renderAssistantPage(state) {
   const t = i18n[state.lang] || i18n.ta;
-  const isTa = state.lang === 'ta';
   const assistantLang = state.assistantLang || state.lang || 'ta';
   const isListening = state.isListening || false;
-  const isSpeaking = state.isSpeaking || false;
   const chatMessages = state.chatHistory || [];
   const voiceConfig = state.voiceConfig || {};
-  const consentGiven = state.micConsentGiven || false;
+  const hasResults = chatMessages.some(m => m.sender === 'ai' && m.matches && m.matches.length > 0);
 
   return `
-    <div class="assistant-page-container container">
-      <!-- Top Status & AI Configuration Banner -->
+    <div class="assistant-page-container container" style="max-width: 1150px; margin: 0 auto; padding: 1.5rem 1rem 3.5rem;">
+      <!-- AI Backend & Model Status Banner -->
       ${voiceConfig.configuration_instruction ? `
-        <div style="background: linear-gradient(135deg, rgba(0, 143, 140, 0.08) 0%, rgba(9, 45, 80, 0.05) 100%); border: 1px solid rgba(0, 143, 140, 0.25); border-radius: var(--radius-md); padding: 0.85rem 1.25rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; font-size: 0.86rem;">
+        <div style="background: rgba(217, 119, 6, 0.08); border: 1px solid rgba(217, 119, 6, 0.28); border-radius: var(--radius-xl); padding: 0.85rem 1.25rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; font-size: 0.88rem;">
           <div style="display: flex; align-items: center; gap: 0.65rem;">
-            <span style="font-size: 1.15rem;">⚡</span>
+            <span class="material-symbols-outlined" style="color: var(--secondary-saffron); font-size: 20px;">bolt</span>
             <span>
-              <strong>${isTa ? "AI பொறிமுறை நிலை:" : "AI Model Status:"}</strong> 
-              ${isTa ? "சரிபார்க்கப்பட்ட தமிழ்நாடு விதிமுறைப் பொறிமுறை இயங்குகிறது." : "Running verified Tamil Nadu structured rule engine."}
+              <strong style="color: var(--primary-indigo);">${t.aiModelStatusLabel || "AI Model Status:"}</strong> 
+              ${t.aiModelStatusVerified || "Running verified Tamil Nadu structured rule engine."}
             </span>
           </div>
-          <button class="btn btn-outline btn-sm" id="view-ai-config-btn" style="padding: 0.25rem 0.65rem; font-size: 0.78rem;">
-            ⚙️ ${isTa ? "API சாவி வழிகாட்டுதல் (Setup Gemini)" : "Configure Gemini API"}
+          <button class="btn btn-outline btn-sm" id="view-ai-config-btn" style="padding: 0.35rem 0.85rem; font-size: 0.8rem; border-color: var(--secondary-saffron); color: var(--secondary-saffron);">
+            ⚙️ ${t.btnConfigureGemini || "Configure Gemini API"}
           </button>
         </div>
       ` : `
-        <div style="background: rgba(22, 131, 74, 0.08); border: 1px solid rgba(22, 131, 74, 0.25); border-radius: var(--radius-md); padding: 0.65rem 1.15rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.84rem; color: var(--gov-green);">
-          <span>✓</span>
-          <span><strong>Google Gemini AI:</strong> Connected & Active for Multi-Lingual Reasoning.</span>
+        <div style="background: rgba(21, 128, 61, 0.08); border: 1px solid rgba(21, 128, 61, 0.25); border-radius: var(--radius-xl); padding: 0.65rem 1.15rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; font-size: 0.84rem; color: var(--tertiary-green);">
+          <div style="display: flex; align-items: center; gap: 0.45rem;">
+            <span class="material-symbols-outlined" style="font-size: 18px;">check_circle</span>
+            <span><strong>${t.geminiConnectedTitle || "Google Gemini AI & Rule Engine:"}</strong> ${t.geminiConnectedSub || "Connected for multi-lingual scheme reasoning."}</span>
+          </div>
+          <span style="font-size: 0.78rem; opacity: 0.85; font-weight: 600;">${t.geminiDeterministicBadge || "Deterministic & Transparent"}</span>
         </div>
       `}
 
-      <div class="assistant-header">
-        <span class="badge badge-teal" style="margin-bottom: 0.65rem;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
-          Voice-First AI Discovery | குரல்வழி வழிகாட்டி
-        </span>
-        <h1 style="font-size: 2.25rem; font-weight: 800; color: var(--primary-navy);">${t.assistantTitle}</h1>
-        <p style="color: var(--text-muted); font-size: 1.05rem; margin-top: 0.5rem; max-width: 680px; margin-left: auto; margin-right: auto;">
-          ${t.assistantSubtitle}
-        </p>
-
-        <!-- Language Choice Selector -->
-        <div class="assistant-lang-selector">
-          <span style="font-size: 0.88rem; font-weight: 600; color: var(--text-muted);">${t.languageChoice}</span>
-          <button class="lang-chip ${assistantLang === 'ta' ? 'active' : ''}" data-lang-choice="ta">
-            ${t.langTamil}
-          </button>
-          <button class="lang-chip ${assistantLang === 'tanglish' ? 'active' : ''}" data-lang-choice="tanglish">
-            ${t.langTanglish}
-          </button>
-          <button class="lang-chip ${assistantLang === 'en' ? 'active' : ''}" data-lang-choice="en">
-            ${t.langEnglish}
-          </button>
-        </div>
-      </div>
-
-      <!-- Microphone & Input Center -->
-      <div class="mic-control-center">
-        <!-- Privacy Notice Indicator -->
-        <div style="display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem; font-size: 0.78rem; color: var(--text-light);">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span>${isTa ? "தனியுரிமை உறுதி: குரல் பதிவுகள் சேமிக்கப்படாது (Privacy: No raw voice stored)" : "Privacy Guaranteed: Voice is processed ephemerally and never stored."}</span>
-        </div>
-
-        <div>
-          <button class="large-mic-btn ${isListening ? 'listening' : ''}" id="main-mic-btn" title="Click to speak">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
-          </button>
-        </div>
-
-        <div class="mic-status-label" id="mic-status-text">
-          ${isListening ? t.micListening : t.micIdle}
-        </div>
-
-        <!-- Soundwave Visualization -->
-        <div class="waveform-container ${isListening ? 'active' : ''}" id="soundwave-bars">
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-        </div>
-
-        <!-- Text Input Alternative -->
-        <div class="assistant-input-box">
-          <div class="input-textarea-wrap">
-            <textarea
-              id="assistant-query-input"
-              class="citizen-textarea"
-              placeholder="${t.textPlaceholder}"
-              rows="3"
-            >${state.currentQuery || ''}</textarea>
+      <!-- Top Civic Pathway & Integrity Guarantee Bar (Stepper) -->
+      <section style="margin-bottom: 1.75rem;">
+        <div style="background: var(--bg-card); padding: 1.25rem 1.5rem; border-radius: var(--radius-xl); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; md:flex-row; justify-content: space-between; align-items: stretch; gap: 1rem;">
+          <!-- Stepper Tracking -->
+          <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center;">
+              <div style="width: 38px; height: 38px; border-radius: 9999px; background: ${hasResults ? 'var(--tertiary-green)' : 'var(--secondary-saffron)'}; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                ${hasResults ? '<span class="material-symbols-outlined" style="font-size: 20px;">check</span>' : '1'}
+              </div>
+              <div style="width: 50px; height: 3px; background: ${hasResults ? 'var(--tertiary-green)' : 'var(--border-color)'}; margin: 0 0.5rem; border-radius: 9999px;"></div>
+              <div style="width: 38px; height: 38px; border-radius: 9999px; background: ${hasResults ? 'var(--secondary-saffron)' : 'var(--bg-muted)'}; color: ${hasResults ? '#ffffff' : 'var(--text-secondary)'}; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; border: 1px solid var(--border-color);">
+                2
+              </div>
+            </div>
+            <div>
+              <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--secondary-saffron); font-weight: 700; display: block;">
+                ${hasResults ? (t.step2Of2 || "Step 2 of 2") : (t.step1Of2 || "Step 1 of 2")}
+              </span>
+              <span style="font-size: 1.15rem; font-weight: 700; color: var(--primary-indigo);">
+                ${hasResults ? (t.step2Prompt || "Confirm your profile & discover schemes") : (t.step1Prompt || "Tell us about your situation")}
+              </span>
+            </div>
           </div>
 
-          <div class="input-controls-row">
-            <div style="font-size: 0.82rem; color: var(--text-light); display: flex; align-items: center; gap: 0.4rem;">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></svg>
-              <span>தமிழ், தங்கிலீஷ் அல்லது ஆங்கிலத்தில் பேசலாம் / எழுதலாம்</span>
-            </div>
-            <div class="input-controls-actions">
-              <button class="btn btn-outline" id="clear-query-btn" type="button">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                <span>${t.clearBtn}</span>
-              </button>
-              <button class="btn btn-primary" id="submit-query-btn" type="button">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                <span>${t.submitBtn}</span>
-              </button>
+          <!-- Language Selector Capsule -->
+          <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--bg-canvas); padding: 0.35rem 0.85rem; border-radius: 9999px; border: 1px solid var(--border-color); align-self: flex-start; flex-wrap: wrap;">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--secondary-saffron);">translate</span>
+            <span style="font-size: 0.82rem; color: var(--text-primary);">
+              ${t.languageChoice || "Language:"} 
+              <strong style="color: var(--primary-indigo);">${assistantLang === 'ta' ? 'தமிழ்' : assistantLang === 'hi' ? 'हिन्दी' : assistantLang === 'ml' ? 'മലയാളം' : assistantLang === 'tanglish' ? 'Tanglish' : assistantLang === 'hinglish' ? 'Hinglish' : 'English'}</strong>
+            </span>
+            <div style="display: flex; gap: 0.25rem; margin-left: 0.35rem; flex-wrap: wrap;">
+              <button class="lang-chip ${assistantLang === 'en' ? 'active' : ''}" data-lang-choice="en" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">English</button>
+              <button class="lang-chip ${assistantLang === 'ta' ? 'active' : ''}" data-lang-choice="ta" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">தமிழ்</button>
+              <button class="lang-chip ${assistantLang === 'hi' ? 'active' : ''}" data-lang-choice="hi" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">हिन्दी</button>
+              <button class="lang-chip ${assistantLang === 'ml' ? 'active' : ''}" data-lang-choice="ml" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">മലയാളം</button>
+              <button class="lang-chip ${assistantLang === 'tanglish' ? 'active' : ''}" data-lang-choice="tanglish" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">Tanglish</button>
+              <button class="lang-chip ${assistantLang === 'hinglish' ? 'active' : ''}" data-lang-choice="hinglish" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">Hinglish</button>
             </div>
           </div>
         </div>
 
-        <!-- Clickable Example Questions -->
-        <div class="example-prompts-box">
-          <div class="example-prompts-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-teal)" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-            <span>${t.examplePromptsTitle}</span>
+        <!-- Zero-PII Civic Reassurance Banner -->
+        <div style="margin-top: 0.75rem; background: #ffffff; padding: 0.75rem 1.25rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; box-shadow: var(--shadow-2xs);">
+          <div style="display: flex; align-items: center; gap: 0.65rem; color: var(--text-secondary); font-size: 0.86rem;">
+            <span class="material-symbols-outlined" style="color: var(--secondary-saffron); font-size: 20px;">shield</span>
+            <span>
+              <strong style="color: var(--text-primary); font-weight: 600;">${t.privacyPledgeTitle || "Privacy Pledge:"}</strong>
+              ${t.privacyPledgeText || "We never ask for sensitive data like Aadhaar, bank accounts, or phone OTPs. Voice input is transcribed in real-time and never permanently stored."}
+            </span>
           </div>
-          <div class="prompt-chips-wrap">
-            <button class="prompt-chip" data-example="${t.ex1}">${t.ex1}</button>
-            <button class="prompt-chip" data-example="${t.ex2}">${t.ex2}</button>
-            <button class="prompt-chip" data-example="${t.ex3}">${t.ex3}</button>
-            <button class="prompt-chip" data-example="${t.ex4}">${t.ex4}</button>
-            <button class="prompt-chip" data-example="${t.ex5}">${t.ex5}</button>
+          <div style="display: flex; align-items: center; gap: 0.35rem; color: var(--tertiary-green); font-size: 0.78rem; font-weight: 600; white-space: nowrap;">
+            <span class="material-symbols-outlined" style="font-size: 16px;">verified</span>
+            <span>${t.localSessionBadge || "Local Session Only"}</span>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Live Conversation Interface -->
-      <div class="chat-conversation-area" id="chat-conversation-area">
-        ${chatMessages.length === 0 ? `
-          <div style="text-align: center; padding: 2.5rem; background: var(--bg-surface); border-radius: var(--radius-lg); border: 1px dashed var(--border-color);">
-            <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🎙️</div>
-            <h3 style="color: var(--primary-navy); font-size: 1.15rem; margin-bottom: 0.35rem;">உங்கள் கேள்வியை கேட்க காத்திருக்கிறது</h3>
-            <p style="color: var(--text-light); font-size: 0.9rem;">மேலே உள்ள மைக்கை கிளிக் செய்து பேசவும் அல்லது மாதிரி கேள்விகளில் ஒன்றை அழுத்தவும்.</p>
+      <!-- Main Dual Input Layout -->
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; align-items: start; margin-bottom: 2rem;">
+        
+        <!-- Voice & Conversational Input Card -->
+        <div style="background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius-xl); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 1.25rem;">
+          
+          <!-- Card Header -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem;">
+            <div>
+              <div style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.2rem 0.65rem; border-radius: 9999px; background: rgba(217, 119, 6, 0.12); color: var(--secondary-saffron); font-size: 0.76rem; font-weight: 700; margin-bottom: 0.4rem;">
+                <span class="material-symbols-outlined" style="font-size: 14px;">record_voice_over</span>
+                <span>${t.voiceOrTextBadge || "Voice or Conversational Text"}</span>
+              </div>
+              <h2 style="font-size: 1.35rem; font-weight: 700; color: var(--primary-indigo); margin: 0;">
+                ${t.expressSituationHeading || "Express Your Situation Freely"}
+              </h2>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.25rem; line-height: 1.5;">
+                ${t.noFormalNamesNeeded || "Speak or type naturally in everyday mixed language. No formal scheme names needed."}
+              </p>
+            </div>
+            <span class="material-symbols-outlined" style="color: var(--secondary-saffron); font-size: 28px; opacity: 0.8;">graphic_eq</span>
           </div>
-        ` : chatMessages.map((msg, index) => renderChatMessage(msg, index, state)).join('')}
-      </div>
+
+          <!-- Microphone Hero Interaction -->
+          <div style="background: var(--bg-canvas); padding: 1.25rem; border-radius: var(--radius-xl); border: 1px solid var(--border-color); display: flex; flex-direction: column; sm:flex-row; align-items: center; gap: 1.25rem; text-align: center; sm:text-left;">
+            <div style="position: relative; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <!-- Animated Aura Ping -->
+              <span style="position: absolute; width: 68px; height: 68px; border-radius: 9999px; background: rgba(217, 119, 6, 0.3); animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
+              <button class="large-mic-btn ${isListening ? 'listening' : ''}" id="main-mic-btn" type="button" title="Click to speak" style="position: relative; z-index: 10; width: 56px; height: 56px; border-radius: 9999px; background: ${isListening ? 'var(--gov-red, #dc2626)' : 'var(--secondary-saffron)'}; color: #ffffff; border: none; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(217, 119, 6, 0.35); cursor: pointer; transition: all 0.2s ease;">
+                <span class="material-symbols-outlined" style="font-size: 28px;">mic</span>
+              </button>
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; align-items: center; justify-content: center; sm:justify-content: flex-start; gap: 0.4rem;">
+                <span style="font-size: 1rem; font-weight: 700; color: var(--primary-indigo);">
+                  ${isListening ? (t.listeningPleaseSpeak || "Listening... please speak") : (t.tapToSpeak || "Tap to Speak")}
+                </span>
+                <span style="width: 8px; height: 8px; border-radius: 9999px; background: ${isListening ? '#dc2626' : 'var(--secondary-saffron)'}; display: inline-block;"></span>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.25rem; line-height: 1.4;" id="mic-status-text">
+                ${isListening ? t.micListening : (t.micReadyMsg || "Microphone ready. Speech is converted to text in real-time; audio is never archived or permanently stored.")}
+              </p>
+            </div>
+          </div>
+
+          <!-- Soundwave Animation when Listening -->
+          <div class="waveform-container ${isListening ? 'active' : ''}" id="soundwave-bars" style="display: ${isListening ? 'flex' : 'none'}; justify-content: center; align-items: center; gap: 5px; height: 28px; margin: 0.25rem 0;">
+            <div class="wave-bar" style="width: 4px; height: 16px; background: var(--secondary-saffron); border-radius: 2px;"></div>
+            <div class="wave-bar" style="width: 4px; height: 24px; background: var(--secondary-saffron); border-radius: 2px;"></div>
+            <div class="wave-bar" style="width: 4px; height: 12px; background: var(--secondary-saffron); border-radius: 2px;"></div>
+            <div class="wave-bar" style="width: 4px; height: 28px; background: var(--secondary-saffron); border-radius: 2px;"></div>
+            <div class="wave-bar" style="width: 4px; height: 18px; background: var(--secondary-saffron); border-radius: 2px;"></div>
+            <div class="wave-bar" style="width: 4px; height: 14px; background: var(--secondary-saffron); border-radius: 2px;"></div>
+          </div>
+
+          <!-- Text Input Alternative -->
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label for="assistant-query-input" style="font-size: 0.88rem; font-weight: 700; color: var(--primary-indigo); display: flex; align-items: center; gap: 0.4rem;">
+                <span class="material-symbols-outlined" style="font-size: 16px; color: var(--secondary-saffron);">chat_bubble</span>
+                <span>${t.yourSituationNeeds || "Your Situation / Needs:"}</span>
+              </label>
+              <span style="font-size: 0.78rem; color: var(--text-secondary);">Tamil / Hindi / Malayalam / Tanglish / Hinglish / English</span>
+            </div>
+            
+            <div style="position: relative;">
+              <textarea
+                id="assistant-query-input"
+                class="citizen-textarea"
+                placeholder="${t.textPlaceholder || 'E.g.: I am pursuing higher education in college...'}"
+                rows="4"
+                style="width: 100%; padding: 0.85rem; border-radius: var(--radius-lg); border: 1.5px solid var(--border-color); background: var(--bg-canvas); color: var(--text-primary); font-family: inherit; font-size: 0.95rem; resize: vertical; line-height: 1.6;"
+              >${state.currentQuery || ''}</textarea>
+              
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+                <button type="button" id="clear-query-btn" class="btn btn-outline btn-sm" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; display: flex; align-items: center; gap: 0.35rem;">
+                  <span class="material-symbols-outlined" style="font-size: 15px;">backspace</span>
+                  <span>${t.clearBtn}</span>
+                </button>
+                <button type="button" id="submit-query-btn" class="btn btn-primary" style="padding: 0.45rem 1.25rem; font-size: 0.9rem; display: flex; align-items: center; gap: 0.45rem;">
+                  <span>${t.submitBtn}</span>
+                  <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Common Starting Examples (Prompt Chips) -->
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <span style="font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 700;">
+              ${t.commonStartingExamples || "Common Starting Examples:"}
+            </span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+              <button class="prompt-chip" data-example="${t.ex1}" style="padding: 0.4rem 0.85rem; border-radius: 9999px; background: var(--bg-canvas); border: 1px solid var(--border-color); font-size: 0.82rem; color: var(--primary-indigo); cursor: pointer; text-align: left; transition: all 0.2s ease;">
+                🎓 ${t.filterEducation || "Student Scholarship"}
+              </button>
+              <button class="prompt-chip" data-example="${t.ex2}" style="padding: 0.4rem 0.85rem; border-radius: 9999px; background: var(--bg-canvas); border: 1px solid var(--border-color); font-size: 0.82rem; color: var(--primary-indigo); cursor: pointer; text-align: left; transition: all 0.2s ease;">
+                🌾 ${t.filterAgri || "Farmer Crop Subsidy"}
+              </button>
+              <button class="prompt-chip" data-example="${t.ex3}" style="padding: 0.4rem 0.85rem; border-radius: 9999px; background: var(--bg-canvas); border: 1px solid var(--border-color); font-size: 0.82rem; color: var(--primary-indigo); cursor: pointer; text-align: left; transition: all 0.2s ease;">
+                💼 ${t.filterWomen || "Women Self-Employment"}
+              </button>
+              <button class="prompt-chip" data-example="${t.ex4}" style="padding: 0.4rem 0.85rem; border-radius: 9999px; background: var(--bg-canvas); border: 1px solid var(--border-color); font-size: 0.82rem; color: var(--primary-indigo); cursor: pointer; text-align: left; transition: all 0.2s ease;">
+                👵 ${t.filterSeniors || "Senior Citizen Pension"}
+              </button>
+              <button class="prompt-chip" data-example="${t.ex5}" style="padding: 0.4rem 0.85rem; border-radius: 9999px; background: var(--bg-canvas); border: 1px solid var(--border-color); font-size: 0.82rem; color: var(--primary-indigo); cursor: pointer; text-align: left; transition: all 0.2s ease;">
+                🚀 ${t.filterEmployment || "Youth Skill & MSME"}
+              </button>
+            </div>
+          </div>
+
+          <!-- Cultural Context Badge -->
+          <div style="background: var(--bg-canvas); padding: 0.85rem 1rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color); display: flex; align-items: center; gap: 0.75rem;">
+            <span class="material-symbols-outlined" style="font-size: 24px; color: var(--secondary-saffron); flex-shrink: 0;">psychology</span>
+            <div style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4;">
+              <strong style="color: var(--primary-indigo); font-weight: 700;">${t.dialectsUnderstoodTitle || "Colloquial Dialects & Mixed Language Understood"}</strong>: 
+              ${t.dialectsUnderstoodDesc || "Our civic model identifies key eligibility criteria from everyday conversational speech."}
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Conversation, Interpreted Profile & Transparent Matching -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;" id="chat-conversation-area">
+          ${chatMessages.length === 0 ? `
+            <!-- Empty State / Transparent Diagnostic Intro -->
+            <div style="background: var(--bg-card); padding: 2rem 1.5rem; border-radius: var(--radius-xl); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); text-align: center;">
+              <div style="width: 56px; height: 56px; border-radius: 9999px; background: rgba(21, 35, 62, 0.05); color: var(--primary-indigo); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                <span class="material-symbols-outlined" style="font-size: 28px; color: var(--secondary-saffron);">fact_check</span>
+              </div>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--primary-indigo); margin-bottom: 0.4rem;">
+                ${t.transparentMatchingTitle || "Transparent Scheme Matching"}
+              </h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; max-width: 440px; margin: 0 auto 1.5rem;">
+                ${t.transparentMatchingDesc || "We transparently map your situation against verified Tamil Nadu and Central welfare guidelines."}
+              </p>
+
+              <!-- Pathway Checklist Preview -->
+              <div style="background: var(--bg-canvas); border-radius: var(--radius-lg); padding: 1rem; border: 1px solid var(--border-color); text-align: left; display: flex; flex-direction: column; gap: 0.75rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.84rem; color: var(--text-primary);">
+                  <span class="material-symbols-outlined" style="font-size: 18px; color: var(--tertiary-green);">check_circle</span>
+                  <span><strong>1. ${t.stepNlpTitle || "Natural Language Understanding"}:</strong> ${t.stepNlpDesc || "Understands Tamil, Hindi, Malayalam, Tanglish & Hinglish queries"}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.84rem; color: var(--text-primary);">
+                  <span class="material-symbols-outlined" style="font-size: 18px; color: var(--tertiary-green);">check_circle</span>
+                  <span><strong>2. ${t.stepRuleTitle || "Rule Matching"}:</strong> ${t.stepRuleDesc || "Matches education, age, occupation and income limits"}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.84rem; color: var(--text-primary);">
+                  <span class="material-symbols-outlined" style="font-size: 18px; color: var(--secondary-saffron);">pending</span>
+                  <span><strong>3. ${t.stepDocTitle || "Checklist Guidance"}:</strong> ${t.stepDocDesc || "Guides certificates and application procedures"}</span>
+                </div>
+              </div>
+            </div>
+          ` : chatMessages.map((msg, index) => renderStitchChatMessage(msg, index, state)).join('')}
+        </div>
+
+      </section>
     </div>
 
     <!-- Microphone Permission & Privacy Consent Modal -->
     <div class="modal-overlay ${state.showMicConsentModal ? 'open' : ''}" id="mic-consent-modal">
-      <div class="modal-box" style="max-width: 540px;">
-        <div class="modal-header">
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="font-size: 1.5rem;">🔒</span>
-            <h3 class="modal-title" style="font-size: 1.15rem;">
-              ${isTa ? "ஒலிவாங்கி அனுமதி & தனியுரிமை கொள்கை" : "Microphone Access & Privacy Notice"}
+      <div class="modal-box" style="max-width: 520px; background: #ffffff; border-radius: var(--radius-xl); border: 1px solid var(--border-color); box-shadow: var(--shadow-lg); padding: 1.75rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <div style="width: 36px; height: 36px; border-radius: 9999px; background: rgba(217, 119, 6, 0.12); display: flex; align-items: center; justify-content: center; color: var(--secondary-saffron);">
+              <span class="material-symbols-outlined" style="font-size: 20px;">lock</span>
+            </div>
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--primary-indigo); margin: 0;">
+              ${t.micModalTitle || "Microphone Access & Privacy Notice"}
             </h3>
           </div>
-          <button class="modal-close-btn" id="close-mic-consent-btn">✕</button>
+          <button id="close-mic-consent-btn" style="background: none; border: none; font-size: 1.25rem; color: var(--text-secondary); cursor: pointer;">✕</button>
         </div>
-        <div class="modal-body" style="gap: 1rem; font-size: 0.92rem; line-height: 1.6;">
+
+        <div style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; display: flex; flex-direction: column; gap: 1rem;">
           <p>
-            ${isTa ?
-              "நம்மசேவை AI உங்கள் கேள்விகளை தமிழ் அல்லது ஆங்கிலத்தில் கேட்டு, அரசு நலத்திட்டங்களை எளிதாக கண்டறிய உங்கள் சாதனத்தின் ஒலிவாங்கியை (Microphone) பயன்படுத்த அனுமதி கேட்கிறது." :
-              "NammaSevai AI requests access to your microphone to listen to your voice query in Tamil, Tanglish, or English to help you discover eligible government schemes."}
+            ${t.micModalText || "NammaSevai AI requests temporary access to your microphone to listen to your voice query to help you discover eligible government schemes."}
           </p>
-          <div style="background: var(--bg-surface); border-radius: var(--radius-md); padding: 1rem; border-left: 3px solid var(--primary-teal);">
-            <strong>🛡️ ${isTa ? "எங்கள் தனியுரிமை உத்தரவாதம்:" : "Our Privacy Guarantees:"}</strong>
-            <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.88rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.35rem;">
-              <li>${isTa ? "குரல் பதிவுகள் தற்காலிகமாக மட்டுமே ஆய்வு செய்யப்பட்டு உடனே அழிக்கப்படும்." : "Raw audio is processed ephemerally and deleted immediately after transcription."}</li>
-              <li>${isTa ? "எந்தவித தனிநபர் கடவுச்சொற்கள் அல்லது ரகசிய தகவல்கள் சேமிக்கப்படாது." : "No personal confidential credentials or permanent audio files are stored."}</li>
-              <li>${isTa ? "குரலுக்கு பதிலாக தட்டச்சு செய்தும் எந்த நேரத்திலும் பயன்படுத்தலாம்." : "You can revoke access anytime or choose to type your queries."}</li>
+          <div style="background: var(--bg-canvas); border-radius: var(--radius-lg); padding: 1rem; border-left: 3px solid var(--secondary-saffron);">
+            <strong style="color: var(--primary-indigo); font-size: 0.88rem;">🛡️ ${t.micPrivacyTitle || "Our Civic Privacy Guarantees:"}</strong>
+            <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.84rem; display: flex; flex-direction: column; gap: 0.35rem;">
+              <li>${t.micPriv1 || "Raw audio is processed ephemerally and deleted immediately after speech recognition."}</li>
+              <li>${t.micPriv2 || "No personal confidential credentials or permanent audio files are stored."}</li>
+              <li>${t.micPriv3 || "You can revoke access anytime or choose to type your queries."}</li>
             </ul>
           </div>
         </div>
-        <div class="modal-footer" style="justify-content: space-between;">
-          <button type="button" class="btn btn-outline" id="deny-mic-consent-btn">
-            ${isTa ? "ரத்து செய் (தட்டச்சு செய்க)" : "Cancel (Type instead)"}
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; gap: 0.75rem;">
+          <button type="button" class="btn btn-outline" id="deny-mic-consent-btn" style="padding: 0.5rem 1rem;">
+            ${t.btnCancelType || "Cancel (Type instead)"}
           </button>
-          <button type="button" class="btn btn-primary" id="grant-mic-consent-btn">
-            ✓ ${isTa ? "அனுமதி அளித்து பேசுக" : "Grant Access & Speak"}
+          <button type="button" class="btn btn-primary" id="grant-mic-consent-btn" style="padding: 0.5rem 1.25rem;">
+            ✓ ${t.btnGrantSpeak || "Grant Access & Speak"}
           </button>
         </div>
       </div>
@@ -185,141 +294,238 @@ export function renderAssistantPage(state) {
 
     <!-- AI API Key Instruction Modal -->
     <div class="modal-overlay ${state.showApiKeyModal ? 'open' : ''}" id="api-key-modal">
-      <div class="modal-box" style="max-width: 600px;">
-        <div class="modal-header">
-          <h3 class="modal-title">⚙️ Google Gemini AI Model Setup</h3>
-          <button class="modal-close-btn" id="close-api-key-modal-btn">✕</button>
+      <div class="modal-box" style="max-width: 580px; background: #ffffff; border-radius: var(--radius-xl); border: 1px solid var(--border-color); box-shadow: var(--shadow-lg); padding: 1.75rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--primary-indigo); margin: 0;">
+            ⚙️ Google Gemini AI Model Setup
+          </h3>
+          <button id="close-api-key-modal-btn" style="background: none; border: none; font-size: 1.25rem; color: var(--text-secondary); cursor: pointer;">✕</button>
         </div>
-        <div class="modal-body" style="font-size: 0.92rem; line-height: 1.6;">
+
+        <div style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; display: flex; flex-direction: column; gap: 1rem;">
           <p>
-            NammaSevai AI seamlessly uses <strong>Google Gemini AI</strong> for complex multi-lingual contextual reasoning in colloquial Tamil, Tanglish, and English.
+            NammaSevai AI seamlessly uses <strong>Google Gemini AI</strong> for multi-lingual contextual reasoning in colloquial Tamil, Hindi, Malayalam, Tanglish, Hinglish, and English.
           </p>
-          <div style="background: var(--bg-surface); border-radius: var(--radius-md); padding: 1rem; border-left: 3px solid var(--accent-saffron);">
-            <strong>Step 1: Get a Free Gemini API Key</strong><br/>
-            Visit <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio ↗</a> and generate your free API key.
+          <div style="background: var(--bg-canvas); border-radius: var(--radius-lg); padding: 1rem; border-left: 3px solid var(--secondary-saffron);">
+            <strong style="color: var(--primary-indigo);">Step 1: Get a Free Gemini API Key</strong><br/>
+            Visit <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color: var(--secondary-saffron); text-decoration: underline;">Google AI Studio ↗</a> and generate your free API key.
           </div>
-          <div style="background: var(--bg-surface); border-radius: var(--radius-md); padding: 1rem; border-left: 3px solid var(--primary-teal); margin-top: 0.75rem;">
-            <strong>Step 2: Add to .env File</strong><br/>
+          <div style="background: var(--bg-canvas); border-radius: var(--radius-lg); padding: 1rem; border-left: 3px solid var(--tertiary-green);">
+            <strong style="color: var(--primary-indigo);">Step 2: Add to .env File</strong><br/>
             Open the <code>.env</code> file in your project directory and add:<br/>
-            <pre style="background: #092d50; color: #fff; padding: 0.65rem; border-radius: 6px; margin-top: 0.4rem; font-family: monospace;">GEMINI_API_KEY="your-gemini-api-key-here"</pre>
+            <pre style="background: #15233E; color: #fff; padding: 0.65rem; border-radius: 6px; margin-top: 0.4rem; font-family: monospace; font-size: 0.85rem;">GEMINI_API_KEY="your-gemini-api-key-here"</pre>
           </div>
-          <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem;">
+          <p style="font-size: 0.84rem; color: var(--text-secondary);">
             <em>Note: Even without an API key, the system runs with 100% precision using the verified Tamil Nadu structured rule engine.</em>
           </p>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="dismiss-api-key-modal-btn">Got It</button>
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-primary" id="dismiss-api-key-modal-btn" style="padding: 0.5rem 1.25rem;">Got It</button>
         </div>
       </div>
     </div>
   `;
 }
 
-function renderChatMessage(msg, index, state) {
+function renderStitchChatMessage(msg, index, state) {
   const t = i18n[state.lang] || i18n.ta;
-  const isTa = state.lang === 'ta';
   const isUser = msg.sender === 'user';
 
   if (isUser) {
     return `
-      <div class="chat-message">
-        <div class="chat-avatar user">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </div>
-        <div class="chat-body user-bubble">
-          <div class="chat-header">
-            <span class="chat-sender-name">${isTa ? "நீங்கள் (Citizen)" : "You (Citizen)"}</span>
-            <span class="chat-time">${msg.time || ''}</span>
+      <!-- User Query Card -->
+      <div style="background: var(--bg-card); border-radius: var(--radius-xl); border: 1px solid var(--border-color); padding: 1.25rem; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <div style="width: 28px; height: 28px; border-radius: 9999px; background: var(--primary-indigo); color: #fff; display: flex; align-items: center; justify-content: center;">
+              <span class="material-symbols-outlined" style="font-size: 16px;">person</span>
+            </div>
+            <span style="font-size: 0.88rem; font-weight: 700; color: var(--primary-indigo);">
+              ${t.citizenQueryTitle || "Citizen Query"}
+            </span>
           </div>
-          <div class="chat-text">"${msg.text}"</div>
+          <span style="font-size: 0.78rem; color: var(--text-secondary);">${msg.time || ''}</span>
+        </div>
+        <div style="font-size: 0.95rem; color: var(--text-primary); line-height: 1.5; font-style: italic; background: var(--bg-canvas); padding: 0.75rem 1rem; border-radius: var(--radius-lg); border-left: 3px solid var(--secondary-saffron);">
+          "${msg.text}"
         </div>
       </div>
     `;
   }
 
-  // AI Response
+  // AI Response Block
   const matches = msg.matches || [];
-  const followUps = isTa ? (msg.follow_ups_ta || msg.follow_ups || []) : (msg.follow_ups_en || msg.follow_ups || []);
+  const curLang = state.assistantLang || state.lang;
+  const followUps = (curLang === 'ta' || curLang === 'tanglish')
+    ? (msg.follow_ups_ta || msg.follow_ups || [])
+    : (curLang === 'hi' || curLang === 'hinglish')
+    ? (msg.follow_ups_hi || msg.follow_ups_en || msg.follow_ups || [])
+    : (curLang === 'ml')
+    ? (msg.follow_ups_ml || msg.follow_ups_en || msg.follow_ups || [])
+    : (msg.follow_ups_en || msg.follow_ups || []);
+  const profile = msg.extracted_profile || {};
 
   return `
-    <div class="chat-message">
-      <div class="chat-avatar ai">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
-      </div>
-      <div class="chat-body ai-bubble">
-        <div class="chat-header">
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      
+      <!-- Interpreted Profile Summary Card (if profile items exist) -->
+      <div style="background: var(--bg-card); border-radius: var(--radius-xl); border: 1px solid var(--border-color); padding: 1.25rem; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; pb: 0.5rem; border-bottom: 1px solid var(--border-color);">
           <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span class="chat-sender-name">நம்மசேவை AI Assistant</span>
-            <span class="badge badge-teal">${matches.length} ${t.matchedCount}</span>
+            <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(21, 35, 62, 0.08); display: flex; align-items: center; justify-content: center; color: var(--primary-indigo);">
+              <span class="material-symbols-outlined" style="font-size: 18px;">assignment_turned_in</span>
+            </div>
+            <div>
+              <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--primary-indigo); margin: 0;">
+                ${t.interpretedProfileTitle || "Your Interpreted Profile"}
+              </h3>
+              <span style="font-size: 0.75rem; color: var(--text-secondary);">
+                ${t.interpretedProfileSub || "Derived strictly from your voice & text input"}
+              </span>
+            </div>
           </div>
-          <span class="chat-time">${msg.time || ''}</span>
+          <span style="font-size: 0.76rem; font-weight: 700; padding: 0.2rem 0.65rem; border-radius: 9999px; background: rgba(21, 128, 61, 0.12); color: var(--tertiary-green); display: flex; align-items: center; gap: 0.25rem;">
+            <span class="material-symbols-outlined" style="font-size: 14px;">verified</span> ${t.highConfidenceBadge || "High Confidence"}
+          </span>
         </div>
 
-        <div class="chat-text">${msg.text}</div>
-
-        <!-- Follow-up Questions Card for Missing Essential Info -->
-        ${followUps.length > 0 ? `
-          <div style="background: rgba(255, 148, 24, 0.12); border: 1px solid rgba(255, 148, 24, 0.35); border-radius: var(--radius-md); padding: 0.95rem 1.15rem; margin-top: 0.85rem;">
-            <div style="font-weight: 700; color: #9a3412; font-size: 0.88rem; display: flex; align-items: center; gap: 0.45rem;">
-              <span>❓</span>
-              <span>${isTa ? "உங்கள் தகுதியை உறுதி செய்ய கூடுதல் விவரங்கள் தேவை:" : "Follow-up questions to confirm your eligibility:"}</span>
-            </div>
-            <ul style="margin-top: 0.45rem; padding-left: 1.25rem; font-size: 0.86rem; color: #7c2d12; display: flex; flex-direction: column; gap: 0.35rem;">
-              ${followUps.slice(0, 2).map(q => `<li>${q}</li>`).join('')}
-            </ul>
+        <!-- Extracted Parameter Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem;">
+          <div style="background: var(--bg-canvas); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; display: block;">🎯 ${t.primaryGoal || "Primary Goal"}</span>
+            <span style="font-size: 0.88rem; font-weight: 700; color: var(--primary-indigo); display: block; margin-top: 0.2rem;">
+              ${profile.goal || (curLang === 'ta' ? "கல்வி / உதவித்தொகை" : curLang === 'hi' ? "शिक्षा / छात्रवृत्ति" : curLang === 'ml' ? "വിദ്യാഭ്യാസം / സ്കോളർഷിപ്പ്" : "Welfare & Fee Support")}
+            </span>
           </div>
-        ` : ''}
 
-        <!-- Matched Scheme Preview Cards -->
-        ${matches.length > 0 ? `
-          <div class="matched-schemes-preview-list">
+          <div style="background: var(--bg-canvas); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; display: block;">📍 ${t.locationLabel || "Location"}</span>
+            <span style="font-size: 0.88rem; font-weight: 700; color: var(--primary-indigo); display: block; margin-top: 0.2rem;">
+              ${profile.district ? profile.district + ", Tamil Nadu" : "Tamil Nadu, India"}
+            </span>
+          </div>
+
+          <div style="background: var(--bg-canvas); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; display: block;">💰 ${t.familyIncomeLabel || "Family Income"}</span>
+            <span style="font-size: 0.88rem; font-weight: 700; color: var(--primary-indigo); display: block; margin-top: 0.2rem;">
+              ${profile.income ? "₹" + Number(profile.income).toLocaleString('en-IN') + " / year" : "< ₹2,50,000 / year"}
+            </span>
+          </div>
+
+          <div style="background: var(--bg-canvas); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; display: block;">👤 ${t.categoryRoleLabel || "Category / Role"}</span>
+            <span style="font-size: 0.88rem; font-weight: 700; color: var(--primary-indigo); display: block; margin-top: 0.2rem;">
+              ${profile.occupation || profile.category || (curLang === 'ta' ? "மாணவர் / குடிமக்கள்" : curLang === 'hi' ? "छात्र / नागरिक" : curLang === 'ml' ? "വിദ്യാർത്ഥി / പൗരൻ" : "Student / Citizen")}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Analysis Text & Audio Playback -->
+      <div style="background: var(--bg-card); border-radius: var(--radius-xl); border: 1px solid var(--border-color); padding: 1.25rem; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <div style="width: 28px; height: 28px; border-radius: 9999px; background: var(--secondary-saffron); color: #fff; display: flex; align-items: center; justify-content: center;">
+              <span class="material-symbols-outlined" style="font-size: 16px;">support_agent</span>
+            </div>
+            <span style="font-size: 0.88rem; font-weight: 700; color: var(--primary-indigo);">
+              ${t.aiAssessmentTitle || "NammaSevai AI Assessment"}
+            </span>
+          </div>
+          <span style="font-size: 0.78rem; font-weight: 700; padding: 0.15rem 0.6rem; border-radius: 9999px; background: rgba(21, 35, 62, 0.08); color: var(--primary-indigo);">
+            ${matches.length} ${t.matchedCount || "Matches"}
+          </span>
+        </div>
+
+        <p style="font-size: 0.95rem; color: var(--text-primary); line-height: 1.6; margin: 0 0 1rem;">
+          ${msg.text}
+        </p>
+
+        <!-- Audio Speak / Stop Controls -->
+        <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+          <button class="btn btn-outline btn-sm tts-listen-btn" data-tts-text="${encodeURIComponent(msg.text)}" type="button" title="Read answer aloud" style="display: flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.85rem; font-size: 0.82rem;">
+            <span class="material-symbols-outlined" style="font-size: 16px; color: var(--secondary-saffron);">volume_up</span>
+            <span>${t.listenAudioSummary || t.listenAudio || "Listen"}</span>
+          </button>
+          <button class="btn btn-outline btn-sm tts-stop-btn" style="display: none; color: #dc2626; border-color: rgba(220, 38, 38, 0.3); padding: 0.35rem 0.85rem; font-size: 0.82rem;" type="button" title="Stop speech">
+            <span class="material-symbols-outlined" style="font-size: 16px;">stop_circle</span>
+            <span>${t.stopAudioSummary || t.stopAudio || "Stop"}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Follow-up Questions Card for Missing Essential Info -->
+      ${followUps.length > 0 ? `
+        <div style="background: rgba(217, 119, 6, 0.08); border: 1px solid rgba(217, 119, 6, 0.3); border-radius: var(--radius-xl); padding: 1.15rem; box-shadow: var(--shadow-2xs);">
+          <div style="font-weight: 700; color: #9a3412; font-size: 0.9rem; display: flex; align-items: center; gap: 0.45rem;">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--secondary-saffron);">quiz</span>
+            <span>${t.whyMatched || "Follow-up questions to pinpoint your eligibility:"}</span>
+          </div>
+          <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.86rem; color: #7c2d12; display: flex; flex-direction: column; gap: 0.35rem; line-height: 1.5;">
+            ${followUps.slice(0, 3).map(q => `<li>${q}</li>`).join('')}
+          </ul>
+        </div>
+      ` : ''}
+
+      <!-- Matched Scheme Preview Cards -->
+      ${matches.length > 0 ? `
+        <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.95rem; font-weight: 700; color: var(--primary-indigo);">
+              ${t.resultsTitle || "Identified Potential Schemes"} (${matches.length})
+            </span>
+            <a href="#schemes" class="btn btn-primary btn-sm" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; display: flex; align-items: center; gap: 0.35rem;">
+              <span>${t.viewMatchedSchemes || "View All Matching Schemes"}</span>
+              <span class="material-symbols-outlined" style="font-size: 15px;">arrow_forward</span>
+            </a>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.85rem;">
             ${matches.slice(0, 3).map(item => {
               const schemeId = item.scheme_id || item.scheme?.id;
-              const name = isTa ? (item.scheme_name_ta || item.scheme?.name_ta) : (item.scheme_name_en || item.scheme?.name);
-              const dept = isTa ? (item.department_ta || item.scheme?.department_ta) : (item.department_en || item.scheme?.department);
-              const benefit = isTa ? (item.benefit_summary_ta || item.scheme?.benefit_summary_ta) : (item.benefit_summary_en || item.scheme?.benefit_summary);
+              const foundScheme = (state.schemes || []).find(s => s.id === schemeId) || item.scheme || item;
+              const loc = getLocalizedScheme(foundScheme, curLang);
+
+              const name = loc.displayName || item.scheme_name_ta || item.scheme_name_en || '';
+              const benefit = loc.displayBenefit || item.benefit_summary_ta || item.benefit_summary_en || '';
+              const dept = loc.displayDepartment || item.department_ta || item.department_en || '';
+
               const confidence = item.match_confidence || item.matchPercent || 85;
+              const isStrong = confidence >= 80;
 
               return `
-                <div class="matched-preview-card">
-                  <div class="matched-preview-info">
-                    <div style="display: flex; align-items: center; gap: 0.45rem;">
-                      <span class="badge ${confidence >= 80 ? 'badge-green' : 'badge-teal'}">${confidence}% Potential Match</span>
-                      <span style="font-size: 0.78rem; color: var(--text-light);">${dept}</span>
+                <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 1rem; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between; gap: 0.75rem; border-top: 3px solid ${confidence >= 80 ? 'var(--tertiary-green)' : 'var(--secondary-saffron)'};">
+                  <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.35rem; margin-bottom: 0.4rem;">
+                      <span style="padding: 0.15rem 0.55rem; border-radius: 9999px; background: ${confidence >= 80 ? 'rgba(21, 128, 61, 0.12)' : 'rgba(217, 119, 6, 0.12)'}; color: ${confidence >= 80 ? 'var(--tertiary-green)' : 'var(--secondary-saffron)'}; font-size: 0.72rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.25rem;">
+                        <span class="material-symbols-outlined" style="font-size: 13px;">${confidence >= 80 ? 'check_circle' : 'help_outline'}</span>
+                        ${confidence}% ${isStrong ? (t.strongMatchBadge || "Strong Potential Match") : (t.worthCheckingBadge || "Worth Checking")}
+                      </span>
+                      <span style="font-size: 0.72rem; color: var(--text-secondary); text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 140px;">
+                        ${dept}
+                      </span>
                     </div>
-                    <div class="matched-preview-title">${name}</div>
-                    <div class="matched-preview-benefit">💰 ${benefit}</div>
+                    <div style="font-size: 0.95rem; font-weight: 700; color: var(--primary-indigo); line-height: 1.35; margin-bottom: 0.35rem;">
+                      ${name}
+                    </div>
+                    <div style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4;">
+                      💰 ${benefit}
+                    </div>
                   </div>
-                  <a href="#scheme-details/${schemeId}" class="btn btn-outline btn-sm">
-                    ${t.viewDetails}
-                  </a>
+                  <div style="display: flex; justify-content: flex-end;">
+                    <a href="#scheme-details/${schemeId}" class="btn btn-outline btn-sm" style="padding: 0.3rem 0.75rem; font-size: 0.8rem; display: flex; align-items: center; gap: 0.3rem;">
+                      <span>${t.viewDetails}</span>
+                      <span class="material-symbols-outlined" style="font-size: 14px;">arrow_forward</span>
+                    </a>
+                  </div>
                 </div>
               `;
             }).join('')}
           </div>
-        ` : ''}
-
-        <!-- Voice Output: Speak and Stop Audio Controls -->
-        <div class="ai-actions-row">
-          <div style="display: flex; gap: 0.5rem; align-items: center;">
-            <button class="btn btn-outline btn-sm tts-listen-btn" data-tts-text="${encodeURIComponent(msg.text)}" type="button" title="Read answer aloud">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-              <span>${isTa ? "குரலில் கேட்கவும் (Speak)" : "Speak"}</span>
-            </button>
-            <button class="btn btn-outline btn-sm tts-stop-btn" style="display: none; color: var(--gov-red); border-color: rgba(220, 38, 38, 0.3);" type="button" title="Stop speech">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="5" y="5" rx="2"/></svg>
-              <span>${isTa ? "நிறுத்து (Stop)" : "Stop"}</span>
-            </button>
-          </div>
-
-          ${matches.length > 0 ? `
-            <a href="#schemes" class="btn btn-primary btn-sm">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
-              <span>${t.viewMatchedSchemes} (${matches.length})</span>
-            </a>
-          ` : ''}
         </div>
-      </div>
+      ` : ''}
+
     </div>
   `;
 }
