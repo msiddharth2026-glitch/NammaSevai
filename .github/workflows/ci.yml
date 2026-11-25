@@ -1,0 +1,39 @@
+name: CI / Production Verification
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Automated Regression & Security Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Full Automated Test Suite (180 Tests)
+        run: |
+          python -m unittest discover -s . -p "test_*.py"
+
+      - name: Verify Scheme Integrity & Record Counts (85 Schemes)
+        run: |
+          python -c "from backend.database import SessionLocal; from backend.models.scheme import Scheme; db = SessionLocal(); count = db.query(Scheme).filter_by(is_active=True).count(); assert count == 85, f'Expected 85 active schemes, found {count}'; print(f'Integrity Verified: {count} schemes active'); db.close()"
+
+      - name: Verify Secret Isolation (.gitignore)
+        run: |
+          ! git ls-files | grep -E '\.env$|\.db$|\.sqlite3$|\.scheduler\.lock$'
