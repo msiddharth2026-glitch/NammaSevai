@@ -353,7 +353,6 @@ export function renderDetailsPage(scheme, state) {
               <span>${t.helplineTitle}</span>
             </div>
             <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.82rem; color: var(--text-secondary);">
-              <div>📞 <strong>1100:</strong> ${t.cmHelpline || "Chief Minister Helpline"}</div>
               <div>📞 <strong>14417:</strong> ${t.studentHelpline || "Education Helpline"}</div>
               <div>📞 <strong>181:</strong> ${t.womenHelpline || "Women Helpline"}</div>
             </div>

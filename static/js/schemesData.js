@@ -139,7 +139,7 @@ export const initialSchemes = [
     "official_source": "Tamil Nadu Social Welfare and Women Empowerment Department",
     "source_verification": "verified",
     "verified_date": "2026-10-20",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "pudhumai-penn",
       "education",
@@ -283,7 +283,7 @@ export const initialSchemes = [
     "official_source": "Special Programme Implementation & Revenue Department, TN",
     "source_verification": "verified",
     "verified_date": "2026-11-01",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "kmut-magalir",
       "women",
@@ -404,7 +404,7 @@ export const initialSchemes = [
     "official_source": "Tamil Nadu Health Systems Project (TNHSP)",
     "source_verification": "verified",
     "verified_date": "2026-10-18",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "cmchis-health",
       "health",
@@ -542,7 +542,7 @@ export const initialSchemes = [
     "official_source": "Social Welfare and Women Empowerment Department, TN",
     "source_verification": "verified",
     "verified_date": "2026-10-05",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "sewing-machine-welfare",
       "women",
@@ -665,7 +665,7 @@ export const initialSchemes = [
     "official_source": "Ministry of Agriculture & TN Agriculture Department",
     "source_verification": "verified",
     "verified_date": "2026-11-10",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "pm-kisan-tn",
       "agriculture",
@@ -777,7 +777,7 @@ export const initialSchemes = [
     "official_source": "Tamil Nadu Skill Development Corporation (TNSDC)",
     "source_verification": "verified",
     "verified_date": "2026-10-25",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "naan-mudhalvan",
       "employment",
@@ -898,7 +898,7 @@ export const initialSchemes = [
     "official_source": "Revenue and Disaster Management Department, TN",
     "source_verification": "verified",
     "verified_date": "2026-11-05",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "oap-senior-pension",
       "seniors",
@@ -1019,7 +1019,7 @@ export const initialSchemes = [
     "official_source": "Welfare of Differently Abled Persons Department, TN",
     "source_verification": "verified",
     "verified_date": "2026-10-28",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "differently-abled-welfare",
       "disability",
@@ -1153,7 +1153,7 @@ export const initialSchemes = [
     "official_source": "Directorate of Public Health and Preventive Medicine, TN",
     "source_verification": "verified",
     "verified_date": "2026-10-12",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "muthulakshmi-maternity",
       "health",
@@ -1287,7 +1287,7 @@ export const initialSchemes = [
     "official_source": "Tamil Nadu MSME Department",
     "source_verification": "verified",
     "verified_date": "2026-10-30",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "aabcs-scst-entrepreneur",
       "employment",
@@ -1421,7 +1421,7 @@ export const initialSchemes = [
     "official_source": "Tamil Nadu Higher Education Department",
     "source_verification": "verified",
     "verified_date": "2026-11-02",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "tamil-pudhalvan",
       "education",
@@ -1564,7 +1564,7 @@ export const initialSchemes = [
     "official_source": "Rural Development and Panchayat Raj Department, TN",
     "source_verification": "verified",
     "verified_date": "2026-10-15",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "kalaignar-kanavu-illam",
       "housing",
@@ -1705,7 +1705,7 @@ export const initialSchemes = [
     "official_source": "Khadi and Village Industries Commission (KVIC) / Ministry of MSME",
     "source_verification": "verified",
     "verified_date": "2026-10-15",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "pmegp-msme-business",
       "business",
@@ -1846,7 +1846,7 @@ export const initialSchemes = [
     "official_source": "National Scholarship Portal, Govt. of India",
     "source_verification": "verified",
     "verified_date": "2026-10-15",
-    "helpline": "CM Helpline 1100 / State Guidance Portal",
+    "helpline": "State Guidance Portal",
     "keywords": [
       "nsp-post-matric-scholarship",
       "education",

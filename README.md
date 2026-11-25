@@ -24,7 +24,7 @@ BharatSevai AI allows citizens across India to describe their real-life situatio
 1. **Landing Page**: Official logo, Tamil headline (*"உங்களுக்கு தேவையான அரசு நலத்திட்டங்களை எளிதாக கண்டறியுங்கள்"*), English subtitle, interactive voice preview demo, feature highlights, and 3-step guide.
 2. **AI Assistant Page**: Large microphone button, soundwave animation, language selector (Tamil, Tanglish, English), text input alternative, conversation bubbles, follow-up questions card, and preview cards for potential matches.
 3. **Scheme Results Page**: Search bar, category filter pills (Education, Women, Health, Agriculture, Employment, Seniors, Disability, Housing), match confidence percentages, explanation rationale, and document preview pills.
-4. **Scheme Details Page**: Scheme description, eligibility rules, interactive printable document checklist with checkboxes, online/offline procedure steps, important dates, official portal links, verified date, and helpline contacts (1100, 14417, 181, 104).
+4. **Scheme Details Page**: Scheme description, eligibility rules, interactive printable document checklist with checkboxes, online/offline procedure steps, important dates, official portal links, verified date, and helpline contacts (14417, 181, 104).
 5. **Admin Dashboard**: Scheme catalog table, metrics summary cards, search and category filters, verification status toggle, Add Scheme modal, Edit Scheme modal, and Delete scheme action. Secured by `X-Admin-Key` header authentication.
 
 ---

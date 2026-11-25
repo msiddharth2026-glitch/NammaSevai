@@ -17,15 +17,6 @@ export function renderFooter(state) {
   const disclaimerTitle = disclaimerTitles[lang] || disclaimerTitles.en;
 
   // Localized helpline sub-labels
-  const cmHelplineLabel = {
-    ta: "முதல்வரின் தனிப்பிரிவு உதவி எண்",
-    hi: "मुख्यमंत्री हेल्पलाइन",
-    ml: "മുഖ്യമന്ത്രി ഹെൽപ്പ്‌ലൈൻ",
-    hinglish: "CM Helpline",
-    tanglish: "CM Helpline",
-    en: "CM Special Cell Helpline"
-  }[lang] || "CM Special Cell Helpline";
-
   const eduHelplineLabel = {
     ta: "பள்ளிக் கல்வி வழிகாட்டுதல்",
     hi: "शिक्षा मार्गदर्शन हेल्पलाइन",
@@ -126,10 +117,6 @@ export function renderFooter(state) {
           <!-- Column 3: Helplines & Assistance -->
           <div>
             <h4 class="footer-col-title">${t.helplineTitle || t.citizenHelplines || 'Citizen Helplines'}</h4>
-            <div class="helpline-item">
-              <span class="material-symbols-outlined" style="color: var(--secondary-saffron); font-size: 18px;">call</span>
-              <span><strong>1100</strong> — ${cmHelplineLabel}</span>
-            </div>
             <div class="helpline-item">
               <span class="material-symbols-outlined" style="color: var(--secondary-saffron); font-size: 18px;">school</span>
               <span><strong>14417</strong> — ${eduHelplineLabel}</span>

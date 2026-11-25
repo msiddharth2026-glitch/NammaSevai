@@ -384,7 +384,6 @@ export function renderChecklistPage(state) {
               ${t.helplineSupport || "Free citizen telephonic guidance for state scholarship certificates:"}
             </p>
             <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.84rem; color: var(--text-primary); font-weight: 600;">
-              <div>📞 1100 – ${t.cmHelpline || "Chief Minister Helpline"}</div>
               <div>📞 14417 – ${t.studentHelpline || "Education Helpline"}</div>
               <div>📞 181 – ${t.womenHelpline || "Women Helpline"}</div>
             </div>

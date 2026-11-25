@@ -127,7 +127,7 @@ SCHEMES_SEED = [
             "portal_url": "https://www.penkalvi.tn.gov.in",
             "verified_date": "2026-10-20",
             "verification_status": "verified",
-            "helpline_number": "044-24351885 / CM Helpline 1100",
+            "helpline_number": "044-24351885 / State Guidance Portal",
             "government_order_ref": "G.O. (Ms) No. 46, Social Welfare Dept"
         }
     },
@@ -245,7 +245,7 @@ SCHEMES_SEED = [
             "portal_url": "https://kmut.tn.gov.in",
             "verified_date": "2026-11-01",
             "verification_status": "verified",
-            "helpline_number": "044-25619224 / CM Helpline 1100"
+            "helpline_number": "044-25619224 / State Guidance Portal"
         }
     },
     {
@@ -684,7 +684,7 @@ SCHEMES_SEED = [
             "portal_url": "https://www.tnesevai.tn.gov.in",
             "verified_date": "2026-11-05",
             "verification_status": "verified",
-            "helpline_number": "CM Helpline 1100"
+            "helpline_number": "State Guidance Portal"
         }
     },
     {
@@ -1092,7 +1092,7 @@ SCHEMES_SEED = [
             "portal_url": "https://www.tn.gov.in",
             "verified_date": "2026-11-02",
             "verification_status": "verified",
-            "helpline_number": "CM Helpline 1100 / 14417"
+            "helpline_number": "Education Guidance Portal / 14417"
         }
     },
     {
@@ -1189,7 +1189,7 @@ SCHEMES_SEED = [
             "portal_url": "https://www.tnrd.tn.gov.in",
             "verified_date": "2026-10-15",
             "verification_status": "verified",
-            "helpline_number": "CM Helpline 1100 / District Rural Wing"
+            "helpline_number": "District Rural Wing"
         }
     },
     {

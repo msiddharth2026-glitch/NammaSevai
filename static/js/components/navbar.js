@@ -42,11 +42,6 @@ export function renderNavbar(state) {
           <span>${t.officialSchemeGuidance || "Tamil Nadu & Central Welfare Schemes Guidance | Independent Civic Discovery Service"}</span>
         </div>
         <div style="display: flex; gap: 1rem; align-items: center; font-size: 0.78rem;">
-          <span style="display: flex; align-items: center; gap: 0.25rem;">
-            <span class="material-symbols-outlined" style="font-size: 14px; color: var(--secondary-saffron);">call</span>
-            <span>${t.helplineTitle || "Helpline"}: <strong>1100</strong></span>
-          </span>
-          <span style="color: var(--border-color);">|</span>
           <span style="color: var(--secondary-saffron); font-weight: 600;">${currentLang === 'ta' ? "வழிகாட்டுதல் மாதிரி தளம் (Demonstration Catalog)" : currentLang === 'hi' ? "नागरिक मार्गदर्शन सूची (Demonstration Catalog)" : currentLang === 'ml' ? "മാർഗ്ഗനിർദ്ദേശ കാറ്റലോഗ് (Demonstration Catalog)" : "Demonstration Catalog"}</span>
         </div>
       </div>
