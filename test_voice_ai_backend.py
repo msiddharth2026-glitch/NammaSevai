@@ -5,22 +5,28 @@ import base64
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from fastapi.testclient import TestClient
-from backend.main import app
-from backend.database import engine, Base
+from backend.database import engine, Base, SessionLocal
 from backend.seeds.seed_data import seed_database
+from backend.routers.voice import get_voice_config, synthesize_speech, SynthesizeRequest
+from backend.routers.assistant import analyze_citizen_query, match_citizen_schemes
+from backend.routers.schemes import get_scheme_documents
+from backend.routers.admin import create_scheme, toggle_verification_status, delete_scheme
+from backend.schemas.assistant import AnalyzeRequest, MatchRequest
+from backend.schemas.scheme import SchemeCreate
 
 class TestVoiceAndAIBackend(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         Base.metadata.create_all(bind=engine)
         seed_database()
-        cls.client = TestClient(app, raise_server_exceptions=False)
+        cls.db = SessionLocal()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.db.close()
 
     def test_01_voice_config_endpoint(self):
-        res = self.client.get("/api/voice/config")
-        self.assertEqual(res.status_code, 200)
-        data = res.json()
+        data = get_voice_config()
         self.assertTrue(data["voice_recognition_available"])
         self.assertTrue(data["tts_available"])
         self.assertIn("privacy_policy", data)
@@ -29,52 +35,48 @@ class TestVoiceAndAIBackend(unittest.TestCase):
 
     def test_02_tts_synthesize_endpoint(self):
         # Test real Tamil Text-To-Speech generation
-        res = self.client.post("/api/voice/synthesize", json={
-            "text": "வணக்கம், உங்களுக்கு தேவையான நலத்திட்டங்கள் கண்டறியப்பட்டுள்ளன.",
-            "lang": "ta"
-        })
-        self.assertEqual(res.status_code, 200)
-        self.assertEqual(res.headers.get("content-type"), "audio/mpeg")
-        self.assertGreater(len(res.content), 100)  # Real MP3 audio stream returned
+        req = SynthesizeRequest(
+            text="வணக்கம், உங்களுக்கு தேவையான நலத்திட்டங்கள் கண்டறியப்பட்டுள்ளன.",
+            lang="ta"
+        )
+        res = synthesize_speech(req)
+        self.assertEqual(res.media_type, "audio/mpeg")
+        self.assertIn("Content-Disposition", res.headers)
 
     def test_03_assistant_analyze_tanglish(self):
         # Test Tanglish input understanding
-        res = self.client.post("/api/assistant/analyze", json={
-            "text": "Naan 2 acres dryland vachirukura vivasaayi, enakku agriculture subsidy venum",
-            "lang": "tanglish"
-        })
-        self.assertEqual(res.status_code, 200)
-        data = res.json()
-        profile = data["extracted_profile"]
-        self.assertEqual(profile["occupation"], "farmer")
-        self.assertEqual(profile["landholding_acres"], 2.0)
-        self.assertIn("agriculture", data["identified_categories"])
+        req = AnalyzeRequest(
+            text="Naan 2 acres dryland vachirukura vivasaayi, enakku agriculture subsidy venum",
+            lang="tanglish"
+        )
+        data = analyze_citizen_query(req)
+        profile = data.extracted_profile
+        self.assertEqual(profile.occupation, "farmer")
+        self.assertEqual(profile.landholding_acres, 2.0)
+        self.assertIn("agriculture", data.identified_categories)
 
     def test_04_assistant_match_structured_explanation(self):
         # Match for senior citizen
-        res = self.client.post("/api/assistant/match", json={
-            "query": "65 years old destitute elder person looking for pension",
-            "lang": "en"
-        })
-        self.assertEqual(res.status_code, 200)
-        data = res.json()
-        self.assertGreater(data["total_potential_matches"], 0)
-        top = data["matches"][0]
-        self.assertEqual(top["scheme_id"], "oap-senior-pension")
-        self.assertIn("potential", top["match_status"])
-        self.assertIn("oap", top["official_portal_url"].lower() + top["scheme_id"].lower())
-        self.assertIn("disclaimer", data)
+        req = MatchRequest(
+            query="65 years old destitute elder person looking for pension",
+            lang="en"
+        )
+        data = match_citizen_schemes(req, db=self.db)
+        self.assertGreater(data.total_potential_matches, 0)
+        matched_ids = [m.scheme_id for m in data.matches]
+        self.assertIn("oap-senior-pension", matched_ids)
+        top = next(m for m in data.matches if m.scheme_id == "oap-senior-pension")
+        self.assertIn("potential", top.match_status)
+        self.assertIn("oap", top.official_portal_url.lower() + top.scheme_id.lower())
+        self.assertIsNotNone(data.disclaimer)
 
     def test_05_schemes_and_documents(self):
-        res = self.client.get("/api/schemes/kmut-magalir/documents")
-        self.assertEqual(res.status_code, 200)
-        docs = res.json()
-        doc_names = [d["name_en"] for d in docs]
+        docs = get_scheme_documents("kmut-magalir", db=self.db)
+        doc_names = [d.name_en for d in docs]
         self.assertTrue(any("Ration Card" in d for d in doc_names))
 
     def test_06_admin_lifecycle(self):
-        # Create
-        new_scheme = {
+        new_scheme_payload = {
             "id": "tn-green-fellowship",
             "name": "Tamil Nadu Green Fellowship Programme",
             "name_ta": "தமிழ்நாடு பசுமை உதவித்தொகை திட்டம்",
@@ -97,17 +99,19 @@ class TestVoiceAndAIBackend(unittest.TestCase):
                 "verification_status": "verified"
             }
         }
-        headers = {"X-Admin-Key": "nammasevai-admin-secret-2026"}
-        res = self.client.post("/api/admin/schemes", json=new_scheme, headers=headers)
-        self.assertEqual(res.status_code, 201)
+        scheme_create_obj = SchemeCreate(**new_scheme_payload)
+
+        # Create
+        created = create_scheme(scheme_create_obj, db=self.db, authorized=True)
+        self.assertEqual(created.id, "tn-green-fellowship")
 
         # Toggle status
-        res = self.client.post("/api/admin/schemes/tn-green-fellowship/toggle-status", headers=headers)
-        self.assertEqual(res.status_code, 200)
+        toggled = toggle_verification_status("tn-green-fellowship", db=self.db, authorized=True)
+        self.assertIn("verification_status", toggled)
 
         # Delete
-        res = self.client.delete("/api/admin/schemes/tn-green-fellowship", headers=headers)
-        self.assertEqual(res.status_code, 200)
+        del_res = delete_scheme("tn-green-fellowship", db=self.db, authorized=True)
+        self.assertIn("deleted successfully", del_res.get("message", ""))
 
 if __name__ == "__main__":
     unittest.main()

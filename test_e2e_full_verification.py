@@ -52,7 +52,7 @@ class TestNammaSevaiFullE2E(unittest.TestCase):
     # ---------------------------------------------------------
     def test_02_all_twelve_schemes_present(self):
         """Verify all 12 authentic Tamil Nadu welfare schemes are in database."""
-        schemes = list_schemes(limit=50, offset=0, db=self.db)
+        schemes = list_schemes(limit=100, offset=0, db=self.db)
         self.assertGreaterEqual(len(schemes), 12)
         scheme_ids = [s.id for s in schemes]
         

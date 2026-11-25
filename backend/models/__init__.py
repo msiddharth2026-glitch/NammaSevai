@@ -3,7 +3,8 @@ from .scheme import Scheme
 from .condition import EligibilityCondition
 from .document import RequiredDocument
 from .step import ApplicationStep
-from .source import OfficialSource
+from .source import OfficialSource, PortalHealthLog, DetectedSchemeChange, SchemeVersionHistory
+from .feedback import CitizenPilotFeedback
 
 __all__ = [
     "User",
@@ -11,5 +12,9 @@ __all__ = [
     "EligibilityCondition",
     "RequiredDocument",
     "ApplicationStep",
-    "OfficialSource"
+    "OfficialSource",
+    "PortalHealthLog",
+    "DetectedSchemeChange",
+    "SchemeVersionHistory",
+    "CitizenPilotFeedback"
 ]

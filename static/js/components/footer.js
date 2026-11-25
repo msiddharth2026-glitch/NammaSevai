@@ -116,6 +116,7 @@ export function renderFooter(state) {
               <li><a href="#assistant">${t.assistant || 'Find Schemes (Voice/Text)'}</a></li>
               <li><a href="#schemes">${t.schemes || 'Explore All Schemes'}</a></li>
               <li><a href="#checklist">${t.checklist || t.savedChecklistNav || 'Saved Preparation Checklist'}</a></li>
+              <li><a href="#feedback"><span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle;">rate_review</span> ${t.pilotFeedbackNav || 'Citizen Pilot Feedback'}</a></li>
               <li><a href="#admin">${t.admin || 'Portal Administration'}</a></li>
               <li><a href="https://tnesevai.tn.gov.in" target="_blank" rel="noopener">TNeGA e-Sevai Citizen Portal ↗</a></li>
               <li><a href="https://www.tn.gov.in" target="_blank" rel="noopener">Tamil Nadu Government Portal ↗</a></li>

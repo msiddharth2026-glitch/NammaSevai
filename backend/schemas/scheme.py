@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ConfigDict
-from typing import List, Optional
+from typing import List, Optional, Any, Dict
 from datetime import datetime
 from .condition import EligibilityConditionResponse, EligibilityConditionCreate
 from .document import RequiredDocumentResponse, RequiredDocumentCreate
@@ -16,8 +16,17 @@ class SchemeBase(BaseModel):
     department_hi: Optional[str] = None
     department_ml: Optional[str] = None
     category: str
+
+    # Geographical Classification: Central / State / Union Territory
+    level: Optional[str] = "State"
+    # State / UT name or "All India" for Central
+    state: Optional[str] = "Tamil Nadu"
+
     beneficiary_type: Optional[str] = None
     beneficiary_type_ta: Optional[str] = None
+    target_beneficiaries: Optional[str] = None
+    target_beneficiaries_ta: Optional[str] = None
+
     benefit_summary: str
     benefit_summary_ta: str
     benefit_summary_hi: Optional[str] = None
@@ -27,8 +36,13 @@ class SchemeBase(BaseModel):
     description_ta: str
     description_hi: Optional[str] = None
     description_ml: Optional[str] = None
+
     coverage_type: Optional[str] = "State Government (Tamil Nadu)"
     application_url: Optional[str] = None
+    
+    # Status: "Active", "Inactive", "Under Review", "Discontinued"
+    scheme_status: Optional[str] = "Active"
+    keywords: Optional[str] = None
     is_active: bool = True
 
 class SchemeListItem(SchemeBase):
@@ -63,14 +77,37 @@ class SchemeCreate(SchemeBase):
 class SchemeUpdate(BaseModel):
     name: Optional[str] = None
     name_ta: Optional[str] = None
+    name_hi: Optional[str] = None
+    name_ml: Optional[str] = None
     department: Optional[str] = None
     department_ta: Optional[str] = None
+    department_hi: Optional[str] = None
+    department_ml: Optional[str] = None
     category: Optional[str] = None
+    level: Optional[str] = None
+    state: Optional[str] = None
     beneficiary_type: Optional[str] = None
     beneficiary_type_ta: Optional[str] = None
+    target_beneficiaries: Optional[str] = None
+    target_beneficiaries_ta: Optional[str] = None
     benefit_summary: Optional[str] = None
     benefit_summary_ta: Optional[str] = None
+    benefit_summary_hi: Optional[str] = None
+    benefit_summary_ml: Optional[str] = None
     benefit_amount: Optional[str] = None
     description: Optional[str] = None
     description_ta: Optional[str] = None
+    description_hi: Optional[str] = None
+    description_ml: Optional[str] = None
+    scheme_status: Optional[str] = None
+    keywords: Optional[str] = None
     is_active: Optional[bool] = None
+
+class BulkImportReport(BaseModel):
+    total_processed: int
+    imported: int
+    duplicates: int
+    invalid: int
+    verification_required: int
+    failed: int
+    details: List[Dict[str, Any]] = []

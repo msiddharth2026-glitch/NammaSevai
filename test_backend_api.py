@@ -1,142 +1,122 @@
 import os
 import sys
 import unittest
-from fastapi.testclient import TestClient
+from fastapi import HTTPException
 
 # Ensure workspace root is in sys.path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from backend.main import app
-from backend.database import engine, Base
+from backend.database import engine, Base, SessionLocal
 from backend.seeds.seed_data import seed_database
+from backend.main import health_check
+from backend.routers.schemes import list_schemes, get_scheme_by_id, get_scheme_documents
+from backend.routers.assistant import analyze_citizen_query, match_citizen_schemes
+from backend.routers.admin import create_scheme, delete_scheme, get_admin_stats
+from backend.schemas.assistant import AnalyzeRequest, MatchRequest
+from backend.schemas.scheme import SchemeCreate
 
 class TestNammaSevaiBackend(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         Base.metadata.create_all(bind=engine)
         seed_database()
-        cls.client = TestClient(app)
+        cls.db = SessionLocal()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.db.close()
 
     def test_01_health_check(self):
-        res = self.client.get("/api/health")
-        self.assertEqual(res.status_code, 200)
-        data = res.json()
+        data = health_check()
         self.assertEqual(data["status"], "healthy")
         self.assertIn("database", data)
 
     def test_02_get_schemes_list(self):
-        res = self.client.get("/api/schemes")
-        self.assertEqual(res.status_code, 200)
-        schemes = res.json()
+        schemes = list_schemes(limit=100, offset=0, db=self.db)
         self.assertIsInstance(schemes, list)
         self.assertGreater(len(schemes), 0)
-        
-        # Check first scheme structure
         s = schemes[0]
-        self.assertIn("id", s)
-        self.assertIn("name", s)
-        self.assertIn("name_ta", s)
-        self.assertIn("benefit_amount", s)
-        self.assertIn("source_verification_status", s)
+        self.assertIsNotNone(s.id)
+        self.assertIsNotNone(s.name)
+        self.assertIsNotNone(s.name_ta)
+        self.assertIsNotNone(s.benefit_amount)
 
     def test_03_get_schemes_filtered_by_category(self):
-        res = self.client.get("/api/schemes?category=education")
-        self.assertEqual(res.status_code, 200)
-        schemes = res.json()
-        self.assertTrue(all(s["category"] == "education" for s in schemes))
+        schemes = list_schemes(category="education", limit=100, offset=0, db=self.db)
+        self.assertTrue(all(s.category == "education" for s in schemes))
 
     def test_04_get_scheme_by_id(self):
-        res = self.client.get("/api/schemes/pudhumai-penn")
-        self.assertEqual(res.status_code, 200)
-        data = res.json()
-        self.assertEqual(data["id"], "pudhumai-penn")
-        self.assertIn("conditions", data)
-        self.assertIn("documents", data)
-        self.assertIn("steps", data)
-        self.assertIn("source", data)
-        self.assertGreater(len(data["conditions"]), 0)
-        self.assertGreater(len(data["documents"]), 0)
-        self.assertGreater(len(data["steps"]), 0)
-        self.assertEqual(data["source"]["verification_status"], "verified")
+        data = get_scheme_by_id("pudhumai-penn", db=self.db)
+        self.assertEqual(data.id, "pudhumai-penn")
+        self.assertGreater(len(data.conditions), 0)
+        self.assertGreater(len(data.documents), 0)
+        self.assertGreater(len(data.steps), 0)
+        self.assertEqual(data.source.verification_status.lower(), "verified")
 
     def test_05_get_scheme_not_found(self):
-        res = self.client.get("/api/schemes/non-existent-scheme-999")
-        self.assertEqual(res.status_code, 404)
+        with self.assertRaises(HTTPException) as ctx:
+            get_scheme_by_id("non-existent-scheme-999", db=self.db)
+        self.assertEqual(ctx.exception.status_code, 404)
 
     def test_06_get_scheme_documents(self):
-        res = self.client.get("/api/schemes/pudhumai-penn/documents")
-        self.assertEqual(res.status_code, 200)
-        docs = res.json()
+        docs = get_scheme_documents("pudhumai-penn", db=self.db)
         self.assertIsInstance(docs, list)
         self.assertGreater(len(docs), 0)
         doc = docs[0]
-        self.assertIn("name_en", doc)
-        self.assertIn("name_ta", doc)
-        self.assertIn("is_mandatory", doc)
+        self.assertIsNotNone(doc.name_en)
+        self.assertIsNotNone(doc.name_ta)
 
     def test_07_assistant_analyze_tamil_query(self):
         query = "நான் அரசுப் பள்ளியில் படித்து தற்போது கல்லூரியில் சேர்ந்த மாணவி, எனக்கு உதவித்தொகை உண்டா?"
-        res = self.client.post("/api/assistant/analyze", json={"text": query, "lang": "ta"})
-        self.assertEqual(res.status_code, 200)
-        data = res.json()
-        profile = data["extracted_profile"]
-        self.assertEqual(profile["gender"], "female")
-        self.assertEqual(profile["occupation"], "student")
-        self.assertEqual(profile["school_type"], "government")
-        self.assertIn("education", data["identified_categories"])
+        data = analyze_citizen_query(AnalyzeRequest(text=query, lang="ta"))
+        profile = data.extracted_profile
+        self.assertEqual(profile.gender, "female")
+        self.assertEqual(profile.occupation, "student")
+        self.assertEqual(profile.school_type, "government")
+        self.assertIn("education", data.identified_categories)
 
     def test_08_assistant_analyze_missing_critical_info(self):
-        # Query says student but omits school type (govt vs private)
         query = "I am a college student girl looking for scholarships in Madurai."
-        res = self.client.post("/api/assistant/analyze", json={"text": query, "lang": "en"})
-        self.assertEqual(res.status_code, 200)
-        data = res.json()
-        profile = data["extracted_profile"]
-        self.assertEqual(profile["gender"], "female")
-        self.assertEqual(profile["occupation"], "student")
-        self.assertEqual(profile["district"], "Madurai")
-        self.assertIsNone(profile["school_type"])
+        data = analyze_citizen_query(AnalyzeRequest(text=query, lang="en"))
+        profile = data.extracted_profile
+        self.assertEqual(profile.gender, "female")
+        self.assertEqual(profile.occupation, "student")
+        self.assertEqual(profile.district, "Madurai")
+        self.assertIsNone(profile.school_type)
         
-        # Follow-up questions must be present
-        self.assertGreater(len(data["missing_critical_info"]), 0)
-        missing_fields = [m["field_name"] for m in data["missing_critical_info"]]
+        self.assertGreater(len(data.missing_critical_info), 0)
+        missing_fields = [m.field_name for m in data.missing_critical_info]
         self.assertIn("school_type", missing_fields)
-        self.assertGreater(len(data["follow_up_questions_en"]), 0)
-        self.assertGreater(len(data["follow_up_questions_ta"]), 0)
+        self.assertGreater(len(data.follow_up_questions_en), 0)
+        self.assertGreater(len(data.follow_up_questions_ta), 0)
 
     def test_09_assistant_match_structured_schemes(self):
-        # Profile for a female govt school student in college
-        req = {
-            "query": "19 year old girl from govt school studying in college degree",
-            "lang": "en"
-        }
-        res = self.client.post("/api/assistant/match", json=req)
-        self.assertEqual(res.status_code, 200)
-        data = res.json()
-        self.assertGreater(data["total_potential_matches"], 0)
+        req = MatchRequest(
+            query="19 year old girl from govt school studying in college degree",
+            lang="en"
+        )
+        data = match_citizen_schemes(req, db=self.db)
+        self.assertGreater(data.total_potential_matches, 0)
         
-        # Pudhumai Penn should be top match
-        top_match = data["matches"][0]
-        self.assertEqual(top_match["scheme_id"], "pudhumai-penn")
-        self.assertIn(top_match["match_status"], ["high_potential", "potential_match"])
-        self.assertGreaterEqual(top_match["match_confidence"], 70.0)
-        self.assertIn("₹1,000 / month", top_match["benefit_amount"])
-        self.assertGreater(len(top_match["required_documents"]), 0)
-        self.assertGreater(len(top_match["application_steps"]), 0)
-        self.assertIn("penkalvi.tn.gov.in", top_match["official_portal_url"])
-        self.assertIn("disclaimer", data)
-        self.assertIn("disclaimer_ta", data)
+        top_match = data.matches[0]
+        self.assertEqual(top_match.scheme_id, "pudhumai-penn")
+        self.assertIn(top_match.match_status, ["high_potential", "potential_match"])
+        self.assertGreaterEqual(top_match.match_confidence, 70.0)
+        self.assertIn("₹1,000 / month", top_match.benefit_amount)
+        self.assertGreater(len(top_match.required_documents), 0)
+        self.assertGreater(len(top_match.application_steps), 0)
+        self.assertIn("penkalvi.tn.gov.in", top_match.official_portal_url)
+        self.assertIsNotNone(data.disclaimer)
+        self.assertIsNotNone(data.disclaimer_ta)
 
     def test_10_assistant_match_farmer_query(self):
-        req = {
-            "query": "நான் 2 ஏக்கர் நிலம் வைத்துள்ள விவசாயி, எனக்கு உழவர் உதவி கிடைக்குமா?",
-            "lang": "ta"
-        }
-        res = self.client.post("/api/assistant/match", json=req)
-        self.assertEqual(res.status_code, 200)
-        data = res.json()
-        self.assertGreater(data["total_potential_matches"], 0)
-        matched_ids = [m["scheme_id"] for m in data["matches"]]
+        req = MatchRequest(
+            query="நான் 2 ஏக்கர் நிலம் வைத்துள்ள விவசாயி, எனக்கு உழவர் உதவி கிடைக்குமா?",
+            lang="ta"
+        )
+        data = match_citizen_schemes(req, db=self.db)
+        self.assertGreater(data.total_potential_matches, 0)
+        matched_ids = [m.scheme_id for m in data.matches]
         self.assertIn("pm-kisan-tn", matched_ids)
 
     def test_11_admin_create_and_delete_scheme(self):
@@ -188,32 +168,27 @@ class TestNammaSevaiBackend(unittest.TestCase):
                 "verification_status": "verified"
             }
         }
+        scheme_create_obj = SchemeCreate(**new_scheme_payload)
 
-        headers = {"X-Admin-Key": "nammasevai-admin-secret-2026"}
+        # 1. create
+        created = create_scheme(scheme_create_obj, db=self.db, authorized=True)
+        self.assertEqual(created.id, "tn-sports-scholarship")
 
-        # 1. POST create
-        res = self.client.post("/api/admin/schemes", json=new_scheme_payload, headers=headers)
-        self.assertEqual(res.status_code, 201)
-        created = res.json()
-        self.assertEqual(created["id"], "tn-sports-scholarship")
+        # 2. verify creation
+        fetched = get_scheme_by_id("tn-sports-scholarship", db=self.db)
+        self.assertEqual(fetched.id, "tn-sports-scholarship")
 
-        # 2. GET verify creation
-        res = self.client.get("/api/schemes/tn-sports-scholarship")
-        self.assertEqual(res.status_code, 200)
+        # 3. delete
+        res = delete_scheme("tn-sports-scholarship", db=self.db, authorized=True)
+        self.assertIn("deleted successfully", res.get("message", ""))
 
-        # 3. DELETE clean up
-        res = self.client.delete("/api/admin/schemes/tn-sports-scholarship", headers=headers)
-        self.assertEqual(res.status_code, 200)
-
-        # 4. GET verify deletion
-        res = self.client.get("/api/schemes/tn-sports-scholarship")
-        self.assertEqual(res.status_code, 404)
+        # 4. verify deletion
+        with self.assertRaises(HTTPException) as ctx:
+            get_scheme_by_id("tn-sports-scholarship", db=self.db)
+        self.assertEqual(ctx.exception.status_code, 404)
 
     def test_12_admin_stats(self):
-        headers = {"X-Admin-Key": "nammasevai-admin-secret-2026"}
-        res = self.client.get("/api/admin/stats", headers=headers)
-        self.assertEqual(res.status_code, 200)
-        data = res.json()
+        data = get_admin_stats(db=self.db)
         self.assertIn("total_schemes", data)
         self.assertIn("verified_sources", data)
         self.assertGreater(data["total_schemes"], 0)

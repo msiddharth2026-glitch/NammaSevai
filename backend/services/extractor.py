@@ -52,10 +52,161 @@ class CitizenInfoExtractor:
         "സേലം": "salem"
     }
 
+    # Major Indian Cities mapped to State & Display District
+    MAJOR_INDIAN_CITIES = {
+        # Maharashtra
+        "mumbai": ("Maharashtra", "Mumbai"),
+        "bombay": ("Maharashtra", "Mumbai"),
+        "pune": ("Maharashtra", "Pune"),
+        "nagpur": ("Maharashtra", "Nagpur"),
+        "thane": ("Maharashtra", "Thane"),
+        "nashik": ("Maharashtra", "Nashik"),
+        "मुंबई": ("Maharashtra", "Mumbai"),
+        "पुणे": ("Maharashtra", "Pune"),
+        # Karnataka
+        "bengaluru": ("Karnataka", "Bengaluru"),
+        "bangalore": ("Karnataka", "Bengaluru"),
+        "mysuru": ("Karnataka", "Mysuru"),
+        "mysore": ("Karnataka", "Mysuru"),
+        "hubli": ("Karnataka", "Hubli"),
+        "mangalore": ("Karnataka", "Mangaluru"),
+        "பெங்களூரு": ("Karnataka", "Bengaluru"),
+        "बेंगलुरु": ("Karnataka", "Bengaluru"),
+        "ബെംഗളൂരു": ("Karnataka", "Bengaluru"),
+        # Kerala
+        "thiruvananthapuram": ("Kerala", "Thiruvananthapuram"),
+        "trivandrum": ("Kerala", "Thiruvananthapuram"),
+        "kochi": ("Kerala", "Kochi"),
+        "cochin": ("Kerala", "Kochi"),
+        "kozhikode": ("Kerala", "Kozhikode"),
+        "calicut": ("Kerala", "Kozhikode"),
+        "thrissur": ("Kerala", "Thrissur"),
+        "തിരുവനന്തപുരം": ("Kerala", "Thiruvananthapuram"),
+        "കൊച്ചി": ("Kerala", "Kochi"),
+        # Delhi
+        "delhi": ("Delhi", "Delhi"),
+        "new delhi": ("Delhi", "New Delhi"),
+        "दिल्ली": ("Delhi", "Delhi"),
+        "டெல்லி": ("Delhi", "Delhi"),
+        "ഡൽഹി": ("Delhi", "Delhi"),
+        # Uttar Pradesh
+        "lucknow": ("Uttar Pradesh", "Lucknow"),
+        "kanpur": ("Uttar Pradesh", "Kanpur"),
+        "varanasi": ("Uttar Pradesh", "Varanasi"),
+        "banaras": ("Uttar Pradesh", "Varanasi"),
+        "noida": ("Uttar Pradesh", "Gautam Buddha Nagar"),
+        "agra": ("Uttar Pradesh", "Agra"),
+        "prayagraj": ("Uttar Pradesh", "Prayagraj"),
+        "allahabad": ("Uttar Pradesh", "Prayagraj"),
+        "लखनऊ": ("Uttar Pradesh", "Lucknow"),
+        "वाराणसी": ("Uttar Pradesh", "Varanasi"),
+        # Gujarat
+        "ahmedabad": ("Gujarat", "Ahmedabad"),
+        "surat": ("Gujarat", "Surat"),
+        "vadodara": ("Gujarat", "Vadodara"),
+        "gandhinagar": ("Gujarat", "Gandhinagar"),
+        # West Bengal
+        "kolkata": ("West Bengal", "Kolkata"),
+        "calcutta": ("West Bengal", "Kolkata"),
+        "howrah": ("West Bengal", "Howrah"),
+        # Telangana & Andhra
+        "hyderabad": ("Telangana", "Hyderabad"),
+        "secunderabad": ("Telangana", "Hyderabad"),
+        "warangal": ("Telangana", "Warangal"),
+        "visakhapatnam": ("Andhra Pradesh", "Visakhapatnam"),
+        "vizag": ("Andhra Pradesh", "Visakhapatnam"),
+        "vijayawada": ("Andhra Pradesh", "Vijayawada"),
+        # Rajasthan
+        "jaipur": ("Rajasthan", "Jaipur"),
+        "jodhpur": ("Rajasthan", "Jodhpur"),
+        "udaipur": ("Rajasthan", "Udaipur"),
+        # Bihar
+        "patna": ("Bihar", "Patna"),
+        "gaya": ("Bihar", "Gaya"),
+        # Madhya Pradesh
+        "bhopal": ("Madhya Pradesh", "Bhopal"),
+        "indore": ("Madhya Pradesh", "Indore"),
+        # Punjab & Haryana
+        "chandigarh": ("Chandigarh", "Chandigarh"),
+        "amritsar": ("Punjab", "Amritsar"),
+        "ludhiana": ("Punjab", "Ludhiana"),
+        "gurugram": ("Haryana", "Gurugram"),
+        "gurgaon": ("Haryana", "Gurugram"),
+        # Odisha
+        "bhubaneswar": ("Odisha", "Bhubaneswar"),
+        "cuttack": ("Odisha", "Cuttack"),
+        # Assam
+        "guwahati": ("Assam", "Kamrup Metropolitan"),
+        # Uttarakhand & HP
+        "dehradun": ("Uttarakhand", "Dehradun"),
+        "shimla": ("Himachal Pradesh", "Shimla"),
+        # Goa
+        "panaji": ("Goa", "North Goa"),
+        # J&K / Ladakh
+        "srinagar": ("Jammu and Kashmir", "Srinagar"),
+        "jammu": ("Jammu and Kashmir", "Jammu"),
+        "leh": ("Ladakh", "Leh"),
+        # Puducherry
+        "puducherry": ("Puducherry", "Puducherry"),
+        "pondicherry": ("Puducherry", "Puducherry")
+    }
+
+    # All 28 States & 8 UTs name variations in English, Tamil, Hindi, Malayalam
+    STATE_NAMES_MULTILINGUAL = {
+        # States
+        "Andhra Pradesh": ["andhra pradesh", "andhra", "ஆந்திரப் பிரதேசம்", "ஆந்திரா", "आंध्र प्रदेश", "ആന്ധ്രാപ്രദേശ്"],
+        "Arunachal Pradesh": ["arunachal pradesh", "arunachal", "அருணாச்சலப் பிரதேசம்", "अरुणाचल प्रदेश", "അരുണാചൽ പ്രദേശ്"],
+        "Assam": ["assam", "asom", "அசாம்", "असम", "ആസാം", "അസം"],
+        "Bihar": ["bihar", "பீகார்", "बिहार", "ബീഹാർ"],
+        "Chhattisgarh": ["chhattisgarh", "chattisgarh", "சத்தீஸ்கர்", "छत्तीसगढ़", "ഛത്തീസ്ഗഡ്"],
+        "Goa": ["goa", "கோவா", "गोवा", "ഗോവ"],
+        "Gujarat": ["gujarat", "குஜராத்", "गुजरात", "ഗുജറാത്ത്"],
+        "Haryana": ["haryana", "ஹரியானா", "हरियाणा", "ഹരിയാന"],
+        "Himachal Pradesh": ["himachal pradesh", "himachal", "இமாச்சலப் பிரதேசம்", "हिमाचल प्रदेश", "ഹിമാചൽ പ്രദേശ്"],
+        "Jharkhand": ["jharkhand", "ஜார்க்கண்ட்", "झारखंड", "ജാർഖണ്ഡ്"],
+        "Karnataka": ["karnataka", "கர்நாடகா", "கர்நாடகம்", "कर्नाटक", "കർണാടക"],
+        "Kerala": ["kerala", "கேரளா", "கேரளம்", "केरल", "കേരളം", "കേരള"],
+        "Madhya Pradesh": ["madhya pradesh", "மத்திய பிரதேசம்", "मध्य प्रदेश", "മധ്യപ്രദേശ്"],
+        "Maharashtra": ["maharashtra", "மகாராஷ்டிரா", "மகாராஷ்டிர", "महाराष्ट्र", "മഹാരാഷ്ട്ര"],
+        "Manipur": ["manipur", "மணிப்பூர்", "मणिपुर", "മണിപ്പൂർ"],
+        "Meghalaya": ["meghalaya", "மேகாலயா", "मेघालय", "മേഘാലയ"],
+        "Mizoram": ["mizoram", "மிசோரம்", "मिजोरम", "മിസോറാം"],
+        "Nagaland": ["nagaland", "நாகாலாந்து", "नागालैंड", "നാഗാലാൻഡ്"],
+        "Odisha": ["odisha", "orissa", "ஒடிசா", "ஒரிசா", "ओडिशा", "उड़ीसा", "ഒഡീഷ"],
+        "Punjab": ["punjab", "பஞ்சாப்", "पंजाब", "പഞ്ചാബ്"],
+        "Rajasthan": ["rajasthan", "ராஜஸ்தான்", "राजस्थान", "രാജസ്ഥാൻ"],
+        "Sikkim": ["sikkim", "சிக்கிம்", "सिक्किम", "സിക്കിം"],
+        "Tamil Nadu": ["tamil nadu", "tamilnadu", "தமிழ்நாடு", "தமிழ் நாடு", "तमिलनाडु", "തമിഴ്നാട്"],
+        "Telangana": ["telangana", "தெலுங்கானா", "तेलंगाना", "തെലങ്കാന"],
+        "Tripura": ["tripura", "திரிபுரா", "त्रिपुरा", "ത്രിപുര"],
+        "Uttar Pradesh": ["uttar pradesh", "உத்தரப் பிரதேசம்", "உத்தர பிரதேசம்", "उत्तर प्रदेश", "ഉത്തർപ്രദേശ്"],
+        "Uttarakhand": ["uttarakhand", "uttaranchal", "உத்தரகாண்ட்", "उत्तराखंड", "ഉത്തരാഖണ്ഡ്"],
+        "West Bengal": ["west bengal", "bengal", "மேற்கு வங்காளம்", "पश्चिम बंगाल", "പശ്ചിമ ബംഗാൾ"],
+        # Union Territories
+        "Andaman and Nicobar Islands": ["andaman", "nicobar", "அந்தமான்", "अंडमान", "ആൻഡമാൻ"],
+        "Chandigarh": ["chandigarh", "சண்டிகர்", "चंडीगढ़", "ചണ്ഡീഗഡ്"],
+        "Dadra and Nagar Haveli and Daman and Diu": ["daman", "diu", "dadra", "nagar haveli", "தாமன்", "दमन", "ദാമൻ"],
+        "Delhi": ["delhi", "new delhi", "டெல்லி", "தில்லி", "दिल्ली", "ഡൽഹി"],
+        "Jammu and Kashmir": ["jammu", "kashmir", "ஜம்மு", "காஷ்மீர்", "जम्मू और कश्मीर", "ജമ്മു കശ്മീർ"],
+        "Ladakh": ["ladakh", "லடாக்", "लद्दाख", "ലഡാക്ക്"],
+        "Lakshadweep": ["lakshadweep", "லட்சத்தீவு", "लक्षद्वीप", "ലക്ഷദ്വീപ്"],
+        "Puducherry": ["puducherry", "pondicherry", "பாண்டிச்சேரி", "புதுச்சேரி", "पुदुचेरी", "പുതുച്ചേരി"]
+    }
+
     def normalize(self, text: str) -> str:
         # Preserve comma within digits by merging them (e.g. 1,50,000 -> 150000)
         cleaned = re.sub(r'(\d+),(?=\d)', r'\1', text.lower())
         return cleaned.replace("-", " ").replace(",", " ")
+
+    def _has_signal(self, text: str, signals: List[str]) -> bool:
+        for s in signals:
+            if s.isascii():
+                if re.search(r'\b' + re.escape(s) + r'\b', text):
+                    return True
+            else:
+                if s in text:
+                    return True
+        return False
 
     def extract(self, text: str) -> Tuple[ExtractedUserProfile, List[str], List[MissingInformationItem]]:
         norm = self.normalize(text)
@@ -99,9 +250,9 @@ class CitizenInfoExtractor:
             "പുരുഷൻ", "ആൺകുട്ടി", "അച്ഛൻ", "വിദ്യാർത്ഥി", "മകൻ"
         ]
 
-        if any(w in norm for w in female_signals):
+        if self._has_signal(norm, female_signals):
             profile.gender = "female"
-        elif any(w in norm for w in male_signals):
+        elif self._has_signal(norm, male_signals):
             profile.gender = "male"
 
         # 3. Occupation & Education extraction
@@ -113,6 +264,7 @@ class CitizenInfoExtractor:
         ]
         if any(w in norm for w in student_signals):
             profile.occupation = "student"
+            profile.is_student = True
             intents.append("education")
             if any(w in norm for w in ["college", "degree", "கல்லூரி", "कॉलेज", "ഡിഗ്രി", "കോളേജ്"]):
                 profile.education_level = "college_ug"
@@ -138,6 +290,7 @@ class CitizenInfoExtractor:
         ]
         if any(w in norm for w in farmer_signals):
             profile.occupation = "farmer"
+            profile.is_farmer = True
             intents.append("agriculture")
             acres_match = re.search(r'(\d+(?:\.\d+)?)\s*(?:acres|acre|ஏக்கர்|एकड़|ഏക്കർ|ekad)', norm)
             if acres_match:
@@ -155,6 +308,7 @@ class CitizenInfoExtractor:
         widow_signals = ["widow", "destitute", "deserted", "விதவை", "ஆதரவற்ற", "विधवा", "बेसहारा", "vidhwa", "വിധവ"]
         if any(w in norm for w in widow_signals):
             profile.is_widow_or_destitute = True
+            profile.marital_status = "widow"
             profile.gender = "female"
             intents.append("women")
 
@@ -206,27 +360,49 @@ class CitizenInfoExtractor:
                     profile.district = eng_name.capitalize()
                     break
 
-        # State detection
-        if "kerala" in norm or "കേരളം" in norm:
-            profile.state = "Kerala"
-        elif "delhi" in norm or "दिल्ली" in norm:
-            profile.state = "Delhi"
-        else:
+        # Check major Indian cities across all states (longest name first e.g. "new delhi" before "delhi")
+        detected_state_from_city = None
+        for city_key in sorted(self.MAJOR_INDIAN_CITIES.keys(), key=len, reverse=True):
+            if self._has_signal(norm, [city_key]):
+                st_name, dist_name = self.MAJOR_INDIAN_CITIES[city_key]
+                if not profile.district:
+                    profile.district = dist_name
+                detected_state_from_city = st_name
+                break
+
+        # Comprehensive State / Union Territory detection (All 28 States & 8 UTs)
+        detected_state = None
+        for canonical_state, signals in self.STATE_NAMES_MULTILINGUAL.items():
+            if self._has_signal(norm, signals):
+                detected_state = canonical_state
+                break
+
+        if detected_state:
+            profile.state = detected_state
+        elif detected_state_from_city:
+            profile.state = detected_state_from_city
+        elif profile.district:
+            # If a Tamil Nadu district was identified earlier, state is Tamil Nadu
             profile.state = "Tamil Nadu"
+        else:
+            profile.state = None
 
         # 5. Income extraction
-        income_match = re.search(r'(?:income|வருமானம்|சம்பளம்|आय|कमाई|वेतन|सैलरी|aamdani|വരുമാനം|ശമ്പളം)\s*(?:is|:|\s|है|ആണ്)?\s*(?:rs\.?|₹)?\s*(\d+(?:\.\d+)?)\s*(?:lakhs|lakh|லட்சம்|लाख|ലക്ഷം)?', norm)
-        if income_match:
-            try:
-                num_str = income_match.group(1)
-                val = float(num_str)
-                if any(w in norm for w in ["lakh", "லட்சம்", "लाख", "ലക്ഷം"]) and val < 1000:
-                    val = val * 100000
-                profile.annual_income = val
-            except Exception:
-                pass
-        elif any(w in norm for w in ["bpl", "poor", "ஏழை", "வறுமை", "गरीब", "നിർധന"]):
-            profile.annual_income = 72000.0
+        if re.search(r'-\s*(?:rs\.?|₹)?\s*\d+', norm):
+            profile.annual_income = -1.0
+        else:
+            income_match = re.search(r'(?:income|வருமானம்|சம்பளம்|आय|कमाई|वेतन|सैलरी|aamdani|വരുമാനം|ശമ്പളം)\s*(?:is|:|\s|है|ആണ്)?\s*(?:rs\.?|₹)?\s*(\d+(?:\.\d+)?)\s*(?:lakhs|lakh|லட்சம்|लाख|ലക്ഷം)?', norm)
+            if income_match:
+                try:
+                    num_str = income_match.group(1)
+                    val = float(num_str)
+                    if any(w in norm for w in ["lakh", "லட்சம்", "लाख", "ലക്ഷம்"]) and val < 1000:
+                        val = val * 100000
+                    profile.annual_income = val
+                except Exception:
+                    pass
+            elif any(w in norm for w in ["bpl", "poor", "ஏழை", "வறுமை", "गरीब", "നിർധന"]):
+                profile.annual_income = 72000.0
 
         # 6. Sensitive attributes (Only when voluntarily supplied and relevant)
         if any(w in norm.split() for w in ["sc", "st", "dalit", "ஆதிதிராவிடர்", "பழங்குடியினர்", "एससी", "एसटी", "दलित", "आदिवासी", "ദളിത്"]):
@@ -237,6 +413,16 @@ class CitizenInfoExtractor:
         if any(w in norm for w in ["disabled", "handicapped", "wheelchair", "udid", "மாற்றுத்திறனாளி", "ஊனம்", "विकलांग", "दिव्यांग", "अपंग", "divyang", "viklang", "ഭിന്നശേഷി", "വികലാംഗ"]):
             profile.disability_status = True
             intents.append("disability")
+
+        # Ration card signals
+        if any(w in norm for w in ["bpl", "phh", "aay", "antyodaya", "ration card", "ரேஷன் அட்டை", "राशन कार्ड"]):
+            profile.ration_card_type = "bpl"
+
+        # Housing / Residence type signals
+        if any(w in norm for w in ["pucca", "own house", "independent house", "சொந்த வீடு", "पक्का मकान"]):
+            profile.residence_type = "pucca"
+        elif any(w in norm for w in ["rural", "கிராமம்", "ग्रामीण"]):
+            profile.residence_type = "rural"
 
         # 7. Identify Missing Essential Information for Specific Intents
         if profile.occupation == "student":
@@ -292,6 +478,17 @@ class CitizenInfoExtractor:
                     question_ml="നിങ്ങളുടെ കുടുംബ വാർഷിക വരുമാനം ₹2.5 ലക്ഷത്തിൽ താഴെയാണോ?"
                 ))
 
+        if any(w in norm for w in ["solar", "rooftop", "சூரிய சக்தி", "छत", "सौर"]):
+            if not profile.residence_type:
+                missing.append(MissingInformationItem(
+                    field_name="residence_type",
+                    relevance_to_scheme="PM Surya Ghar Muft Bijli Yojana requires owning a residential house with suitable roof",
+                    question_en="Do you own a residential house with a suitable rooftop for solar panel installation?",
+                    question_ta="சூரிய மின் பலகைகள் நிறுவ பொருத்தமான கூரையுடன் கூடிய சொந்த குடியிருப்பு வீடு உங்களுக்கு உள்ளதா?",
+                    question_hi="क्या आपके पास सौर पैनल स्थापित करने के लिए उपयुक्त छत वाला आवासीय मकान है?",
+                    question_ml="സോളാർ പാനലുകൾ സ്ഥാപിക്കാൻ അനുയോജ്യമായ മേൽക്കൂരയുള്ള സ്വന്തം വീട് നിങ്ങൾക്കുണ്ടോ?"
+                ))
+
         # General missing information when essential demographic details are absent
         if not profile.occupation and not profile.age:
             missing.append(MissingInformationItem(
@@ -317,6 +514,17 @@ class CitizenInfoExtractor:
                 question_ta="உங்கள் குடும்ப ஆண்டு வருமானம் தோராயமாக எவ்வளவு?",
                 question_hi="आपकी अनुमानित पारिवारिक वार्षिक आय कितनी है?",
                 question_ml="നിങ്ങളുടെ ഏകദേശ കുടുംബ വാർഷിക വരുമാനം എത്രയാണ്?"
+            ))
+
+        # 8. National Geographic Profile: Prompt for State/UT when not mentioned
+        if not profile.state:
+            missing.append(MissingInformationItem(
+                field_name="state",
+                relevance_to_scheme="State-specific welfare schemes require residency in that particular State or Union Territory",
+                question_en="Which State or Union Territory do you currently reside in?",
+                question_ta="நீங்கள் எந்த மாநிலம் அல்லது யூனியன் பிரதேசத்தில் வசிக்கிறீர்கள்?",
+                question_hi="आप किस राज्य या केंद्र शासित प्रदेश में रहते हैं?",
+                question_ml="നിങ്ങൾ ഏത് സംസ്ഥാനത്താണ് അല്ലെങ്കിൽ കേന്ദ്രഭരണ പ്രദേശത്താണ് താമസിക്കുന്നത്?"
             ))
 
         return profile, intents, missing

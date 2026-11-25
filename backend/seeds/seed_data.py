@@ -1498,9 +1498,23 @@ def seed_database():
 
         db.commit()
         if inserted_count > 0:
-            logger.info(f"Successfully seeded {inserted_count} new schemes. Total schemes: {len(SCHEMES_SEED)}.")
+            logger.info(f"Successfully seeded {inserted_count} new schemes. Total base schemes: {len(SCHEMES_SEED)}.")
         else:
-            logger.info(f"All {len(SCHEMES_SEED)} schemes are already present in the database.")
+            logger.info(f"All {len(SCHEMES_SEED)} base schemes are already present in the database.")
+
+        # Seed national schemes if available
+        import os, json
+        from ..services.scheme_importer import SchemeImporterService
+        curr_dir = os.path.dirname(os.path.abspath(__file__))
+        national_seed_path = os.path.join(curr_dir, "national_schemes_seed.json")
+        if os.path.exists(national_seed_path):
+            with open(national_seed_path, "r", encoding="utf-8") as nf:
+                national_records = json.load(nf)
+                report = SchemeImporterService.import_records(db, national_records, allow_overwrite=False)
+                if report["imported"] > 0:
+                    logger.info(f"Imported {report['imported']} national schemes from {national_seed_path}.")
+                else:
+                    logger.info(f"National schemes are already up-to-date ({report['duplicates']} duplicates preserved).")
 
     except Exception as e:
         db.rollback()

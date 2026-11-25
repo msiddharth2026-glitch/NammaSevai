@@ -109,6 +109,12 @@ export function renderNavbar(state) {
                   <span>${t.admin || 'Admin'}</span>
                 </a>
               </li>
+              <li>
+                <a class="nav-link ${currentRoute === 'feedback' ? 'active' : ''}" href="#feedback" data-route="feedback">
+                  <span class="material-symbols-outlined nav-icon">rate_review</span>
+                  <span>${t.pilotFeedbackNav || (currentLang === 'ta' ? 'கருத்துக்கணிப்பு' : currentLang === 'hi' ? 'प्रतिक्रिया' : currentLang === 'ml' ? 'ഫീഡ്‌ബാക്ക്' : 'Feedback')}</span>
+                </a>
+              </li>
             </ul>
 
             <!-- Mobile Navigation Language Section (visible inside drawer on mobile) -->

@@ -7,8 +7,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from .config import settings
 from .database import engine, Base
-from .routers import schemes, assistant, admin, voice
+from .routers import schemes, assistant, admin, voice, feedback
 from .seeds.seed_data import seed_database
+from .middleware.security import (
+    SecurityHeadersMiddleware,
+    RateLimitingMiddleware,
+    RequestSizeLimitMiddleware
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -18,9 +23,17 @@ logger = logging.getLogger("nammasevai.main")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: ensure tables exist and seed default schemes
+    # Security audit check
+    settings.check_production_security()
+    
+    # Startup: ensure tables exist, run migrations, and seed default schemes
     logger.info("Initializing database schema...")
     Base.metadata.create_all(bind=engine)
+    try:
+        from .database_migration import run_database_migrations
+        run_database_migrations()
+    except Exception as e:
+        logger.error(f"Error during schema migration: {e}")
     logger.info("Running database seed check...")
     try:
         seed_database()
@@ -42,6 +55,19 @@ app = FastAPI(
     lifespan=lifespan,
     docs_url="/docs",
     redoc_url="/redoc"
+)
+
+# Security and Hardening Middlewares
+app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(
+    RequestSizeLimitMiddleware, 
+    max_body_bytes=settings.MAX_REQUEST_BODY_BYTES
+)
+app.add_middleware(
+    RateLimitingMiddleware,
+    requests_per_minute=settings.RATE_LIMIT_GENERAL_PER_MINUTE,
+    match_requests_per_minute=settings.RATE_LIMIT_MATCH_PER_MINUTE,
+    admin_requests_per_minute=settings.RATE_LIMIT_ADMIN_PER_MINUTE
 )
 
 # CORS Middleware
@@ -70,6 +96,7 @@ app.include_router(schemes.router)
 app.include_router(assistant.router)
 app.include_router(admin.router)
 app.include_router(voice.router)
+app.include_router(feedback.router)
 
 # Health check
 @app.get("/api/health", tags=["Health"])

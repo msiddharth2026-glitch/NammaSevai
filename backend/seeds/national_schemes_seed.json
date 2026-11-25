@@ -1,0 +1,689 @@
+[
+  {
+    "id": "ayushman-bharat-pmjay",
+    "name": "Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (PM-JAY)",
+    "name_ta": "ஆயுஷ்மான் பாரத் - பிரதம மந்திரி ஜன் ஆரோக்கிய திட்டம் (PM-JAY)",
+    "name_hi": "आयुष्मान भारत - प्रधानमंत्री जन आरोग्य योजना (PM-JAY)",
+    "name_ml": "ആയുഷ്മാൻ ഭാരത് - പ്രധാനമന്ത്രി ജൻ ആരോഗ്യ യോജന (PM-JAY)",
+    "department": "National Health Authority (NHA), Ministry of Health and Family Welfare",
+    "department_ta": "தேசிய சுகாதார ஆணையம், சுகாதார மற்றும் குடும்ப நல அமைச்சகம்",
+    "department_hi": "राष्ट्रीय स्वास्थ्य प्राधिकरण, स्वास्थ्य एवं परिवार कल्याण मंत्रालय",
+    "department_ml": "ദേശീയ ആരോഗ്യ അതോറിറ്റി, ആരോഗ്യ കുടുംബക്ഷേമ മന്ത്രാലയം",
+    "category": "health",
+    "level": "Central",
+    "state": "All India",
+    "beneficiary_type": "Vulnerable and low-income families identified via SECC data",
+    "beneficiary_type_ta": "SECC தரவு அடிப்படையில் அடையாளம் காணப்பட்ட குறைந்த வருமானக் குடும்பங்கள்",
+    "target_beneficiaries": "Economically disadvantaged rural and urban families",
+    "benefit_summary": "Cashless hospitalization health coverage of up to ₹5,00,000 per family per year for secondary and tertiary care.",
+    "benefit_summary_ta": "குடும்பத்திற்கு ஆண்டிற்கு ₹5,00,000 வரை பணமில்லா மருத்துவமனை சிகிச்சைக் காப்பீடு.",
+    "benefit_summary_hi": "प्रति परिवार प्रति वर्ष ₹5,00,000 तक का कैशलेस द्वितीयक और तृतीयक अस्पताल उपचार।",
+    "benefit_summary_ml": "ഓരോ കുടുംബത്തിനും പ്രതിവർഷം ₹5,00,000 വരെ സൗജന്യ ക്യാഷ്‌ലെസ് ചികിത്സ.",
+    "benefit_amount": "₹5,00,000 / family / year",
+    "description": "World's largest government-funded health assurance scheme covering over 12 crore poor and vulnerable families across India with cashless treatment in empanelled public and private hospitals.",
+    "description_ta": "இந்தியா முழுவதும் உள்ள 12 கோடிக்கும் அதிகமான ஏழை எளிய குடும்பங்களுக்கு பணமில்லா சிகிச்சை வழங்கும் உலகின் மிகப்பெரிய சுகாதார திட்டம்.",
+    "description_hi": "भारत के 12 करोड़ से अधिक कमजोर परिवारों को सूचीबद्ध अस्पतालों में ₹5 लाख तक का कैशलेस इलाज देने वाली प्रमुख राष्ट्रीय योजना।",
+    "description_ml": "രാജ്യത്തെ 12 കോടിയിലധികം ദരിദ്ര കുടുംബങ്ങൾക്ക് ₹5 ലക്ഷം വരെ സൗജന്യ ചികിത്സ നൽകുന്ന ദേശീയ പദ്ധതി.",
+    "keywords": "ayushman bharat, pmjay, health card, cashless treatment, hospitalization, 5 lakh medical insurance",
+    "scheme_status": "Active",
+    "is_active": true,
+    "source_name": "National Health Authority (NHA) / PM-JAY Official Portal",
+    "portal_url": "https://pmjay.gov.in",
+    "verified_date": "2026-11-24",
+    "verification_status": "verified",
+    "conditions": [
+      {
+        "field_name": "income_max",
+        "operator": "lte",
+        "expected_value": "300000",
+        "is_mandatory": true,
+        "description_en": "Family annual income within priority low-income category / SECC deprivation criteria",
+        "description_ta": "குடும்ப ஆண்டு வருமானம் குறைந்த வருமான வரம்பிற்குள் இருக்க வேண்டும்",
+        "prompt_question_en": "What is your total family annual income?",
+        "prompt_question_ta": "உங்கள் குடும்பத்தின் மொத்த ஆண்டு வருமானம் எவ்வளவு?"
+      }
+    ],
+    "documents": [
+      {
+        "name_en": "Aadhaar Card",
+        "name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority_en": "UIDAI",
+        "issuing_authority_ta": "இந்திய தனித்துவ அடையாள ஆணையம்"
+      },
+      {
+        "name_en": "Ration Card / Family Card",
+        "name_ta": "குடும்ப அட்டை / ரேஷன் கார்டு",
+        "is_mandatory": true,
+        "issuing_authority_en": "State Food & Civil Supplies Department",
+        "issuing_authority_ta": "உணவு மற்றும் பொது விநியோகத் துறை"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Check Am I Eligible Portal",
+        "title_ta": "தகுதி சரிபார்த்தல் இணையதளம்",
+        "description_en": "Visit beneficiary.nha.gov.in or pmjay.gov.in and check eligibility using mobile number or Ration card.",
+        "description_ta": "beneficiary.nha.gov.in தளத்தில் உங்கள் மொபைல் எண் அல்லது குடும்ப அட்டை கொண்டு தகுதியை சோதிக்கவும்.",
+        "portal_url": "https://beneficiary.nha.gov.in"
+      },
+      {
+        "step_number": 2,
+        "mode": "in_person",
+        "title_en": "Visit Empanelled Hospital or CSC",
+        "title_ta": "அங்கீகரிக்கப்பட்ட மருத்துவமனை அல்லது இ-சேவை மையம் செல்லுதல்",
+        "description_en": "Visit the Ayushman Mitra desk at any empanelled hospital or Common Service Centre (CSC) with Aadhaar to generate Ayushman Card.",
+        "description_ta": "அருகிலுள்ள அரசு/தனியார் மருத்துவமனையில் உள்ள ஆயுஷ்மான் மித்ரா மையத்தை அணுகி அட்டை பெறலாம்.",
+        "portal_url": "https://pmjay.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "pmay-urban-housing",
+    "name": "Pradhan Mantri Awas Yojana - Urban (PMAY-U)",
+    "name_ta": "பிரதம மந்திரி நகர்ப்புற வீட்டுவசதி திட்டம் (PMAY-U)",
+    "name_hi": "प्रधानमंत्री आवास योजना - शहरी (PMAY-U)",
+    "name_ml": "പ്രധാനമന്ത്രി ആവാസ് യോജന - അർബൻ (PMAY-U)",
+    "department": "Ministry of Housing and Urban Affairs (MoHUA)",
+    "department_ta": "வீட்டுவசதி மற்றும் நகர்ப்புற விவகாரங்கள் அமைச்சகம்",
+    "department_hi": "आवासन और शहरी कार्य मंत्रालय",
+    "department_ml": "ഭവന-നഗരകാര്യ മന്ത്രാലയം",
+    "category": "housing",
+    "level": "Central",
+    "state": "All India",
+    "beneficiary_type": "Urban poor, EWS, and LIG families without a pucca house anywhere in India",
+    "beneficiary_type_ta": "சொந்த கான்கிரீட் வீடு இல்லாத நகர்ப்புற ஏழை எளிய குடும்பங்கள்",
+    "target_beneficiaries": "Urban residents, EWS/LIG families, women homeowners",
+    "benefit_summary": "Interest subsidy up to ₹2.67 lakh on home loans or central financial assistance of ₹1.5 lakh for pucca house construction.",
+    "benefit_summary_ta": "வீட்டுக் கடனுக்கான வட்டி மானியம் ₹2.67 லட்சம் வரை அல்லது வீடு கட்ட ₹1.50 லட்சம் அரசு மானியம்.",
+    "benefit_summary_hi": "गृह ऋण पर ₹2.67 लाख तक की ब्याज सब्सिडी या पक्का मकान बनाने के लिए ₹1.5 लाख की सरकारी सहायता।",
+    "benefit_summary_ml": "ഭവന വായ്പയ്ക്ക് ₹2.67 ലക്ഷം വരെ പലിശ സബ്സിഡി അല്ലെങ്കിൽ വീട് നിർമ്മാണത്തിന് ₹1.5 ലക്ഷം ഗ്രാന്റ്.",
+    "benefit_amount": "Up to ₹2,67,000 Subsidy",
+    "description": "Central flagship scheme providing affordable pucca houses to eligible urban households across all 28 States and 8 Union Territories with mandatory female co-ownership.",
+    "description_ta": "இந்தியா முழுவதும் உள்ள அனைத்து 28 மாநிலங்கள் மற்றும் 8 யூனியன் பிரதேசங்களில் நகர்ப்புற ஏழைகளுக்கு நிரந்தர வீடு வழங்கும் மத்திய அரசு திட்டம்.",
+    "description_hi": "सभी 28 राज्यों और 8 केंद्र शासित प्रदेशों के शहरी बेघर परिवारों को पक्के घर उपलब्ध कराने की केंद्रीय योजना।",
+    "description_ml": "എല്ലാ സംസ്ഥാനങ്ങളിലും കേന്ദ്രഭരണ പ്രദേശങ്ങളിലുമുള്ള നഗരവാസികൾക്ക് വീട് ലഭ്യമാക്കുന്ന കേന്ദ്ര പദ്ധതി.",
+    "keywords": "pmay, housing for all, urban housing subsidy, home loan subsidy, clss, pucca house",
+    "scheme_status": "Active",
+    "is_active": true,
+    "source_name": "Ministry of Housing and Urban Affairs Official Portal",
+    "portal_url": "https://pmaymis.gov.in",
+    "verified_date": "2026-11-24",
+    "verification_status": "verified",
+    "conditions": [
+      {
+        "field_name": "income_max",
+        "operator": "lte",
+        "expected_value": "600000",
+        "is_mandatory": true,
+        "description_en": "Family annual income up to ₹3,00,000 for EWS or ₹6,00,000 for LIG category",
+        "description_ta": "குடும்ப ஆண்டு வருமானம் ₹6,00,000-க்குள் இருக்க வேண்டும்",
+        "prompt_question_en": "What is your total family annual income?",
+        "prompt_question_ta": "உங்கள் குடும்பத்தின் மொத்த ஆண்டு வருமானம் எவ்வளவு?"
+      }
+    ],
+    "documents": [
+      {
+        "name_en": "Aadhaar Card of all family members",
+        "name_ta": "குடும்ப உறுப்பினர்களின் ஆதார் அட்டைகள்",
+        "is_mandatory": true
+      },
+      {
+        "name_en": "Income Certificate / Salary Slip",
+        "name_ta": "வருமானச் சான்றிதழ்",
+        "is_mandatory": true
+      },
+      {
+        "name_en": "Land Ownership Document / Patta (if self-constructing)",
+        "name_ta": "நிலப் பட்டா / உரிமை ஆவணம்",
+        "is_mandatory": false
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Apply on PMAY Portal or CSC",
+        "title_ta": "PMAY இணையதளத்தில் விண்ணப்பிக்கவும்",
+        "description_en": "Log in to pmaymis.gov.in with Aadhaar authentication or submit application via Common Service Center.",
+        "portal_url": "https://pmaymis.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "pm-svanidhi-microcredit",
+    "name": "PM Street Vendor's AtmaNirbhar Nidhi (PM SVANidhi)",
+    "name_ta": "பிரதம மந்திரி சாலையோர வியாபாரிகள் ஆத்மநிர்பர் நிதி (PM SVANidhi)",
+    "name_hi": "प्रधानमंत्री स्ट्रीट वेंडर्स आत्मनिर्भर निधि (पीएम स्वनिधि)",
+    "name_ml": "പിഎം സ്ട്രീറ്റ് വെണ്ടേഴ്സ് ആത്മനിർഭർ നിധി (PM SVANidhi)",
+    "department": "Ministry of Housing and Urban Affairs (MoHUA)",
+    "department_ta": "வீட்டுவசதி மற்றும் நகர்ப்புற விவகாரங்கள் அமைச்சகம்",
+    "department_hi": "आवासन और शहरी कार्य मंत्रालय",
+    "department_ml": "ഭവന-നഗരകാര്യ മന്ത്രാലയം",
+    "category": "business",
+    "level": "Central",
+    "state": "All India",
+    "beneficiary_type": "Street vendors, hawkers, and small informal merchants in urban areas",
+    "beneficiary_type_ta": "சாலையோர வியாபாரிகள் மற்றும் சிறு வணிகர்கள்",
+    "target_beneficiaries": "Street vendors, small entrepreneurs, self-employed micro-merchants",
+    "benefit_summary": "Collateral-free working capital loan starting at ₹10,000 up to ₹50,000 with 7% interest subsidy and cashback on digital transactions.",
+    "benefit_summary_ta": "பிணையில்லா நடைமுறை மூலதனக் கடன் ₹10,000 முதல் ₹50,000 வரை மற்றும் 7% வட்டி மானியம்.",
+    "benefit_summary_hi": "बिना गारंटी ₹10,000 से ₹50,000 तक का कार्यशील पूंजी ऋण, 7% ब्याज सब्सिडी और डिजिटल लेनदेन पर कैशबैक।",
+    "benefit_summary_ml": "ഈടില്ലാതെ ₹10,000 മുതൽ ₹50,000 വരെ വായ്പയും 7% പലിശ സബ്‌സിഡിയും.",
+    "benefit_amount": "₹10,000 - ₹50,000 Loan + 7% Interest Subsidy",
+    "description": "Central sector micro-credit facility empowering street vendors across all Indian cities and towns to resume livelihoods and transition to formal banking.",
+    "description_ta": "இந்தியாவின் அனைத்து நகரங்களிலும் உள்ள சாலையோர வியாபாரிகளுக்கு பிணையில்லா கடன் உதவி வழங்கும் மத்திய திட்டம்.",
+    "description_hi": "सभी भारतीय शहरों में रेहड़ी-पटरी वालों को सस्ता ऋण और डिजिटल प्रोत्साहन देने वाली केंद्रीय योजना।",
+    "description_ml": "തെരുവ് കച്ചവടക്കാർക്ക് ബാങ്ക് വായ്പയും സബ്സിഡിയും നൽകുന്ന ദേശീയ പദ്ധതി.",
+    "keywords": "pm svanidhi, street vendor loan, microcredit, collateral free loan, 10000 loan, small business",
+    "scheme_status": "Active",
+    "is_active": true,
+    "source_name": "PM SVANidhi Portal, MoHUA",
+    "portal_url": "https://pmsvanidhi.mohua.gov.in",
+    "verified_date": "2026-11-24",
+    "verification_status": "verified",
+    "conditions": [
+      {
+        "field_name": "occupation",
+        "operator": "in",
+        "expected_value": "tailor,entrepreneur,unemployed,self_employed,vendor",
+        "is_mandatory": true,
+        "description_en": "Must be engaged in street vending or informal micro-merchandising in urban/peri-urban area",
+        "description_ta": "சாலையோர வியாபாரம் அல்லது சுயதொழில் செய்பவராக இருக்க வேண்டும்",
+        "prompt_question_en": "Are you engaged in street vending or a small self-employed business?",
+        "prompt_question_ta": "நீங்கள் சாலையோர வியாபாரம் அல்லது சிறு சுயதொழில் செய்கிறீர்களா?"
+      }
+    ],
+    "documents": [
+      {
+        "name_en": "Aadhaar Card",
+        "name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true
+      },
+      {
+        "name_en": "Vending Certificate / Letter of Recommendation (LoR) from Urban Local Body",
+        "name_ta": "நகராட்சி / மாநகராட்சி சாலையோர வியாபார அடையாள அட்டை அல்லது பரிந்துரைக் கடிதம்",
+        "is_mandatory": true
+      },
+      {
+        "name_en": "Bank Account Passbook",
+        "name_ta": "வங்கி கணக்கு புத்தகம்",
+        "is_mandatory": true
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Apply Online at PM SVANidhi Portal",
+        "title_ta": "PM SVANidhi தளத்தில் விண்ணப்பிக்கவும்",
+        "description_en": "Fill application on pmsvanidhi.mohua.gov.in using Aadhaar registered mobile number and upload LoR.",
+        "portal_url": "https://pmsvanidhi.mohua.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "atal-pension-yojana",
+    "name": "Atal Pension Yojana (APY)",
+    "name_ta": "அடல் ஓய்வூதியத் திட்டம் (APY)",
+    "name_hi": "अटल पेंशन योजना (APY)",
+    "name_ml": "അടൽ പെൻഷൻ യോജന (APY)",
+    "department": "Pension Fund Regulatory and Development Authority (PFRDA), Ministry of Finance",
+    "department_ta": "ஓய்வூதிய நிதி ஒழுங்குமுறை ஆணையம், நிதி அமைச்சகம்",
+    "department_hi": "पेंशन निधि विनियामक और विकास प्राधिकरण, वित्त मंत्रालय",
+    "department_ml": "പെൻഷൻ ഫണ്ട് റെഗുലേറ്ററി അതോറിറ്റി, ധനകാര്യ മന്ത്രാലയം",
+    "category": "seniors",
+    "level": "Central",
+    "state": "All India",
+    "beneficiary_type": "Citizens in the unorganized sector aged 18 to 40 years",
+    "beneficiary_type_ta": "18 முதல் 40 வயதுக்குட்பட்ட அமைப்புசாரா தொழிலாளர்கள்",
+    "target_beneficiaries": "Unorganized sector workers, self-employed citizens, small business operators",
+    "benefit_summary": "Guaranteed monthly pension of ₹1,000 to ₹5,000 starting at age 60, with pension to spouse and return of corpus to nominee.",
+    "benefit_summary_ta": "60 வயதுக்கு பின் மாதம் ₹1,000 முதல் ₹5,000 வரை உத்தரவாத ஓய்வூதியம்.",
+    "benefit_summary_hi": "60 वर्ष की आयु के बाद ₹1,000 से ₹5,000 प्रति माह की निश्चित पेंशन।",
+    "benefit_summary_ml": "60 വയസ്സിന് ശേഷം പ്രതിമാസം ₹1,000 മുതൽ ₹5,000 വരെ ഉറപ്പായ പെൻഷൻ.",
+    "benefit_amount": "₹1,000 - ₹5,000 Monthly Pension",
+    "description": "National social security scheme targeted at unorganized sector workers ensuring old-age income security with sovereign government guarantee.",
+    "description_ta": "அமைப்புசாரா துறை தொழிலாளர்களின் முதுமைப் பாதுகாப்பை உறுதி செய்யும் மத்திய அரசின் உத்தரவாத ஓய்வூதிய திட்டம்.",
+    "description_hi": "असंगठित क्षेत्र के कामगारों के बुढ़ापे की सुरक्षा सुनिश्चित करने वाली भारत सरकार की निश्चित पेंशन योजना।",
+    "description_ml": "അസംഘടിത മേഖലയിലെ തൊഴിലാളികൾക്ക് വാർദ്ധക്യകാല പെൻഷൻ ഉറപ്പാക്കുന്ന കേന്ദ്ര സർക്കാർ പദ്ധതി.",
+    "keywords": "atal pension, apy, monthly pension, pfrda, retirement security, unorganized workers",
+    "scheme_status": "Active",
+    "is_active": true,
+    "source_name": "PFRDA / Financial Services Portal",
+    "portal_url": "https://www.npscra.nsdl.co.in",
+    "verified_date": "2026-11-24",
+    "verification_status": "verified",
+    "conditions": [
+      {
+        "field_name": "age_min",
+        "operator": "gte",
+        "expected_value": "18",
+        "is_mandatory": true,
+        "description_en": "Citizen must be at least 18 years old",
+        "description_ta": "குறைந்தபட்ச வயது 18 பூர்த்தியடைந்திருக்க வேண்டும்",
+        "prompt_question_en": "What is your age?",
+        "prompt_question_ta": "உங்கள் வயது என்ன?"
+      },
+      {
+        "field_name": "age_max",
+        "operator": "lte",
+        "expected_value": "40",
+        "is_mandatory": true,
+        "description_en": "Citizen must be under 40 years of age at the time of joining",
+        "description_ta": "திட்டத்தில் சேரும்போது 40 வயதுக்குள் இருக்க வேண்டும்",
+        "prompt_question_en": "Are you between 18 and 40 years old?",
+        "prompt_question_ta": "நீங்கள் 18 முதல் 40 வயதுக்குட்பட்டவரா?"
+      }
+    ],
+    "documents": [
+      {
+        "name_en": "Aadhaar Card",
+        "name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true
+      },
+      {
+        "name_en": "Savings Bank Account / Post Office Account",
+        "name_ta": "வங்கி சேமிப்புக் கணக்கு அல்லது அஞ்சலக கணக்கு",
+        "is_mandatory": true
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "in_person",
+        "title_en": "Apply at Bank or Post Office",
+        "title_ta": "வங்கி அல்லது அஞ்சல் நிலையத்தில் விண்ணப்பிக்கவும்",
+        "description_en": "Visit your bank branch or net banking portal to enroll in Atal Pension Yojana via auto-debit.",
+        "portal_url": "https://www.npscra.nsdl.co.in"
+      }
+    ]
+  },
+  {
+    "id": "sukanya-samriddhi-yojana",
+    "name": "Sukanya Samriddhi Yojana (SSY)",
+    "name_ta": "செல்வமகள் சேமிப்புத் திட்டம் (சுகன்யா சம்ரிதி)",
+    "name_hi": "सुकन्या समृद्धि योजना (SSY)",
+    "name_ml": "സുകന്യ സമൃദ്ധി യോജന (SSY)",
+    "department": "Department of Posts / Ministry of Finance",
+    "department_ta": "அஞ்சல் துறை, நிதி அமைச்சகம்",
+    "department_hi": "डाक विभाग, वित्त मंत्रालय",
+    "department_ml": "തപാൽ വകുപ്പ്, ധനകാര്യ മന്ത്രാലയം",
+    "category": "women",
+    "level": "Central",
+    "state": "All India",
+    "beneficiary_type": "Girl child below 10 years of age represented by parent/guardian",
+    "beneficiary_type_ta": "10 வயதுக்குட்பட்ட பெண் குழந்தைகள்",
+    "target_beneficiaries": "Girl children, female students, parents saving for education/marriage",
+    "benefit_summary": "High government-backed sovereign interest (8.2% p.a.) with full Section 80C tax exemption for girl child higher education and marriage.",
+    "benefit_summary_ta": "பெண் குழந்தைகளின் கல்வி மற்றும் திருமணத்திற்காக அதிக வட்டி (8.2%) மற்றும் முழு வரிவிலக்கு கொண்ட சேமிப்புத் திட்டம்.",
+    "benefit_summary_hi": "बालिका की उच्च शिक्षा और विवाह हेतु 8.2% की उच्च ब्याज दर और पूर्ण आयकर छूट।",
+    "benefit_summary_ml": "പെൺകുട്ടികളുടെ ഉന്നത വിദ്യാഭ്യാസത്തിനും വിവാഹത്തിനുമായി 8.2% പലിശയും പൂർണ്ണ നികുതി ഇളവുമുള്ള സമ്പാദ്യ പദ്ധതി.",
+    "benefit_amount": "8.2% p.a. Sovereign Interest + Tax Exemption",
+    "description": "Government of India small deposit scheme under Beti Bachao Beti Padhao campaign providing high compounding returns and financial independence for girl children.",
+    "description_ta": "மத்திய அரசின் 'பேட்டி பச்சாவோ பேட்டி படாவோ' இயக்கத்தின் கீழ் பெண் குழந்தைகளின் எதிர்கால பாதுகாப்பிற்கான சேமிப்பு திட்டம்.",
+    "description_hi": "बेटी बचाओ बेटी पढ़ाओ अभियान के तहत बालिकाओं के उज्ज्वल भविष्य के लिए शुरू की गई लोकप्रिय केंद्रीय बचत योजना।",
+    "description_ml": "പെൺകുട്ടികളുടെ ഭാവി സുരക്ഷിതമാക്കാൻ കേന്ദ്ര സർക്കാർ ആരംഭിച്ച സമ്പാദ്യ പദ്ധതി.",
+    "keywords": "sukanya samriddhi, ssy, girl child savings, selva magal semippu thittam, post office savings",
+    "scheme_status": "Active",
+    "is_active": true,
+    "source_name": "India Post / National Savings Institute",
+    "portal_url": "https://www.indiapost.gov.in",
+    "verified_date": "2026-11-24",
+    "verification_status": "verified",
+    "conditions": [
+      {
+        "field_name": "age_max",
+        "operator": "lte",
+        "expected_value": "10",
+        "is_mandatory": true,
+        "description_en": "Girl child must be 10 years old or younger at the time of account opening",
+        "description_ta": "கணக்கு துவங்கும் போது பெண் குழந்தையின் வயது 10 அல்லது அதற்குள் இருக்க வேண்டும்",
+        "prompt_question_en": "Is the girl child aged 10 years or below?",
+        "prompt_question_ta": "பெண் குழந்தையின் வயது 10 அல்லது அதற்குள் உள்ளதா?"
+      }
+    ],
+    "documents": [
+      {
+        "name_en": "Birth Certificate of Girl Child",
+        "name_ta": "குழந்தையின் பிறப்புச் சான்றிதழ்",
+        "is_mandatory": true
+      },
+      {
+        "name_en": "Aadhaar Card / ID of Parent or Legal Guardian",
+        "name_ta": "பெற்றோர் அல்லது பாதுகாவலரின் அடையாள ஆவணம்",
+        "is_mandatory": true
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "in_person",
+        "title_en": "Open Account at Post Office or Bank",
+        "title_ta": "அஞ்சல் அலுவலகம் அல்லது வங்கியில் கணக்கு தொடங்குதல்",
+        "description_en": "Submit application form along with birth certificate and parent's KYC at any post office or authorized commercial bank.",
+        "portal_url": "https://www.indiapost.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "mjpjay-maharashtra",
+    "name": "Mahatma Jyotirao Phule Jan Arogya Yojana (MJPJAY)",
+    "name_ta": "மகாத்மா ஜோதிராவ் பூலே மக்கள் ஆரோக்கிய திட்டம் (மகாராஷ்டிரா)",
+    "name_hi": "महात्मा ज्योतिराव फुले जन आरोग्य योजना (MJPJAY - महाराष्ट्र)",
+    "name_ml": "മഹാത്മാ ജ്യോതിറാവു ഫൂലെ ജൻ ആരോഗ്യ യോജന (മഹാരാഷ്ട്ര)",
+    "department": "Public Health Department, Government of Maharashtra",
+    "department_ta": "பொது சுகாதாரத் துறை, மகாராஷ்டிரா அரசு",
+    "department_hi": "सार्वजनिक स्वास्थ्य विभाग, महाराष्ट्र शासन",
+    "department_ml": "പൊതുജനാരോഗ്യ വകുപ്പ്, മഹാരാഷ്ട്ര സർക്കാർ",
+    "category": "health",
+    "level": "State",
+    "state": "Maharashtra",
+    "beneficiary_type": "All domicile residents and ration card holders of Maharashtra",
+    "beneficiary_type_ta": "மகாராஷ்டிராவில் வசிக்கும் குடும்ப அட்டைதாரர்கள்",
+    "target_beneficiaries": "Residents of Maharashtra, low-income families, farmers in distressed districts",
+    "benefit_summary": "Cashless secondary and tertiary health cover up to ₹5,00,000 per family per year across 996 medical procedures.",
+    "benefit_summary_ta": "மகாராஷ்டிரா குடும்பங்களுக்கு ஆண்டிற்கு ₹5,00,000 வரை பணமில்லா மருத்துவ காப்பீடு.",
+    "benefit_summary_hi": "महाराष्ट्र के परिवारों को 996 चिकित्सा प्रक्रियाओं के लिए प्रति वर्ष ₹5,00,000 तक कैशलेस उपचार।",
+    "benefit_summary_ml": "മഹാരാഷ്ട്ര നിവാസികൾക്ക് പ്രതിവർഷം ₹5 ലക്ഷം രൂപയുടെ ക്യാഷ്‌ലെസ് ചികിത്സാ പരിരക്ഷ.",
+    "benefit_amount": "₹5,00,000 / family / year",
+    "description": "Maharashtra State flagship health assurance scheme providing comprehensive cashless medical treatment to citizens through network hospitals.",
+    "description_ta": "மகாராஷ்டிரா மாநிலத்தின் முதன்மை மருத்துவக் காப்பீட்டுத் திட்டம்.",
+    "description_hi": "महाराष्ट्र के सभी नागरिकों को सूचीबद्ध अस्पतालों में मुफ्त और कैशलेस इलाज प्रदान करने वाली राज्य सरकार की प्रमुख स्वास्थ्य योजना।",
+    "description_ml": "മഹാരാഷ്ട്രയിലെ രോഗികൾക്ക് മികച്ച ആശുപത്രി ചികിത്സ സൗജന്യമായി നൽകുന്ന സംസ്ഥാന പദ്ധതി.",
+    "keywords": "mjpjay, maharashtra health scheme, cashless hospital, mahatma phule arogya yojana",
+    "scheme_status": "Active",
+    "is_active": true,
+    "source_name": "State Health Assurance Society, Government of Maharashtra",
+    "portal_url": "https://www.jeevandayee.gov.in",
+    "verified_date": "2026-11-24",
+    "verification_status": "verified",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "expected_value": "Maharashtra",
+        "is_mandatory": true,
+        "description_en": "Citizen must be a resident of Maharashtra holding a valid state ration card",
+        "description_ta": "மகாராஷ்டிராவில் வசிப்பவராக இருக்க வேண்டும்",
+        "prompt_question_en": "Are you a resident of Maharashtra?",
+        "prompt_question_ta": "நீங்கள் மகாராஷ்டிரா மாநிலத்தில் வசிப்பவரா?"
+      }
+    ],
+    "documents": [
+      {
+        "name_en": "Maharashtra State Ration Card (Yellow/Orange/White)",
+        "name_ta": "மகாராஷ்டிரா மாநில குடும்ப அட்டை",
+        "is_mandatory": true
+      },
+      {
+        "name_en": "Aadhaar Card",
+        "name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "in_person",
+        "title_en": "Visit Network Hospital with Ration Card",
+        "title_ta": "குடும்ப அட்டையுடன் மருத்துவமனைக்கு செல்லவும்",
+        "description_en": "Approach Arogyamitra at any empanelled hospital in Maharashtra for diagnosis and cashless admission.",
+        "portal_url": "https://www.jeevandayee.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "gruha-lakshmi-karnataka",
+    "name": "Gruha Lakshmi Scheme - Karnataka",
+    "name_ta": "கிருஹ லக்ஷ்மி திட்டம் (கர்நாடகா)",
+    "name_hi": "गृह लक्ष्मी योजना (कर्नाटक)",
+    "name_ml": "ഗൃഹ ലക്ഷ്മി പദ്ധതി (കർണ്ണാടക)",
+    "department": "Department of Women and Child Development, Government of Karnataka",
+    "department_ta": "மகளிர் மற்றும் குழந்தைகள் மேம்பாட்டுத் துறை, கர்நாடக அரசு",
+    "department_hi": "महिला एवं बाल विकास विभाग, कर्नाटक सरकार",
+    "department_ml": "വനിതാ ശിശു വികസന വകുപ്പ്, കർണാടക സർക്കാർ",
+    "category": "women",
+    "level": "State",
+    "state": "Karnataka",
+    "beneficiary_type": "Woman head of household in Karnataka",
+    "beneficiary_type_ta": "கர்நாடகாவில் உள்ள குடும்பத்தின் பெண் தலைவர்",
+    "target_beneficiaries": "Women heads of families, housewives in Karnataka",
+    "benefit_summary": "Direct benefit transfer of ₹2,000 per month to the woman head of eligible households in Karnataka.",
+    "benefit_summary_ta": "குடும்பத்தின் பெண் தலைவருக்கு மாதம் ₹2,000 நேரடி வங்கிப் பரிமாற்றம்.",
+    "benefit_summary_hi": "कर्नाटक में पात्र परिवारों की महिला मुखिया को ₹2,000 प्रति माह प्रत्यक्ष वित्तीय सहायता।",
+    "benefit_summary_ml": "കർണാടകയിലെ കുടുംബങ്ങളിലെ വനിതാ ഗൃഹനാഥകൾക്ക് പ്രതിമാസം ₹2,000 ധനസഹായം.",
+    "benefit_amount": "₹2,000 / month",
+    "description": "Karnataka State guarantee scheme empowering women homemakers through recurring financial independence transferred directly to their Aadhaar-linked bank accounts.",
+    "description_ta": "கர்நாடகாவில் பெண்களின் பொருளாதார தன்னிறைவை உறுதி செய்ய மாதம் ₹2000 வழங்கும் திட்டம்.",
+    "description_hi": "कर्नाटक में महिलाओं को आर्थिक संबल प्रदान करने के लिए सीधे बैंक खाते में ₹2,000 मासिक सहायता योजना।",
+    "description_ml": "സ്ത്രീകൾക്ക് പ്രതിമാസം 2,000 രൂപ അക്കൗണ്ടിലേക്ക് നൽകുന്ന കർണാടക സർക്കാരിന്റെ ഗ്യാരണ്ടി പദ്ധതി.",
+    "keywords": "gruha lakshmi, karnataka women scheme, 2000 monthly, seva sindhu, dbt karnataka",
+    "scheme_status": "Active",
+    "is_active": true,
+    "source_name": "Seva Sindhu Portal, Government of Karnataka",
+    "portal_url": "https://sevasindhugs.karnataka.gov.in",
+    "verified_date": "2026-11-24",
+    "verification_status": "verified",
+    "conditions": [
+      {
+        "field_name": "gender",
+        "operator": "eq",
+        "expected_value": "female",
+        "is_mandatory": true,
+        "description_en": "Beneficiary must be a female head of family",
+        "description_ta": "பெண் தலைவராக இருக்க வேண்டும்",
+        "prompt_question_en": "Are you a woman head of the family?",
+        "prompt_question_ta": "நீங்கள் குடும்பத்தின் பெண் தலைவரா?"
+      },
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "expected_value": "Karnataka",
+        "is_mandatory": true,
+        "description_en": "Citizen must reside in Karnataka",
+        "description_ta": "கர்நாடகாவில் வசிப்பவராக இருக்க வேண்டும்",
+        "prompt_question_en": "Are you a resident of Karnataka?",
+        "prompt_question_ta": "நீங்கள் கர்நாடக மாநிலத்தில் வசிப்பவரா?"
+      }
+    ],
+    "documents": [
+      {
+        "name_en": "Karnataka Ration Card (BPL/APL/AAY)",
+        "name_ta": "கர்நாடக குடும்ப அட்டை",
+        "is_mandatory": true
+      },
+      {
+        "name_en": "Aadhaar Card linked to Bank Account",
+        "name_ta": "வங்கி கணக்குடன் இணைக்கப்பட்ட ஆதார் அட்டை",
+        "is_mandatory": true
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Register via Seva Sindhu / Grama One",
+        "title_ta": "சேவா சிந்து / கிராம ஒன் மையத்தில் பதிவு செய்க",
+        "description_en": "Apply through Seva Sindhu portal or visit Karnataka One, Grama One, or Bapuji Seva Kendra.",
+        "portal_url": "https://sevasindhugs.karnataka.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "delhi-ladli-scheme",
+    "name": "Delhi Ladli Scheme",
+    "name_ta": "டெல்லி லாட்லி திட்டம்",
+    "name_hi": "दिल्ली लाडली योजना",
+    "name_ml": "ഡൽഹി ലാഡ്‌ലി സ്കീം",
+    "department": "Department of Women and Child Development, Government of NCT of Delhi",
+    "department_ta": "மகளிர் மற்றும் குழந்தைகள் மேம்பாட்டுத் துறை, டெல்லி அரசு",
+    "department_hi": "महिला एवं बाल विकास विभाग, दिल्ली सरकार",
+    "department_ml": "വനിതാ ശിശു വികസന വകുപ്പ്, ഡൽഹി സർക്കാർ",
+    "category": "education",
+    "level": "Union Territory",
+    "state": "Delhi",
+    "beneficiary_type": "Girl children born in Delhi studying in recognized schools",
+    "beneficiary_type_ta": "டெல்லியில் பிறந்து அரசு அல்லது அங்கீகரிக்கப்பட்ட பள்ளியில் படிக்கும் பெண் குழந்தைகள்",
+    "target_beneficiaries": "Girl students in Delhi schools, low-income families in UT of Delhi",
+    "benefit_summary": "Financial aid up to ₹35,000 deposited in stages from birth till class XII completion for girl child education.",
+    "benefit_summary_ta": "பெண் குழந்தையின் பிறப்பு முதல் 12-ம் வகுப்பு வரை பல்வேறு நிலைகளில் ₹35,000 வரை கல்வி நிதி உதவி.",
+    "benefit_summary_hi": "बालिका के जन्म से 12वीं कक्षा तक विभिन्न चरणों में ₹35,000 तक की वित्तीय सहायता।",
+    "benefit_summary_ml": "പെൺകുട്ടികളുടെ ജനനം മുതൽ 12-ാം ക്ലാസ് വരെ ഘട്ടങ്ങളിലായി ₹35,000 വരെ വിദ്യാഭ്യാസ സഹായം.",
+    "benefit_amount": "Up to ₹35,000 in stages",
+    "description": "Union Territory of Delhi flagship social protection program promoting female child education and curbing female feticide through milestone-based financial deposits.",
+    "description_ta": "டெல்லி யூனியன் பிரதேசத்தில் பெண் கல்வியை ஊக்குவிக்க செயல்படுத்தப்படும் சமூக பாதுகாப்பு திட்டம்.",
+    "description_hi": "दिल्ली में बालिकाओं की शिक्षा को बढ़ावा देने और ड्रॉपआउट रोकने के लिए चरणबद्ध वित्तीय सहायता योजना।",
+    "description_ml": "ഡൽഹിയിലെ പെൺകുട്ടികളുടെ സ്കൂൾ വിദ്യാഭ്യാസം ഉറപ്പാക്കാൻ ഘട്ടങ്ങളായി ധനസഹായം നൽകുന്ന പദ്ധതി.",
+    "keywords": "delhi ladli, girl child scholarship, delhi ut scheme, ladli scheme, edistrict delhi",
+    "scheme_status": "Active",
+    "is_active": true,
+    "source_name": "Government of NCT of Delhi Official Portal",
+    "portal_url": "https://edistrict.delhigovt.nic.in",
+    "verified_date": "2026-11-24",
+    "verification_status": "verified",
+    "conditions": [
+      {
+        "field_name": "gender",
+        "operator": "eq",
+        "expected_value": "female",
+        "is_mandatory": true,
+        "description_en": "Beneficiary must be a girl child",
+        "description_ta": "பெண் குழந்தையாக இருக்க வேண்டும்",
+        "prompt_question_en": "Is the student a girl child?",
+        "prompt_question_ta": "மாணவர் பெண் குழந்தையா?"
+      },
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "expected_value": "Delhi",
+        "is_mandatory": true,
+        "description_en": "Must be a resident of National Capital Territory of Delhi for at least 3 years",
+        "description_ta": "டெல்லியில் குறைந்தது 3 ஆண்டுகள் வசித்திருக்க வேண்டும்",
+        "prompt_question_en": "Are you a resident of Delhi?",
+        "prompt_question_ta": "நீங்கள் டெல்லி யூனியன் பிரதேசத்தில் வசிப்பவரா?"
+      },
+      {
+        "field_name": "income_max",
+        "operator": "lte",
+        "expected_value": "100000",
+        "is_mandatory": true,
+        "description_en": "Family annual income should not exceed ₹1,00,000",
+        "description_ta": "குடும்ப ஆண்டு வருமானம் ₹1,00,000-க்குள் இருக்க வேண்டும்",
+        "prompt_question_en": "Is your family income under ₹1,00,000 per year?",
+        "prompt_question_ta": "உங்கள் குடும்ப ஆண்டு வருமானம் ₹1,00,000-க்குள் உள்ளதா?"
+      }
+    ],
+    "documents": [
+      {
+        "name_en": "Delhi Residence Proof (3 years domicile)",
+        "name_ta": "டெல்லி இருப்பிடச் சான்று",
+        "is_mandatory": true
+      },
+      {
+        "name_en": "Income Certificate issued by SDM",
+        "name_ta": "வருமானச் சான்றிதழ்",
+        "is_mandatory": true
+      },
+      {
+        "name_en": "School Admission Certificate",
+        "name_ta": "பள்ளி சேர்க்கைச் சான்றிதழ்",
+        "is_mandatory": true
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Apply through e-District Delhi Portal",
+        "title_ta": "இ-டிஸ்ட்ரிக்ட் டெல்லி தளத்தில் விண்ணப்பிக்கவும்",
+        "description_en": "Submit form online via edistrict.delhigovt.nic.in or through school nodal officer.",
+        "portal_url": "https://edistrict.delhigovt.nic.in"
+      }
+    ]
+  },
+  {
+    "id": "kanya-sumangala-up",
+    "name": "Mukhyamantri Kanya Sumangala Yojana (Uttar Pradesh)",
+    "name_ta": "முதலமைச்சர் கன்யா சுமங்கலா திட்டம் (உத்தரப் பிரதேசம்)",
+    "name_hi": "मुख्यमंत्री कन्या सुमंगला योजना (उत्तर प्रदेश)",
+    "name_ml": "മുഖ്യമന്ത്രി കന്യാ സുമംഗലാ യോജന (ഉത്തർപ്രദേശ്)",
+    "department": "Women and Child Development Department, Government of Uttar Pradesh",
+    "department_ta": "மகளிர் மற்றும் குழந்தைகள் மேம்பாட்டுத் துறை, உத்தரப் பிரதேச அரசு",
+    "department_hi": "महिला कल्याण विभाग, उत्तर प्रदेश सरकार",
+    "department_ml": "വനിതാ ക്ഷേമ വകുപ്പ്, ഉത്തർപ്രദേശ് സർക്കാർ",
+    "category": "women",
+    "level": "State",
+    "state": "Uttar Pradesh",
+    "beneficiary_type": "Girl children residing in Uttar Pradesh",
+    "beneficiary_type_ta": "உத்தரப் பிரதேசத்தில் வசிக்கும் பெண் குழந்தைகள்",
+    "target_beneficiaries": "Girl students, daughters in UP families with up to 2 girls",
+    "benefit_summary": "Financial grant of up to ₹25,000 across 6 milestones from birth through graduation admission.",
+    "benefit_summary_ta": "பிறப்பு முதல் கல்லூரி பட்டப்படிப்பு வரை 6 நிலைகளில் ₹25,000 உதவித்தொகை.",
+    "benefit_summary_hi": "बालिका के जन्म से लेकर स्नातक/डिप्लोमा प्रवेश तक 6 चरणों में कुल ₹25,000 की वित्तीय सहायता।",
+    "benefit_summary_ml": "പെൺകുട്ടികളുടെ ജനനം മുതൽ ബിരുദ പ്രവേശനം വരെ 6 ഘട്ടങ്ങളിലായി ₹25,000 ധനസഹായം.",
+    "benefit_amount": "₹25,000 in 6 installments",
+    "description": "Uttar Pradesh Government flagship incentive program securing health, vaccination, and higher education for daughters in low and middle-income families.",
+    "description_ta": "உத்தரப் பிரதேசத்தில் பெண்களின் ஆரோக்கியம் மற்றும் உயர் கல்வியை ஊக்குவிக்கும் நிதி உதவி திட்டம்.",
+    "description_hi": "उत्तर प्रदेश सरकार की बालिकाओं के स्वास्थ्य, टीकाकरण और उच्च शिक्षा को प्रोत्साहित करने वाली प्रमुख योजना।",
+    "description_ml": "പെൺകുട്ടികളുടെ ആരോഗ്യവും ഉന്നത വിദ്യാഭ്യാസവും പ്രോത്സാഹിപ്പിക്കുന്ന ഉത്തർപ്രദേശ് സർക്കാർ പദ്ധതി.",
+    "keywords": "kanya sumangala, up girl scheme, mksy, uttar pradesh women welfare, 25000 grant",
+    "scheme_status": "Active",
+    "is_active": true,
+    "source_name": "Department of Women Welfare, Government of Uttar Pradesh",
+    "portal_url": "https://mksy.up.gov.in",
+    "verified_date": "2026-11-24",
+    "verification_status": "verified",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "expected_value": "Uttar Pradesh",
+        "is_mandatory": true,
+        "description_en": "Family must be permanent resident of Uttar Pradesh",
+        "description_ta": "உத்தரப் பிரதேசத்தில் நிரந்தரமாக வசிப்பவராக இருக்க வேண்டும்",
+        "prompt_question_en": "Are you a resident of Uttar Pradesh?",
+        "prompt_question_ta": "நீங்கள் உத்தரப் பிரதேச மாநிலத்தில் வசிப்பவரா?"
+      },
+      {
+        "field_name": "income_max",
+        "operator": "lte",
+        "expected_value": "300000",
+        "is_mandatory": true,
+        "description_en": "Family annual income must not exceed ₹3,00,000",
+        "description_ta": "குடும்ப ஆண்டு வருமானம் ₹3,00,000-க்குள் இருக்க வேண்டும்",
+        "prompt_question_en": "Is your family annual income under ₹3 Lakhs?",
+        "prompt_question_ta": "உங்கள் குடும்ப ஆண்டு வருமானம் ₹3 லட்சத்திற்குள் உள்ளதா?"
+      }
+    ],
+    "documents": [
+      {
+        "name_en": "Uttar Pradesh Domicile Certificate",
+        "name_ta": "உத்தரப் பிரதேச இருப்பிடச் சான்றிதழ்",
+        "is_mandatory": true
+      },
+      {
+        "name_en": "Income Certificate",
+        "name_ta": "வருமானச் சான்றிதழ்",
+        "is_mandatory": true
+      },
+      {
+        "name_en": "Bank Passbook with Joint Account in Daughter's Name",
+        "name_ta": "வங்கி கணக்கு புத்தகம்",
+        "is_mandatory": true
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Apply Online on MKSY Portal",
+        "title_ta": "MKSY தளத்தில் இணையவழியில் விண்ணப்பிக்கவும்",
+        "description_en": "Register at mksy.up.gov.in and apply under relevant category with required certificates.",
+        "portal_url": "https://mksy.up.gov.in"
+      }
+    ]
+  }
+]

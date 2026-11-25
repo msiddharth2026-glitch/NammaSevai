@@ -11,6 +11,7 @@ import { renderResultsPage } from './components/resultsPage.js';
 import { renderDetailsPage } from './components/detailsPage.js';
 import { renderChecklistPage } from './components/checklistPage.js';
 import { renderAdminPage } from './components/adminPage.js';
+import { renderFeedbackPage } from './components/feedbackPage.js';
 
 class App {
   constructor() {
@@ -18,6 +19,7 @@ class App {
     this.currentAudioPlayer = null;
 
     const storedLang = localStorage.getItem('nammasevai_lang') || 'ta';
+    const storedState = localStorage.getItem('bharatsevai_user_state') || '';
 
     this.state = {
       lang: storedLang,
@@ -28,10 +30,14 @@ class App {
       currentQuery: '',
       chatHistory: [],
       selectedCategory: 'all',
+      selectedLevel: 'all',
+      selectedState: storedState || 'all',
+      selectedBeneficiary: 'all',
+      selectedSort: 'name',
       searchQuery: '',
       lastAssistantQuery: '',
       lastMatchedMap: {},
-      userProfile: {},
+      userProfile: storedState ? { state: storedState } : {},
       isListening: false,
       isSpeaking: false,
       adminSearch: '',
@@ -78,6 +84,158 @@ class App {
     }
   }
 
+  async runPortalHealthCheck() {
+    const btn = document.getElementById('run-portal-health-btn');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 18px; animation: spin 1s linear infinite;">sync</span> Running Health Audit...`;
+    }
+    try {
+      const res = await fetch('/api/admin/portal-monitor/run', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Token': 'nammasevai-admin-dev-secret'
+        }
+      });
+      if (res.ok) {
+        const summary = await res.json();
+        alert(`Portal Health Audit Completed:\n• ${summary.total_checked} Portals Checked\n• ${summary.available_count} Available\n• ${summary.redirects_detected} Redirects Detected\n• ${summary.domain_migrations_detected} Migrations Detected\n• ${summary.unavailable_count} Unavailable`);
+      }
+    } catch (e) {
+      console.error("Portal health check failed:", e);
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 18px;">sync</span> Run Health Audit Now`;
+      }
+    }
+  }
+
+  async runQualityBenchmark() {
+    const btn = document.getElementById('run-quality-benchmark-btn');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 18px; animation: spin 1s linear infinite;">sync</span> Running Benchmark Audit...`;
+    }
+    try {
+      const res = await fetch('/api/admin/quality-benchmark', {
+        headers: {
+          'X-Admin-Key': 'nammasevai-admin-dev-secret'
+        }
+      });
+      if (res.ok) {
+        const report = await res.json();
+        this.state.qualityBenchmark = report;
+        this.render();
+      } else {
+        alert("Failed to run quality benchmark. Ensure admin authorization.");
+      }
+    } catch (e) {
+      console.error("Quality benchmark audit failed:", e);
+    } finally {
+      const btnAfter = document.getElementById('run-quality-benchmark-btn');
+      if (btnAfter) {
+        btnAfter.disabled = false;
+        btnAfter.innerHTML = `<span class="material-symbols-outlined" style="font-size: 18px;">sync</span> Run Benchmark Audit Now`;
+      }
+    }
+  }
+
+  async runContentAudit() {
+    const btn = document.getElementById('run-content-audit-btn');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 18px; animation: spin 1s linear infinite;">sync</span> Running Content Audit...`;
+    }
+    try {
+      const res = await fetch('/api/admin/content-monitor/run', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Key': 'nammasevai-admin-dev-secret'
+        },
+        body: JSON.stringify(null)
+      });
+      if (res.ok) {
+        const audit = await res.json();
+        await this.loadContentMonitoringSummary();
+        alert(`Content Audit Completed:\n• ${audit.sources_audited} Sources Audited\n• ${audit.changes_detected} Changes Detected\n• ${audit.unchanged_sources} Unchanged Baselines\n• ${audit.pending_admin_reviews} Pending Human Reviews`);
+      } else {
+        alert("Failed to run content audit. Ensure admin authorization.");
+      }
+    } catch (e) {
+      console.error("Content audit failed:", e);
+    } finally {
+      const btnAfter = document.getElementById('run-content-audit-btn');
+      if (btnAfter) {
+        btnAfter.disabled = false;
+        btnAfter.innerHTML = `<span class="material-symbols-outlined" style="font-size: 18px;">sync</span> Run Content Audit Now`;
+      }
+    }
+  }
+
+  async loadContentMonitoringSummary() {
+    try {
+      const [sumRes, chRes] = await Promise.all([
+        fetch('/api/admin/content-monitor/summary', { headers: { 'X-Admin-Key': 'nammasevai-admin-dev-secret' } }),
+        fetch('/api/admin/content-monitor/changes', { headers: { 'X-Admin-Key': 'nammasevai-admin-dev-secret' } })
+      ]);
+      if (sumRes.ok) {
+        this.state.contentSummary = await sumRes.json();
+      }
+      if (chRes.ok) {
+        this.state.detectedChanges = await chRes.json();
+      }
+      this.render();
+    } catch (e) {
+      console.error("Error loading content monitoring summary:", e);
+    }
+  }
+
+  async reviewDetectedChange(changeId) {
+    const change = (this.state.detectedChanges || []).find(c => c.id === changeId);
+    const summary = change ? `Scheme: ${change.scheme_name}\nClassification: ${change.change_classification}\nSummary: ${change.change_summary}` : `Change ID: ${changeId}`;
+    const action = prompt(`${summary}\n\nEnter action: "approve", "reject", or "evidence":`, "approve");
+    if (!action) return;
+    const notes = prompt("Enter review notes / reason for record:", "Verified against official gazette / portal notification");
+    const adminKey = localStorage.getItem('nammasevai_admin_key') || 'nammasevai-admin-dev-secret';
+
+    try {
+      const res = await fetch(`/api/admin/content-monitor/changes/${changeId}/review`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Key': adminKey
+        },
+        body: JSON.stringify({
+          action: action.trim().toLowerCase(),
+          admin_id: "admin@bharatsevai.gov.in",
+          review_notes: notes || "Manual verification complete"
+        })
+      });
+      if (res.ok) {
+        const result = await res.json();
+        alert(`Change successfully processed (${action.toUpperCase()}):\n${result.message}`);
+        await this.loadContentMonitoringSummary();
+        // Refresh schemes in memory
+        try {
+          const sRes = await fetch('/api/schemes?limit=200');
+          if (sRes.ok) {
+            this.state.schemes = await sRes.json();
+            this.saveSchemes();
+          }
+        } catch (_) {}
+        this.render();
+      } else {
+        const err = await res.json();
+        alert(`Review failed: ${err.detail || "Server error"}`);
+      }
+    } catch (e) {
+      alert(`Network error: ${e.message}`);
+    }
+  }
+
   async init() {
     // Check backend voice and AI config
     try {
@@ -92,7 +250,7 @@ class App {
 
     // Sync schemes from backend if available
     try {
-      const res = await fetch('/api/schemes');
+      const res = await fetch('/api/schemes?limit=200');
       if (res.ok) {
         const backendSchemes = await res.json();
         if (Array.isArray(backendSchemes) && backendSchemes.length > 0) {
@@ -139,7 +297,7 @@ class App {
     if (hash.startsWith('scheme-details/')) {
       this.state.route = 'scheme-details';
       this.state.schemeDetailsId = hash.replace('scheme-details/', '');
-    } else if (['landing', 'assistant', 'schemes', 'checklist', 'admin'].includes(hash)) {
+    } else if (['landing', 'assistant', 'schemes', 'checklist', 'admin', 'feedback'].includes(hash)) {
       this.state.route = hash;
       this.state.schemeDetailsId = null;
     } else {
@@ -326,6 +484,26 @@ class App {
         return;
       }
 
+      // Reset All Results Filters
+      if (e.target.closest('#reset-results-filters-btn')) {
+        this.state.selectedCategory = 'all';
+        this.state.selectedLevel = 'all';
+        this.state.selectedState = 'all';
+        this.state.selectedBeneficiary = 'all';
+        this.state.searchQuery = '';
+        this.state.lastAssistantQuery = '';
+        this.state.lastMatchedMap = {};
+        this.render();
+        return;
+      }
+
+      // Clear Search Button
+      if (e.target.closest('#clear-search-btn')) {
+        this.state.searchQuery = '';
+        this.render();
+        return;
+      }
+
       // Print Checklist Button
       if (e.target.closest('#print-checklist-btn')) {
         window.print();
@@ -471,12 +649,46 @@ class App {
         this.openSchemeModal();
         return;
       }
+      if (e.target.closest('#open-bulk-import-modal-btn')) {
+        this.openBulkImportModal();
+        return;
+      }
+      if (e.target.closest('#close-bulk-modal-btn') || e.target.closest('#cancel-bulk-modal-btn')) {
+        this.closeBulkImportModal();
+        return;
+      }
+      if (e.target.closest('#load-sample-import-btn')) {
+        this.loadSampleImportTemplate();
+        return;
+      }
+      if (e.target.closest('#submit-bulk-import-btn')) {
+        this.submitBulkImport();
+        return;
+      }
       if (e.target.closest('#close-modal-btn') || e.target.closest('#cancel-modal-btn')) {
         this.closeSchemeModal();
         return;
       }
       if (e.target.closest('#reset-schemes-btn')) {
         this.resetSchemes();
+        return;
+      }
+      if (e.target.closest('#run-portal-health-btn')) {
+        this.runPortalHealthCheck();
+        return;
+      }
+      if (e.target.closest('#run-quality-benchmark-btn')) {
+        this.runQualityBenchmark();
+        return;
+      }
+      if (e.target.closest('#run-content-audit-btn')) {
+        this.runContentAudit();
+        return;
+      }
+      const reviewChangeBtn = e.target.closest('.review-change-btn');
+      if (reviewChangeBtn) {
+        const changeId = parseInt(reviewChangeBtn.getAttribute('data-change-id'), 10);
+        this.reviewDetectedChange(changeId);
         return;
       }
       const toggleStatusBtn = e.target.closest('.toggle-status-btn');
@@ -513,6 +725,40 @@ class App {
         this.state.adminStatus = e.target.value;
         this.render();
       }
+      if (e.target.id === 'scheme-level-select') {
+        this.state.selectedLevel = e.target.value;
+        this.render();
+      }
+      if (e.target.id === 'scheme-state-select') {
+        this.state.selectedState = e.target.value;
+        if (e.target.value && e.target.value !== 'all' && e.target.value !== 'All India') {
+          this.state.userProfile = { ...(this.state.userProfile || {}), state: e.target.value };
+          localStorage.setItem('bharatsevai_user_state', e.target.value);
+        }
+        this.render();
+      }
+      if (e.target.id === 'assistant-state-select') {
+        const selVal = e.target.value;
+        this.state.selectedState = selVal;
+        if (selVal && selVal !== 'all') {
+          this.state.userProfile = { ...(this.state.userProfile || {}), state: selVal };
+          localStorage.setItem('bharatsevai_user_state', selVal);
+        } else {
+          if (this.state.userProfile) {
+            delete this.state.userProfile.state;
+          }
+          localStorage.removeItem('bharatsevai_user_state');
+        }
+        this.render();
+      }
+      if (e.target.id === 'scheme-beneficiary-select') {
+        this.state.selectedBeneficiary = e.target.value;
+        this.render();
+      }
+      if (e.target.id === 'scheme-sort-select') {
+        this.state.selectedSort = e.target.value;
+        this.render();
+      }
     });
 
     // Search input
@@ -528,6 +774,21 @@ class App {
       if (e.target.id === 'assistant-query-input') {
         this.state.currentQuery = e.target.value;
       }
+      if (e.target.id === 'fb-ease') {
+        const span = document.getElementById('ease-val');
+        const map = { 1: '1 / 5 (Difficult / புரியவில்லை)', 2: '2 / 5', 3: '3 / 5 (Moderate / சுமாரானது)', 4: '4 / 5', 5: '5 / 5 (Very Easy / மிக எளிது)' };
+        if (span) span.innerText = map[e.target.value] || `${e.target.value} / 5`;
+      }
+      if (e.target.id === 'fb-clarity') {
+        const span = document.getElementById('clarity-val');
+        const map = { 1: '1 / 5 (Confusing / குழப்பமானது)', 2: '2 / 5', 3: '3 / 5 (Clear Enough / ஓரளவு தெளிவு)', 4: '4 / 5', 5: '5 / 5 (Very Clear / மிகத் தெளிவு)' };
+        if (span) span.innerText = map[e.target.value] || `${e.target.value} / 5`;
+      }
+      if (e.target.id === 'fb-useful') {
+        const span = document.getElementById('useful-val');
+        const map = { 1: '1 / 5 (Not Useful / பயனில்லை)', 2: '2 / 5', 3: '3 / 5 (Somewhat Useful / பயனுள்ளது)', 4: '4 / 5', 5: '5 / 5 (Highly Useful / மிக பயனுள்ளது)' };
+        if (span) span.innerText = map[e.target.value] || `${e.target.value} / 5`;
+      }
     });
 
     // Enter key submit in assistant textarea
@@ -539,11 +800,15 @@ class App {
       }
     });
 
-    // Form submit in Modal
+    // Form submit in Modal & Feedback
     appRoot.addEventListener('submit', (e) => {
       if (e.target.id === 'scheme-form') {
         e.preventDefault();
         this.saveModalScheme();
+      }
+      if (e.target.id === 'citizen-pilot-feedback-form') {
+        e.preventDefault();
+        this.handleFeedbackSubmit();
       }
     });
 
@@ -686,6 +951,10 @@ class App {
             ...(this.state.userProfile || {}),
             ...detectedProf
           };
+          if (detectedProf.state) {
+            this.state.selectedState = detectedProf.state;
+            localStorage.setItem('bharatsevai_user_state', detectedProf.state);
+          }
         }
 
         // Save matched map for schemes results page
@@ -902,6 +1171,9 @@ class App {
     const crit = document.getElementById('form-criteria');
     const docs = document.getElementById('form-docs');
     const portal = document.getElementById('form-portal');
+    const levelEl = document.getElementById('form-level');
+    const stateEl = document.getElementById('form-state');
+    const benEl = document.getElementById('form-beneficiaries');
 
     if (schemeId) {
       const scheme = this.state.schemes.find(s => s.id === schemeId);
@@ -921,11 +1193,17 @@ class App {
         crit.value = (scheme.eligibility_criteria || []).join('\n');
         docs.value = (scheme.required_documents || []).map(d => d.name || d.name_en).join('\n');
         portal.value = scheme.official_portal || '';
+        if (levelEl) levelEl.value = scheme.level || 'State';
+        if (stateEl) stateEl.value = scheme.state || 'Tamil Nadu';
+        if (benEl) benEl.value = (scheme.target_beneficiaries || []).join(', ');
       }
     } else {
       titleText.textContent = "புதிய அரசு நலத்திட்டத்தை சேர்க்க (Add New Scheme)";
       idField.value = '';
       document.getElementById('scheme-form').reset();
+      if (levelEl) levelEl.value = 'State';
+      if (stateEl) stateEl.value = 'Tamil Nadu';
+      if (benEl) benEl.value = '';
     }
 
     modal.classList.add('open');
@@ -934,6 +1212,147 @@ class App {
   closeSchemeModal() {
     const modal = document.getElementById('scheme-modal');
     if (modal) modal.classList.remove('open');
+  }
+
+  // Bulk Import Modal Handlers
+  openBulkImportModal() {
+    const modal = document.getElementById('bulk-import-modal');
+    if (!modal) return;
+    const res = document.getElementById('bulk-import-result');
+    if (res) res.style.display = 'none';
+    modal.style.display = 'flex';
+  }
+
+  closeBulkImportModal() {
+    const modal = document.getElementById('bulk-import-modal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  loadSampleImportTemplate() {
+    const formatEl = document.querySelector('input[name="bulk-import-format"]:checked');
+    const format = formatEl ? formatEl.value : 'json';
+    const contentEl = document.getElementById('bulk-import-content');
+    if (!contentEl) return;
+
+    if (format === 'json') {
+      contentEl.value = JSON.stringify([
+        {
+          "id": "pm-kisan-national",
+          "name": "Pradhan Mantri Kisan Samman Nidhi",
+          "name_ta": "பிரதமர் கிசான் சம்மான் நிதி",
+          "name_hi": "प्रधानमंत्री किसान सम्मान निधि",
+          "name_ml": "പ്രധാനമന്ത്രി കിസാൻ സമ്മാൻ നിധി",
+          "department": "Ministry of Agriculture and Farmers Welfare",
+          "department_ta": "வேளாண்மை மற்றும் உழவர் நல அமைச்சகம்",
+          "category": "agriculture",
+          "level": "Central",
+          "state": "All India",
+          "benefit_amount": "₹6,000 / year in 3 equal installments",
+          "benefit_summary": "₹6,000 per year direct income support in three 4-monthly installments of ₹2,000",
+          "description": "Central Sector Scheme to augment the income of all landholding farmer families across the country.",
+          "official_portal": "https://pmkisan.gov.in",
+          "source_name": "Ministry of Agriculture, Government of India",
+          "source_verification": "verified",
+          "eligibility_criteria": ["Cultivable landholding in own name", "Registered on PM-Kisan portal", "Aadhaar seeded bank account"],
+          "required_documents": ["Aadhaar Card", "Land Ownership Record (Patta/Chitta/Khasra)", "Bank Account Details"]
+        }
+      ], null, 2);
+    } else {
+      contentEl.value = `name,level,state,category,department,benefit_amount,official_portal,source_name
+Pradhan Mantri Awas Yojana (Urban),Central,All India,housing,Ministry of Housing and Urban Affairs,Up to ₹2.67 Lakhs interest subsidy,https://pmay-urban.gov.in,Ministry of Housing and Urban Affairs
+Kanya Sumangala Yojana,State,Uttar Pradesh,women,Department of Women and Child Development,₹15000 conditional grant,https://mksy.up.gov.in,Government of Uttar Pradesh`;
+    }
+  }
+
+  async submitBulkImport() {
+    const contentEl = document.getElementById('bulk-import-content');
+    const resEl = document.getElementById('bulk-import-result');
+    const submitBtn = document.getElementById('submit-bulk-import-btn');
+    const formatEl = document.querySelector('input[name="bulk-import-format"]:checked');
+    const skipDupEl = document.getElementById('bulk-skip-duplicates');
+
+    if (!contentEl || !contentEl.value.trim()) {
+      alert("Please enter JSON or CSV scheme records to import.");
+      return;
+    }
+
+    const isJson = (formatEl ? formatEl.value : 'json') === 'json';
+    const allowOverwrite = !(skipDupEl ? skipDupEl.checked : true);
+    let payload;
+    if (isJson) {
+      try {
+        const parsed = JSON.parse(contentEl.value.trim());
+        payload = {
+          records: Array.isArray(parsed) ? parsed : [parsed],
+          allow_overwrite: allowOverwrite
+        };
+      } catch (err) {
+        alert("Invalid JSON format: " + err.message);
+        return;
+      }
+    } else {
+      payload = {
+        csv_content: contentEl.value.trim(),
+        allow_overwrite: allowOverwrite
+      };
+    }
+
+    const adminKey = localStorage.getItem('nammasevai_admin_key') || 'nammasevai-admin-secret-2026';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="material-symbols-outlined spin" style="font-size: 18px;">sync</span> Validating...';
+    }
+
+    try {
+      const resp = await fetch('/api/admin/schemes/import', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Key': adminKey
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const report = await resp.json();
+      if (resEl) {
+        resEl.style.display = 'block';
+        if (resp.ok) {
+          resEl.style.background = 'rgba(21, 128, 61, 0.1)';
+          resEl.style.border = '1px solid rgba(21, 128, 61, 0.3)';
+          resEl.style.color = 'var(--tertiary-green)';
+          resEl.innerHTML = `
+            <strong>Bulk Import Complete:</strong><br>
+            &bull; Total Processed: <strong>${report.total_processed}</strong> records<br>
+            &bull; New Schemes Added: <strong>${report.imported}</strong><br>
+            &bull; Existing Skipped (Duplicates): <strong>${report.duplicates}</strong><br>
+            &bull; Invalid Records: <strong>${report.invalid}</strong><br>
+            &bull; Failed: <strong>${report.failed}</strong>
+            ${report.details && report.details.length > 0 ? `<div style="margin-top: 0.5rem; max-height: 120px; overflow-y: auto; font-size: 0.75rem; border-top: 1px solid var(--border-color); padding-top: 0.35rem;">${report.details.map(d => `<div>${d.action === 'imported' ? '✓' : d.action === 'duplicate' ? '↷' : '✕'} [${d.id || 'N/A'}] ${d.name}: ${d.message}</div>`).join('')}</div>` : ''}
+          `;
+          // Reload schemes
+          await this.loadSchemes();
+          this.render();
+        } else {
+          resEl.style.background = 'rgba(220, 38, 38, 0.1)';
+          resEl.style.border = '1px solid rgba(220, 38, 38, 0.3)';
+          resEl.style.color = '#dc2626';
+          resEl.innerHTML = `<strong>Import Failed:</strong> ${report.detail || "Server error"}`;
+        }
+      }
+    } catch (e) {
+      if (resEl) {
+        resEl.style.display = 'block';
+        resEl.style.background = 'rgba(220, 38, 38, 0.1)';
+        resEl.style.border = '1px solid rgba(220, 38, 38, 0.3)';
+        resEl.style.color = '#dc2626';
+        resEl.innerHTML = `<strong>Network Error:</strong> ${e.message}`;
+      }
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size: 18px;">cloud_upload</span> Validate & Import';
+      }
+    }
   }
 
   async saveModalScheme() {
@@ -951,6 +1370,9 @@ class App {
     const critText = document.getElementById('form-criteria').value.trim();
     const docsText = document.getElementById('form-docs').value.trim();
     const portal = document.getElementById('form-portal').value.trim();
+    const levelVal = document.getElementById('form-level') ? document.getElementById('form-level').value : 'State';
+    const stateVal = document.getElementById('form-state') ? document.getElementById('form-state').value.trim() : 'Tamil Nadu';
+    const benVal = document.getElementById('form-beneficiaries') ? document.getElementById('form-beneficiaries').value.trim() : '';
 
     const criteria = critText ? critText.split('\n').map(s => s.trim()).filter(Boolean) : [];
     const docItems = docsText ? docsText.split('\n').map(s => s.trim()).filter(Boolean).map(name => ({
@@ -968,6 +1390,9 @@ class App {
       department: deptEn,
       department_ta: deptTa,
       category: cat,
+      level: levelVal,
+      state: stateVal,
+      target_beneficiaries: benVal ? benVal.split(',').map(s => s.trim()).filter(Boolean) : [],
       benefit_summary: benEn,
       benefit_summary_ta: benTa,
       benefit_amount: benEn,
@@ -994,7 +1419,7 @@ class App {
         }
       ],
       source: {
-        source_name: "Tamil Nadu Government Portal",
+        source_name: levelVal === 'Central' ? "National Government Portal" : (stateVal + " Government Portal"),
         portal_url: portal,
         verified_date: new Date().toISOString().split('T')[0],
         verification_status: status
@@ -1080,6 +1505,59 @@ class App {
     }
   }
 
+  async handleFeedbackSubmit() {
+    const btn = document.getElementById('submit-feedback-btn');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 18px; animation: spin 1s linear infinite;">sync</span> Submitting...`;
+    }
+
+    const category = document.getElementById('fb-category')?.value || null;
+    const language = document.getElementById('fb-language')?.value || this.state.lang || 'ta';
+    const ease = parseInt(document.getElementById('fb-ease')?.value || '5', 10);
+    const clarity = parseInt(document.getElementById('fb-clarity')?.value || '5', 10);
+    const useful = parseInt(document.getElementById('fb-useful')?.value || '5', 10);
+    const problems = document.getElementById('fb-problems')?.value?.trim() || null;
+    const suggestions = document.getElementById('fb-suggestions')?.value?.trim() || null;
+
+    try {
+      const res = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          participant_category: category,
+          preferred_language: language,
+          ease_of_use_rating: ease,
+          clarity_rating: clarity,
+          usefulness_rating: useful,
+          problems_encountered: problems,
+          suggestions: suggestions
+        })
+      });
+
+      if (res.ok) {
+        const form = document.getElementById('citizen-pilot-feedback-form');
+        const banner = document.getElementById('feedback-success-banner');
+        if (form) form.style.display = 'none';
+        if (banner) banner.style.display = 'block';
+      } else {
+        const err = await res.json();
+        alert(err.detail || "Error submitting feedback. Please try again.");
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 18px;">send</span> Submit Voluntary Feedback`;
+        }
+      }
+    } catch (e) {
+      console.error("Feedback submission error:", e);
+      alert("Network error submitting feedback. Please check connection.");
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 18px;">send</span> Submit Voluntary Feedback`;
+      }
+    }
+  }
+
   render() {
     const appRoot = document.getElementById('app-root');
     if (!appRoot) return;
@@ -1103,7 +1581,25 @@ class App {
       case 'checklist':
         pageHtml = renderChecklistPage(this.state);
         break;
+      case 'feedback':
+        pageHtml = renderFeedbackPage(this.state);
+        break;
       case 'admin':
+        if (!this.state.aiProvidersStatusLoaded) {
+          this.state.aiProvidersStatusLoaded = true;
+          fetch('/api/assistant/provider-status')
+            .then(r => r.ok ? r.json() : null)
+            .then(data => {
+              if (data) {
+                this.state.aiProvidersStatus = data;
+                this.render();
+              }
+            }).catch(() => {});
+        }
+        if (!this.state.contentSummaryLoaded) {
+          this.state.contentSummaryLoaded = true;
+          this.loadContentMonitoringSummary();
+        }
         pageHtml = renderAdminPage(this.state);
         break;
       default:

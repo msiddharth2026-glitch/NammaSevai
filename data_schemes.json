@@ -114,5 +114,29 @@
     "name_ta": "தேர்வு திட்டம்",
     "official_portal": "https://tn.gov.in",
     "id": "scheme-4"
+  },
+  {
+    "benefit_amount": "₹500 / month",
+    "benefit_summary": "Test monthly assistance",
+    "benefit_summary_ta": "மாத உதவி",
+    "category": "education",
+    "department": "Test Dept",
+    "department_ta": "தேர்வு துறை",
+    "name": "Test Citizen Scheme",
+    "name_ta": "தேர்வு திட்டம்",
+    "official_portal": "https://tn.gov.in",
+    "id": "scheme-5"
+  },
+  {
+    "benefit_amount": "₹500 / month",
+    "benefit_summary": "Test monthly assistance",
+    "benefit_summary_ta": "மாத உதவி",
+    "category": "education",
+    "department": "Test Dept",
+    "department_ta": "தேர்வு துறை",
+    "name": "Test Citizen Scheme",
+    "name_ta": "தேர்வு திட்டம்",
+    "official_portal": "https://tn.gov.in",
+    "id": "scheme-6"
   }
 ]

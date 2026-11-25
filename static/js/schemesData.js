@@ -1970,8 +1970,31 @@ export function getLocalizedScheme(scheme, lang = 'en') {
     procOffline = rawProc.offline_hinglish || rawProc.offline_hi || procOffline;
   }
 
+  // Geographical and Coverage Display
+  const level = scheme.level || (['pm-', 'pmegp', 'nsp-', 'ayushman', 'pmay'].some(k => (scheme.id || '').toLowerCase().includes(k)) ? 'Central' : 'State');
+  const stateName = scheme.state || (level === 'Central' ? 'All India' : 'Tamil Nadu');
+
+  let displayCoverage = `${level} Government (${stateName})`;
+  if (level === 'Central') {
+    if (isTa) displayCoverage = "மத்திய அரசு (அகில இந்தியா)";
+    else if (isHi) displayCoverage = "केंद्र सरकार (अखिल भारतीय)";
+    else if (isMl) displayCoverage = "കേന്ദ്ര സർക്കാർ (അഖിലേന്ത്യാ)";
+    else if (isTanglish) displayCoverage = "Central Govt (All India)";
+    else if (isHinglish) displayCoverage = "Central Govt (All India)";
+  } else {
+    const isUt = level === 'Union Territory';
+    if (isTa) displayCoverage = `${stateName} ${isUt ? 'யூனியன் பிரதேசம்' : 'மாநில அரசு'}`;
+    else if (isHi) displayCoverage = `${stateName} ${isUt ? 'केंद्र शासित प्रदेश' : 'राज्य सरकार'}`;
+    else if (isMl) displayCoverage = `${stateName} ${isUt ? 'കേന്ദ്രഭരണ പ്രദേശം' : 'സംസ്ഥാന സർക്കാർ'}`;
+    else if (isTanglish) displayCoverage = `${stateName} ${isUt ? 'UT' : 'State'} Govt`;
+    else if (isHinglish) displayCoverage = `${stateName} ${isUt ? 'UT' : 'State'} Sarkar`;
+  }
+
   return {
     ...scheme,
+    level,
+    state: stateName,
+    displayCoverage,
     displayName: name,
     displayDepartment: department,
     displayBenefit: benefit_summary,
@@ -1985,3 +2008,21 @@ export function getLocalizedScheme(scheme, lang = 'en') {
     }
   };
 }
+
+export const INDIAN_STATES = [
+  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+  "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
+  "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
+  "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
+  "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
+  "Uttar Pradesh", "Uttarakhand", "West Bengal"
+];
+
+export const INDIAN_UNION_TERRITORIES = [
+  "Andaman and Nicobar Islands", "Chandigarh",
+  "Dadra and Nagar Haveli and Daman and Diu", "Delhi",
+  "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
+];
+
+export const GOVERNMENT_LEVELS = ["Central", "State", "Union Territory"];
+

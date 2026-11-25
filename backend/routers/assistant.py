@@ -57,7 +57,8 @@ def analyze_citizen_query(payload: AnalyzeRequest):
         follow_up_questions_en=follow_ups_en,
         follow_up_questions_ta=follow_ups_ta,
         follow_up_questions_hi=follow_ups_hi,
-        follow_up_questions_ml=follow_ups_ml
+        follow_up_questions_ml=follow_ups_ml,
+        active_provider=ai_service.get_last_provider()
     )
 
 @router.post("/match", response_model=MatchResponse, summary="Match schemes using structured eligibility conditions")
@@ -112,11 +113,15 @@ def match_citizen_schemes(payload: MatchRequest, db: Session = Depends(get_db)):
 
     # Generate compassionate response text
     lang = payload.lang or "ta"
+    # Skip redundant external AI call if external AI already failed/unconfigured during query analysis
+    # or if query is absent (pure structured profile)
+    skip_ai = (not payload.query) or (ai_service.get_last_provider() == "rule_engine")
     response_msg = ai_service.generate_compassionate_response(
         query=payload.query or "",
         matches=matches,
         missing_info=missing_raw,
-        lang=lang
+        lang=lang,
+        skip_external_ai=skip_ai
     )
 
     return MatchResponse(
@@ -127,5 +132,11 @@ def match_citizen_schemes(payload: MatchRequest, db: Session = Depends(get_db)):
         follow_up_questions_ta=follow_ups_ta,
         follow_up_questions_hi=follow_ups_hi,
         follow_up_questions_ml=follow_ups_ml,
-        compassionate_response=response_msg
+        compassionate_response=response_msg,
+        active_provider=ai_service.get_last_provider()
     )
+
+@router.get("/provider-status", summary="Public status of AI providers and fallback chain (zero secrets)")
+def get_ai_provider_public_status():
+    """Returns real-time status of AI providers and circuit breaker without exposing keys."""
+    return ai_service.get_safe_status()

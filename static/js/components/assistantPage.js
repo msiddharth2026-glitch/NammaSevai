@@ -1,6 +1,6 @@
 // NammaSevai AI - AI Assistant Page Component (BharatSevai AI / Stitch Theme Redesign)
 import { i18n } from '../i18n.js';
-import { getLocalizedScheme } from '../schemesData.js';
+import { getLocalizedScheme, INDIAN_STATES, INDIAN_UNION_TERRITORIES } from '../schemesData.js';
 
 export function renderAssistantPage(state) {
   const t = i18n[state.lang] || i18n.ta;
@@ -9,6 +9,7 @@ export function renderAssistantPage(state) {
   const chatMessages = state.chatHistory || [];
   const voiceConfig = state.voiceConfig || {};
   const hasResults = chatMessages.some(m => m.sender === 'ai' && m.matches && m.matches.length > 0);
+  const currentCitizenState = (state.userProfile && state.userProfile.state) ? state.userProfile.state : (state.selectedState && state.selectedState !== 'all' ? state.selectedState : '');
 
   return `
     <div class="assistant-page-container container" style="max-width: 1150px; margin: 0 auto; padding: 1.5rem 1rem 3.5rem;">
@@ -60,20 +61,40 @@ export function renderAssistantPage(state) {
             </div>
           </div>
 
-          <!-- Language Selector Capsule -->
-          <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--bg-canvas); padding: 0.35rem 0.85rem; border-radius: 9999px; border: 1px solid var(--border-color); align-self: flex-start; flex-wrap: wrap;">
-            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--secondary-saffron);">translate</span>
-            <span style="font-size: 0.82rem; color: var(--text-primary);">
-              ${t.languageChoice || "Language:"} 
-              <strong style="color: var(--primary-indigo);">${assistantLang === 'ta' ? 'தமிழ்' : assistantLang === 'hi' ? 'हिन्दी' : assistantLang === 'ml' ? 'മലയാളം' : assistantLang === 'tanglish' ? 'Tanglish' : assistantLang === 'hinglish' ? 'Hinglish' : 'English'}</strong>
-            </span>
-            <div style="display: flex; gap: 0.25rem; margin-left: 0.35rem; flex-wrap: wrap;">
-              <button class="lang-chip ${assistantLang === 'en' ? 'active' : ''}" data-lang-choice="en" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">English</button>
-              <button class="lang-chip ${assistantLang === 'ta' ? 'active' : ''}" data-lang-choice="ta" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">தமிழ்</button>
-              <button class="lang-chip ${assistantLang === 'hi' ? 'active' : ''}" data-lang-choice="hi" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">हिन्दी</button>
-              <button class="lang-chip ${assistantLang === 'ml' ? 'active' : ''}" data-lang-choice="ml" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">മലയാളം</button>
-              <button class="lang-chip ${assistantLang === 'tanglish' ? 'active' : ''}" data-lang-choice="tanglish" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">Tanglish</button>
-              <button class="lang-chip ${assistantLang === 'hinglish' ? 'active' : ''}" data-lang-choice="hinglish" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">Hinglish</button>
+          <!-- Controls Row: Language Selector & Citizen State Selector Capsules -->
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <!-- Language Selector Capsule -->
+            <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--bg-canvas); padding: 0.35rem 0.85rem; border-radius: 9999px; border: 1px solid var(--border-color); align-self: flex-start; flex-wrap: wrap;">
+              <span class="material-symbols-outlined" style="font-size: 18px; color: var(--secondary-saffron);">translate</span>
+              <span style="font-size: 0.82rem; color: var(--text-primary);">
+                ${t.languageChoice || "Language:"} 
+                <strong style="color: var(--primary-indigo);">${assistantLang === 'ta' ? 'தமிழ்' : assistantLang === 'hi' ? 'हिन्दी' : assistantLang === 'ml' ? 'മലയാളം' : assistantLang === 'tanglish' ? 'Tanglish' : assistantLang === 'hinglish' ? 'Hinglish' : 'English'}</strong>
+              </span>
+              <div style="display: flex; gap: 0.25rem; margin-left: 0.35rem; flex-wrap: wrap;">
+                <button class="lang-chip ${assistantLang === 'en' ? 'active' : ''}" data-lang-choice="en" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">English</button>
+                <button class="lang-chip ${assistantLang === 'ta' ? 'active' : ''}" data-lang-choice="ta" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">தமிழ்</button>
+                <button class="lang-chip ${assistantLang === 'hi' ? 'active' : ''}" data-lang-choice="hi" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">हिन्दी</button>
+                <button class="lang-chip ${assistantLang === 'ml' ? 'active' : ''}" data-lang-choice="ml" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">മലയാളം</button>
+                <button class="lang-chip ${assistantLang === 'tanglish' ? 'active' : ''}" data-lang-choice="tanglish" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">Tanglish</button>
+                <button class="lang-chip ${assistantLang === 'hinglish' ? 'active' : ''}" data-lang-choice="hinglish" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; border-radius: 9999px;">Hinglish</button>
+              </div>
+            </div>
+
+            <!-- Citizen State/UT Selection Pill -->
+            <div style="display: flex; align-items: center; gap: 0.4rem; background: var(--bg-canvas); padding: 0.35rem 0.85rem; border-radius: 9999px; border: 1px solid var(--border-color); align-self: flex-start;">
+              <span class="material-symbols-outlined" style="font-size: 18px; color: var(--secondary-saffron);">location_on</span>
+              <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-primary); white-space: nowrap;">
+                ${t.stateOrUtLabel || "State / UT"}:
+              </span>
+              <select id="assistant-state-select" style="padding: 0.2rem 0.5rem; font-size: 0.78rem; border-radius: 9999px; border: 1px solid var(--border-color); background: #ffffff; color: var(--primary-indigo); font-weight: 600; cursor: pointer; max-width: 175px;">
+                <option value="all" ${!currentCitizenState || currentCitizenState === 'all' ? 'selected' : ''}>🇮🇳 Pan-India (All India)</option>
+                <optgroup label="28 States">
+                  ${INDIAN_STATES.map(st => `<option value="${st}" ${currentCitizenState === st ? 'selected' : ''}>${st}</option>`).join('')}
+                </optgroup>
+                <optgroup label="8 Union Territories">
+                  ${INDIAN_UNION_TERRITORIES.map(ut => `<option value="${ut}" ${currentCitizenState === ut ? 'selected' : ''}>${ut}</option>`).join('')}
+                </optgroup>
+              </select>
             </div>
           </div>
         </div>
@@ -402,7 +423,7 @@ function renderStitchChatMessage(msg, index, state) {
           <div style="background: var(--bg-canvas); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
             <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; display: block;">📍 ${t.locationLabel || "Location"}</span>
             <span style="font-size: 0.88rem; font-weight: 700; color: var(--primary-indigo); display: block; margin-top: 0.2rem;">
-              ${profile.district ? profile.district + ", Tamil Nadu" : "Tamil Nadu, India"}
+              ${profile.district ? (profile.state ? `${profile.district}, ${profile.state}` : `${profile.district}`) : (profile.state ? `${profile.state}, India` : (t.panIndiaCoverage || "Pan-India / Central"))}
             </span>
           </div>
 

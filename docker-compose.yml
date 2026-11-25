@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nammasevai_web
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=production
+      - DEBUG=False
+      - HOST=0.0.0.0
+      - PORT=8000
+      - DATABASE_URL=postgresql://bharatsevai_admin:${POSTGRES_PASSWORD:-supersecretpw}@db:5432/${POSTGRES_DB:-bharatsevai_prod}
+      - ADMIN_API_KEY=${ADMIN_API_KEY:-CHANGE_ME_PRODUCTION_SECRET_2026}
+      - SECRET_KEY=${SECRET_KEY:-CHANGE_ME_CRYPTOGRAPHIC_KEY_2026}
+      - CORS_ORIGINS=https://bharatsevai.gov.in,https://nammasevai.gov.in
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - XAI_API_KEY=${XAI_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - backup_data:/app/backups
+
+  db:
+    image: postgres:16-alpine
+    container_name: nammasevai_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-bharatsevai_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-supersecretpw}
+      POSTGRES_DB: ${POSTGRES_DB:-bharatsevai_prod}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bharatsevai_admin -d bharatsevai_prod"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  backup_data:

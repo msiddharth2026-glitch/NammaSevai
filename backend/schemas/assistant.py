@@ -9,11 +9,19 @@ class ExtractedUserProfile(BaseModel):
     gender: Optional[str] = None  # female, male, other
     occupation: Optional[str] = None  # student, farmer, tailor, self_employed, unemployed, housewife, senior
     annual_income: Optional[float] = None
-    state: str = "Tamil Nadu"
+    state: Optional[str] = None  # User's State or UT (None if unstated; Central schemes match all)
     district: Optional[str] = None
     education_level: Optional[str] = None  # school_10th, school_12th, college_ug, diploma, iti, graduate
     school_type: Optional[str] = None      # government, private, aided
     landholding_acres: Optional[float] = None
+    
+    # Extended profile attributes for comprehensive national matching
+    marital_status: Optional[str] = None          # married, unmarried, widow, destitute
+    ration_card_type: Optional[str] = None        # bpl, phh, aay, nphh, yellow, orange
+    residence_type: Optional[str] = None          # rural, urban, pucca, owned, rented
+    is_student: Optional[bool] = None
+    is_farmer: Optional[bool] = None
+    employment_status: Optional[str] = None       # employed, unemployed, self_employed, unorganized
     
     # Sensitive attributes: collected ONLY when voluntarily provided by citizen and relevant
     community_category: Optional[str] = None  # SC, ST, BC, MBC, General
@@ -45,6 +53,8 @@ class AnalyzeResponse(BaseModel):
     follow_up_questions_ta: List[str]
     follow_up_questions_hi: Optional[List[str]] = []
     follow_up_questions_ml: Optional[List[str]] = []
+    active_provider: Optional[str] = None
+    fallback_chain: Optional[List[Dict[str, str]]] = []
 
 class PotentialSchemeMatch(BaseModel):
     scheme_id: str
@@ -68,12 +78,20 @@ class PotentialSchemeMatch(BaseModel):
     # Matching breakdown
     match_status: str  # high_potential, potential_match, conditional, not_eligible
     match_confidence: float  # 0 to 100 percentage
+    recommendation_category: Optional[str] = "potentially_eligible"  # eligibility_confirmed, potentially_eligible, more_info_required, not_eligible, administrative_review
     eligibility_explanation_en: str
     eligibility_explanation_ta: str
     eligibility_explanation_hi: Optional[str] = None
     eligibility_explanation_ml: Optional[str] = None
     fulfilled_conditions: List[str]
     unverified_conditions: List[str]
+    unfulfilled_conditions: Optional[List[str]] = []
+    missing_information_fields: Optional[List[str]] = []
+    official_disclaimer: Optional[str] = (
+        "Official Disclaimer: Matching indicates potential eligibility based on verified rules. "
+        "It does not constitute government approval. Final eligibility and benefit disbursement "
+        "are subject to verification of original documents by the implementing department."
+    )
     
     # Actionable items for citizen
     required_documents: List[RequiredDocumentResponse]
@@ -97,6 +115,8 @@ class MatchResponse(BaseModel):
     follow_up_questions_hi: Optional[List[str]] = []
     follow_up_questions_ml: Optional[List[str]] = []
     compassionate_response: Optional[str] = None
+    active_provider: Optional[str] = None
+    fallback_chain: Optional[List[Dict[str, str]]] = []
     disclaimer: str = (
         "Notice: Potential matching does not constitute confirmed eligibility. "
         "Citizens must verify all conditions with the respective department or official portal."

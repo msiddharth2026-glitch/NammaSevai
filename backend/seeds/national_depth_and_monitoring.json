@@ -1,0 +1,1613 @@
+[
+  {
+    "id": "pm-vishwakarma",
+    "name": "PM Vishwakarma Scheme",
+    "name_ta": "பிரதம மந்திரி விஸ்வகர்மா திட்டம்",
+    "name_hi": "प्रधानमंत्री विश्वकर्मा योजना",
+    "name_ml": "പ്രധാനമന്ത്രി വിശ്വകർമ പദ്ധതി",
+    "department": "Ministry of Micro, Small and Medium Enterprises",
+    "department_ta": "குறு, சிறு மற்றும் நடுத்தர தொழில் அமைச்சகம்",
+    "department_hi": "सूक्ष्म, लघु एवं मध्यम उद्यम मंत्रालय",
+    "department_ml": "സൂക്ഷ്മ, ചെറുകിട, ഇടത്തരം വ്യവസായ മന്ത്രാലയം",
+    "category": "business",
+    "level": "Central",
+    "state": "All India",
+    "beneficiary_type": "Traditional artisans and craftspeople working with hands and tools",
+    "beneficiary_type_ta": "பாரம்பரிய கைவினைஞர்கள் மற்றும் தொழிலாளர்கள்",
+    "beneficiary_type_hi": "पारंपरिक कारीगर और शिल्पकार",
+    "beneficiary_type_ml": "പരമ്പരാഗത കരകൗശല വിദഗ്ധരും തൊഴിലാളികളും",
+    "target_beneficiaries": "Artisans, Carpenters, Blacksmiths, Potters, Sculptors, Cobblers, Tailors",
+    "target_beneficiaries_ta": "தச்சர், கொல்லர், குயவர், சிற்பி, செருப்பு தைப்பவர், தையல்காரர்",
+    "benefit_amount": "₹3,00,000 at 5% interest + ₹15,000 toolkit voucher",
+    "benefit_summary": "Collateral-free credit up to ₹3 lakh in two tranches at 5% concessional interest, ₹15,000 e-voucher for modern toolkits, and ₹500/day training stipend.",
+    "benefit_summary_ta": "5% குறைந்த வட்டியில் ₹3 லட்சம் பிணையில்லா கடன், ₹15,000 கருவித்தொகுப்பு மானியம், மற்றும் நாள் ஒன்றுக்கு ₹500 பயிற்சி உதவித்தொகை.",
+    "benefit_summary_hi": "5% रियायती ब्याज पर ₹3 लाख तक संपार्श्विक-मुक्त ऋण, आधुनिक टूलकिट के लिए ₹15,000 ई-वाउचर और ₹500/दिन प्रशिक्षण वजीफा।",
+    "benefit_summary_ml": "5% പലിശയിൽ ₹3 ലക്ഷം വരെ ഈടില്ലാത്ത വായ്പ, ₹15,000 ടൂൾകിറ്റ് വൗച്ചർ, പ്രതിദിനം ₹500 പരിശീലന വേതനം.",
+    "description": "Central Sector Scheme to provide end-to-end holistic support to traditional artisans and craftspeople across 18 family-based trades including skill upgradation, toolkit incentive, collateral-free credit support, digital transaction incentive, and brand marketing support.",
+    "description_ta": "18 வகையான பாரம்பரிய கைவினை தொழில்களில் ஈடுபடும் கைவினைஞர்களுக்கு திறன் மேம்பாடு, நவீன கருவிகள் வாங்க ₹15,000 மானியம், 5% வட்டியில் பிணையில்லா கடன் மற்றும் சந்தைப்படுத்தல் ஆதரவு வழங்கும் மத்திய அரசு திட்டம்.",
+    "description_hi": "पारंपरिक 18 शिल्पों में लगे कारीगरों को कौशल प्रशिक्षण, आधुनिक टूलकिट, रियायती दर पर ऋण और बाजार सहायता प्रदान करने वाली केंद्रीय योजना।",
+    "description_ml": "18 പരമ്പരാഗത മേഖലകളിലെ കരകൗശലത്തൊഴിലാളികൾക്ക് സമഗ്ര പിന്തുണയും വായ്പയും നൽകുന്ന കേന്ദ്ര പദ്ധതി.",
+    "keywords": "vishwakarma, artisan, craft, carpenter, blacksmith, potter, tailor, msme, loan, toolkit, skill",
+    "official_portal": "https://pmvishwakarma.gov.in",
+    "application_url": "https://pmvishwakarma.gov.in/Home/Registration",
+    "conditions": [
+      {
+        "field_name": "occupation",
+        "operator": "in",
+        "field_value": "artisan,craftsman,carpenter,blacksmith,potter,cobbler,tailor,mason,barber,washerman",
+        "description_en": "Must be engaged in one of the 18 traditional trades on self-employment basis",
+        "description_ta": "18 பாரம்பரிய கைவினை தொழில்களில் ஒன்றில் சுயதொழில் செய்பவராக இருக்க வேண்டும்",
+        "description_hi": "18 पारंपरिक शिल्पों में से किसी एक में स्व-रोजगार में संलग्न होना चाहिए",
+        "description_ml": "18 പരമ്പരാഗത തൊഴിലുകളിൽ ഒന്നിൽ ഏർപ്പെട്ടിരിക്കുന്നവരായിരിക്കണം"
+      },
+      {
+        "field_name": "age",
+        "operator": "gte",
+        "field_value": "18",
+        "description_en": "Minimum age of 18 years on the date of application",
+        "description_ta": "விண்ணப்பிக்கும் தேதியில் குறைந்தபட்சம் 18 வயது பூர்த்தியடைந்திருக்க வேண்டும்",
+        "description_hi": "आवेदन की तिथि पर न्यूनतम आयु 18 वर्ष होनी चाहिए",
+        "description_ml": "അപേക്ഷ തീയതിയിൽ കുറഞ്ഞത് 18 വയസ്സ് പൂർത്തിയായിരിക്കണം"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Aadhaar Card",
+        "document_name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Bank Account Details (Linked with Aadhaar)",
+        "document_name_ta": "வங்கி கணக்கு புத்தகம்",
+        "is_mandatory": true,
+        "issuing_authority": "Commercial / Grameen Bank"
+      },
+      {
+        "document_name_en": "Ration Card / Family Declaration",
+        "document_name_ta": "குடும்ப அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "Civil Supplies Department"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Biometric Aadhaar Authentication at CSC",
+        "title_ta": "பொது சேவை மையத்தில் பயோமெட்ரிக் பதிவு",
+        "description_en": "Visit nearest Common Services Centre (CSC) with Aadhaar and mobile number for e-KYC biometric authentication.",
+        "description_ta": "அருகிலுள்ள பொது சேவை மையத்திற்குச் சென்று பயோமெட்ரிக் மூலம் பதிவு செய்யவும்.",
+        "portal_url": "https://pmvishwakarma.gov.in"
+      },
+      {
+        "step_number": 2,
+        "mode": "online",
+        "title_en": "Three-Stage Verification & Certificate Issuance",
+        "title_ta": "மூன்று அடுக்கு சரிபார்ப்பு மற்றும் சான்றிதழ்",
+        "description_en": "Application is verified by Gram Panchayat/ULB, followed by District Screening Committee, and National PM Vishwakarma ID card is generated.",
+        "description_ta": "கிராம ஊராட்சி மற்றும் மாவட்ட குழுவின் ஒப்புதலுக்குப் பின் அதிகாரப்பூர்வ அடையாள அட்டை வழங்கப்படும்.",
+        "portal_url": "https://pmvishwakarma.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "pm-sym-pension",
+    "name": "Pradhan Mantri Shram Yogi Maandhan (PM-SYM)",
+    "name_ta": "பிரதம மந்திரி ஷ்ரம் யோகி மான்தன்",
+    "name_hi": "प्रधानमंत्री श्रम योगी मानधन योजना",
+    "name_ml": "പ്രധാനമന്ത്രി ശ്രമയോഗി മാൻധൻ യോജന",
+    "department": "Ministry of Labour and Employment",
+    "department_ta": "தொழிலாளர் மற்றும் வேலைவாய்ப்பு அமைச்சகம்",
+    "department_hi": "श्रम एवं रोजगार मंत्रालय",
+    "department_ml": "തൊഴിൽ മന്ത്രാലയം",
+    "category": "social_security",
+    "level": "Central",
+    "state": "All India",
+    "beneficiary_type": "Unorganized workers earning up to ₹15,000 per month",
+    "beneficiary_type_ta": "மாத வருமானம் ₹15,000க்கு மிகாமல் உள்ள அமைப்புசாரா தொழிலாளர்கள்",
+    "beneficiary_type_hi": "असंगठित क्षेत्र के श्रमिक जिनकी मासिक आय ₹15,000 से कम हो",
+    "beneficiary_type_ml": "പ്രതിമാസ വരുമാനം ₹15,000 ൽ താഴെയുള്ള അസംഘടിത തൊഴിലാളികൾ",
+    "target_beneficiaries": "Home-based workers, Street vendors, Mid-day meal workers, Head loaders, Brick kiln workers, Cobblers, Rag pickers, Domestic workers",
+    "target_beneficiaries_ta": "வீட்டுப் பணியாளர்கள், தெருவோர வியாபாரிகள், கூலித் தொழிலாளர்கள், துப்புரவுப் பணியாளர்கள்",
+    "benefit_amount": "₹3,000 / month pension after age 60",
+    "benefit_summary": "Assured monthly pension of ₹3,000 after attaining 60 years of age, with 50% matching contribution by the Central Government.",
+    "benefit_summary_ta": "60 வயது பூர்த்தியடைந்தவுடன் மாதம் ₹3,000 உறுதிசெய்யப்பட்ட ஓய்வூதியம், மத்திய அரசின் 50% சமபங்கு பங்களிப்புடன்.",
+    "benefit_summary_hi": "60 वर्ष की आयु के बाद ₹3,000 की सुनिश्चित मासिक पेंशन, केंद्र सरकार द्वारा 50% समतुल्य अंशदान के साथ।",
+    "benefit_summary_ml": "60 വയസ്സിന് ശേഷം പ്രതിമാസം ₹3,000 ഉറപ്പായ പെൻഷൻ, തുല്യ വിഹിതം കേന്ദ്ര സർക്കാർ നൽകുന്നു.",
+    "description": "Voluntary and contributory pension scheme for unorganized workers aged 18 to 40 years with monthly income up to ₹15,000, managed jointly by Ministry of Labour and Life Insurance Corporation of India (LIC).",
+    "description_ta": "18 முதல் 40 வயதுக்குட்பட்ட அமைப்புசாரா தொழிலாளர்களுக்கு 60 வயதிற்குப் பின் வாழ்நாள் முழுவதும் மாதம் ₹3,000 ஓய்வூதியம் வழங்கும் எல்ஐசி நிர்வகிக்கும் மத்திய அரசு திட்டம்.",
+    "description_hi": "असंगठित क्षेत्र के श्रमिकों के लिए 60 वर्ष की आयु के बाद न्यूनतम ₹3,000 मासिक पेंशन सुनिश्चित करने वाली सामाजिक सुरक्षा योजना।",
+    "description_ml": "അസംഘടിത തൊഴിലാളികൾക്ക് വാർദ്ധക്യകാലത്ത് സാമ്പത്തിക സുരക്ഷിതത്വം നൽകുന്ന പെൻഷൻ പദ്ധതി.",
+    "keywords": "pension, unorganized, labour, worker, maandhan, pmsym, lic, old age",
+    "official_portal": "https://maandhan.in",
+    "application_url": "https://maandhan.in/shramyogi",
+    "conditions": [
+      {
+        "field_name": "age",
+        "operator": "gte",
+        "field_value": "18",
+        "description_en": "Minimum age of 18 years at entry",
+        "description_ta": "நுழைவு வயது குறைந்தபட்சம் 18 ஆக இருக்க வேண்டும்",
+        "description_hi": "प्रवेश की न्यूनतम आयु 18 वर्ष",
+        "description_ml": "കുറഞ്ഞ പ്രായം 18 വയസ്സ്"
+      },
+      {
+        "field_name": "age",
+        "operator": "lte",
+        "field_value": "40",
+        "description_en": "Maximum age of 40 years at entry",
+        "description_ta": "நுழைவு வயது அதிகபட்சம் 40 ஆக இருக்க வேண்டும்",
+        "description_hi": "प्रवेश की अधिकतम आयु 40 वर्ष",
+        "description_ml": "പരമാവധി പ്രായം 40 വയസ്സ്"
+      },
+      {
+        "field_name": "income",
+        "operator": "lte",
+        "field_value": "180000",
+        "description_en": "Monthly income must not exceed ₹15,000 (Annual <= ₹1,80,000)",
+        "description_ta": "மாத வருமானம் ₹15,000க்கு மிகாமல் இருக்க வேண்டும்",
+        "description_hi": "मासिक आय ₹15,000 से कम होनी चाहिए",
+        "description_ml": "പ്രതിമാസ വരുമാനം ₹15,000 കവിയരുത്"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Aadhaar Card",
+        "document_name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Savings Bank Account / Jan Dhan Account with IFSC",
+        "document_name_ta": "வங்கி சேமிப்பு கணக்கு",
+        "is_mandatory": true,
+        "issuing_authority": "Bank / Post Office"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Enrollment at CSC or Maandhan Portal",
+        "title_ta": "பொது சேவை மையம் அல்லது இணையதளத்தில் பதிவு",
+        "description_en": "Citizen enrolls via self-service at maandhan.in or visits nearest CSC with Aadhaar and Bank passbook.",
+        "description_ta": "ஆதார் மற்றும் வங்கி கணக்குடன் பொது சேவை மையம் வழியாக அல்லது maandhan.in தளத்தில் நேரடியாக பதிவு செய்யவும்.",
+        "portal_url": "https://maandhan.in/shramyogi"
+      }
+    ]
+  },
+  {
+    "id": "pm-kisan-maandhan",
+    "name": "Pradhan Mantri Kisan Maandhan Yojana (PM-KMY)",
+    "name_ta": "பிரதம மந்திரி கிசான் மான்தன் யோஜனா",
+    "name_hi": "प्रधानमंत्री किसान मानधन योजना",
+    "name_ml": "പ്രധാനമന്ത്രി കിസാൻ മാൻധൻ യോജന",
+    "department": "Ministry of Agriculture and Farmers Welfare",
+    "department_ta": "விவசாயம் மற்றும் விவசாயிகள் நல அமைச்சகம்",
+    "department_hi": "कृषि एवं किसान कल्याण मंत्रालय",
+    "department_ml": "കൃഷി മന്ത്രാലയം",
+    "category": "agriculture",
+    "level": "Central",
+    "state": "All India",
+    "beneficiary_type": "Small and marginal farmers holding cultivable land up to 2 hectares",
+    "beneficiary_type_ta": "2 ஹெக்டேர் வரை நிலம் வைத்துள்ள சிறு மற்றும் குறு விவசாயிகள்",
+    "beneficiary_type_hi": "2 हेक्टेयर तक कृषि योग्य भूमि वाले लघु एवं सीमांत किसान",
+    "beneficiary_type_ml": "2 ഹെക്ടർ വരെ കൃഷിഭൂമിയുള്ള ചെറുകിട നാമമാത്ര കർഷകർ",
+    "target_beneficiaries": "Small and Marginal Farmers",
+    "target_beneficiaries_ta": "சிறு மற்றும் குறு விவசாயிகள்",
+    "benefit_amount": "₹3,000 / month pension after age 60",
+    "benefit_summary": "Assured monthly pension of ₹3,000 to small and marginal farmers upon attaining the age of 60 years.",
+    "benefit_summary_ta": "60 வயது பூர்த்தியடைந்த சிறு, குறு விவசாயிகளுக்கு மாதம் ₹3,000 உறுதிசெய்யப்பட்ட ஓய்வூதியம்.",
+    "benefit_summary_hi": "60 वर्ष की आयु प्राप्त करने पर लघु और सीमांत किसानों को ₹3,000 प्रतिमाह की सुनिश्चित पेंशन।",
+    "benefit_summary_ml": "60 വയസ്സിന് ശേഷം ചെറുകിട കർഷകർക്ക് പ്രതിമാസം ₹3,000 ഉറപ്പായ പെൻഷൻ.",
+    "description": "Old age pension scheme for all small and marginal farmers having cultivable landholding up to 2 hectares in the age group of 18 to 40 years, administered by LIC.",
+    "description_ta": "18 முதல் 40 வயதுக்குள் உள்ள 2 ஹெக்டேர் வரை நிலமுள்ள விவசாயிகளுக்கு 60 வயதிற்குப் பின் மாதம் ₹3,000 ஓய்வூதியம் வழங்கும் திட்டம்.",
+    "description_hi": "लघु और सीमांत किसानों को वृद्धावस्था में सामाजिक सुरक्षा प्रदान करने हेतु केंद्रीय पेंशन योजना।",
+    "description_ml": "ചെറുകിട കർഷകർക്ക് വാർദ്ധക്യകാല പെൻഷൻ ഉറപ്പാക്കുന്ന കേന്ദ്ര പദ്ധതി.",
+    "keywords": "kisan, farmer, pension, agriculture, maandhan, pmkmy, lic",
+    "official_portal": "https://pmkmy.gov.in",
+    "application_url": "https://maandhan.in/kisan",
+    "conditions": [
+      {
+        "field_name": "occupation",
+        "operator": "in",
+        "field_value": "farmer,agriculture,cultivator",
+        "description_en": "Must be a small or marginal farmer with cultivable land up to 2 hectares",
+        "description_ta": "2 ஹெக்டேர் வரை நிலமுள்ள சிறு அல்லது குறு விவசாயியாக இருக்க வேண்டும்",
+        "description_hi": "2 हेक्टेयर तक कृषि भूमि वाला लघु या सीमांत किसान होना चाहिए",
+        "description_ml": "2 ഹെക്ടർ വരെ ഭൂമിയുള്ള കർഷകനായിരിക്കണം"
+      },
+      {
+        "field_name": "age",
+        "operator": "gte",
+        "field_value": "18",
+        "description_en": "Minimum entry age 18 years",
+        "description_ta": "குறைந்தபட்ச வயது 18",
+        "description_hi": "न्यूनतम आयु 18 वर्ष",
+        "description_ml": "കുറഞ്ഞ പ്രായം 18 വയസ്സ്"
+      },
+      {
+        "field_name": "age",
+        "operator": "lte",
+        "field_value": "40",
+        "description_en": "Maximum entry age 40 years",
+        "description_ta": "அதிகபட்ச வயது 40",
+        "description_hi": "अधिकतम आयु 40 वर्ष",
+        "description_ml": "പരമാവധി പ്രായം 40 വയസ്സ്"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Aadhaar Card",
+        "document_name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Land Ownership Records (Khasra / Khatauni / Patta)",
+        "document_name_ta": "பட்டா / சிட்டா நில ஆவணங்கள்",
+        "is_mandatory": true,
+        "issuing_authority": "Revenue Department"
+      },
+      {
+        "document_name_en": "Bank Account Details (Linked with PM-KISAN or Aadhaar)",
+        "document_name_ta": "வங்கி கணக்கு விவரம்",
+        "is_mandatory": true,
+        "issuing_authority": "Bank"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Application via CSC or PM-KMY Portal",
+        "title_ta": "பொது சேவை மையம் மூலம் விண்ணப்பித்தல்",
+        "description_en": "Farmer visits nearest Common Service Centre with Aadhaar, Bank Details, and Land records for enrollment.",
+        "description_ta": "ஆதார், பட்டா மற்றும் வங்கி ஆவணங்களுடன் பொது சேவை மையத்தில் பதிவு செய்யவும்.",
+        "portal_url": "https://pmkmy.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "pm-surya-ghar",
+    "name": "PM Surya Ghar: Muft Bijli Yojana",
+    "name_ta": "பிரதம மந்திரி சூர்ய கர்: இலவச மின்சாரத் திட்டம்",
+    "name_hi": "प्रधानमंत्री सूर्य घर: मुफ्त बिजली योजना",
+    "name_ml": "പ്രധാനമന്ത്രി സൂര്യ ഘർ: സൗജന്യ വൈദ്യുതി പദ്ധതി",
+    "department": "Ministry of New and Renewable Energy",
+    "department_ta": "புதிய மற்றும் புதுப்பிக்கத்தக்க எரிசக்தி அமைச்சகம்",
+    "department_hi": "नवीन एवं नवीकरणीय ऊर्जा मंत्रालय",
+    "department_ml": "പുതിയ പുനരുപയോഗ ഊർജ്ജ മന്ത്രാലയം",
+    "category": "housing",
+    "level": "Central",
+    "state": "All India",
+    "beneficiary_type": "Domestic households with grid-connected electricity connection",
+    "beneficiary_type_ta": "சொந்த வீடு மற்றும் மின் இணைப்பு கொண்ட அனைத்து குடும்பங்கள்",
+    "beneficiary_type_hi": "ग्रिड से जुड़े बिजली कनेक्शन वाले घरेलू परिवार",
+    "beneficiary_type_ml": "ഗ്രിഡ് വൈദ്യുതി കണക്ഷനുള്ള ഗാർഹിക ഉപഭോക്താക്കൾ",
+    "target_beneficiaries": "Residential Households",
+    "target_beneficiaries_ta": "வீட்டு நுகர்வோர்",
+    "benefit_amount": "Subsidy up to ₹78,000 + 300 free units/month",
+    "benefit_summary": "Direct financial subsidy up to ₹78,000 for installing residential rooftop solar panels and up to 300 units of free solar electricity per month.",
+    "benefit_summary_ta": "வீட்டு கூரை மீது சோலார் பேனல் அமைக்க ₹78,000 வரை நேரடி மானியம் மற்றும் மாதம் 300 யூனிட் வரை இலவச மின்சாரம்.",
+    "benefit_summary_hi": "छत पर सोलर पैनल लगाने के लिए ₹78,000 तक की प्रत्यक्ष सब्सिडी और प्रतिमाह 300 यूनिट तक मुफ्त बिजली।",
+    "benefit_summary_ml": "മേൽക്കൂര സോളാർ സ്ഥാപിക്കാൻ ₹78,000 വരെ സബ്സിഡിയും പ്രതിമാസം 300 യൂണിറ്റ് സൗജന്യ വൈദ്യുതിയും.",
+    "description": "National rooftop solar scheme aimed at lighting up 1 crore households with solar electricity, providing up to ₹30,000 subsidy per kW up to 2 kW, and ₹18,000 for additional kW up to 3 kW.",
+    "description_ta": "1 கோடி குடும்பங்களுக்கு கூரை சோலார் மூலம் இலவச மின்சாரம் வழங்க 3 கிலோவாட் வரை ₹78,000 வரை மத்திய அரசு மானியம் வழங்கும் திட்டம்.",
+    "description_hi": "1 करोड़ घरों को सौर ऊर्जा से रोशन करने के लिए छत पर सौर संयंत्र लगाने हेतु वित्तीय सहायता योजना।",
+    "description_ml": "1 കോടി വീടുകളിൽ സോളാർ സ്ഥാപിച്ച് സൗജന്യ വൈദ്യുതി ലഭ്യമാക്കുന്ന ദേശീയ പദ്ധതി.",
+    "keywords": "solar, rooftop, electricity, energy, renewable, muft bijli, pmsuryaghar, subsidy",
+    "official_portal": "https://pmsuryaghar.gov.in",
+    "application_url": "https://pmsuryaghar.gov.in/consumerRegistration",
+    "conditions": [
+      {
+        "field_name": "residence_type",
+        "operator": "in",
+        "field_value": "pucca,independent_house,owned,residential",
+        "description_en": "Must own a residential house with suitable roof for solar panel installation",
+        "description_ta": "சோலார் அமைக்க உகந்த கூரையுடன் கூடிய சொந்த குடியிருப்பு வீடு கொண்டிருக்க வேண்டும்",
+        "description_hi": "सोलर पैनल लगाने के लिए उपयुक्त छत वाला आवासीय मकान होना चाहिए",
+        "description_ml": "സോളാർ പാനലുകൾ സ്ഥാപിക്കാൻ അനുയോജ്യമായ മേൽക്കൂരയുള്ള വീട് ഉണ്ടായിരിക്കണം"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Electricity Bill (Recent Month)",
+        "document_name_ta": "சமீபத்திய மின்சார கட்டண ரசீது",
+        "is_mandatory": true,
+        "issuing_authority": "State DISCOM (Electricity Board)"
+      },
+      {
+        "document_name_en": "Aadhaar Card",
+        "document_name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Bank Account Passbook / Cancelled Cheque",
+        "document_name_ta": "வங்கி கணக்கு புத்தகம்",
+        "is_mandatory": true,
+        "issuing_authority": "Bank"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Registration on National Solar Portal",
+        "title_ta": "தேசிய சோலார் தளத்தில் பதிவு செய்தல்",
+        "description_en": "Register on pmsuryaghar.gov.in by selecting State, Electricity Distribution Company (DISCOM), and Consumer Account Number.",
+        "description_ta": "pmsuryaghar.gov.in இணையதளத்தில் மின் இணைப்பு எண்ணை உள்ளிட்டு பதிவு செய்யவும்.",
+        "portal_url": "https://pmsuryaghar.gov.in/consumerRegistration"
+      },
+      {
+        "step_number": 2,
+        "mode": "online",
+        "title_en": "Installation by Registered Vendor & Net-Metering",
+        "title_ta": "பதிவுபெற்ற நிறுவனம் மூலம் நிறுவுதல் மற்றும் நெட் மீட்டரிங்",
+        "description_en": "Install rooftop solar through DISCOM-registered vendor. DISCOM inspects, installs net meter, and subsidy is released directly to bank account within 30 days.",
+        "description_ta": "அங்கீகரிக்கப்பட்ட விற்பனையாளர் மூலம் நிறுவிய பின் நெட் மீட்டர் பொருத்தப்பட்டு 30 நாட்களுக்குள் மானியம் வங்கிக் கணக்கில் வரவு வைக்கப்படும்.",
+        "portal_url": "https://pmsuryaghar.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "standup-india",
+    "name": "Stand-Up India Scheme",
+    "name_ta": "ஸ்டாண்ட்-அப் இந்தியா திட்டம்",
+    "name_hi": "स्टैंड-अप इंडिया योजना",
+    "name_ml": "സ്റ്റാൻഡ്-അപ്പ് ഇന്ത്യ പദ്ധതി",
+    "department": "Department of Financial Services, Ministry of Finance",
+    "department_ta": "நிதி அமைச்சகம், நிதிச் சேவைகள் துறை",
+    "department_hi": "वित्तीय सेवाएं विभाग, वित्त मंत्रालय",
+    "department_ml": "ധനകാര്യ സേവന വകുപ്പ്",
+    "category": "business",
+    "level": "Central",
+    "state": "All India",
+    "beneficiary_type": "SC, ST and Women entrepreneurs setting up greenfield enterprises",
+    "beneficiary_type_ta": "புதிய தொழில் தொடங்கும் எஸ்சி, எஸ்டி மற்றும் பெண் தொழில்முனைவோர்",
+    "beneficiary_type_hi": "एससी, एसटी एवं महिला उद्यमी जो नया उद्यम स्थापित कर रहे हैं",
+    "beneficiary_type_ml": "പുതിയ സംരംഭങ്ങൾ തുടങ്ങുന്ന എസ്‌സി, എസ്ടി, വനിതാ സംരംഭകർ",
+    "target_beneficiaries": "SC, ST, and Women Entrepreneurs",
+    "target_beneficiaries_ta": "பட்டியலின, பழங்குடியின மற்றும் பெண் தொழில்முனைவோர்",
+    "benefit_amount": "₹10 Lakh to ₹1 Crore bank loan",
+    "benefit_summary": "Composite bank loan between ₹10 lakh and ₹1 crore to at least one SC/ST borrower and at least one woman borrower per bank branch for setting up greenfield enterprises.",
+    "benefit_summary_ta": "ஒவ்வொரு வங்கி கிளையிலும் ஒரு எஸ்சி/எஸ்டி மற்றும் ஒரு பெண்ணுக்கு ₹10 லட்சம் முதல் ₹1 கோடி வரை தொழில் கடன்.",
+    "benefit_summary_hi": "प्रत्येक बैंक शाखा द्वारा कम से कम एक एससी/एसटी और एक महिला उद्यमी को ₹10 लाख से ₹1 करोड़ तक का बैंक ऋण।",
+    "benefit_summary_ml": "ഓരോ ബാങ്ക് ശാഖയിൽ നിന്നും ഒരു എസ്‌സി/എസ്ടി, ഒരു വനിതാ സംരംഭകയ്ക്ക് ₹10 ലക്ഷം മുതൽ ₹1 കോടി വരെ വായ്പ.",
+    "description": "Facilitates bank loans between ₹10 lakh and ₹1 crore for greenfield enterprises in manufacturing, services, agri-allied activities, or trading sectors by SC, ST or Women entrepreneurs.",
+    "description_ta": "உற்பத்தி, வர்த்தகம், விவசாயம் சார்ந்த மற்றும் சேவைத் துறைகளில் புதிய தொழில் தொடங்கும் பெண் மற்றும் எஸ்சி/எஸ்டி தொழில்முனைவோருக்கு ₹1 கோடி வரை கடன் வழங்கும் திட்டம்.",
+    "description_hi": "विनिर्माण, सेवा, व्यापार या कृषि-संबद्ध गतिविधियों में नए उद्यम स्थापित करने हेतु विशेष वित्तीय सहायता।",
+    "description_ml": "പുതിയ ഗ്രീൻഫീൽഡ് സംരംഭങ്ങൾ തുടങ്ങുന്നതിനുള്ള സാമ്പത്തിക സഹായ പദ്ധതി.",
+    "keywords": "standup india, loan, sc, st, women, entrepreneur, business, finance, sidbi",
+    "official_portal": "https://www.standupmitra.in",
+    "application_url": "https://www.standupmitra.in/Login/Register",
+    "conditions": [
+      {
+        "field_name": "gender",
+        "operator": "in",
+        "field_value": "female,sc,st",
+        "description_en": "Borrower must be a Woman OR belonging to Scheduled Caste (SC) or Scheduled Tribe (ST)",
+        "description_ta": "விண்ணப்பதாரர் பெண்ணாக அல்லது எஸ்சி/எஸ்டி பிரிவைச் சேர்ந்தவராக இருக்க வேண்டும்",
+        "description_hi": "उद्यमी महिला या अनुसूचित जाति/जनजाति वर्ग से होना चाहिए",
+        "description_ml": "വനിതയോ എസ്‌സി/എസ്ടി വിഭാഗത്തിൽപ്പെട്ടയാളോ ആയിരിക്കണം"
+      },
+      {
+        "field_name": "age",
+        "operator": "gte",
+        "field_value": "18",
+        "description_en": "Must be at least 18 years of age",
+        "description_ta": "குறைந்தபட்சம் 18 வயது பூர்த்தியடைந்திருக்க வேண்டும்",
+        "description_hi": "न्यूनतम आयु 18 वर्ष",
+        "description_ml": "കുറഞ്ഞ പ്രായം 18 വയസ്സ്"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Identity & Address Proof (Aadhaar / Voter ID / Passport)",
+        "document_name_ta": "அடையாளம் மற்றும் முகவரி சான்று",
+        "is_mandatory": true,
+        "issuing_authority": "Government of India"
+      },
+      {
+        "document_name_en": "Caste Certificate (For SC/ST applicants)",
+        "document_name_ta": "ஜாதி சான்றிதழ் (எஸ்சி/எஸ்டி பிரிவினருக்கு)",
+        "is_mandatory": false,
+        "issuing_authority": "Tahsildar / Revenue Department"
+      },
+      {
+        "document_name_en": "Detailed Project Report (DPR) / Business Plan",
+        "document_name_ta": "தொழில் திட்ட அறிக்கை",
+        "is_mandatory": true,
+        "issuing_authority": "Applicant / Chartered Accountant"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Online Application on Stand-Up Mitra Portal",
+        "title_ta": "ஸ்டாண்ட்-அப் மித்ரா தளத்தில் விண்ணப்பித்தல்",
+        "description_en": "Register and submit online loan application along with business DPR on standupmitra.in.",
+        "description_ta": "standupmitra.in இணையதளத்தில் பதிவு செய்து தொழில் திட்ட அறிக்கையுடன் விண்ணப்பிக்கவும்.",
+        "portal_url": "https://www.standupmitra.in"
+      }
+    ]
+  },
+  {
+    "id": "pm-ujjwala-2",
+    "name": "Pradhan Mantri Ujjwala Yojana 2.0 (PMUY)",
+    "name_ta": "பிரதம மந்திரி உஜ்வாலா திட்டம் 2.0",
+    "name_hi": "प्रधानमंत्री उज्ज्वला योजना 2.0",
+    "name_ml": "പ്രധാനമന്ത്രി ഉജ്ജ്വല യോജന 2.0",
+    "department": "Ministry of Petroleum and Natural Gas",
+    "department_ta": "பெட்ரோலியம் மற்றும் இயற்கை எரிவாயு அமைச்சகம்",
+    "department_hi": "पेट्रोलियम एवं प्राकृतिक गैस मंत्रालय",
+    "department_ml": "പെട്രോളിയം പ്രകൃതിവാതക മന്ത്രാലയം",
+    "category": "women",
+    "level": "Central",
+    "state": "All India",
+    "beneficiary_type": "Adult women from BPL / poor households without existing LPG connection",
+    "beneficiary_type_ta": "எரிவாயு இணைப்பு இல்லாத ஏழைக் குடும்பங்களைச் சேர்ந்த பெண்கள்",
+    "beneficiary_type_hi": "बीपीएल/निर्धन परिवारों की वयस्क महिलाएं जिनके घर में एलपीजी कनेक्शन नहीं है",
+    "beneficiary_type_ml": "ഗ്യാസ് കണക്ഷൻ ഇല്ലാത്ത ദരിദ്ര കുടുംബങ്ങളിലെ മുതിർന്ന വനിതകൾ",
+    "target_beneficiaries": "Poor and Marginalized Women",
+    "target_beneficiaries_ta": "ஏழை மற்றும் பின்தங்கிய பெண்கள்",
+    "benefit_amount": "Free LPG connection + Free first cylinder & stove",
+    "benefit_summary": "Deposit-free LPG connection along with first refill cylinder and hotplate (stove) completely free of cost, plus ongoing targeted subsidy of ₹300 per cylinder.",
+    "benefit_summary_ta": "வைப்புத்தொகை இன்றி இலவச எரிவாயு இணைப்பு, இலவச முதல் சிலிண்டர் மற்றும் அடுப்பு, மேலும் ஒரு சிலிண்டருக்கு ₹300 நேரடி மானியம்.",
+    "benefit_summary_hi": "जमा-मुक्त एलपीजी कनेक्शन, पहला सिलेंडर और चूल्हा बिल्कुल मुफ्त, साथ ही प्रति सिलेंडर ₹300 की सब्सिडी।",
+    "benefit_summary_ml": "സൗജന്യ എൽപിജി കണക്ഷനും ആദ്യ സിലിണ്ടറും സ്റ്റൗവും സൗജന്യമായി, കൂടാതെ സിലിണ്ടറിന് ₹300 സബ്സിഡി.",
+    "description": "Clean cooking fuel welfare mission providing deposit-free LPG connections to women belonging to poor households to protect health from hazardous smoke and indoor air pollution.",
+    "description_ta": "கிராமப்புற ஏழைப் பெண்களுக்கு புகை இல்லாத தூய சமையல் எரிவாயுவை இலவசமாக வழங்கும் மத்திய அரசின் உன்னத திட்டம்.",
+    "description_hi": "ग्रामीण एवं निर्धन परिवारों की महिलाओं को स्वच्छ ईंधन उपलब्ध कराकर उनके स्वास्थ्य की रक्षा हेतु योजना।",
+    "description_ml": "പാവപ്പെട്ട കുടുംബങ്ങളിലെ സ്ത്രീകൾക്ക് സൗജന്യ ഗാർഹിക പാചകവാതകം നൽകുന്ന പദ്ധതി.",
+    "keywords": "ujjwala, lpg, gas cylinder, women, bpl, subsidy, clean cooking",
+    "official_portal": "https://www.pmuy.gov.in",
+    "application_url": "https://www.pmuy.gov.in/ujjwala2.html",
+    "conditions": [
+      {
+        "field_name": "gender",
+        "operator": "eq",
+        "field_value": "female",
+        "description_en": "Applicant must be an adult woman (aged 18 or above)",
+        "description_ta": "விண்ணப்பதாரர் 18 வயது பூர்த்தியடைந்த பெண்ணாக இருக்க வேண்டும்",
+        "description_hi": "आवेदक 18 वर्ष या उससे अधिक आयु की महिला होनी चाहिए",
+        "description_ml": "അപേക്ഷക 18 വയസ്സ് തികഞ്ഞ സ്ത്രീയായിരിക്കണം"
+      },
+      {
+        "field_name": "ration_card_type",
+        "operator": "in",
+        "field_value": "bpl,phh,aay,poor",
+        "description_en": "Household must belong to BPL / Antyodaya / Pradhan Mantri Awas / SECC list",
+        "description_ta": "குடும்பம் வறுமைக் கோட்டிற்கு கீழ் (BPL) அல்லது அந்தியோதயா பிரிவில் இருக்க வேண்டும்",
+        "description_hi": "परिवार बीपीएल या अंत्योदय वर्ग से संबंधित होना चाहिए",
+        "description_ml": "കുടുംബം ബിപിഎൽ വിഭാഗത്തിൽപ്പെട്ടതായിരിക്കണം"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Aadhaar Card of Applicant and Adult Family Members",
+        "document_name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Ration Card (BPL / Antyodaya / State Food Security Card)",
+        "document_name_ta": "குடும்ப அட்டை (ரேஷன் கார்டு)",
+        "is_mandatory": true,
+        "issuing_authority": "Food and Civil Supplies Department"
+      },
+      {
+        "document_name_en": "Bank Account Passbook (Aadhaar linked)",
+        "document_name_ta": "வங்கி கணக்கு புத்தகம்",
+        "is_mandatory": true,
+        "issuing_authority": "Bank"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Application via PMUY Portal or Nearest LPG Distributor",
+        "title_ta": "இணையதளம் அல்லது எரிவாயு ஏஜென்சியில் விண்ணப்பித்தல்",
+        "description_en": "Apply online at pmuy.gov.in or submit physical form at nearest Indane, Bharat Gas, or HP Gas distributor.",
+        "description_ta": "pmuy.gov.in தளத்தில் அல்லது அருகிலுள்ள இண்டேன், பாரத் கேஸ், எச்பி கேஸ் விநியோகஸ்தரிடம் விண்ணப்பிக்கவும்.",
+        "portal_url": "https://www.pmuy.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "up-farmer-solar-pump",
+    "name": "UP Farmer Solar Pump Subsidy Scheme (PM-KUSUM Component-B)",
+    "name_ta": "உத்தரப் பிரதேச விவசாய சோலார் பம்ப் மானியத் திட்டம்",
+    "name_hi": "उत्तर प्रदेश किसान सोलर पंप योजना (पीएम-कुसुम)",
+    "name_ml": "യുപി കർഷക സോളാർ പമ്പ് സബ്സിഡി പദ്ധതി",
+    "department": "Department of Agriculture, Government of Uttar Pradesh",
+    "department_ta": "விவசாயத் துறை, உத்தரப் பிரதேச அரசு",
+    "department_hi": "कृषि विभाग, उत्तर प्रदेश सरकार",
+    "department_ml": "കൃഷി വകുപ്പ്, ഉത്തർപ്രദേശ് സർക്കാർ",
+    "category": "agriculture",
+    "level": "State",
+    "state": "Uttar Pradesh",
+    "beneficiary_type": "Farmers with agricultural land and functional borewell/source for irrigation",
+    "beneficiary_type_ta": "விவசாய நிலம் மற்றும் நீர் ஆதாரம் கொண்ட விவசாயிகள்",
+    "beneficiary_type_hi": "सिंचाई योग्य कृषि भूमि और जल स्रोत वाले किसान",
+    "beneficiary_type_ml": "കൃഷിഭൂമിയും ജലസ്രോതസ്സുമുള്ള കർഷകർ",
+    "target_beneficiaries": "Farmers of Uttar Pradesh",
+    "target_beneficiaries_ta": "உத்தரப் பிரதேச விவசாயிகள்",
+    "benefit_amount": "Up to 60% government subsidy on solar pumps (2HP to 10HP)",
+    "benefit_summary": "60% financial grant (30% Central + 30% UP State) on standalone DC/AC solar irrigation pumps (2 HP to 10 HP) saving grid electricity and diesel costs.",
+    "benefit_summary_ta": "2 HP முதல் 10 HP சோலார் பாசன பம்புகளுக்கு 60% அரசு மானியம் (30% மத்திய அரசு + 30% மாநில அரசு).",
+    "benefit_summary_hi": "2 एचपी से 10 एचपी तक के सोलर पंप पर 60% अनुदान (30% केंद्र + 30% राज्य सरकार द्वारा)।",
+    "benefit_summary_ml": "സോളാർ പമ്പുകൾക്ക് 60% സർക്കാർ സബ്സിഡി.",
+    "description": "Flagship renewable energy irrigation scheme empowering Uttar Pradesh farmers with standalone solar-powered tube wells and surface pumps with 60% combined subsidy.",
+    "description_ta": "உத்தரப் பிரதேச விவசாயிகளுக்கு டீசல் மற்றும் மின்சார கட்டணத்தை மிச்சப்படுத்தி 60% மானியத்தில் சோலார் பம்பு அமைத்து தரும் உன்னத திட்டம்.",
+    "description_hi": "किसानों को सिंचाई के लिए दिन में बिजली और डीजल खर्च से मुक्ति दिलाने हेतु 60% अनुदानित सोलर पंप योजना।",
+    "description_ml": "കർഷകർക്ക് സോളാർ പമ്പ് സ്ഥാപിക്കാൻ 60% സബ്സിഡി നൽകുന്ന പദ്ധതി.",
+    "keywords": "solar pump, up agriculture, kusum, farmer, irrigation, uttar pradesh",
+    "official_portal": "http://upagriculture.com",
+    "application_url": "http://upagriculture.com/Solar_registration.aspx",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "field_value": "Uttar Pradesh",
+        "description_en": "Must be a registered farmer and resident of Uttar Pradesh",
+        "description_ta": "உத்தரப் பிரதேசத்தின் பதிவு பெற்ற விவசாயியாக இருக்க வேண்டும்",
+        "description_hi": "उत्तर प्रदेश का पंजीकृत किसान और निवासी होना चाहिए",
+        "description_ml": "ഉത്തർപ്രദേശിലെ രജിസ്റ്റർ ചെയ്ത കർഷകനായിരിക്കണം"
+      },
+      {
+        "field_name": "occupation",
+        "operator": "in",
+        "field_value": "farmer,agriculture",
+        "description_en": "Must possess agricultural land with functional irrigation source (borewell)",
+        "description_ta": "விவசாய நிலமும் ஆழ்துளை கிணறு போன்ற நீர் ஆதாரமும் இருக்க வேண்டும்",
+        "description_hi": "कृषि भूमि और बोरवेल/जल स्रोत होना आवश्यक है",
+        "description_ml": "കൃഷിഭൂമിയും ജലസ്രോതസ്സും ഉണ്ടായിരിക്കണം"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Kisan Panjikaran (UP Agriculture Portal Registration Number)",
+        "document_name_ta": "விவசாயி பதிவு எண்",
+        "is_mandatory": true,
+        "issuing_authority": "Agriculture Department UP"
+      },
+      {
+        "document_name_en": "Aadhaar Card",
+        "document_name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Land Revenue Records (Khatauni)",
+        "document_name_ta": "நில வருவாய் ஆவணம் (கதவுனி)",
+        "is_mandatory": true,
+        "issuing_authority": "Revenue Department UP"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Booking on UP Agriculture Department Portal",
+        "title_ta": "உத்தரப் பிரதேச விவசாய போர்ட்டலில் முன்பதிவு",
+        "description_en": "Book token online at upagriculture.com using Farmer Registration ID and pay farmer share via online banking/challan.",
+        "description_ta": "upagriculture.com தளத்தில் டோக்கன் பதிவு செய்து விவசாயி பங்களிப்பை ஆன்லைனில் செலுத்தவும்.",
+        "portal_url": "http://upagriculture.com"
+      }
+    ]
+  },
+  {
+    "id": "up-post-matric-scholarship",
+    "name": "UP Post-Matric Scholarship & Fee Reimbursement Scheme",
+    "name_ta": "உத்தரப் பிரதேச கல்லூரி கல்வி உதவித்தொகை மற்றும் கட்டணத் திருப்பம்",
+    "name_hi": "उत्तर प्रदेश पोस्ट-मैट्रिक छात्रवृत्ति एवं शुल्क प्रतिपूर्ति योजना",
+    "name_ml": "യുപി പോസ്റ്റ്-മെട്രിക് സ്കോളർഷിപ്പ്",
+    "department": "Social Welfare Department, Government of Uttar Pradesh",
+    "department_ta": "சமூக நலத்துறை, உத்தரப் பிரதேச அரசு",
+    "department_hi": "समाज कल्याण विभाग, उत्तर प्रदेश सरकार",
+    "department_ml": "സാമൂഹിക ക്ഷേമ വകുപ്പ്, യുപി",
+    "category": "education",
+    "level": "State",
+    "state": "Uttar Pradesh",
+    "beneficiary_type": "SC, ST, OBC, Minority, and General category students studying in Class 11, 12, Degree, Diploma, PG courses",
+    "beneficiary_type_ta": "11, 12 மற்றும் கல்லூரி பட்டப்படிப்பு பயிலும் மாணவர்கள்",
+    "beneficiary_type_hi": "कक्षा 11, 12, स्नातक, स्नातकोत्तर, इंजीनियरिंग, मेडिकल के छात्र",
+    "beneficiary_type_ml": "കോളേജ്, ഉന്നത വിദ്യാഭ്യാസം നടത്തുന്ന വിദ്യാർത്ഥികൾ",
+    "target_beneficiaries": "Post-Matric College Students",
+    "target_beneficiaries_ta": "கல்லூரி மாணவர்கள்",
+    "benefit_amount": "Full Tuition Fee Reimbursement + Annual Maintenance Allowance up to ₹50,000",
+    "benefit_summary": "100% non-refundable tuition fee reimbursement directly to educational institutions or student account plus maintenance allowance up to ₹50,000 per academic year.",
+    "benefit_summary_ta": "முழுக் கல்விக் கட்டணத் திருப்பம் மற்றும் ஆண்டிற்கு ₹50,000 வரை பராமரிப்பு உதவித்தொகை.",
+    "benefit_summary_hi": "पूर्ण शिक्षण शुल्क प्रतिपूर्ति एवं ₹50,000 तक का वार्षिक भरण-पोषण भत्ता सीधे बैंक खाते में।",
+    "benefit_summary_ml": "പൂർണ്ണ ട്യൂഷൻ ഫീസ് റീഇംബേഴ്സ്മെന്റും സ്കോളർഷിപ്പും.",
+    "description": "Comprehensive statewide scholarship program for students enrolled in post-matric courses in recognized colleges, polytechnics, and universities across Uttar Pradesh.",
+    "description_ta": "உத்தரப் பிரதேசத்தில் உயர் கல்வி பயிலும் பொருளாதாரத்தில் பின்தங்கிய மாணவர்களின் முழுக் கல்விச் செலவை ஏற்கும் மாநில அரசு திட்டம்.",
+    "description_hi": "उत्तर प्रदेश के उच्च शिक्षण संस्थानों में अध्ययनरत निर्धन व मेधावी विद्यार्थियों के लिए छात्रवृत्ति योजना।",
+    "description_ml": "യുപിയിലെ ഉന്നത വിദ്യാഭ്യാസ വിദ്യാർത്ഥികൾക്കുള്ള സമഗ്ര സ്കോളർഷിപ്പ്.",
+    "keywords": "up scholarship, fee reimbursement, college, post matric, social welfare, uttar pradesh",
+    "official_portal": "https://scholarship.up.gov.in",
+    "application_url": "https://scholarship.up.gov.in/RegistrationNew.aspx",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "field_value": "Uttar Pradesh",
+        "description_en": "Must be a domicile of Uttar Pradesh",
+        "description_ta": "உத்தரப் பிரதேசத்தில் நிரந்தரமாக வசிப்பவராக இருக்க வேண்டும்",
+        "description_hi": "उत्तर प्रदेश का मूल निवासी होना चाहिए",
+        "description_ml": "ഉത്തർപ്രദേശിലെ സ്ഥിരതാമസക്കാരനായിരിക്കണം"
+      },
+      {
+        "field_name": "income",
+        "operator": "lte",
+        "field_value": "250000",
+        "description_en": "Annual family income must not exceed ₹2,50,000 (SC/ST) or ₹2,00,000 (OBC/Gen)",
+        "description_ta": "ஆண்டு குடும்ப வருமானம் ₹2,50,000க்கு மிகாமல் இருக்க வேண்டும்",
+        "description_hi": "वार्षिक पारिवारिक आय ₹2,50,000 (एससी/एसटी) या ₹2,00,000 (अन्य) से अधिक नहीं होनी चाहिए",
+        "description_ml": "കുടുംബ വാർഷിക വരുമാനം ₹2,50,000 ൽ താഴെയായിരിക്കണം"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Domicile / Residence Certificate of Uttar Pradesh",
+        "document_name_ta": "இருப்பிடச் சான்றிதழ்",
+        "is_mandatory": true,
+        "issuing_authority": "Revenue Authority (Tehsildar UP)"
+      },
+      {
+        "document_name_en": "Income Certificate (Aadhaar-authenticated)",
+        "document_name_ta": "வருமானச் சான்றிதழ்",
+        "is_mandatory": true,
+        "issuing_authority": "Tehsildar UP"
+      },
+      {
+        "document_name_en": "Caste Certificate (For SC/ST/OBC)",
+        "document_name_ta": "ஜாதி சான்றிதழ்",
+        "is_mandatory": false,
+        "issuing_authority": "Tehsildar UP"
+      },
+      {
+        "document_name_en": "Fee Receipt & College Bonafide / Enrollment Card",
+        "document_name_ta": "கல்லூரி சேர்க்கை மற்றும் கட்டண ரசீது",
+        "is_mandatory": true,
+        "issuing_authority": "College / University"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Online Registration on UP Scholarship Portal",
+        "title_ta": "இணையதளத்தில் பதிவு செய்து விண்ணப்பித்தல்",
+        "description_en": "Register on scholarship.up.gov.in using Aadhaar e-KYC and fill academic and fee details.",
+        "description_ta": "scholarship.up.gov.in இணையதளத்தில் பதிவு செய்து கல்வி விவரங்களை சமர்ப்பிக்கவும்.",
+        "portal_url": "https://scholarship.up.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "bihar-student-credit-card",
+    "name": "Bihar Student Credit Card Scheme (MNSSBY)",
+    "name_ta": "பீகார் மாணவர் கடன் அட்டை திட்டம்",
+    "name_hi": "बिहार स्टूडेंट क्रेडिट कार्ड योजना (एमएनएसएसबीवाई)",
+    "name_ml": "ബീഹാർ സ്റ്റുഡന്റ് ക്രെഡിറ്റ് കാർഡ് പദ്ധതി",
+    "department": "Education Department, Government of Bihar",
+    "department_ta": "கல்வித் துறை, பீகார் அரசு",
+    "department_hi": "शिक्षा विभाग, बिहार सरकार",
+    "department_ml": "വിദ്യാഭ്യാസ വകുപ്പ്, ബീഹാർ സർക്കാർ",
+    "category": "education",
+    "level": "State",
+    "state": "Bihar",
+    "beneficiary_type": "12th pass students pursuing higher education (BA, BSc, BTech, MBBS, MBA, Polytechnic)",
+    "beneficiary_type_ta": "12ஆம் வகுப்பு முடித்து கல்லூரி உயர்கல்வி பயிலும் மாணவர்கள்",
+    "beneficiary_type_hi": "12वीं उत्तीर्ण छात्र जो तकनीकी, व्यावसायिक या उच्च शिक्षा प्राप्त कर रहे हैं",
+    "beneficiary_type_ml": "12-ാം ക്ലാസ് കഴിഞ്ഞ് ഉന്നത വിദ്യാഭ്യാസം നേടുന്ന വിദ്യാർത്ഥികൾ",
+    "target_beneficiaries": "Higher Education Students of Bihar",
+    "target_beneficiaries_ta": "பீகார் உயர்கல்வி மாணவர்கள்",
+    "benefit_amount": "Education Loan up to ₹4,00,000 at 1% / 4% simple interest",
+    "benefit_summary": "Guaranteed educational loan up to ₹4 lakh with state government guarantee, charged at nominal 1% interest for women/PwD and 4% for male students.",
+    "benefit_summary_ta": "பீகார் அரசின் உத்தரவாதத்துடன் ₹4 லட்சம் வரை கல்விக் கடன் (மாணவிகளுக்கு 1%, மாணவர்களுக்கு 4% வட்டி).",
+    "benefit_summary_hi": "राज्य सरकार की गारंटी पर ₹4 लाख तक का शिक्षा ऋण (छात्राओं/दिव्यांगों हेतु 1% और छात्रों हेतु 4% ब्याज दर)।",
+    "benefit_summary_ml": "സംസ്ഥാന ഗ്യാരണ്ടിയിൽ ₹4 ലക്ഷം വരെ വിദ്യാഭ്യാസ വായ്പ (വനിതകൾക്ക് 1% പലിശ).",
+    "description": "Part of Bihar's 7 Nischay initiatives, enabling financially challenged students to pursue 40+ professional and academic degree courses without requiring institutional property collateral.",
+    "description_ta": "நிதி பற்றாக்குறையால் எந்த மாணவரும் உயர்கல்வியை கைவிடக்கூடாது என்பதற்காக ₹4 லட்சம் வரை உத்தரவாதக் கடன் வழங்கும் பீகார் அரசின் திட்டம்.",
+    "description_hi": "बिहार के युवाओं को उच्च शिक्षा हेतु आर्थिक बाधाओं से मुक्त करने के लिए 7 निश्चय के तहत प्रारंभ की गई योजना।",
+    "description_ml": "ബീഹാറിലെ വിദ്യാർത്ഥികൾക്ക് ഉന്നത വിദ്യാഭ്യാസത്തിന് ധനസഹായം നൽകുന്ന പദ്ധതി.",
+    "keywords": "student credit card, bihar education loan, mnssby, 7 nischay, bihar scholarship",
+    "official_portal": "https://www.7nishchay-yuvaupmission.bihar.gov.in",
+    "application_url": "https://www.7nishchay-yuvaupmission.bihar.gov.in/addnewApplicantPage",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "field_value": "Bihar",
+        "description_en": "Must be a permanent resident of Bihar",
+        "description_ta": "பீகாரின் நிரந்தரக் குடியுரிமை கொண்டவராக இருக்க வேண்டும்",
+        "description_hi": "बिहार का स्थायी निवासी होना चाहिए",
+        "description_ml": "ബീഹാറിലെ സ്ഥിരതാമസക്കാരനായിരിക്കണം"
+      },
+      {
+        "field_name": "education",
+        "operator": "in",
+        "field_value": "12th,intermediate,diploma,college",
+        "description_en": "Must have passed 12th / Intermediate from recognized institution in Bihar",
+        "description_ta": "12ஆம் வகுப்பு அல்லது அதற்கு இணையான படிப்பில் தேர்ச்சி பெற்றிருக்க வேண்டும்",
+        "description_hi": "मान्यता प्राप्त संस्थान से 12वीं/इंटरमीडिएट उत्तीर्ण होना चाहिए",
+        "description_ml": "12-ാം ക്ലാസ് വിജയിച്ചിരിക്കണം"
+      },
+      {
+        "field_name": "age",
+        "operator": "lte",
+        "field_value": "25",
+        "description_en": "Maximum age limit of 25 years at application",
+        "description_ta": "விண்ணப்பிக்கும் போது அதிகபட்ச வயது 25க்கு மிகாமல் இருக்க வேண்டும்",
+        "description_hi": "आवेदन के समय अधिकतम आयु 25 वर्ष",
+        "description_ml": "പരമാവധി പ്രായം 25 വയസ്സ്"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Aadhaar Card of Student and Co-Applicant (Parent/Guardian)",
+        "document_name_ta": "மாணவர் மற்றும் பெற்றோரின் ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Bihar Domicile Certificate",
+        "document_name_ta": "பீகார் இருப்பிடச் சான்றிதழ்",
+        "is_mandatory": true,
+        "issuing_authority": "Circle Officer (CO) / SDO Bihar"
+      },
+      {
+        "document_name_en": "10th and 12th Marksheets & Certificates",
+        "document_name_ta": "10 மற்றும் 12ஆம் வகுப்பு மதிப்பெண் சான்றிதழ்",
+        "is_mandatory": true,
+        "issuing_authority": "BSEB / CBSE / ICSE"
+      },
+      {
+        "document_name_en": "College Admission Letter & Fee Structure Leaflet",
+        "document_name_ta": "கல்லூரி சேர்க்கை மற்றும் கட்டண விவர கடிதம்",
+        "is_mandatory": true,
+        "issuing_authority": "College / University Authority"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Online Registration on MNSSBY Portal",
+        "title_ta": "இணையதளத்தில் விண்ணப்பப் பதிவு",
+        "description_en": "Register on 7nishchay-yuvaupmission.bihar.gov.in, fill course fee details and schedule DRCC appointment.",
+        "description_ta": "இணையதளத்தில் பதிவு செய்து மாவட்ட பதிவு மைய (DRCC) நேரத்தை முன்பதிவு செய்யவும்.",
+        "portal_url": "https://www.7nishchay-yuvaupmission.bihar.gov.in"
+      },
+      {
+        "step_number": 2,
+        "mode": "offline",
+        "title_en": "Physical Document Verification at DRCC",
+        "title_ta": "மாவட்ட மையத்தில் நேரடி ஆவண சரிபார்ப்பு",
+        "description_en": "Visit District Registration and Counseling Center (DRCC) on scheduled date with original documents for biometric capture.",
+        "description_ta": "அசல் ஆவணங்களுடன் மாவட்ட மையத்திற்கு நேரில் சென்று சரிபார்க்கவும்.",
+        "portal_url": "https://www.7nishchay-yuvaupmission.bihar.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "bihar-udyami-yojana",
+    "name": "Mukhyamantri Udyami Yojana (Youth, Women, SC/ST, EBC)",
+    "name_ta": "பீகார் முதலமைச்சர் தொழில்முனைவோர் திட்டம்",
+    "name_hi": "मुख्यमंत्री उद्यमी योजना (युवा, महिला, एससी/एसटी, ईबीसी)",
+    "name_ml": "മുഖ്യമന്ത്രി ഉദ്യമി യോജന ബീഹാർ",
+    "department": "Industries Department, Government of Bihar",
+    "department_ta": "தொழில்துறை, பீகார் அரசு",
+    "department_hi": "उद्योग विभाग, बिहार सरकार",
+    "department_ml": "വ്യവസായ വകുപ്പ്, ബീഹാർ",
+    "category": "business",
+    "level": "State",
+    "state": "Bihar",
+    "beneficiary_type": "Educated Youth, Women, SC/ST, and EBC citizens starting new enterprises",
+    "beneficiary_type_ta": "புதிய தொழில் தொடங்கும் இளைஞர்கள், பெண்கள், எஸ்சி/எஸ்டி மற்றும் பின்தங்கிய வகுப்பினர்",
+    "beneficiary_type_hi": "नया उद्योग या सेवा उद्यम शुरू करने वाले युवा, महिलाएं, एससी/एसटी व अति पिछड़ा वर्ग",
+    "beneficiary_type_ml": "പുതിയ സംരംഭങ്ങൾ തുടങ്ങുന്ന യുവാക്കളും വനിതകളും",
+    "target_beneficiaries": "Aspiring Entrepreneurs of Bihar",
+    "target_beneficiaries_ta": "தொழில்முனைவோர்",
+    "benefit_amount": "₹10,00,000 (50% Grant up to ₹5 Lakh + 50% Interest-free loan)",
+    "benefit_summary": "Financial project assistance of ₹10 lakh per entrepreneur comprising 50% non-repayable government grant (up to ₹5 lakh) and 50% interest-free loan repayable in 84 installments.",
+    "benefit_summary_ta": "ஒரு தொழில்முனைவோருக்கு ₹10 லட்சம் நிதி ஆதரவு (₹5 லட்சம் இலவச அரசு மானியம் + ₹5 லட்சம் வட்டியில்லா கடன்).",
+    "benefit_summary_hi": "₹10 लाख की वित्तीय सहायता (₹5 लाख तक 50% सरकारी अनुदान + ₹5 लाख 84 किस्तों में ब्याज-मुक्त ऋण)।",
+    "benefit_summary_ml": "₹10 ലക്ഷം ധനസഹായം (₹5 ലക്ഷം സബ്സിഡി + ₹5 ലക്ഷം പലിശരഹിത വായ്പ).",
+    "description": "Massive enterprise promotion mission by the Bihar Industries Department empowering citizens to set up manufacturing, agro-processing, and service units with 50% grant assistance.",
+    "description_ta": "பீகாரில் சுயதொழில் மற்றும் தொழிற்சாலைகளை உருவாக்க ₹10 லட்சம் திட்டத்தில் 50% மானியம் வழங்கும் அரசு திட்டம்.",
+    "description_hi": "बिहार में सूक्ष्म एवं लघु उद्योगों को बढ़ावा देने हेतु 50% अनुदान और ब्याज-मुक्त ऋण योजना।",
+    "description_ml": "ചെറുകിട വ്യവസായ സംരംഭങ്ങൾ തുടങ്ങാൻ ധനസഹായം നൽകുന്ന ബീഹാർ പദ്ധതി.",
+    "keywords": "udyami, bihar entrepreneur, startup, msme, grant, loan, industries",
+    "official_portal": "https://udyami.bihar.gov.in",
+    "application_url": "https://udyami.bihar.gov.in/Registration",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "field_value": "Bihar",
+        "description_en": "Must be a permanent resident of Bihar",
+        "description_ta": "பீகாரின் நிரந்தரக் குடியுரிமை கொண்டவராக இருக்க வேண்டும்",
+        "description_hi": "बिहार का स्थायी निवासी होना अनिवार्य है",
+        "description_ml": "ബീഹാറിലെ സ്ഥിരതാമസക്കാരനായിരിക്കണം"
+      },
+      {
+        "field_name": "education",
+        "operator": "in",
+        "field_value": "12th,intermediate,iti,polytechnic,diploma,graduate",
+        "description_en": "Minimum educational qualification: 10+2 / Intermediate / ITI / Polytechnic Diploma or equivalent",
+        "description_ta": "குறைந்தபட்சம் 12ஆம் வகுப்பு, ஐடிஐ அல்லது பாலிடெக்னிக் தேர்ச்சி பெற்றிருக்க வேண்டும்",
+        "description_hi": "न्यूनतम शैक्षणिक योग्यता: 12वीं/इंटरमीडिएट/आईटीआई/पॉलिटेक्निक डिप्लोमा",
+        "description_ml": "കുറഞ്ഞത് 12-ാം ക്ലാസ് അല്ലെങ്കിൽ ഐടിഐ/ഡിപ്ലോമ ഉണ്ടായിരിക്കണം"
+      },
+      {
+        "field_name": "age",
+        "operator": "gte",
+        "field_value": "18",
+        "description_en": "Minimum age 18 years",
+        "description_ta": "குறைந்தபட்ச வயது 18",
+        "description_hi": "न्यूनतम आयु 18 वर्ष",
+        "description_ml": "കുറഞ്ഞ പ്രായം 18 വയസ്സ്"
+      },
+      {
+        "field_name": "age",
+        "operator": "lte",
+        "field_value": "50",
+        "description_en": "Maximum age 50 years",
+        "description_ta": "அதிகபட்ச வயது 50",
+        "description_hi": "अधिकतम आयु 50 वर्ष",
+        "description_ml": "പരമാവധി പ്രായം 50 വയസ്സ്"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Aadhaar Card",
+        "document_name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Permanent Residence / Domicile Certificate",
+        "document_name_ta": "இருப்பிடச் சான்றிதழ்",
+        "is_mandatory": true,
+        "issuing_authority": "Revenue Department Bihar"
+      },
+      {
+        "document_name_en": "Educational Marksheets & Passing Certificates",
+        "document_name_ta": "கல்விச் சான்றிதழ்கள்",
+        "is_mandatory": true,
+        "issuing_authority": "BSEB / Board / University"
+      },
+      {
+        "document_name_en": "Current Bank Account Statement & Cancelled Cheque in Firm Name",
+        "document_name_ta": "நிறுவன வங்கி கணக்கு காசோலை",
+        "is_mandatory": true,
+        "issuing_authority": "Bank"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Online Portal Registration & Project Selection",
+        "title_ta": "இணையதளத்தில் பதிவு செய்து தொழில் மாதிரியை தேர்வு செய்தல்",
+        "description_en": "Apply on udyami.bihar.gov.in, select trade from approved project list, and upload documents.",
+        "description_ta": "udyami.bihar.gov.in தளத்தில் பதிவு செய்து திட்டப்பட்டியலில் இருந்து தொழில் மாதிரியைத் தேர்ந்தெடுத்து விண்ணப்பிக்கவும்.",
+        "portal_url": "https://udyami.bihar.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "maharashtra-ladki-bahin",
+    "name": "Mukhyamantri Majhi Ladki Bahin Yojana",
+    "name_ta": "மகாராஷ்டிரா முதலமைச்சர் மாஜி லட்கி பஹின் திட்டம்",
+    "name_hi": "मुख्यमंत्री माझी लाड़की बहिन योजना",
+    "name_ml": "മുഖ്യമന്ത്രി മാജി ലാഡ്കി ബഹിൻ പദ്ധതി",
+    "department": "Women and Child Development Department, Government of Maharashtra",
+    "department_ta": "பெண்கள் மற்றும் குழந்தைகள் மேம்பாட்டுத் துறை, மகாராஷ்டிரா அரசு",
+    "department_hi": "महिला एवं बाल विकास विभाग, महाराष्ट्र शासन",
+    "department_ml": "വനിതാ ശിശു വികസന വകുപ്പ്, മഹാരാഷ്ട്ര",
+    "category": "women",
+    "level": "State",
+    "state": "Maharashtra",
+    "beneficiary_type": "Resident women aged 21 to 65 years from families with annual income under ₹2.5 lakh",
+    "beneficiary_type_ta": "ஆண்டு குடும்ப வருமானம் ₹2.5 லட்சத்திற்குள் உள்ள 21 முதல் 65 வயது பெண்கள்",
+    "beneficiary_type_hi": "वार्षिक पारिवारिक आय ₹2.5 लाख से कम वाली 21 से 65 वर्ष की विवाहित, विधवा, परित्यक्ता महिलाएं",
+    "beneficiary_type_ml": "21 മുതൽ 65 വയസ്സുവരെയുള്ള സാമ്പത്തികമായി പിന്നാക്കം നിൽക്കുന്ന സ്ത്രീകൾ",
+    "target_beneficiaries": "Women of Maharashtra",
+    "target_beneficiaries_ta": "மகாராஷ்டிர பெண்கள்",
+    "benefit_amount": "₹1,500 / month direct bank transfer",
+    "benefit_summary": "Monthly direct benefit transfer of ₹1,500 directly into the Aadhaar-linked bank accounts of eligible women for economic independence and nutrition.",
+    "benefit_summary_ta": "தகுதியான பெண்களின் வங்கிக் கணக்கில் மாதம் ₹1,500 நேரடி பண உதவி.",
+    "benefit_summary_hi": "पात्र महिलाओं के आधार-लिंक्ड बैंक खाते में सीधे प्रतिमाह ₹1,500 की आर्थिक सहायता।",
+    "benefit_summary_ml": "അർഹരായ സ്ത്രീകൾക്ക് പ്രതിമാസം ₹1,500 ബാങ്ക് അക്കൗണ്ടിലേക്ക് നേരിട്ട്.",
+    "description": "Landmark welfare mission providing direct economic assistance of ₹18,000 annually to promote self-reliance, improve health, and provide nutrition support to women across Maharashtra.",
+    "description_ta": "மகாராஷ்டிராவில் குடும்பத் தலைவிகள் மற்றும் ஏழைப் பெண்களுக்கு மாதம் ₹1,500 நிதி உதவி வழங்கும் மாநில அரசு திட்டம்.",
+    "description_hi": "महाराष्ट्र की 21 से 65 वर्ष की आर्थिक रूप से कमजोर महिलाओं को सशक्त बनाने हेतु प्रतिमाह ₹1,500 की सहायता योजना।",
+    "description_ml": "മഹാരാഷ്ട്രയിലെ വനിതകൾക്ക് പ്രതിമാസം ₹1,500 ധനസഹായം നൽകുന്ന പദ്ധതി.",
+    "keywords": "ladki bahin, maharashtra women, dbt, direct cash, majhi ladki, wcd maharashtra",
+    "official_portal": "https://ladakibahin.maharashtra.gov.in",
+    "application_url": "https://ladakibahin.maharashtra.gov.in",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "field_value": "Maharashtra",
+        "description_en": "Must be a permanent resident / domicile of Maharashtra",
+        "description_ta": "மகாராஷ்டிராவின் நிரந்தர குடிமகளாக இருக்க வேண்டும்",
+        "description_hi": "महाराष्ट्र राज्य की मूल निवासी/अधिवासी होना आवश्यक है",
+        "description_ml": "മഹാരാഷ്ട്രയിലെ സ്ഥിരതാമസക്കാരിയായിരിക്കണം"
+      },
+      {
+        "field_name": "gender",
+        "operator": "eq",
+        "field_value": "female",
+        "description_en": "Must be a female applicant (married, widowed, divorced, deserted or unmarried)",
+        "description_ta": "பெண்ணாக இருக்க வேண்டும்",
+        "description_hi": "महिला आवेदक होना आवश्यक है",
+        "description_ml": "സ്ത്രീയായിരിക്കണം"
+      },
+      {
+        "field_name": "age",
+        "operator": "gte",
+        "field_value": "21",
+        "description_en": "Minimum age 21 years",
+        "description_ta": "குறைந்தபட்ச வயது 21",
+        "description_hi": "न्यूनतम आयु 21 वर्ष",
+        "description_ml": "കുറഞ്ഞ പ്രായം 21 വയസ്സ്"
+      },
+      {
+        "field_name": "age",
+        "operator": "lte",
+        "field_value": "65",
+        "description_en": "Maximum age 65 years",
+        "description_ta": "அதிகபட்ச வயது 65",
+        "description_hi": "अधिकतम आयु 65 वर्ष",
+        "description_ml": "പരമാവധി പ്രായം 65 വയസ്സ്"
+      },
+      {
+        "field_name": "income",
+        "operator": "lte",
+        "field_value": "250000",
+        "description_en": "Combined annual family income must not exceed ₹2,50,000",
+        "description_ta": "ஆண்டு குடும்ப வருமானம் ₹2.5 லட்சத்திற்கு மிகாமல் இருக்க வேண்டும்",
+        "description_hi": "वार्षिक पारिवारिक आय ₹2.50 लाख से अधिक नहीं होनी चाहिए",
+        "description_ml": "കുടുംബ വാർഷിക വരുമാനം ₹2.5 ലക്ഷത്തിൽ താഴെയായിരിക്കണം"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Aadhaar Card",
+        "document_name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Maharashtra Domicile Certificate or 15-year old Ration Card/Voter ID",
+        "document_name_ta": "மகாராஷ்டிரா இருப்பிடச் சான்று",
+        "is_mandatory": true,
+        "issuing_authority": "Revenue Department Maharashtra"
+      },
+      {
+        "document_name_en": "Yellow or Orange Ration Card / Income Certificate",
+        "document_name_ta": "மஞ்சள் அல்லது ஆரஞ்சு குடும்ப அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "Food & Civil Supplies Maharashtra"
+      },
+      {
+        "document_name_en": "Bank Account Passbook (Aadhaar Seeded)",
+        "document_name_ta": "ஆதார் இணைக்கப்பட்ட வங்கி கணக்கு புத்தகம்",
+        "is_mandatory": true,
+        "issuing_authority": "Bank"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Online Application via Nari Shakti Doot App or Web Portal",
+        "title_ta": "நாரி சக்தி தூத் செயலி அல்லது இணையதளத்தில் விண்ணப்பித்தல்",
+        "description_en": "Apply through the official portal ladakibahin.maharashtra.gov.in or Mobile App, or visit Anganwadi/Aaple Sarkar Seva Kendra.",
+        "description_ta": "ladakibahin.maharashtra.gov.in இணையதளம் அல்லது அங்கன்வாடி மையம் வழியாக விண்ணப்பிக்கவும்.",
+        "portal_url": "https://ladakibahin.maharashtra.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "maharashtra-namo-shetkari",
+    "name": "Namo Shetkari Maha Samman Nidhi Yojana",
+    "name_ta": "நமோ ஷேத்காரி மகா சம்மான் நிதி திட்டம்",
+    "name_hi": "नमो शेतकरी महा सम्मान निधि योजना",
+    "name_ml": "നമോ ഷേത്കരി മഹാ സമ്മാൻ നിധി",
+    "department": "Department of Agriculture, Government of Maharashtra",
+    "department_ta": "விவசாயத் துறை, மகாராஷ்டிரா அரசு",
+    "department_hi": "कृषि विभाग, महाराष्ट्र शासन",
+    "department_ml": "കൃഷി വകുപ്പ്, മഹാരാഷ്ട്ര സർക്കാർ",
+    "category": "agriculture",
+    "level": "State",
+    "state": "Maharashtra",
+    "beneficiary_type": "Landholding farmers of Maharashtra receiving PM-KISAN benefits",
+    "beneficiary_type_ta": "பிஎம்-கிசான் உதவி பெறும் மகாராஷ்டிர விவசாயிகள்",
+    "beneficiary_type_hi": "महाराष्ट्र के किसान जो पीएम-किसान सम्मान निधि के तहत पात्र हैं",
+    "beneficiary_type_ml": "പിഎം കിസാൻ ആനുകൂല്യം ലഭിക്കുന്ന മഹാരാഷ്ട്രയിലെ കർഷകർ",
+    "target_beneficiaries": "Landholding Farmers of Maharashtra",
+    "target_beneficiaries_ta": "மகாராஷ்டிர விவசாயிகள்",
+    "benefit_amount": "₹6,000 / year (in 3 equal installments of ₹2,000)",
+    "benefit_summary": "Top-up financial grant of ₹6,000 per year from the Maharashtra state government, bringing total farmer support to ₹12,000/year when combined with PM-KISAN.",
+    "benefit_summary_ta": "மகாராஷ்டிர அரசு வழங்கும் கூடுதல் ₹6,000 மானியம் (பிஎம்-கிசான் சேர்த்து ஆண்டுக்கு மொத்தம் ₹12,000).",
+    "benefit_summary_hi": "महाराष्ट्र सरकार द्वारा ₹6,000 प्रतिवर्ष की अतिरिक्त सहायता, पीएम-किसान के साथ कुल ₹12,000 प्रतिवर्ष।",
+    "benefit_summary_ml": "വർഷം തോറും ₹6,000 അധിക സഹായം (ആകെ ₹12,000).",
+    "description": "Farmer welfare income support program where the state matches the Central PM-KISAN grant with an additional ₹6,000 annually paid in three equal four-monthly installments.",
+    "description_ta": "மகாராஷ்டிராவில் உள்ள விவசாயிகளுக்கு பிஎம்-கிசான் தொகையோடு கூடுதலாக ஆண்டுக்கு ₹6,000 வழங்கும் மாநில அரசு திட்டம்.",
+    "description_hi": "महाराष्ट्र के किसानों को अतिरिक्त वित्तीय संबल देने के लिए प्रतिवर्ष ₹6,000 की नकद सहायता योजना।",
+    "description_ml": "മഹാരാഷ്ട്രയിലെ കർഷകർക്കുള്ള വാർഷിക വരുമാന പിന്തുണ പദ്ധതി.",
+    "keywords": "namo shetkari, farmer, maharashtra agriculture, crop, kisan, mahashetkari",
+    "official_portal": "https://krishi.maharashtra.gov.in",
+    "application_url": "https://krishi.maharashtra.gov.in",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "field_value": "Maharashtra",
+        "description_en": "Must be a resident and landowner farmer in Maharashtra",
+        "description_ta": "மகாராஷ்டிராவில் விவசாய நிலம் வைத்துள்ள விவசாயியாக இருக்க வேண்டும்",
+        "description_hi": "महाराष्ट्र राज्य में कृषि भूमि का धारक किसान होना चाहिए",
+        "description_ml": "മഹാരാഷ്ട്രയിലെ കർഷകനായിരിക്കണം"
+      },
+      {
+        "field_name": "occupation",
+        "operator": "in",
+        "field_value": "farmer,agriculture",
+        "description_en": "Must be verified and receiving PM-KISAN installments",
+        "description_ta": "பிஎம்-கிசான் திட்டத்தில் பதிவு செய்து பயன் பெறுபவராக இருக்க வேண்டும்",
+        "description_hi": "पीएम-किसान योजना के तहत ई-केवाईसी पूर्ण एवं पात्र होना आवश्यक है",
+        "description_ml": "പിഎം കിസാൻ ആനുകൂല്യം ലഭിക്കുന്നയാളായിരിക്കണം"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Aadhaar Card (Linked with Bank Account)",
+        "document_name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "7/12 (Saat Baara) and 8A Land Extract Documents",
+        "document_name_ta": "7/12 நில ஆவணங்கள்",
+        "is_mandatory": true,
+        "issuing_authority": "Revenue Department Maharashtra"
+      },
+      {
+        "document_name_en": "PM-KISAN Registration ID / Beneficiary Status",
+        "document_name_ta": "பிஎம்-கிசான் பதிவு எண்",
+        "is_mandatory": true,
+        "issuing_authority": "Ministry of Agriculture / PM-KISAN"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Automatic Integration with PM-KISAN Database",
+        "title_ta": "பிஎம்-கிசான் தரவுகளுடன் தானியங்கி இணைப்பு",
+        "description_en": "All active e-KYC verified PM-KISAN beneficiaries in Maharashtra are automatically enrolled; status verifiable on krishi.maharashtra.gov.in.",
+        "description_ta": "மகாராஷ்டிராவில் உள்ள பிஎம்-கிசான் பயனாளிகள் தானாகவே சேர்க்கப்பட்டு வங்கி கணக்கில் பணம் வரவு வைக்கப்படும்.",
+        "portal_url": "https://krishi.maharashtra.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "wb-kanyashree-prakalpa",
+    "name": "Kanyashree Prakalpa (K1 & K2)",
+    "name_ta": "கன்யாஸ்ரீ திட்டம் (கே1 மற்றும் கே2)",
+    "name_hi": "कन्याश्री प्रकल्प (के1 एवं के2)",
+    "name_ml": "കന്യാശ്രീ പ്രകൽപ പശ്ചിമ ബംഗാൾ",
+    "department": "Department of Women and Child Development and Social Welfare, West Bengal",
+    "department_ta": "பெண்கள், குழந்தைகள் மேம்பாடு மற்றும் சமூக நலத்துறை, மேற்கு வங்கம்",
+    "department_hi": "महिला एवं बाल विकास विभाग, पश्चिम बंगाल",
+    "department_ml": "വനിതാ ശിശു വികസന വകുപ്പ്, പശ്ചിമ ബംഗാൾ",
+    "category": "women",
+    "level": "State",
+    "state": "West Bengal",
+    "beneficiary_type": "Unmarried girl students aged 13 to 19 years studying in recognized institutions in West Bengal",
+    "beneficiary_type_ta": "பள்ளி, கல்லூரியில் பயிலும் 13 முதல் 19 வயது திருமணமாகாத மாணவிகள்",
+    "beneficiary_type_hi": "13 से 19 वर्ष की अविवाहित छात्राएं जो स्कूल/कॉलेज में नामांकित हैं",
+    "beneficiary_type_ml": "13 മുതൽ 19 വയസ്സുവരെയുള്ള അവിവാഹിതരായ വിദ്യാർത്ഥിനികൾ",
+    "target_beneficiaries": "Girl Students of West Bengal",
+    "target_beneficiaries_ta": "மேற்கு வங்க மாணவிகள்",
+    "benefit_amount": "₹1,000 / year (K1) + ₹25,000 one-time grant (K2)",
+    "benefit_summary": "Annual scholarship of ₹1,000 (K1) for girls aged 13-18 enrolled in classes 8-12, and a one-time grant of ₹25,000 (K2) upon reaching 18 years while remaining unmarried and continuing education.",
+    "benefit_summary_ta": "8 முதல் 12 வரை படிக்கும் போது ஆண்டுதோறும் ₹1,000 (K1) மற்றும் 18 வயது நிறைவடைந்தவுடன் ₹25,000 ஒருமுறை மானியம் (K2).",
+    "benefit_summary_hi": "कक्षा 8-12 की छात्राओं को वार्षिक ₹1,000 (K1) और 18 वर्ष पूर्ण होने पर अविवाहित रहने व पढ़ाई जारी रखने पर ₹25,000 एकमुश्त अनुदान (K2)।",
+    "benefit_summary_ml": "വാർഷിക സ്കോളർഷിപ്പ് ₹1,000, 18 വയസ്സ് തികയുമ്പോൾ ₹25,000 ഗ്രാന്റ്.",
+    "description": "Internationally acclaimed UN Public Service Award-winning conditional cash transfer scheme designed to prevent child marriage and promote secondary and higher education among adolescent girls.",
+    "description_ta": "குழந்தைத் திருமணங்களைத் தடுத்து பெண் கல்வியை ஊக்குவிப்பதற்காக மேற்கு வங்க அரசு வழங்கும் சர்வதேச விருது பெற்ற முன்னோடித் திட்டம்.",
+    "description_hi": "बाल विवाह रोकथाम और बालिकाओं को उच्च शिक्षा से जोड़ने हेतु पश्चिम बंगाल का विश्वप्रसिद्ध कार्यक्रम।",
+    "description_ml": "പെൺകുട്ടികളുടെ വിദ്യാഭ്യാസം പ്രോത്സാഹിപ്പിക്കുന്നതിനുള്ള പ്രശസ്തമായ ബംഗാൾ പദ്ധതി.",
+    "keywords": "kanyashree, west bengal, girl student, scholarship, unicef, child marriage prevention",
+    "official_portal": "https://www.wbkanyashree.gov.in",
+    "application_url": "https://www.wbkanyashree.gov.in/kp_4.0/index.php",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "field_value": "West Bengal",
+        "description_en": "Must be a resident of West Bengal",
+        "description_ta": "மேற்கு வங்கத்தில் வசிப்பவராக இருக்க வேண்டும்",
+        "description_hi": "पश्चिम बंगाल की निवासी होना आवश्यक है",
+        "description_ml": "പശ്ചിമ ബംഗാളിലെ താമസക്കാരിയായിരിക്കണം"
+      },
+      {
+        "field_name": "gender",
+        "operator": "eq",
+        "field_value": "female",
+        "description_en": "Must be a female unmarried student",
+        "description_ta": "திருமணமாகாத மாணவியாக இருக்க வேண்டும்",
+        "description_hi": "अविवाहित छात्रा होना आवश्यक है",
+        "description_ml": "അവിവാഹിതയായ വിദ്യാർത്ഥിനിയായിരിക്കണം"
+      },
+      {
+        "field_name": "age",
+        "operator": "gte",
+        "field_value": "13",
+        "description_en": "Age between 13 and 19 years",
+        "description_ta": "வயது 13 முதல் 19க்குள் இருக்க வேண்டும்",
+        "description_hi": "आयु 13 से 19 वर्ष के बीच",
+        "description_ml": "പ്രായം 13 മുതൽ 19 വയസ്സ് വരെ"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Birth Certificate (Issued by Municipal Corporation or Panchayat)",
+        "document_name_ta": "பிறப்புச் சான்றிதழ்",
+        "is_mandatory": true,
+        "issuing_authority": "Municipal Corporation / Gram Panchayat"
+      },
+      {
+        "document_name_en": "Aadhaar Card",
+        "document_name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Unmarried Status Declaration (Signed by Parent/Guardian)",
+        "document_name_ta": "திருமணமாகாதவர் உறுதிமொழி படிவம்",
+        "is_mandatory": true,
+        "issuing_authority": "Parent / Guardian"
+      },
+      {
+        "document_name_en": "Bank Passbook in Girl Student's own Name",
+        "document_name_ta": "மாணவியின் சொந்த வங்கி கணக்கு புத்தகம்",
+        "is_mandatory": true,
+        "issuing_authority": "Bank"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "offline",
+        "title_en": "Submission of Form at School / College",
+        "title_ta": "பள்ளி / கல்லூரியில் படிவம் சமர்ப்பித்தல்",
+        "description_en": "Collect and submit K1 or K2 application form at applicant's educational institution, which uploads it to wbkanyashree.gov.in portal.",
+        "description_ta": "பள்ளி அல்லது கல்லூரியில் படிவத்தை பூர்த்தி செய்து கொடுத்தால் பள்ளி நிர்வாகம் இணையதளத்தில் பதிவேற்றும்.",
+        "portal_url": "https://www.wbkanyashree.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "wb-swasthya-sathi",
+    "name": "Swasthya Sathi Scheme",
+    "name_ta": "ஸ்வஸ்திய சாதி சுகாதாரத் திட்டம்",
+    "name_hi": "स्वास्थ्य साथी योजना",
+    "name_ml": "സ്വാസ്ഥ്യ സാഥി പദ്ധതി പശ്ചിമ ബംഗാൾ",
+    "department": "Department of Health and Family Welfare, Government of West Bengal",
+    "department_ta": "சுகாதாரம் மற்றும் குடும்ப நலத்துறை, மேற்கு வங்க அரசு",
+    "department_hi": "स्वास्थ्य एवं परिवार कल्याण विभाग, पश्चिम बंगाल",
+    "department_ml": "ആരോഗ്യ കുടുംബക്ഷേമ വകുപ്പ്, പശ്ചിമ ബംഗാൾ",
+    "category": "health",
+    "level": "State",
+    "state": "West Bengal",
+    "beneficiary_type": "Universal coverage for all families residing in West Bengal",
+    "beneficiary_type_ta": "மேற்கு வங்கத்தில் வசிக்கும் அனைத்து குடும்பங்கள்",
+    "beneficiary_type_hi": "पश्चिम बंगाल के सभी परिवार (सार्वभौमिक स्वास्थ्य सुरक्षा)",
+    "beneficiary_type_ml": "പശ്ചിമ ബംഗാളിലെ എല്ലാ കുടുംബങ്ങളും",
+    "target_beneficiaries": "All Residents of West Bengal",
+    "target_beneficiaries_ta": "மேற்கு வங்க மக்கள்",
+    "benefit_amount": "₹5,00,000 / year cashless health cover per family",
+    "benefit_summary": "Comprehensive basic and tertiary cashless hospital treatment cover up to ₹5 lakh per family per year, issued through a smart card in the name of the eldest female member.",
+    "benefit_summary_ta": "மூத்த பெண் குடும்பத் தலைவர் பெயரில் ஸ்மார்ட் கார்டு மூலம் ஆண்டுக்கு ₹5 லட்சம் வரை கட்டணமில்லா மருத்துவ சிகிச்சை.",
+    "benefit_summary_hi": "परिवार की वरिष्ठ महिला के नाम जारी स्मार्ट कार्ड द्वारा प्रतिवर्ष ₹5 लाख तक का कैशलेस अस्पताल उपचार।",
+    "benefit_summary_ml": "കുടുംബത്തിന് പ്രതിവർഷം ₹5 ലക്ഷം രൂപയുടെ സൗജന്യ ചികിത്സ.",
+    "description": "Universal health protection scheme covering over 2.2 crore families in West Bengal for hospitalization across 2,000+ empanelled government and private hospitals with zero out-of-pocket costs.",
+    "description_ta": "மேற்கு வங்கத்தின் 2 கோடிக்கும் அதிகமான குடும்பங்களுக்கு தனியார் மற்றும் அரசு மருத்துவமனைகளில் ₹5 லட்சம் வரை கட்டணமில்லா சிகிச்சை அளிக்கும் திட்டம்.",
+    "description_hi": "पश्चिम बंगाल के सभी नागरिकों को गुणवत्तापूर्ण स्वास्थ्य सेवाएं प्रदान करने वाली कैशलेस स्वास्थ्य योजना।",
+    "description_ml": "പശ്ചിമ ബംഗാളിലെ സാർവത്രിക ആരോഗ്യ ഇൻഷുറൻസ് പദ്ധതി.",
+    "keywords": "swasthya sathi, health insurance, cashless, hospital, west bengal, medical",
+    "official_portal": "https://swasthyasathi.gov.in",
+    "application_url": "https://swasthyasathi.gov.in/OurScheme",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "field_value": "West Bengal",
+        "description_en": "Must be a permanent resident of West Bengal not covered under other govt medical allowance",
+        "description_ta": "மேற்கு வங்கத்தில் நிரந்தரமாக வசிப்பவராக இருக்க வேண்டும்",
+        "description_hi": "पश्चिम बंगाल का स्थायी निवासी होना अनिवार्य है",
+        "description_ml": "പശ്ചിമ ബംഗാളിലെ സ്ഥിരതാമസക്കാരനായിരിക്കണം"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Aadhaar Card of all Family Members",
+        "document_name_ta": "குடும்ப உறுப்பினர்களின் ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Digital Ration Card / Khadya Sathi Card",
+        "document_name_ta": "ரேஷன் கார்டு (காத்ய சாதி)",
+        "is_mandatory": true,
+        "issuing_authority": "Food & Supplies Department WB"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Application via Duare Sarkar Camps or Swasthya Sathi Portal",
+        "title_ta": "துவாரே சர்க்கார் முகாம் அல்லது இணையதளத்தில் விண்ணப்பித்தல்",
+        "description_en": "Submit Form-B at nearest Duare Sarkar outreach camp or municipal office to capture biometric smart card.",
+        "description_ta": "துவாரே சர்க்கார் முகாமில் படிவம் பி கொடுத்து ஸ்மார்ட் அட்டை பெற்றுக் கொள்ளலாம்.",
+        "portal_url": "https://swasthyasathi.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "arunachal-cmaay-health",
+    "name": "Chief Minister's Arogya Arunachal Yojana (CMAAY)",
+    "name_ta": "முதலமைச்சர் ஆரோக்கிய அருணாச்சல திட்டம்",
+    "name_hi": "मुख्यमंत्री आरोग्य अरुणाचल योजना (सीएमएएवाई)",
+    "name_ml": "മുഖ്യമന്ത്രി ആരോഗ്യ അരുണാചൽ യോജന",
+    "department": "Department of Health & Family Welfare, Government of Arunachal Pradesh",
+    "department_ta": "சுகாதாரம் மற்றும் குடும்ப நலத்துறை, அருணாச்சலப் பிரதேச அரசு",
+    "department_hi": "स्वास्थ्य एवं परिवार कल्याण विभाग, अरुणाचल प्रदेश",
+    "department_ml": "ആരോഗ്യ വകുപ്പ്, അരുണാചൽ പ്രദേശ്",
+    "category": "health",
+    "level": "State",
+    "state": "Arunachal Pradesh",
+    "beneficiary_type": "Indigenous Scheduled Tribes (APST) and state government employees of Arunachal Pradesh",
+    "beneficiary_type_ta": "அருணாச்சல பழங்குடியின மக்கள் மற்றும் மாநில அரசு ஊழியர்கள்",
+    "beneficiary_type_hi": "अरुणाचल प्रदेश के अनुसूचित जनजाति (APST) परिवार एवं राज्य कर्मचारी",
+    "beneficiary_type_ml": "അരുണാചൽ പ്രദേശിലെ തദ്ദേശീയ ജനങ്ങൾ",
+    "target_beneficiaries": "Indigenous Tribal Families of Arunachal Pradesh",
+    "target_beneficiaries_ta": "அருணாச்சல பழங்குடியினர்",
+    "benefit_amount": "₹5,00,000 / year cashless health cover per family",
+    "benefit_summary": "Cashless hospitalization coverage of up to ₹5 lakh per family per year for secondary and tertiary healthcare, integrated with Ayushman Bharat PM-JAY.",
+    "benefit_summary_ta": "ஆண்டுக்கு குடும்பத்திற்கு ₹5 லட்சம் வரை கட்டணமில்லா மருத்துவமனை சிகிச்சை.",
+    "benefit_summary_hi": "द्वितीयक एवं तृतीयक स्वास्थ्य देखभाल हेतु प्रति परिवार ₹5 लाख तक का कैशलेस स्वास्थ्य बीमा।",
+    "benefit_summary_ml": "കുടുംബത്തിന് പ്രതിവർഷം ₹5 ലക്ഷം രൂപയുടെ സൗജന്യ ചികിത്സ.",
+    "description": "State healthcare protection initiative for all indigenous families of Arunachal Pradesh and state government employees, providing cashless treatments across empanelled hospitals in Arunachal and major Indian cities.",
+    "description_ta": "அருணாச்சலப் பிரதேசத்தின் பழங்குடியின மக்களுக்கு தனியார் மற்றும் அரசு மருத்துவமனைகளில் ₹5 லட்சம் வரை கட்டணமில்லா சிகிச்சை அளிக்கும் திட்டம்.",
+    "description_hi": "अरुणाचल के नागरिकों को गुणवत्तापूर्ण स्वास्थ्य उपचार प्रदान करने वाली राज्य स्वास्थ्य सुरक्षा योजना।",
+    "description_ml": "അരുണാചൽ പ്രദേശിലെ തദ്ദേശീയർക്കുള്ള ആരോഗ്യ ഇൻഷുറൻസ് പദ്ധതി.",
+    "keywords": "cmaay, arunachal health, cashless, insurance, itanagar, tribal welfare",
+    "official_portal": "https://cmaay.com",
+    "application_url": "https://cmaay.com/OnlineEnrollment.aspx",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "field_value": "Arunachal Pradesh",
+        "description_en": "Must be an Arunachal Pradesh Scheduled Tribe (APST) member or permanent resident",
+        "description_ta": "அருணாச்சலப் பிரதேச பழங்குடியின சான்றிதழ் பெற்றவராக இருக்க வேண்டும்",
+        "description_hi": "अरुणाचल प्रदेश अनुसूचित जनजाति (APST) या स्थायी निवासी होना चाहिए",
+        "description_ml": "അരുണാചൽ പ്രദേശിലെ തദ്ദേശീയ വിഭാഗത്തിൽപ്പെട്ടയാളായിരിക്കണം"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "APST Certificate (Arunachal Pradesh Scheduled Tribe Certificate) or PRC",
+        "document_name_ta": "அருணாச்சல பழங்குடியினர் சான்றிதழ்",
+        "is_mandatory": true,
+        "issuing_authority": "Deputy Commissioner / SDO Arunachal"
+      },
+      {
+        "document_name_en": "Aadhaar Card",
+        "document_name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Ration Card (For family member inclusion)",
+        "document_name_ta": "குடும்ப அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "Civil Supplies Department Arunachal"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Online Registration on CMAAY Portal or Kiosk",
+        "title_ta": "இணையதளத்தில் பதிவு செய்து அட்டை பெறுதல்",
+        "description_en": "Enroll online at cmaay.com or at District Hospital kiosk to generate the CMAAY E-Card.",
+        "description_ta": "cmaay.com தளத்தில் அல்லது மாவட்ட மருத்துவமனையில் பதிவு செய்து மின்னணு அட்டையைப் பெறலாம்.",
+        "portal_url": "https://cmaay.com"
+      }
+    ]
+  },
+  {
+    "id": "sikkim-merit-scholarship",
+    "name": "Chief Minister's Merit Scholarship Scheme (CMMSS)",
+    "name_ta": "சிக்கிம் முதலமைச்சர் தகுதி உதவித்தொகை திட்டம்",
+    "name_hi": "मुख्यमंत्री मेधावी छात्रवृत्ति योजना सिक्किम",
+    "name_ml": "സിക്കിം മുഖ്യമന്ത്രിയുടെ മെറിറ്റ് സ്കോളർഷിപ്പ്",
+    "department": "Education Department, Government of Sikkim",
+    "department_ta": "கல்வித் துறை, சிக்கிம் அரசு",
+    "department_hi": "शिक्षा विभाग, सिक्किम सरकार",
+    "department_ml": "വിദ്യാഭ്യാസ വകുപ്പ്, സിക്കിം",
+    "category": "education",
+    "level": "State",
+    "state": "Sikkim",
+    "beneficiary_type": "Meritorious Class 5 students studying in rural government schools of Sikkim",
+    "beneficiary_type_ta": "கிராமப்புற அரசுப் பள்ளிகளில் 5ஆம் வகுப்பு பயிலும் சிறந்த மாணவர்கள்",
+    "beneficiary_type_hi": "सिक्किम के ग्रामीण सरकारी स्कूलों में कक्षा 5 के मेधावी विद्यार्थी",
+    "beneficiary_type_ml": "ഗ്രാമീണ സർക്കാർ സ്കൂളുകളിൽ 5-ാം ക്ലാസിൽ പഠിക്കുന്ന മിടുക്കരായ വിദ്യാർത്ഥികൾ",
+    "target_beneficiaries": "Meritorious Rural School Students of Sikkim",
+    "target_beneficiaries_ta": "சிக்கிம் பள்ளி மாணவர்கள்",
+    "benefit_amount": "100% Fully Funded Education from Class 6 to 12 in Premier Public Schools",
+    "benefit_summary": "Complete sponsorship of school fees, boarding, lodging, books, and uniforms in prestigious residential public schools across India from Class VI through Class XII.",
+    "benefit_summary_ta": "இந்தியாவின் முன்னணி உறைவிடப் பள்ளிகளில் 6 முதல் 12-ம் வகுப்பு வரை முழு கல்விக் கட்டணம் மற்றும் விடுதி செலவை அரசே ஏற்கும் திட்டம்.",
+    "benefit_summary_hi": "कक्षा 6 से 12 तक देश के प्रतिष्ठित आवासीय पब्लिक स्कूलों में संपूर्ण शिक्षण, आवास व भोजन का 100% सरकारी वित्तपोषण।",
+    "benefit_summary_ml": "6 മുതൽ 12 വരെ പ്രമുഖ റസിഡൻഷ്യൽ സ്കൂളുകളിൽ 100% സൗജന്യ വിദ്യാഭ്യാസം.",
+    "description": "Prestigious talent promotion program identifying brilliant young minds from rural government schools of Sikkim through state-level examination and funding their education in top public schools.",
+    "description_ta": "சிக்கிம் கிராமப்புற அரசுப் பள்ளிகளில் படிக்கும் திறமை வாய்ந்த மாணவர்களைத் தேர்வு செய்து இந்தியாவின் தலைசிறந்த பள்ளிகளில் இலவசமாக படிக்க வைக்கும் உன்னத திட்டம்.",
+    "description_hi": "सिक्किम के ग्रामीण प्रतिभाओं को देश के सर्वश्रेष्ठ पब्लिक स्कूलों में निःशुल्क शिक्षा प्रदान करने वाली योजना।",
+    "description_ml": "സിക്കിമിലെ ഗ്രാമീണ പ്രതിഭകളെ കണ്ടെത്തി മികച്ച സ്കൂളുകളിൽ പഠിപ്പിക്കുന്ന പദ്ധതി.",
+    "keywords": "sikkim scholarship, merit, cmmss, boarding school, education, gangtok",
+    "official_portal": "https://sikkim.gov.in",
+    "application_url": "https://sikkim.gov.in",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "field_value": "Sikkim",
+        "description_en": "Must be a Certificate of Identification (COI) / Sikkim Subject holder",
+        "description_ta": "சிக்கிம் குடியுரிமை சான்றிதழ் (COI) பெற்றவராக இருக்க வேண்டும்",
+        "description_hi": "सिक्किम सब्जेक्ट/पहचान प्रमाण पत्र धारक होना आवश्यक है",
+        "description_ml": "സിക്കിം സ്ഥിരതാമസക്കാരനായിരിക്കണം"
+      },
+      {
+        "field_name": "education",
+        "operator": "in",
+        "field_value": "5th,class_5,primary",
+        "description_en": "Must be continuously enrolled in a rural government primary school of Sikkim",
+        "description_ta": "சிக்கிம் கிராமப்புற அரசுப் பள்ளியில் 5ஆம் வகுப்பு படிப்பவராக இருக்க வேண்டும்",
+        "description_hi": "सिक्किम के ग्रामीण सरकारी प्राथमिक स्कूल में कक्षा 5 में अध्ययनरत होना चाहिए",
+        "description_ml": "ഗ്രാമീണ സർക്കാർ സ്കൂളിൽ 5-ാം ക്ലാസിൽ പഠിക്കുന്നവരായിരിക്കണം"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Certificate of Identification (COI) / Sikkim Subject Certificate of Parents",
+        "document_name_ta": "சிக்கிம் குடியுரிமை சான்றிதழ்",
+        "is_mandatory": true,
+        "issuing_authority": "District Collectorate Sikkim"
+      },
+      {
+        "document_name_en": "School Bonafide Certificate with Continuous Enrollment Record",
+        "document_name_ta": "பள்ளி மாணவர் சான்றிதழ்",
+        "is_mandatory": true,
+        "issuing_authority": "Headmaster of Government Primary School"
+      },
+      {
+        "document_name_en": "Birth Certificate",
+        "document_name_ta": "பிறப்புச் சான்றிதழ்",
+        "is_mandatory": true,
+        "issuing_authority": "Health & Family Welfare Sikkim"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "offline",
+        "title_en": "Application via School Headmaster & State Entrance Examination",
+        "title_ta": "பள்ளி தலைமை ஆசிரியர் மூலம் மாநில நுழைவுத் தேர்வுக்கு விண்ணப்பித்தல்",
+        "description_en": "School nominates eligible Class 5 students for the state-level CMMSS screening examination conducted by the Education Department.",
+        "description_ta": "பள்ளி தலைமை ஆசிரியர் மூலம் மாநில அளவிலான தேர்வுக்கான படிவத்தை சமர்ப்பிக்கவும்.",
+        "portal_url": "https://sikkim.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "nagaland-cmmfi-credit",
+    "name": "Chief Minister's Micro Finance Initiative (CMMFI)",
+    "name_ta": "நாகாலாந்து முதலமைச்சர் குறு நிதி உதவி திட்டம்",
+    "name_hi": "मुख्यमंत्री सूक्ष्म वित्त पहल नागालैंड (सीएमएमएफआई)",
+    "name_ml": "മുഖ്യമന്ത്രി മൈക്രോ ഫിനാൻസ് ഇനിഷ്യേറ്റീവ് നാഗാലാൻഡ്",
+    "department": "Finance Department, Government of Nagaland",
+    "department_ta": "நிதித் துறை, நாகாலாந்து அரசு",
+    "department_hi": "वित्त विभाग, नागालैंड सरकार",
+    "department_ml": "ധനകാര്യ വകുപ്പ്, നാഗാലാൻഡ്",
+    "category": "business",
+    "level": "State",
+    "state": "Nagaland",
+    "beneficiary_type": "Farmers, Self-Help Groups (SHGs), Farmer Producer Organizations (FPOs), and Youth Entrepreneurs of Nagaland",
+    "beneficiary_type_ta": "நாகாலாந்து விவசாயிகள், சுயஉதவி குழுக்கள் மற்றும் இளைஞர்கள்",
+    "beneficiary_type_hi": "नागालैंड के किसान, स्वयं सहायता समूह (SHG) एवं युवा उद्यमी",
+    "beneficiary_type_ml": "കർഷകർ, സ്വയംസഹായ സംഘങ്ങൾ, സംരംഭകർ",
+    "target_beneficiaries": "Entrepreneurs & Farmers of Nagaland",
+    "target_beneficiaries_ta": "நாகாலாந்து தொழில்முனைவோர்",
+    "benefit_amount": "Subsidized bank loan up to ₹15 Lakh with 4% interest subvention & capital subsidy",
+    "benefit_summary": "Credit linkage up to ₹15 lakh with 4% state interest subvention, collateral-free credit under CGTMSE, and back-ended capital subsidy for agri and MSME projects.",
+    "benefit_summary_ta": "4% வட்டி மானியத்துடன் ₹15 லட்சம் வரை சலுகை கடன் மற்றும் மூலதன மானியம்.",
+    "benefit_summary_hi": "4% ब्याज अनुदान एवं पूंजीगत सब्सिडी के साथ ₹15 लाख तक का रियायती ऋण।",
+    "benefit_summary_ml": "4% പലിശ ഇളവോടെ ₹15 ലക്ഷം വരെ വായ്പയും സബ്സിഡിയും.",
+    "description": "State flagship credit-linked initiative boosting agriculture, agro-processing, handloom, and service micro-enterprises across all districts of Nagaland.",
+    "description_ta": "நாகாலாந்தில் விவசாயம், கைத்தறி மற்றும் குறு தொழில்களைத் தொடங்க 4% வட்டிச் சலுகையுடன் கடன் வழங்கும் அரசு திட்டம்.",
+    "description_hi": "नागालैंड में कृषि और सूक्ष्म उद्योगों को बढ़ावा देने हेतु रियायती ऋण सुविधा।",
+    "description_ml": "നാഗാലാൻഡിൽ ചെറുകിട സംരംഭങ്ങൾക്ക് കുറഞ്ഞ പലിശയിൽ വായ്പ നൽകുന്ന പദ്ധതി.",
+    "keywords": "nagaland, micro finance, cmmfi, kohima, entrepreneur, shg, loan",
+    "official_portal": "https://cmmfi.nagaland.gov.in",
+    "application_url": "https://cmmfi.nagaland.gov.in/registration",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "field_value": "Nagaland",
+        "description_en": "Must be an indigenous inhabitant or permanent resident of Nagaland",
+        "description_ta": "நாகாலாந்தின் பூர்வீக குடிமகனாக இருக்க வேண்டும்",
+        "description_hi": "नागालैंड का मूल निवासी होना अनिवार्य है",
+        "description_ml": "നാഗാലാൻഡിലെ സ്ഥിരതാമസക്കാരനായിരിക്കണം"
+      },
+      {
+        "field_name": "age",
+        "operator": "gte",
+        "field_value": "18",
+        "description_en": "Minimum age 18 years",
+        "description_ta": "குறைந்தபட்ச வயது 18",
+        "description_hi": "न्यूनतम आयु 18 वर्ष",
+        "description_ml": "കുറഞ്ഞ പ്രായം 18 വയസ്സ്"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Indigenous Inhabitant Certificate (IIC) / Domicile Certificate",
+        "document_name_ta": "நாகாலாந்து பூர்வீக குடியுரிமை சான்றிதழ்",
+        "is_mandatory": true,
+        "issuing_authority": "Deputy Commissioner Nagaland"
+      },
+      {
+        "document_name_en": "Aadhaar Card",
+        "document_name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Detailed Project Concept Note / Business Estimate",
+        "document_name_ta": "தொழில் திட்ட அறிக்கை",
+        "is_mandatory": true,
+        "issuing_authority": "Applicant / Line Department"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "online",
+        "title_en": "Online Submission on CMMFI Portal",
+        "title_ta": "இணையதளத்தில் விண்ணப்பித்தல்",
+        "description_en": "Submit online project proposal at cmmfi.nagaland.gov.in for District Level Committee review.",
+        "description_ta": "cmmfi.nagaland.gov.in தளத்தில் திட்ட அறிக்கையை சமர்ப்பிக்கவும்.",
+        "portal_url": "https://cmmfi.nagaland.gov.in"
+      }
+    ]
+  },
+  {
+    "id": "hp-pyari-behna-samman",
+    "name": "Indira Gandhi Pyari Behna Sukh Samman Nidhi Yojana",
+    "name_ta": "இந்திரா காந்தி பியாரி பெஹ்னா சம்மான் நிதி",
+    "name_hi": "इंदिरा गांधी प्यारी बहना सुख सम्मान निधि योजना",
+    "name_ml": "ഇന്ദിരാഗാന്ധി പ്യാരി ബെഹൻ സുഖ് സമ്മാൻ നിധി",
+    "department": "Department of Social Justice and Empowerment, Government of Himachal Pradesh",
+    "department_ta": "சமூக நீதி மற்றும் அதிகாரமளித்தல் துறை, இமாச்சலப் பிரதேச அரசு",
+    "department_hi": "सामाजिक न्याय एवं अधिकारिता विभाग, हिमाचल प्रदेश सरकार",
+    "department_ml": "സാമൂഹിക നീതി വകുപ്പ്, ഹിമാചൽ പ്രദേശ്",
+    "category": "women",
+    "level": "State",
+    "state": "Himachal Pradesh",
+    "beneficiary_type": "Adult women aged 18 to 59 years residing in Himachal Pradesh",
+    "beneficiary_type_ta": "இமாச்சலப் பிரதேசத்தில் வசிக்கும் 18 முதல் 59 வயது பெண்கள்",
+    "beneficiary_type_hi": "हिमाचल प्रदेश की 18 से 59 वर्ष आयु वर्ग की पात्र महिलाएं",
+    "beneficiary_type_ml": "18 മുതൽ 59 വയസ്സുവരെയുള്ള വനിതകൾ",
+    "target_beneficiaries": "Women of Himachal Pradesh",
+    "target_beneficiaries_ta": "இமாச்சலப் பெண்கள்",
+    "benefit_amount": "₹1,500 / month direct cash pension",
+    "benefit_summary": "Guaranteed monthly financial assistance of ₹1,500 directly into the bank accounts of adult women aged 18 to 59 years for nutritional and social security.",
+    "benefit_summary_ta": "18 முதல் 59 வயதுடைய பெண்களுக்கு மாதம் ₹1,500 நேரடி வங்கி நிதி உதவி.",
+    "benefit_summary_hi": "18 से 59 वर्ष की पात्र महिलाओं को प्रतिमाह ₹1,500 की सीधी वित्तीय सहायता।",
+    "benefit_summary_ml": "സ്ത്രീകൾക്ക് പ്രതിമാസം ₹1,500 ധനസഹായം ബാങ്ക് അക്കൗണ്ടിലേക്ക്.",
+    "description": "Universal welfare support scheme providing financial independence of ₹18,000 annually to eligible adult women living in rural and urban areas of Himachal Pradesh.",
+    "description_ta": "இமாச்சலப் பிரதேசத்தின் 18 முதல் 59 வயது பெண்களின் வாழ்வாதாரத்திற்கு மாதம் ₹1,500 வழங்கும் வரலாற்று சிறப்புமிக்க திட்டம்.",
+    "description_hi": "हिमाचल प्रदेश की महिलाओं के आर्थिक सशक्तिकरण और सामाजिक सुरक्षा हेतु मासिक ₹1,500 की सहायता योजना।",
+    "description_ml": "ഹിമാചലിലെ സ്ത്രീകൾക്ക് പ്രതിമാസം ₹1,500 നൽകുന്ന സമഗ്ര സാമൂഹിക സുരക്ഷാ പദ്ധതി.",
+    "keywords": "pyari behna, himachal women, pension, dbt, sukh samman, shimla",
+    "official_portal": "https://eseva.hp.gov.in",
+    "application_url": "https://eseva.hp.gov.in",
+    "conditions": [
+      {
+        "field_name": "state",
+        "operator": "eq",
+        "field_value": "Himachal Pradesh",
+        "description_en": "Must be a Bonafide Himachali resident",
+        "description_ta": "இமாச்சலப் பிரதேசத்தின் நிரந்தரக் குடியுரிமை கொண்டவராக இருக்க வேண்டும்",
+        "description_hi": "हिमाचल प्रदेश की बोनाफाइड/स्थायी निवासी होना अनिवार्य है",
+        "description_ml": "ഹിമാചൽ പ്രദേശിലെ സ്ഥിരതാമസക്കാരിയായിരിക്കണം"
+      },
+      {
+        "field_name": "gender",
+        "operator": "eq",
+        "field_value": "female",
+        "description_en": "Must be a female citizen",
+        "description_ta": "பெண்ணாக இருக்க வேண்டும்",
+        "description_hi": "महिला नागरिक होना चाहिए",
+        "description_ml": "സ്ത്രീയായിരിക്കണം"
+      },
+      {
+        "field_name": "age",
+        "operator": "gte",
+        "field_value": "18",
+        "description_en": "Minimum age 18 years",
+        "description_ta": "குறைந்தபட்ச வயது 18",
+        "description_hi": "न्यूनतम आयु 18 वर्ष",
+        "description_ml": "കുറഞ്ഞ പ്രായം 18 വയസ്സ്"
+      },
+      {
+        "field_name": "age",
+        "operator": "lte",
+        "field_value": "59",
+        "description_en": "Maximum age 59 years",
+        "description_ta": "அதிகபட்ச வயது 59",
+        "description_hi": "अधिकतम आयु 59 वर्ष",
+        "description_ml": "പരമാവധി പ്രായം 59 വയസ്സ്"
+      }
+    ],
+    "documents": [
+      {
+        "document_name_en": "Bonafide Himachali Certificate",
+        "document_name_ta": "இமாச்சல இருப்பிடச் சான்றிதழ்",
+        "is_mandatory": true,
+        "issuing_authority": "Tehsildar / Executive Magistrate HP"
+      },
+      {
+        "document_name_en": "Aadhaar Card",
+        "document_name_ta": "ஆதார் அட்டை",
+        "is_mandatory": true,
+        "issuing_authority": "UIDAI"
+      },
+      {
+        "document_name_en": "Bank Account Passbook (Aadhaar Seeded)",
+        "document_name_ta": "வங்கி கணக்கு புத்தகம்",
+        "is_mandatory": true,
+        "issuing_authority": "Bank / Post Office"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "mode": "offline",
+        "title_en": "Submission of Form at Tehsil Welfare Office or Anganwadi",
+        "title_ta": "வட்டாட்சியர் அலுவலகம் அல்லது அங்கன்வாடியில் விண்ணப்பித்தல்",
+        "description_en": "Submit physical form at nearest Tehsil Welfare Officer (TWO) or Anganwadi Centre along with Bonafide certificate and Bank details.",
+        "description_ta": "அருகிலுள்ள வட்டாட்சியர் நல அலுவலகம் அல்லது அங்கன்வாடி மையத்தில் படிவத்தை சமர்ப்பிக்கவும்.",
+        "portal_url": "https://eseva.hp.gov.in"
+      }
+    ]
+  }
+]
