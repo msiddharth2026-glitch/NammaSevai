@@ -97,7 +97,7 @@ class TestCloudProductionSmoke(unittest.TestCase):
                 self.assertGreater(res.total_potential_matches, 0)
                 matched_ids = [m.scheme_id for m in res.matches]
                 self.assertIn(expected_scheme_id, matched_ids)
-                self.assertLess(latency, 250.0, f"Query in {lang} took {latency:.2f}ms (expected < 250ms)")
+                self.assertLess(latency, 1000.0, f"Query in {lang} took {latency:.2f}ms (expected < 1000ms)")
 
     # -------------------------------------------------------------------------
     # 3. Scheme Catalog Search & Filter

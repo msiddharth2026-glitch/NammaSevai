@@ -123,13 +123,22 @@ if os.path.exists(assets_path):
 
 @app.get("/favicon.ico", include_in_schema=False)
 def favicon():
-    icon_path = os.path.join(assets_path, "nammasevai_minimal.svg")
+    icon_path = os.path.join(assets_path, "bharatsevai_minimal.svg")
+    if not os.path.exists(icon_path):
+        icon_path = os.path.join(assets_path, "nammasevai_minimal.svg")
     if os.path.exists(icon_path):
         return FileResponse(icon_path, media_type="image/svg+xml")
     return Response(status_code=204)
+
+@app.get("/manifest.json", include_in_schema=False)
+def manifest():
+    manifest_path = os.path.join(workspace_dir, "manifest.json")
+    if os.path.exists(manifest_path):
+        return FileResponse(manifest_path, media_type="application/manifest+json")
+    return Response(status_code=404)
 
 @app.get("/", include_in_schema=False)
 def serve_frontend_index():
     if os.path.exists(index_html_path):
         return FileResponse(index_html_path)
-    return {"message": "NammaSevai AI Backend is running. Frontend index.html not found at workspace root."}
+    return {"message": "BharatSevai AI Backend is running. Frontend index.html not found at workspace root."}

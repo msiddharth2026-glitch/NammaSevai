@@ -1,4 +1,4 @@
-/* NammaSevai AI - Civic Light Design System (Stitch / Namma Pathways Theme) */
+/* BharatSevai AI - Civic Light Design System (Stitch / Bharat Pathways Theme) */
 :root {
   /* Brand Core Colors */
   --primary-indigo: #15233e;
@@ -665,7 +665,7 @@ a:hover {
   min-width: 44px;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .nav-menu-wrapper {
     display: none;
     position: absolute;
@@ -673,10 +673,13 @@ a:hover {
     left: 0;
     right: 0;
     background: var(--bg-card);
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: var(--shadow-lg);
+    border-bottom: 2px solid var(--border-color);
+    box-shadow: 0 10px 25px rgba(21, 35, 62, 0.12);
     padding: 1rem 1.25rem;
     z-index: 1000;
+    max-height: calc(100vh - 74px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .nav-menu-wrapper.open {
     display: flex;
@@ -1937,6 +1940,289 @@ a:hover {
   gap: 0.75rem;
   font-size: 0.8rem;
   color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Comprehensive Mobile & Multi-Device Responsiveness (BharatSevai AI)
+   Target viewports:
+   - Small mobile: 320px–375px
+   - Standard mobile: 376px–430px
+   - Large mobile: 431px–600px
+   - Tablets: 601px–1024px
+   - Laptops: 1025px–1440px
+   - Large desktops: 1441px and above
+   ========================================================================== */
+
+/* 1. Global Box Sizing & Zero Horizontal Overflow */
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+}
+
+/* Fluid responsive media & images */
+img, svg, canvas, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive Table Container */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+}
+
+/* Touch targets: ensure interactive controls are >= 44px */
+.btn,
+.mobile-menu-toggle,
+.lang-dropdown-btn,
+.mobile-lang-btn,
+.form-input,
+.form-select,
+.form-textarea {
+  min-height: 44px;
+}
+
+/* 2. Breakpoint: Desktop Large (1441px and above) */
+@media (min-width: 1441px) {
+  .container {
+    max-width: 1320px;
+  }
+}
+
+/* 3. Breakpoint: Tablet & Below (<= 1024px) */
+@media (max-width: 1024px) {
+  .navbar-inner {
+    height: 68px;
+  }
+
+  .nav-menu-wrapper.open {
+    animation: slideDownNav 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes slideDownNav {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Footer layout on tablets */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+/* 4. Breakpoint: Large Mobile to Tablet (<= 768px) */
+@media (max-width: 768px) {
+  /* Hero section adjustments */
+  .hero-section {
+    padding: 1.5rem 0 2rem;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.75rem, 5.5vw, 2.4rem);
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  /* Grid collapse for scheme details, checklist, and assistant */
+  .details-page-container [style*="grid-template-columns"],
+  .assistant-page-container [style*="grid-template-columns"],
+  .checklist-page-container [style*="grid-template-columns"],
+  .admin-container [style*="grid-template-columns"],
+  .results-page-container [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Header adjustments */
+  .official-strip-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  /* Footer stack */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  /* Chat messages */
+  .chat-message {
+    gap: 0.65rem;
+  }
+
+  .chat-body {
+    padding: 1rem 1.15rem;
+  }
+
+  .chat-text {
+    font-size: 0.94rem;
+  }
+
+  /* Modal responsiveness */
+  .modal-box {
+    max-width: 95vw !important;
+    padding: 1.25rem !important;
+    max-height: 92vh !important;
+  }
+
+  .modal-grid-2col {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 5. Breakpoint: Standard Mobile (<= 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.85rem;
+  }
+
+  .navbar-inner {
+    height: 60px;
+    gap: 0.4rem;
+  }
+
+  .brand-logo-img {
+    height: 30px;
+  }
+
+  .brand-title-main {
+    font-size: 1.05rem;
+  }
+
+  .brand-subtitle {
+    display: none;
+  }
+
+  .header-privacy-text {
+    display: none;
+  }
+
+  .header-privacy-badge {
+    padding: 0.25rem 0.45rem;
+  }
+
+  .lang-current-label {
+    display: none;
+  }
+
+  .lang-dropdown-btn {
+    padding: 0.35rem 0.55rem;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+  }
+
+  .editorial-stats-num {
+    font-size: 2.2rem;
+  }
+
+  .disclaimer-banner {
+    padding: 0.85rem 1rem;
+    font-size: 0.82rem;
+  }
+
+  .prompt-chips-wrap {
+    gap: 0.4rem;
+  }
+
+  .prompt-chip {
+    font-size: 0.78rem;
+    padding: 0.4rem 0.75rem;
+    min-height: 38px;
+  }
+
+  /* Stepper on small mobile */
+  .pathway-stepper {
+    padding: 0;
+  }
+
+  .step-circle {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  /* Buttons stretch full width on mobile cards */
+  .card-actions-row {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .card-actions-row .btn {
+    width: 100%;
+  }
+}
+
+/* 6. Breakpoint: Small Mobile (<= 360px - iPhone SE / compact viewports) */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 0.65rem;
+  }
+
+  .brand-title-main {
+    font-size: 0.95rem;
+  }
+
+  .brand-title-main .ai-pill {
+    font-size: 0.62rem;
+    padding: 0.1rem 0.35rem;
+  }
+
+  .hero-title {
+    font-size: 1.45rem;
+  }
+
+  .btn {
+    font-size: 0.88rem;
+    padding: 0.55rem 1rem;
+  }
 }
 
 /* Print Styles for Printable Checklists */

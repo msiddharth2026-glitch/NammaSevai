@@ -1,4 +1,4 @@
-// NammaSevai AI - AI Assistant Page Component (BharatSevai AI / Stitch Theme Redesign)
+// BharatSevai AI - AI Assistant Page Component (Stitch Theme Redesign)
 import { i18n } from '../i18n.js';
 import { getLocalizedScheme, INDIAN_STATES, INDIAN_UNION_TERRITORIES } from '../schemesData.js';
 
@@ -116,7 +116,7 @@ export function renderAssistantPage(state) {
       </section>
 
       <!-- Main Dual Input Layout -->
-      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; align-items: start; margin-bottom: 2rem;">
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1.5rem; align-items: start; margin-bottom: 2rem;">
         
         <!-- Voice & Conversational Input Card -->
         <div style="background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius-xl); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 1.25rem;">
@@ -290,7 +290,7 @@ export function renderAssistantPage(state) {
 
         <div style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; display: flex; flex-direction: column; gap: 1rem;">
           <p>
-            ${t.micModalText || "NammaSevai AI requests temporary access to your microphone to listen to your voice query to help you discover eligible government schemes."}
+            ${t.micModalText || "BharatSevai AI requests temporary access to your microphone to listen to your voice query to help you discover eligible government schemes."}
           </p>
           <div style="background: var(--bg-canvas); border-radius: var(--radius-lg); padding: 1rem; border-left: 3px solid var(--secondary-saffron);">
             <strong style="color: var(--primary-indigo); font-size: 0.88rem;">🛡️ ${t.micPrivacyTitle || "Our Civic Privacy Guarantees:"}</strong>
@@ -325,7 +325,7 @@ export function renderAssistantPage(state) {
 
         <div style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; display: flex; flex-direction: column; gap: 1rem;">
           <p>
-            NammaSevai AI seamlessly uses <strong>Google Gemini AI</strong> for multi-lingual contextual reasoning in colloquial Tamil, Hindi, Malayalam, Tanglish, Hinglish, and English.
+            BharatSevai AI seamlessly uses <strong>Google Gemini AI</strong> for multi-lingual contextual reasoning in colloquial Tamil, Hindi, Malayalam, Tanglish, Hinglish, and English.
           </p>
           <div style="background: var(--bg-canvas); border-radius: var(--radius-lg); padding: 1rem; border-left: 3px solid var(--secondary-saffron);">
             <strong style="color: var(--primary-indigo);">Step 1: Get a Free Gemini API Key</strong><br/>
@@ -451,7 +451,7 @@ function renderStitchChatMessage(msg, index, state) {
               <span class="material-symbols-outlined" style="font-size: 16px;">support_agent</span>
             </div>
             <span style="font-size: 0.88rem; font-weight: 700; color: var(--primary-indigo);">
-              ${t.aiAssessmentTitle || "NammaSevai AI Assessment"}
+              ${t.aiAssessmentTitle || "BharatSevai AI Assessment"}
             </span>
           </div>
           <span style="font-size: 0.78rem; font-weight: 700; padding: 0.15rem 0.6rem; border-radius: 9999px; background: rgba(21, 35, 62, 0.08); color: var(--primary-indigo);">

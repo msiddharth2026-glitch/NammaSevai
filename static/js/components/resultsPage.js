@@ -170,7 +170,7 @@ export function renderResultsPage(state) {
         
         <!-- Search Toolbar Row -->
         <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
-          <div style="position: relative; flex: 1; min-width: 260px;">
+          <div style="position: relative; flex: 1; min-width: min(100%, 240px);">
             <span class="material-symbols-outlined" style="position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); font-size: 20px; color: var(--text-secondary);">search</span>
             <input
               type="text"

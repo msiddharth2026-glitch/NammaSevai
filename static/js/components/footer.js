@@ -1,4 +1,4 @@
-// NammaSevai AI - Footer Component (Stitch / Namma Pathways Design)
+// BharatSevai AI - Footer Component (Stitch / Bharat Pathways Design)
 import { i18n } from '../i18n.js';
 
 export function renderFooter(state) {
@@ -74,7 +74,7 @@ export function renderFooter(state) {
                 ${disclaimerTitle}
               </strong>
               <p style="margin-top: 0.25rem; font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6;">
-                ${t.disclaimerText || "NammaSevai AI simplifies public welfare scheme discovery. Official state and union departments determine final eligibility and financial approval. Please verify requirements at your nearest e-Sevai center or official department portal before applying."}
+                ${t.disclaimerText || "BharatSevai AI simplifies public welfare scheme discovery. Official state and union departments determine final eligibility and financial approval. Please verify requirements at your nearest e-Sevai / CSC center or official department portal before applying."}
               </p>
             </div>
           </div>
@@ -84,13 +84,13 @@ export function renderFooter(state) {
           <!-- Column 1: Brand & Civic Mission -->
           <div class="footer-brand">
             <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.75rem;">
-              <img src="assets/nammasevai_minimal.svg" alt="NammaSevai AI Logo" style="height: 34px; width: auto;" />
+              <img src="assets/bharatsevai_minimal.svg" alt="BharatSevai AI Logo" style="height: 34px; width: auto;" />
               <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: var(--primary-indigo);">
-                NammaSevai AI
+                BharatSevai AI
               </div>
             </div>
             <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65; max-width: 360px;">
-              ${t.footerDesc || "A voice-first welfare scheme discovery assistant for Indian citizens, especially Tamil Nadu residents. Discover benefits, documents, and procedures in plain language."}
+              ${t.footerDesc || "A voice-first welfare scheme discovery assistant for Indian citizens across all states and union territories. Discover benefits, documents, and procedures in plain language."}
             </p>
             <div style="display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 1rem;">
               <span class="badge badge-indigo">
@@ -150,7 +150,7 @@ export function renderFooter(state) {
 
         <!-- Footer Bottom Bar -->
         <div class="footer-bottom">
-          <div>${t.copyright || '© 2026 NammaSevai AI. Developed for public welfare awareness.'}</div>
+          <div>${t.copyright || '© 2026 BharatSevai AI. Developed for public welfare awareness.'}</div>
           <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
             <span>FastAPI + PostgreSQL Ready</span>
             <span>•</span>

@@ -425,7 +425,7 @@ export function renderAdminPage(state) {
               <span>Detected Policy Changes Queue (${state.detectedChanges.length})</span>
               <span style="font-size: 0.75rem; color: var(--text-secondary);">Human approval required</span>
             </div>
-            <div style="max-height: 280px; overflow-y: auto;">
+            <div class="table-responsive" style="max-height: 280px; overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch;">
               <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left;">
                 <thead>
                   <tr style="border-bottom: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-secondary);">
@@ -607,7 +607,7 @@ export function renderAdminPage(state) {
               <input type="text" id="form-name-ta" class="form-input" required placeholder="எ.கா: முதலமைச்சரின் விரிவான மருத்துவக் காப்பீடு" style="width: 100%; padding: 0.55rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);" />
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+            <div class="modal-grid-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
               <div>
                 <label style="font-size: 0.84rem; font-weight: 700; color: var(--primary-indigo); display: block; margin-bottom: 0.25rem;">${t.fieldDeptEn} *</label>
                 <input type="text" id="form-dept-en" class="form-input" required placeholder="Health Department" style="width: 100%; padding: 0.55rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);" />
@@ -618,7 +618,7 @@ export function renderAdminPage(state) {
               </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+            <div class="modal-grid-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
               <div>
                 <label style="font-size: 0.84rem; font-weight: 700; color: var(--primary-indigo); display: block; margin-bottom: 0.25rem;">${t.fieldCategory} *</label>
                 <select id="form-category" class="form-select" required style="width: 100%; padding: 0.55rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: #fff;">
@@ -642,7 +642,7 @@ export function renderAdminPage(state) {
               </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+            <div class="modal-grid-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
               <div>
                 <label style="font-size: 0.84rem; font-weight: 700; color: var(--primary-indigo); display: block; margin-bottom: 0.25rem;">Government Level *</label>
                 <select id="form-level" class="form-select" style="width: 100%; padding: 0.55rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: #fff;">
@@ -662,7 +662,7 @@ export function renderAdminPage(state) {
               <input type="text" id="form-beneficiaries" class="form-input" placeholder="Students, Youth, Women Entrepreneurs" style="width: 100%; padding: 0.55rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);" />
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+            <div class="modal-grid-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
               <div>
                 <label style="font-size: 0.84rem; font-weight: 700; color: var(--primary-indigo); display: block; margin-bottom: 0.25rem;">${t.fieldBenefitEn} *</label>
                 <input type="text" id="form-benefit-en" class="form-input" required placeholder="₹1,000 / month direct bank deposit" style="width: 100%; padding: 0.55rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);" />

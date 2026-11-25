@@ -1,4 +1,4 @@
-// NammaSevai AI - Main Application Controller with Real Voice & AI Backend Integration
+// BharatSevai AI - Main Application Controller with Real Voice & AI Backend Integration
 import { i18n } from './i18n.js';
 import { initialSchemes } from './schemesData.js';
 import { SchemeMatcher } from './nlpMatcher.js';
@@ -18,7 +18,7 @@ class App {
     this.speechService = new SpeechService();
     this.currentAudioPlayer = null;
 
-    const storedLang = localStorage.getItem('nammasevai_lang') || 'ta';
+    const storedLang = localStorage.getItem('bharatsevai_lang') || localStorage.getItem('nammasevai_lang') || 'ta';
     const storedState = localStorage.getItem('bharatsevai_user_state') || '';
 
     this.state = {
@@ -45,7 +45,7 @@ class App {
       adminStatus: 'all',
       
       // Privacy and Voice Features
-      micConsentGiven: localStorage.getItem('nammasevai_mic_consent') === 'true',
+      micConsentGiven: (localStorage.getItem('bharatsevai_mic_consent') || localStorage.getItem('nammasevai_mic_consent')) === 'true',
       showMicConsentModal: false,
       showApiKeyModal: false,
       voiceConfig: {
@@ -59,7 +59,7 @@ class App {
   }
 
   loadSchemes() {
-    const saved = localStorage.getItem('nammasevai_schemes');
+    const saved = localStorage.getItem('bharatsevai_schemes') || localStorage.getItem('nammasevai_schemes');
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
@@ -72,6 +72,7 @@ class App {
   }
 
   saveSchemes() {
+    localStorage.setItem('bharatsevai_schemes', JSON.stringify(this.state.schemes));
     localStorage.setItem('nammasevai_schemes', JSON.stringify(this.state.schemes));
     this.matcher.setSchemes(this.state.schemes);
   }
@@ -199,7 +200,7 @@ class App {
     const action = prompt(`${summary}\n\nEnter action: "approve", "reject", or "evidence":`, "approve");
     if (!action) return;
     const notes = prompt("Enter review notes / reason for record:", "Verified against official gazette / portal notification");
-    const adminKey = localStorage.getItem('nammasevai_admin_key') || 'nammasevai-admin-dev-secret';
+    const adminKey = localStorage.getItem('bharatsevai_admin_key') || localStorage.getItem('nammasevai_admin_key') || 'nammasevai-admin-dev-secret';
 
     try {
       const res = await fetch(`/api/admin/content-monitor/changes/${changeId}/review`, {
@@ -319,6 +320,7 @@ class App {
   setLanguage(lang) {
     this.state.lang = lang;
     this.state.assistantLang = lang;
+    localStorage.setItem('bharatsevai_lang', lang);
     localStorage.setItem('nammasevai_lang', lang);
     this.render();
   }
@@ -346,10 +348,12 @@ class App {
         return;
       }
 
-      // Close mobile drawer if open when user clicks a nav link
+      // Close mobile drawer if open when user clicks a nav link or outside
       const menu = document.getElementById('nav-menu');
-      if (menu && menu.classList.contains('open') && e.target.closest('.nav-link')) {
-        menu.classList.remove('open');
+      if (menu && menu.classList.contains('open')) {
+        if (e.target.closest('.nav-link') || (!e.target.closest('#nav-menu') && !e.target.closest('#mobile-toggle'))) {
+          menu.classList.remove('open');
+        }
       }
 
       // Legacy Language Toggle in Navbar fallback
@@ -383,6 +387,7 @@ class App {
       // Privacy Consent Modal Actions
       if (e.target.closest('#grant-mic-consent-btn')) {
         this.state.micConsentGiven = true;
+        localStorage.setItem('bharatsevai_mic_consent', 'true');
         localStorage.setItem('nammasevai_mic_consent', 'true');
         this.state.showMicConsentModal = false;
         this.render();
@@ -512,7 +517,7 @@ class App {
 
       // Download Text Checklist (.txt)
       if (e.target.closest('#downloadTextChecklistBtn')) {
-        const saved = JSON.parse(localStorage.getItem('nammasevai_checklist_state') || '{}');
+        const saved = JSON.parse(localStorage.getItem('bharatsevai_checklist_state') || localStorage.getItem('nammasevai_checklist_state') || '{}');
         const defaultDocs = [
           { id: 'doc-1', name: 'College Bonafide Certificate & Student ID', authority: 'College office / Principal' },
           { id: 'doc-2', name: 'Aadhaar Card (Linked with Mobile & Bank DBT)', authority: 'UIDAI' },
@@ -523,7 +528,7 @@ class App {
         ];
 
         let content = "=====================================================\n";
-        content += "NAMMASEVAI AI — CITIZEN SCHEME PREPARATION CHECKLIST\n";
+        content += "BHARATSEVAI AI — CITIZEN SCHEME PREPARATION CHECKLIST\n";
         content += "Generated: " + new Date().toLocaleString() + "\n";
         content += "=====================================================\n\n";
         content += "STATUS     | DOCUMENT NAME                                  | ISSUING AUTHORITY\n";
@@ -545,7 +550,7 @@ class App {
         const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'nammasevai_document_checklist.txt';
+        link.download = 'bharatsevai_document_checklist.txt';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -555,7 +560,7 @@ class App {
 
       // Copy / Share Checklist
       if (e.target.closest('#copyShareChecklistBtn')) {
-        const saved = JSON.parse(localStorage.getItem('nammasevai_checklist_state') || '{}');
+        const saved = JSON.parse(localStorage.getItem('bharatsevai_checklist_state') || localStorage.getItem('nammasevai_checklist_state') || '{}');
         const defaultDocs = [
           { id: 'doc-1', name: 'College Bonafide Certificate & Student ID' },
           { id: 'doc-2', name: 'Aadhaar Card (DBT Active)' },
@@ -566,7 +571,7 @@ class App {
         ];
 
         let readyCount = 0;
-        let textSummary = "📋 NammaSevai AI Document Preparation Checklist:\n\n";
+        let textSummary = "📋 BharatSevai AI Document Preparation Checklist:\n\n";
         defaultDocs.forEach((d, idx) => {
           const isDone = saved[d.id] !== undefined ? saved[d.id] : idx < 4;
           if (isDone) readyCount++;
@@ -577,7 +582,7 @@ class App {
 
         if (navigator.share) {
           navigator.share({
-            title: 'NammaSevai AI Scheme Checklist',
+            title: 'BharatSevai AI Scheme Checklist',
             text: textSummary
           }).catch(() => {});
         } else if (navigator.clipboard) {
@@ -619,8 +624,9 @@ class App {
         if (checkbox) {
           checkbox.checked = !checkbox.checked;
           const id = checkbox.getAttribute('data-id');
-          const saved = JSON.parse(localStorage.getItem('nammasevai_checklist_state') || '{}');
+          const saved = JSON.parse(localStorage.getItem('bharatsevai_checklist_state') || localStorage.getItem('nammasevai_checklist_state') || '{}');
           saved[id] = checkbox.checked;
+          localStorage.setItem('bharatsevai_checklist_state', JSON.stringify(saved));
           localStorage.setItem('nammasevai_checklist_state', JSON.stringify(saved));
           this.render();
         }
@@ -630,8 +636,9 @@ class App {
       const interactiveCheckbox = e.target.closest('.interactive-doc-checkbox');
       if (interactiveCheckbox) {
         const id = interactiveCheckbox.getAttribute('data-id');
-        const saved = JSON.parse(localStorage.getItem('nammasevai_checklist_state') || '{}');
+        const saved = JSON.parse(localStorage.getItem('bharatsevai_checklist_state') || localStorage.getItem('nammasevai_checklist_state') || '{}');
         saved[id] = interactiveCheckbox.checked;
+        localStorage.setItem('bharatsevai_checklist_state', JSON.stringify(saved));
         localStorage.setItem('nammasevai_checklist_state', JSON.stringify(saved));
         this.render();
         return;
@@ -639,6 +646,7 @@ class App {
 
       // Reset All Checklist
       if (e.target.closest('#resetAllChecklist')) {
+        localStorage.removeItem('bharatsevai_checklist_state');
         localStorage.removeItem('nammasevai_checklist_state');
         this.render();
         return;
@@ -1297,7 +1305,7 @@ Kanya Sumangala Yojana,State,Uttar Pradesh,women,Department of Women and Child D
       };
     }
 
-    const adminKey = localStorage.getItem('nammasevai_admin_key') || 'nammasevai-admin-secret-2026';
+    const adminKey = localStorage.getItem('bharatsevai_admin_key') || localStorage.getItem('nammasevai_admin_key') || 'nammasevai-admin-secret-2026';
     if (submitBtn) {
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<span class="material-symbols-outlined spin" style="font-size: 18px;">sync</span> Validating...';
@@ -1427,7 +1435,7 @@ Kanya Sumangala Yojana,State,Uttar Pradesh,women,Department of Women and Child D
     };
 
     // Try posting to backend
-    const adminKey = localStorage.getItem('nammasevai_admin_key') || 'nammasevai-admin-secret-2026';
+    const adminKey = localStorage.getItem('bharatsevai_admin_key') || localStorage.getItem('nammasevai_admin_key') || 'nammasevai-admin-secret-2026';
     try {
       if (id) {
         await fetch(`/api/admin/schemes/${id}`, {
@@ -1466,7 +1474,7 @@ Kanya Sumangala Yojana,State,Uttar Pradesh,women,Department of Women and Child D
   }
 
   async toggleSchemeStatus(id) {
-    const adminKey = localStorage.getItem('nammasevai_admin_key') || 'nammasevai-admin-secret-2026';
+    const adminKey = localStorage.getItem('bharatsevai_admin_key') || localStorage.getItem('nammasevai_admin_key') || 'nammasevai-admin-secret-2026';
     try {
       await fetch(`/api/admin/schemes/${id}/toggle-status`, { 
         method: 'POST',
@@ -1489,7 +1497,7 @@ Kanya Sumangala Yojana,State,Uttar Pradesh,women,Department of Women and Child D
     if (!scheme) return;
 
     if (confirm(`Delete scheme "${scheme.name}"?`)) {
-      const adminKey = localStorage.getItem('nammasevai_admin_key') || 'nammasevai-admin-secret-2026';
+      const adminKey = localStorage.getItem('bharatsevai_admin_key') || localStorage.getItem('nammasevai_admin_key') || 'nammasevai-admin-secret-2026';
       try {
         await fetch(`/api/admin/schemes/${id}`, { 
           method: 'DELETE',
@@ -1618,5 +1626,5 @@ Kanya Sumangala Yojana,State,Uttar Pradesh,women,Department of Women and Child D
 
 // Bootstrap application on DOM load
 document.addEventListener('DOMContentLoaded', () => {
-  window.nammaSevaiApp = new App();
+  window.bharatSevaiApp = window.nammaSevaiApp = new App();
 });

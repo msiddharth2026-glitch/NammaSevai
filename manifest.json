@@ -1,0 +1,23 @@
+{
+  "name": "BharatSevai AI - National Scheme Discovery",
+  "short_name": "BharatSevai",
+  "description": "Voice-first government welfare scheme discovery assistant for citizens across India.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8F5EE",
+  "theme_color": "#15233E",
+  "icons": [
+    {
+      "src": "/assets/bharatsevai_minimal.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/nammasevai_minimal.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

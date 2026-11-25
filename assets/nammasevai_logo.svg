@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
-  <title>NammaSevai AI logo</title>
+  <title>BharatSevai AI logo</title>
   <desc>A friendly AI speech assistant supported by a hand, representing accessible Tamil Nadu public services.</desc>
   <defs>
     <linearGradient id="bubble" x1="0" y1="0" x2="1" y2="1">
@@ -76,7 +76,7 @@
   <!-- Wordmark -->
   <text x="600" y="1060" text-anchor="middle"
         font-family="Inter, Arial, sans-serif" font-size="104" font-weight="750"
-        letter-spacing="-4" fill="#092D50">NammaSevai<tspan fill="#008F8C"> AI</tspan></text>
+        letter-spacing="-4" fill="#092D50">BharatSevai<tspan fill="#008F8C"> AI</tspan></text>
   <text x="600" y="1120" text-anchor="middle"
         font-family="Inter, Arial, sans-serif" font-size="27" font-weight="600"
         letter-spacing="5" fill="#557184">PUBLIC SERVICES, MADE ACCESSIBLE</text>

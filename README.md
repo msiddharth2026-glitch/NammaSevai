@@ -1,8 +1,8 @@
-# NammaSevai AI (நம்மசேவை AI)
+# BharatSevai AI (பாரத்சேவை AI)
 
-> **Voice-First Government Welfare Scheme Discovery Assistant for Citizens of Tamil Nadu.**
+> **Voice-First National & State Government Welfare Scheme Discovery Assistant for Indian Citizens.**
 
-NammaSevai AI allows citizens to describe their real-life situations in **Tamil (தமிழ்), Tanglish, or English** without knowing bureaucratic government scheme names, government orders, or technical eligibility criteria. The platform extracts structured citizen profiles, detects missing critical criteria, generates targeted bilingual follow-up questions, evaluates eligibility against structured conditions, prepares an interactive printable required documents checklist, and directs citizens to authentic official government portals.
+BharatSevai AI allows citizens across India to describe their real-life situations in **Tamil (தமிழ்), Hindi (हिन्दी), Malayalam (മലയാളം), Tanglish, Hinglish, or English** without knowing bureaucratic government scheme names, government orders, or technical eligibility criteria. The platform extracts structured citizen profiles, detects missing critical criteria, generates targeted bilingual follow-up questions, evaluates eligibility against structured conditions, prepares an interactive printable required documents checklist, and directs citizens to authentic official government portals.
 
 ---
 

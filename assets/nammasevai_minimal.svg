@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-labelledby="title desc">
-  <title id="title">NammaSevai AI — minimal logo</title>
-  <desc id="desc">A modern, minimal teal speech mark with an elegant N-shaped pathway and a small saffron spark, paired with the NammaSevai AI wordmark.</desc>
+  <title id="title">BharatSevai AI — minimal logo</title>
+  <desc id="desc">A modern, minimal teal speech mark with an elegant pathway and a small saffron spark, paired with the BharatSevai AI wordmark.</desc>
   <defs>
     <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#19A69C"/>
@@ -44,7 +44,7 @@
   <text x="600" y="835" text-anchor="middle"
         font-family="Inter, Avenir, Montserrat, Arial, sans-serif"
         font-size="104" font-weight="700" letter-spacing="-4"
-        fill="url(#navy)">NammaSevai<tspan fill="#0B918B"> AI</tspan></text>
+        fill="url(#navy)">BharatSevai<tspan fill="#0B918B"> AI</tspan></text>
 
   <!-- Quiet descriptor -->
   <line x1="430" y1="900" x2="770" y2="900" stroke="#D8E4E6" stroke-width="3"/>

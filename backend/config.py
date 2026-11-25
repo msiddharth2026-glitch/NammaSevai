@@ -6,7 +6,7 @@ from pydantic import field_validator
 from typing import List, Union
 
 class Settings(BaseSettings):
-    APP_NAME: str = "NammaSevai AI Backend"
+    APP_NAME: str = "BharatSevai AI Backend"
     APP_VERSION: str = "1.0.0"
     APP_ENV: str = "development"
     DEBUG: bool = True

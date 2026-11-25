@@ -1,4 +1,4 @@
-// NammaSevai AI - Header Navigation Component (Stitch / Namma Pathways Design)
+// BharatSevai AI - Header Navigation Component (Stitch / Bharat Pathways Design)
 import { i18n } from '../i18n.js';
 
 export function renderNavbar(state) {
@@ -56,12 +56,12 @@ export function renderNavbar(state) {
       <div class="container navbar-inner">
         <!-- Brand Link -->
         <a class="brand-link" id="nav-brand" href="#landing">
-          <img src="assets/nammasevai_minimal.svg" alt="NammaSevai AI Logo" class="brand-logo-img" />
+          <img src="assets/bharatsevai_minimal.svg" alt="BharatSevai AI Logo" class="brand-logo-img" />
           <div class="brand-titles">
             <span class="brand-title-main">
-              NammaSevai <span class="ai-pill">AI</span>
+              BharatSevai <span class="ai-pill">AI</span>
             </span>
-            <span class="brand-subtitle">Public Service Scheme Discovery</span>
+            <span class="brand-subtitle">National & State Scheme Discovery</span>
           </div>
         </a>
 

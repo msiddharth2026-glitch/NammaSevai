@@ -1,4 +1,4 @@
-// NammaSevai AI - Scheme Details Page Component (BharatSevai AI / Stitch Theme Redesign)
+// BharatSevai AI - Scheme Details Page Component (Stitch Theme Redesign)
 import { i18n } from '../i18n.js';
 import { getLocalizedScheme } from '../schemesData.js';
 
@@ -109,7 +109,7 @@ export function renderDetailsPage(scheme, state) {
           <div style="display: flex; align-items: flex-start; gap: 0.65rem; background: rgba(217, 119, 6, 0.08); border: 1px solid rgba(217, 119, 6, 0.25); border-radius: var(--radius-lg); padding: 0.75rem 1rem; font-size: 0.84rem; color: #7c2d12; line-height: 1.5;">
             <span class="material-symbols-outlined" style="font-size: 18px; color: var(--secondary-saffron); flex-shrink: 0; margin-top: 1px;">info</span>
             <p style="margin: 0;">
-              <strong style="color: #9a3412;">${t.guidanceOnlyBadge || "Civic Guidance Only"}:</strong> ${t.disclaimerDetailedNotice || "NammaSevai AI simplifies public guidelines. The responsible department makes the final eligibility and financial approval decisions based on submitted original credentials."}
+              <strong style="color: #9a3412;">${t.guidanceOnlyBadge || "Civic Guidance Only"}:</strong> ${t.disclaimerDetailedNotice || "BharatSevai AI simplifies public guidelines. The responsible department makes the final eligibility and financial approval decisions based on submitted original credentials."}
             </p>
           </div>
 
@@ -117,7 +117,7 @@ export function renderDetailsPage(scheme, state) {
       </section>
 
       <!-- Editorial Main Layout: 2-Column Desktop Grid -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.75rem; align-items: start;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1.75rem; align-items: start;">
         
         <!-- Left Column: Core Narrative & Value Proposition -->
         <div style="display: flex; flex-direction: column; gap: 1.75rem; flex: 2; min-width: 0;">

@@ -1,4 +1,4 @@
-// NammaSevai AI - Saved Document Preparation Checklist Page (Stitch Redesign)
+// BharatSevai AI - Saved Document Preparation Checklist Page (Stitch Redesign)
 import { i18n } from '../i18n.js';
 
 export function renderChecklistPage(state) {
@@ -140,7 +140,7 @@ export function renderChecklistPage(state) {
   const getDocDesc = (d) => (d.desc && d.desc[lang]) || d.desc?.en || d.desc_ta || d.desc;
 
   // Load saved checklist state from localStorage
-  const savedState = JSON.parse(localStorage.getItem('nammasevai_checklist_state') || '{}');
+  const savedState = JSON.parse(localStorage.getItem('bharatsevai_checklist_state') || localStorage.getItem('nammasevai_checklist_state') || '{}');
   
   let checkedCount = 0;
   const docs = defaultDocs.map(d => {
@@ -216,7 +216,7 @@ export function renderChecklistPage(state) {
             <span>${t.shareChecklist || "Copy / Share Checklist"}</span>
           </button>
 
-          <button class="btn btn-outline" id="shareWhatsappBtn" onclick="window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('Check my NammaSevai AI Scheme Preparation Checklist: All core documents verified!'))" type="button" style="padding: 0.45rem 1rem; font-size: 0.86rem; display: flex; align-items: center; gap: 0.4rem;">
+          <button class="btn btn-outline" id="shareWhatsappBtn" onclick="window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('Check my BharatSevai AI Scheme Preparation Checklist: All core documents verified!'))" type="button" style="padding: 0.45rem 1rem; font-size: 0.86rem; display: flex; align-items: center; gap: 0.4rem;">
             <span class="material-symbols-outlined" style="font-size: 18px; color: var(--tertiary-green);">share</span>
             <span>WhatsApp</span>
           </button>
@@ -238,7 +238,7 @@ export function renderChecklistPage(state) {
       </div>
 
       <!-- Main Layout: Interactive Checklist vs Next Steps Dossier -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.75rem; align-items: start;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1.75rem; align-items: start;">
         
         <!-- Left Column: Interactive Checklist System -->
         <div style="display: flex; flex-direction: column; gap: 1.5rem; flex: 2; min-width: 0;">

@@ -102,6 +102,10 @@ def serve_assets(filename):
     assets_dir = os.path.join(BASE_DIR, 'assets')
     return send_from_directory(assets_dir, filename)
 
+@app.route('/manifest.json', methods=['GET'])
+def serve_manifest():
+    return send_from_directory(BASE_DIR, 'manifest.json', mimetype='application/manifest+json')
+
 # REST API Endpoints
 @app.route('/api/health', methods=['GET'])
 def health_check():

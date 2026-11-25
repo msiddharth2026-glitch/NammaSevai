@@ -29,7 +29,7 @@
     },
     {
       "src": "/favicon.ico",
-      "dest": "/assets/nammasevai_minimal.svg"
+      "dest": "/assets/bharatsevai_minimal.svg"
     },
     {
       "src": "/api/(.*)",

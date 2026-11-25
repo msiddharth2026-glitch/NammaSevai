@@ -7,7 +7,7 @@ def run_in_memory_tests():
     r = client.get("/")
     print(f"GET / => Status: {r.status_code}, Length: {len(r.data)}")
     assert r.status_code == 200, f"Expected 200 but got {r.status_code}"
-    assert b"NammaSevai AI" in r.data, "Brand title missing in response"
+    assert (b"BharatSevai AI" in r.data or b"NammaSevai AI" in r.data), "Brand title missing in response"
 
     # 2. Health check API test
     r = client.get("/api/health")
