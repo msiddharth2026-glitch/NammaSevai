@@ -1411,11 +1411,35 @@ SCHEMES_SEED = [
 ]
 
 def seed_database():
-    """Seeds the database with authentic Tamil Nadu government welfare schemes."""
+    """Seeds the database with authentic Tamil Nadu and National welfare schemes."""
     Base.metadata.create_all(bind=engine)
     db: Session = SessionLocal()
 
     try:
+        import os, json
+        seed_85_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "seed_85_schemes.json")
+        current_count = db.query(Scheme).count()
+        if current_count < 85 and os.path.exists(seed_85_path):
+            logger.info("Initializing database with complete 85 statutory schemes from seed file...")
+            with open(seed_85_path, "r", encoding="utf-8") as f:
+                d = json.load(f)
+            for s in d.get("schemes", []):
+                db.merge(Scheme(**s))
+            for src in d.get("official_sources", []):
+                db.merge(OfficialSource(**src))
+            if db.query(EligibilityCondition).count() == 0:
+                for c in d.get("eligibility_conditions", []):
+                    db.add(EligibilityCondition(**c))
+            if db.query(RequiredDocument).count() == 0:
+                for doc in d.get("required_documents", []):
+                    db.add(RequiredDocument(**doc))
+            if db.query(ApplicationStep).count() == 0:
+                for step in d.get("application_steps", []):
+                    db.add(ApplicationStep(**step))
+            db.commit()
+            logger.info(f"Database successfully populated with {db.query(Scheme).count()} schemes.")
+            return
+
         inserted_count = 0
         for s_data in SCHEMES_SEED:
             existing = db.query(Scheme).filter(Scheme.id == s_data["id"]).first()

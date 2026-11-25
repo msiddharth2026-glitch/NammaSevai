@@ -107,9 +107,17 @@ class DatabaseBackupService:
                 "schemes": [
                     {
                         "id": s.id, "name": s.name, "name_ta": s.name_ta, "name_hi": s.name_hi, "name_ml": s.name_ml,
-                        "department": s.department, "department_ta": s.department_ta, "category": s.category,
-                        "level": s.level, "state": s.state, "benefit_amount": s.benefit_amount,
-                        "benefit_summary": s.benefit_summary, "description": s.description, "is_active": s.is_active
+                        "department": s.department, "department_ta": s.department_ta,
+                        "department_hi": s.department_hi, "department_ml": s.department_ml,
+                        "category": s.category, "level": s.level, "state": s.state,
+                        "beneficiary_type": s.beneficiary_type, "beneficiary_type_ta": s.beneficiary_type_ta,
+                        "target_beneficiaries": s.target_beneficiaries, "target_beneficiaries_ta": s.target_beneficiaries_ta,
+                        "benefit_summary": s.benefit_summary, "benefit_summary_ta": s.benefit_summary_ta or s.benefit_summary,
+                        "benefit_summary_hi": s.benefit_summary_hi, "benefit_summary_ml": s.benefit_summary_ml,
+                        "benefit_amount": s.benefit_amount,
+                        "description": s.description, "description_ta": s.description_ta or s.description,
+                        "description_hi": s.description_hi, "description_ml": s.description_ml,
+                        "keywords": s.keywords, "scheme_status": s.scheme_status, "is_active": s.is_active
                     } for s in schemes
                 ],
                 "official_sources": [
@@ -130,8 +138,19 @@ class DatabaseBackupService:
                 "required_documents": [
                     {
                         "scheme_id": d.scheme_id, "name_en": d.name_en, "name_ta": d.name_ta,
-                        "is_mandatory": d.is_mandatory, "description": getattr(d, "description_en", "")
+                        "is_mandatory": d.is_mandatory, "description_en": getattr(d, "description_en", ""),
+                        "description_ta": getattr(d, "description_ta", ""),
+                        "issuing_authority_en": getattr(d, "issuing_authority_en", None),
+                        "document_code": getattr(d, "document_code", None)
                     } for d in documents
+                ],
+                "application_steps": [
+                    {
+                        "scheme_id": st.scheme_id, "step_number": st.step_number, "mode": st.mode,
+                        "title_en": st.title_en, "title_ta": st.title_ta,
+                        "description_en": st.description_en, "description_ta": st.description_ta,
+                        "portal_url": st.portal_url, "office_name_en": st.office_name_en, "office_name_ta": st.office_name_ta
+                    } for st in steps
                 ],
                 "version_history": [
                     {

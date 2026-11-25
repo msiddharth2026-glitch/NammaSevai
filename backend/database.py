@@ -8,6 +8,10 @@ logger = logging.getLogger("nammasevai.database")
 
 db_url = settings.DATABASE_URL
 
+# Support Vercel serverless writable storage (/tmp) for zero-config deployments
+if os.getenv("VERCEL") and db_url.startswith("sqlite"):
+    db_url = "sqlite:////tmp/nammasevai.db"
+
 # Check if PostgreSQL connection can be established, otherwise fallback to SQLite
 connect_args = {}
 engine_kwargs = {}
@@ -44,11 +48,15 @@ if db_url.startswith("sqlite"):
     @event.listens_for(engine, "connect")
     def set_sqlite_pragma(dbapi_connection, connection_record):
         cursor = dbapi_connection.cursor()
-        cursor.execute("PRAGMA journal_mode = WAL")
-        cursor.execute("PRAGMA busy_timeout = 5000")
-        cursor.execute("PRAGMA synchronous = NORMAL")
-        cursor.execute("PRAGMA cache_size = -64000")
-        cursor.close()
+        try:
+            cursor.execute("PRAGMA journal_mode = WAL")
+            cursor.execute("PRAGMA busy_timeout = 5000")
+            cursor.execute("PRAGMA synchronous = NORMAL")
+            cursor.execute("PRAGMA cache_size = -64000")
+        except Exception:
+            pass
+        finally:
+            cursor.close()
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
